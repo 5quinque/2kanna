@@ -8,6 +8,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 class PostType extends AbstractType
 {
@@ -17,13 +19,19 @@ class PostType extends AbstractType
             ->add('title', null, [
                 'attr' => ['placeholder' => 'Title']
             ])
-            ->add('board', EntityType::class, [
-                'class' => Board::class,
-                'choice_label' => 'name',
-                
-            ])
-            ->add('message')
-        ;
+            ->add('message');
+
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            $post = $event->getData();
+            $form = $event->getForm();
+
+            if (null === $post->getBoard()) {
+                $form->add('board', EntityType::class, [
+                    'class' => Board::class,
+                    'choice_label' => 'name',
+                ]);
+            }
+        });
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -56,6 +56,7 @@ class BoardController extends AbstractController
     public function show(Board $board): Response
     {
         $post = new Post();
+        $post->setBoard($board);
         $form = $this->createForm(PostType::class, $post, [
             'action' => $this->generateUrl('post_new'),
         ]);
