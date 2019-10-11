@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,6 +33,21 @@ class Post
      * @ORM\JoinColumn(nullable=false)
      */
     private $board;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Post", inversedBy="child_post")
+     */
+    private $parent_post;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Post", mappedBy="parent_post")
+     */
+    private $child_post;
+
+    public function __construct()
+    {
+        $this->child_post = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -69,6 +86,49 @@ class Post
     public function setBoard(?Board $board): self
     {
         $this->board = $board;
+
+        return $this;
+    }
+
+    public function getParentPost(): ?self
+    {
+        return $this->parent_post;
+    }
+
+    public function setParentPost(?self $parent_post): self
+    {
+        $this->parent_post = $parent_post;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getChildPost(): Collection
+    {
+        return $this->child_post;
+    }
+
+    public function addChildPost(self $childPost): self
+    {
+        if (!$this->child_post->contains($childPost)) {
+            $this->child_post[] = $childPost;
+            $childPost->setParentPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChildPost(self $childPost): self
+    {
+        if ($this->child_post->contains($childPost)) {
+            $this->child_post->removeElement($childPost);
+            // set the owning side to null (unless already changed)
+            if ($childPost->getParentPost() === $this) {
+                $childPost->setParentPost(null);
+            }
+        }
 
         return $this;
     }
