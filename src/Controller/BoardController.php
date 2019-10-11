@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Board;
+use App\Entity\Post;
 use App\Form\BoardType;
+use App\Form\PostType;
 use App\Repository\BoardRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -49,17 +51,23 @@ class BoardController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="board_show", methods={"GET"})
+     * @Route("/{name}", name="board_show", methods={"GET"})
      */
     public function show(Board $board): Response
     {
+        $post = new Post();
+        $form = $this->createForm(PostType::class, $post, [
+            'action' => $this->generateUrl('post_new'),
+        ]);
+
         return $this->render('board/show.html.twig', [
             'board' => $board,
+            'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="board_edit", methods={"GET","POST"})
+     * @Route("/{name}/edit", name="board_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Board $board): Response
     {

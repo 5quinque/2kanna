@@ -3,11 +3,20 @@
 {% block title %}Edit Board{% endblock %}
 
 {% block body %}
-    <h1>Edit Board</h1>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+                <h1 id="forms">Edit Board</h1>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+        {{ include('board/_form.html.twig', {'button_label': 'Update'}) }}
 
-    {{ include('board/_form.html.twig', {'button_label': 'Update'}) }}
+        <a href="{{ path('board_index') }}">back to list</a>
 
-    <a href="{{ path('board_index') }}">back to list</a>
-
-    {{ include('board/_delete_form.html.twig') }}
+        {{ include('board/_delete_form.html.twig') }}
+        </div>
+    </div>
 {% endblock %}
