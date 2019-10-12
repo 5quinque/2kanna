@@ -61,8 +61,11 @@ class BoardController extends AbstractController
             'action' => $this->generateUrl('post_new'),
         ]);
 
+        $posts = $board->getPost();
+
         return $this->render('board/show.html.twig', [
             'board' => $board,
+            'posts' => $posts,
             'form' => $form->createView(),
         ]);
     }

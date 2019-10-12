@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TextBoard!{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+                <h1 id="homepage">Hello</h1>
+            </div>
+        </div>
+        <div class="col-lg-12">
+        <a href="{{ path('post_index') }}">Post</a>
+        <a href="{{ path('board_index') }}">Board</a>
+        </div>
+    </div>
+{% endblock %}

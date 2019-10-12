@@ -1,22 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Board{% endblock %}
+{% block title %}Board
+{% endblock %}
 
 {% block body %}
     <div class="row">
         <div class="col-lg-12">
             <div class="page-header">
                 <h1 id="boards">{{ board.name }}</h1>
+                <a class="btn btn-sm btn-dark" href="{{ path('board_index') }}">back</a>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-4 m-auto">
-        {{ include('post/_form.html.twig') }}
+        <div class="col-lg-6 m-auto">
+            {{ include('post/_form.html.twig') }}
         </div>
     </div>
-
-
-    <a href="{{ path('board_index') }}">back to list</a>
-
+    <hr>
+    {% for row in posts|batch(3) %}
+        <div class="row">
+            {% for post in row %}
+                <div class="col-4">
+                    <div class="card border-primary mb-3">
+                        <div class="card-header">
+                            <button type="button" class="btn-collapse" aria-label="Collapse" data-toggle="collapse" data-target="#{{ post.id }}" aria-expanded="true" aria-controls="{{ post.id }}">
+                                <span aria-hidden="true">&minus;</span>
+                            </button>
+                            {{ post.title }}
+                            <button type="button" class="btn btn-sm btn-primary float-right">Reply</button>
+                        </div>
+                        <div id="{{ post.id }}" class="collapse show">
+                            <div class="card-body">
+                                <p class="card-text">{{ post.message }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+    <div class="row">
+    <div class="col-12">
+    <p>No posts to show.</p>
+    </div>
+    </div>
+    {% endfor %}
 {% endblock %}

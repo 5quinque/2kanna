@@ -10,16 +10,25 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type\HiddenEntityType;
 
 class PostType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', null, [
-                'attr' => ['placeholder' => 'Title']
+            ->add('title', TextType::class, [
+                'attr' => ['placeholder' => 'Title'],
+                'label' => false,
             ])
-            ->add('message');
+            ->add('board', HiddenEntityType::class, [
+                'class' => Board::class,
+            ])
+            ->add('message', null, [
+                'attr' => ['placeholder' => 'Message'],
+                'label' => false
+            ]);
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
             $post = $event->getData();
@@ -29,6 +38,7 @@ class PostType extends AbstractType
                 $form->add('board', EntityType::class, [
                     'class' => Board::class,
                     'choice_label' => 'name',
+                    'label' => false
                 ]);
             }
         });

@@ -141,6 +141,9 @@
             "config/packages/sensio_framework_extra.yaml"
         ]
     },
+    "shapecode/hidden-entity-type-bundle": {
+        "version": "3.2.1"
+    },
     "swiftmailer/swiftmailer": {
         "version": "6.2-dev"
     },

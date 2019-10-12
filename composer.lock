@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "567c005035f6df9a586dc2a2f31965a0",
+    "content-hash": "c05f832ea90df6de9face6c0cf802e74",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1960,6 +1960,84 @@
                 "controllers"
             ],
             "time": "2019-10-05T14:34:17+00:00"
+        },
+        {
+            "name": "shapecode/hidden-entity-type-bundle",
+            "version": "3.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/shapecode/hidden-entity-type-bundle.git",
+                "reference": "2e0a6cf3cd0c37ad8a52819bb67a09b8f1642d22"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/shapecode/hidden-entity-type-bundle/zipball/2e0a6cf3cd0c37ad8a52819bb67a09b8f1642d22",
+                "reference": "2e0a6cf3cd0c37ad8a52819bb67a09b8f1642d22",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/common": "^2.8",
+                "doctrine/doctrine-bundle": "^1.6",
+                "doctrine/persistence": "^1.0",
+                "php": "^7.2",
+                "symfony/config": "^3.4|^4.0",
+                "symfony/dependency-injection": "^3.4|^4.0",
+                "symfony/form": "^3.4|^4.0",
+                "symfony/framework-bundle": "^3.4|^4.0",
+                "symfony/http-kernel": "^3.4|^4.0",
+                "symfony/options-resolver": "^3.4|^4.0",
+                "symfony/property-access": "^3.4|^4.0",
+                "symfony/property-info": "^3.4|^4.0",
+                "symfony/yaml": "^3.4|^4.0"
+            },
+            "require-dev": {
+                "doctrine/coding-standard": "^6.0",
+                "maglnet/composer-require-checker": "^2.0",
+                "phpstan/phpstan": "^0.11.16",
+                "phpstan/phpstan-deprecation-rules": "^0.11.2",
+                "phpstan/phpstan-phpunit": "^0.11.2",
+                "phpstan/phpstan-strict-rules": "^0.11.1",
+                "phpunit/phpunit": "^8.4",
+                "roave/security-advisories": "dev-master",
+                "squizlabs/php_codesniffer": "^3.4"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Shapecode\\Bundle\\HiddenEntityTypeBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nikita Loges",
+                    "email": "dev@loges.one",
+                    "homepage": "https://loges.one"
+                },
+                {
+                    "name": "Glifery",
+                    "email": "glifery@gmail.com"
+                }
+            ],
+            "description": "Hidden field for Symfony entities",
+            "homepage": "https://github.com/shapecode/hidden-entity-type-bundle",
+            "keywords": [
+                "entity",
+                "form",
+                "hidden",
+                "shapecode",
+                "symfony",
+                "type"
+            ],
+            "time": "2019-10-11T17:28:07+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
