@@ -25,6 +25,9 @@ class PostType extends AbstractType
             ->add('board', HiddenEntityType::class, [
                 'class' => Board::class,
             ])
+            ->add('parent_post', HiddenEntityType::class, [
+                'class' => Post::class,
+            ])
             ->add('message', null, [
                 'attr' => ['placeholder' => 'Message'],
                 'label' => false

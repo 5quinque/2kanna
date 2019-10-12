@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Form\PostType;
 use App\Repository\PostRepository;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,21 +17,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class PostController extends AbstractController
 {
     /**
-     * @Route("/", name="post_index", methods={"GET"})
-     */
-    public function index(PostRepository $postRepository): Response
-    {
-        return $this->render('post/index.html.twig', [
-            'posts' => $postRepository->findAll(),
-        ]);
-    }
-
-    /**
      * @Route("/new", name="post_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
         $post = new Post();
+        $post->setCreated(new DateTime());
+
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
@@ -53,8 +46,20 @@ class PostController extends AbstractController
      */
     public function show(Post $post): Response
     {
+        $newChildPost = new Post();
+        $newChildPost->setBoard($post->getBoard());
+        $newChildPost->setParentPost($post);
+
+        $form = $this->createForm(PostType::class, $newChildPost, [
+            'action' => $this->generateUrl('post_new'),
+        ]);
+
+        $childPosts = $post->getChildPost(); 
+
         return $this->render('post/show.html.twig', [
             'post' => $post,
+            'child_posts' => $childPosts,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -69,7 +74,7 @@ class PostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('post_index');
+            return $this->redirectToRoute('post_show', ['id' => $post->getId()]);
         }
 
         return $this->render('post/edit.html.twig', [
@@ -83,12 +88,13 @@ class PostController extends AbstractController
      */
     public function delete(Request $request, Post $post): Response
     {
+        $boardIndex = $post->getBoard()->getName();
         if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($post);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('post_index');
+        return $this->redirectToRoute('board_show', ['name' => $boardIndex]);
     }
 }

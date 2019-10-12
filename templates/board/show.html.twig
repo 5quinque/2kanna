@@ -25,14 +25,17 @@
                     <div class="card border-primary mb-3">
                         <div class="card-header">
                             <button type="button" class="btn-collapse" aria-label="Collapse" data-toggle="collapse" data-target="#{{ post.id }}" aria-expanded="true" aria-controls="{{ post.id }}">
-                                <span aria-hidden="true">&minus;</span>
+                                <span aria-hidden="true" class="text-muted">&minus;</span>
                             </button>
                             {{ post.title }}
-                            <button type="button" class="btn btn-sm btn-primary float-right">Reply</button>
+                            <span class="float-right">
+                                <a href="{{ path('post_show', {'id': post.id}) }}" class="">Reply</a>
+                            </span>
                         </div>
                         <div id="{{ post.id }}" class="collapse show">
                             <div class="card-body">
                                 <p class="card-text">{{ post.message }}</p>
+                                <sub class="float-right text-muted">{{ post.created|date("Y-m-d H:i:s") }}</sub>
                             </div>
                         </div>
                     </div>

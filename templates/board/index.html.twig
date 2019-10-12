@@ -1,33 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Board index{% endblock %}
+{% block title %}Board index
+{% endblock %}
 
 {% block body %}
-    <h1>Board index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for board in boards %}
-            <tr>
-                <td>{{ board.name }}</td>
-                <td>
-                    <a class="btn btn-primary" href="{{ path('board_show', {'name': board.name}) }}">show</a>
-                    <a class="btn btn-info" href="{{ path('board_edit', {'name': board.name}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('board_new') }}">Create new</a>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+                <h1 id="board_index">Board Index</h1>
+                <a class="btn btn-sm btn-dark" href="{{ path('board_new') }}">New Board</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 m-auto">
+            <div class="list-group">
+                {% for board in boards %}
+                    <a href="{{ path('board_show', {'name': board.name}) }}" class="list-group-item list-group-item-action">
+                        {{ board.name }}
+                    </a>
+                {% else %}
+                    <span class="list-group-item">No boards found.</span>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock %}

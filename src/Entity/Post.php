@@ -44,6 +44,11 @@ class Post
      */
     private $child_post;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $created;
+
     public function __construct()
     {
         $this->child_post = new ArrayCollection();
@@ -129,6 +134,18 @@ class Post
                 $childPost->setParentPost(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreated(): ?\DateTimeInterface
+    {
+        return $this->created;
+    }
+
+    public function setCreated(\DateTimeInterface $created): self
+    {
+        $this->created = $created;
 
         return $this;
     }
