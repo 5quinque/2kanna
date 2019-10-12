@@ -21,6 +21,7 @@ class PostType extends AbstractType
             ->add('title', TextType::class, [
                 'attr' => ['placeholder' => 'Title'],
                 'label' => false,
+                'required' => false,
             ])
             ->add('board', HiddenEntityType::class, [
                 'class' => Board::class,

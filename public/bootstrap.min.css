@@ -1,5 +1,6 @@
 .child-post > .child-border {
     border-left: 2px solid #E95420;
+    margin-left: 0.5rem;
 }
 .child-post > .child-border > .card {
     margin-left: 0.5rem !important;

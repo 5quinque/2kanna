@@ -7,14 +7,12 @@ use App\Entity\Post;
 use App\Form\BoardType;
 use App\Form\PostType;
 use App\Repository\BoardRepository;
+use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/board")
- */
 class BoardController extends AbstractController
 {
     /**
@@ -51,9 +49,9 @@ class BoardController extends AbstractController
     }
 
     /**
-     * @Route("/{name}", name="board_show", methods={"GET"})
+     * @Route("/{name}/{page_no<\d+>?0}", name="board_show", methods={"GET"}, requirements={"name"="^((?!post).)*$"})
      */
-    public function show(Board $board): Response
+    public function show(Board $board, int $page_no, PostRepository $postRepository): Response
     {
         $post = new Post();
         $post->setBoard($board);
@@ -61,11 +59,11 @@ class BoardController extends AbstractController
             'action' => $this->generateUrl('post_new'),
         ]);
 
-        $posts = $board->getPost();
-
+        $repPosts = $postRepository->findBy(['parent_post' => null, 'board' => $board], ["created" => "ASC"], 30, $page_no * 30);
+ 
         return $this->render('board/show.html.twig', [
             'board' => $board,
-            'posts' => $posts,
+            'posts' => $repPosts,
             'form' => $form->createView(),
         ]);
     }

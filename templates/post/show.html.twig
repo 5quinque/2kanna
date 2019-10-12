@@ -8,7 +8,7 @@
         <div class="col-lg-12">
             <div class="page-header">
                 <h1 id="post">{{ post.title }}</h1>
-                <a class="btn btn-sm btn-dark" href="{{ path('board_show', {'name': post.board.name}) }}">back</a>
+                <a class="btn btn-sm btn-dark" href="{{ path('board_show', {'name': post.board.name}) }}">{{ post.board.name }}</a>
             </div>
         </div>
     </div>
@@ -37,31 +37,5 @@
             </div>
         </div>
     </div>
-
-    {% for post in child_posts %}
-        <div class="row">
-            <div class="col-12 child-post">
-                <div class="child-border">
-                <div class="card border-secondary mb-3">
-                    <div class="card-header">
-                        <button type="button" class="btn-collapse" aria-label="Collapse" data-toggle="collapse" data-target="#{{ post.id }}" aria-expanded="true" aria-controls="{{ post.id }}">
-                            <span aria-hidden="true" class="text-muted">&minus;</span>
-                        </button>
-                        {{ post.title }}
-                        <span class="float-right">
-                            <a href="{{ path('post_show', {'id': post.id}) }}" class="">Reply</a>
-                        </span>
-                    </div>
-                    <div id="{{ post.id }}" class="collapse show">
-                        <div class="card-body">
-                            <p class="card-text">{{ post.message }}</p>
-                            <sub class="float-right text-muted">{{ post.created|date("Y-m-d H:i:s") }}</sub>
-                        </div>
-                    </div>
-                </div>
-                </div>
-            </div>
-        </div>
-    {% endfor %}
-
+{% include "post/_tree.html.twig" %}
 {% endblock %}

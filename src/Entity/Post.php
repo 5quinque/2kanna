@@ -36,6 +36,7 @@ class Post
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Post", inversedBy="child_post")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $parent_post;
 

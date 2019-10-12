@@ -12,8 +12,13 @@ class BoardType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, ['label' => 'Board Name',])
-        ;
+            ->add(
+                'name',
+                null,
+                ['attr' => ['placeholder' => 'Board Name'],
+                'label' => false,
+            ]
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver)

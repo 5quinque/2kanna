@@ -32,7 +32,11 @@ class PostController extends AbstractController
             $entityManager->persist($post);
             $entityManager->flush();
 
-            return $this->redirectToRoute('post_show', ['id' => $post->getId()]);
+            if ($post->getParentPost()) {
+                return $this->redirectToRoute('post_show', ['id' => $post->getParentPost()->getId()]);
+            } else {
+                return $this->redirectToRoute('post_show', ['id' => $post->getId()]);
+            }
         }
 
         return $this->render('post/new.html.twig', [
@@ -44,7 +48,7 @@ class PostController extends AbstractController
     /**
      * @Route("/{id}", name="post_show", methods={"GET"})
      */
-    public function show(Post $post): Response
+    public function show(Post $post, PostRepository $postRepository): Response
     {
         $newChildPost = new Post();
         $newChildPost->setBoard($post->getBoard());
@@ -54,11 +58,12 @@ class PostController extends AbstractController
             'action' => $this->generateUrl('post_new'),
         ]);
 
-        $childPosts = $post->getChildPost(); 
+        //$childPosts = $postRepository->findBy();
+        //$childPosts = $post->getChildPost(); 
 
         return $this->render('post/show.html.twig', [
             'post' => $post,
-            'child_posts' => $childPosts,
+            //'child_posts' => $childPosts,
             'form' => $form->createView(),
         ]);
     }
