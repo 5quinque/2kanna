@@ -16,6 +16,6 @@ class QuoteExtension extends AbstractExtension
 
     public function formatQuote($string)
     {
-        return preg_replace('/(^&gt;.+$)/m', "<p class='text-dark'>$1</p>", $string);
+        return preg_replace('/(^&gt;.+$)/m', "<span class='text-dark'>$1</span>", $string);
     }
 }

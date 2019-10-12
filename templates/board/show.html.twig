@@ -7,8 +7,9 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="page-header">
-                <h1 id="boards">{{ board.name }}</h1>
-                <a class="btn btn-sm btn-dark" href="{{ path('board_index') }}">back</a>
+                <h1 id="boards">{{ board.name }}
+                    <a class="btn btn-sm btn-dark float-right" href="{{ path('board_index') }}">back</a>
+                </h1>
             </div>
         </div>
     </div>
@@ -18,11 +19,11 @@
         </div>
     </div>
     <hr>
-    {% for row in posts|batch(3) %}
-        <div class="row">
-            {% for post in row %}
-                <div class="col-4">
-                    <div class="card border-primary mb-3">
+    <div class="row">
+        {% for row in posts|batch(3) %}
+            <div class="col-4">
+                {% for post in row %}
+                    <div class="card border-secondary mb-3">
                         <div class="card-header">
                             <button type="button" class="btn-collapse" aria-label="Collapse" data-toggle="collapse" data-target="#{{ post.id }}" aria-expanded="true" aria-controls="{{ post.id }}">
                                 <span aria-hidden="true" class="text-muted">&minus;</span>
@@ -34,19 +35,18 @@
                         </div>
                         <div id="{{ post.id }}" class="collapse show">
                             <div class="card-body">
-                                <p class="card-text">{{ post.message }}</p>
+                                <p class="card-text">{{ post.message|nl2br|gt2quote }}</p>
                                 <sub class="float-right text-muted">{{ post.created|date("Y-m-d H:i:s") }}</sub>
                             </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
-        </div>
-    {% else %}
-    <div class="row">
-    <div class="col-12">
-    <p>No posts to show.</p>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="col-12">
+                <p>No posts to show.</p>
+            </div>
+        {% endfor %}
     </div>
-    </div>
-    {% endfor %}
+
 {% endblock %}

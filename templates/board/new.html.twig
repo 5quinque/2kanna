@@ -1,13 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Board{% endblock %}
+{% block title %}New Board
+{% endblock %}
 
 {% block body %}
     <div class="row">
         <div class="col-lg-12">
             <div class="page-header">
-                <h1 id="post">Create new Board</h1>
-                <a class="btn btn-sm btn-dark" href="{{ path('board_index') }}">back</a>
+                <h1 id="post">Create new Board
+                    <a class="btn btn-sm btn-dark float-right" href="{{ path('board_index') }}">back</a>
+                </h1>
             </div>
         </div>
     </div>

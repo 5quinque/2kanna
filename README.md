@@ -17,6 +17,7 @@ cd textboard
 composer install
 php bin/console doctrine:database:create
 php bin/console doctrine:migrations:migrate
+php bin/console doctrine:fixtures:load
 ```
 
 [1]: https://symfony.com/doc/4.4/setup.html
