@@ -30,7 +30,8 @@
                 </div>
                 <div id="{{ post.id }}">
                     <div class="card-body">
-                        <p class="card-text">{{ post.message }}</p>
+                        <p class="card-text">
+                        {{ post.message|nl2br|gt2quote }}</p>
                         <sub class="float-right text-muted">{{ post.created|date("Y-m-d H:i:s") }}</sub>
                     </div>
                 </div>
