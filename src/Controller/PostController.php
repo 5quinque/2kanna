@@ -33,14 +33,16 @@ class PostController extends AbstractController
             $entityManager->persist($post);
             $entityManager->flush();
 
-            if ($post->getParentPost()) {
-                while ($post = $post->getParentPost()) {
-                    $parentId = $post->getId();
-                }
-                return $this->redirectToRoute('post_show', ['id' => $parentId]);
-            } else {
-                return $this->redirectToRoute('post_show', ['id' => $post->getId()]);
+            $boardName = $post->getBoard()->getName();
+            $redirectPostId = $post->getId();
+
+            while ($post = $post->getParentPost()) {
+                $redirectPostId = $post->getId();
             }
+            return $this->redirectToRoute('post_show', [
+                'name' => $boardName,
+                'id' => $redirectPostId
+                ]);
         }
 
         return $this->render('post/new.html.twig', [
@@ -52,7 +54,7 @@ class PostController extends AbstractController
     /**
      * @Route("/{id}", methods={"GET"})
      */
-    public function show(Post $post, PostRepository $postRepository): Response
+    public function show(Post $post): Response
     {
         $newChildPost = new Post();
         $newChildPost->setBoard($post->getBoard());
@@ -79,7 +81,10 @@ class PostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('post_show', ['id' => $post->getId()]);
+            return $this->redirectToRoute('post_show', [
+                'name' => $post->getBoard()->getName(),
+                'id' => $post->getId()
+                ]);
         }
 
         return $this->render('post/edit.html.twig', [
@@ -100,11 +105,16 @@ class PostController extends AbstractController
             $entityManager->flush();
         }
 
+        $boardName = $post->getBoard()->getName();
+
         if ($post->getParentPost()) {
             while ($post = $post->getParentPost()) {
                 $parentId = $post->getId();
             }
-            return $this->redirectToRoute('post_show', ['id' => $parentId]);
+            return $this->redirectToRoute('post_show', [
+                'name' => $boardName,
+                'id' => $parentId
+                ]);
         } else {
             return $this->redirectToRoute('board_show', ['name' => $boardIndex]);
         }

@@ -11,6 +11,7 @@
     </div>
     <div class="row">
         <div class="col-lg-6 m-auto">
+            {% set button_label='Reply' %}
             {{ include('post/_form.html.twig') }}
         </div>
     </div>
@@ -27,9 +28,9 @@
                 </div>
                 <div id="{{ post.id }}">
                     <div class="card-body">
+                        <sub class="float-right text-muted">{{ post.created|date("Y-m-d H:i:s") }}</sub>
                         <p class="card-text">
                             {{ post.message|nl2br|gt2quote }}</p>
-                        <sub class="float-right text-muted">{{ post.created|date("Y-m-d H:i:s") }}</sub>
                     </div>
                 </div>
             </div>
