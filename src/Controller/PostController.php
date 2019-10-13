@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Entity\Board;
 use App\Form\PostType;
 use App\Repository\PostRepository;
 use DateTime;
@@ -49,7 +50,7 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="post_show", methods={"GET"})
+     * @Route("/{id}", methods={"GET"})
      */
     public function show(Post $post, PostRepository $postRepository): Response
     {

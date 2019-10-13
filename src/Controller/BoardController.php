@@ -69,6 +69,18 @@ class BoardController extends AbstractController
     }
 
     /**
+     * @Route("{name}/post/{id}", name="post_show", methods={"GET"})
+     */
+    public function showPost(Post $post)
+    {
+    $response = $this->forward('App\Controller\PostController::show', [
+        'post'  => $post,
+    ]);
+
+    return $response;
+}
+
+    /**
      * @Route("/{name}/edit", name="board_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Board $board): Response
