@@ -49,7 +49,7 @@ class BoardController extends AbstractController
     }
 
     /**
-     * @Route("/{name}/{page_no<\d+>?0}", name="board_show", methods={"GET"}, requirements={"name"="^((?!post).)*$"})
+     * @Route("/{name}/{page_no<\d+>?0}", name="board_show", methods={"GET"})
      */
     public function show(Board $board, int $page_no, PostRepository $postRepository): Response
     {
@@ -59,7 +59,13 @@ class BoardController extends AbstractController
             'action' => $this->generateUrl('post_new'),
         ]);
 
-        $repPosts = $postRepository->findBy(['parent_post' => null, 'board' => $board], ["created" => "ASC"], 30, $page_no * 30);
+        // [todo] sort by newest child_post
+        $repPosts = $postRepository->findBy([
+            'parent_post' => null,
+            'board' => $board],
+            ["created" => "ASC"],
+            10,
+            $page_no * 10);
  
         return $this->render('board/show.html.twig', [
             'board' => $board,
@@ -102,7 +108,7 @@ class BoardController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="board_delete", methods={"DELETE"})
+     * @Route("/{name}", name="board_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Board $board): Response
     {
