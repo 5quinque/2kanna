@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-12 child-post">
             <div class="child-border">
-                <div class="card border-secondary mb-3">
+                <div class="card border-{{ post.id == new_post_id ? 'success' : 'secondary' }} mb-3">
                     <div class="card-header">
                         <button type="button" class="btn-collapse" aria-label="Collapse" data-toggle="collapse" data-target="#{{ post.id }}" aria-expanded="true" aria-controls="{{ post.id }}">
                             <span aria-hidden="true" class="text-muted">&minus;</span>

@@ -34,17 +34,19 @@ class PostController extends AbstractController
             $entityManager->flush();
 
             $boardName = $post->getBoard()->getName();
-            $redirectPostId = $post->getId();
+            $newPostId = $redirectPostId = $post->getId();
 
             while ($post = $post->getParentPost()) {
                 $redirectPostId = $post->getId();
             }
             return $this->redirectToRoute('post_show', [
                 'name' => $boardName,
-                'id' => $redirectPostId
+                'id' => $redirectPostId,
+                'newPostId' => $newPostId
                 ]);
         }
 
+        // [todo] evnetually get rid of this 
         return $this->render('post/new.html.twig', [
             'post' => $post,
             'form' => $form->createView(),
@@ -52,9 +54,9 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"GET"})
+     * @Route("/{id}/{newpost?}", methods={"GET"})
      */
-    public function show(Post $post): Response
+    public function show(Post $post, int $newPostId = null): Response
     {
         $newChildPost = new Post();
         $newChildPost->setBoard($post->getBoard());
@@ -66,6 +68,7 @@ class PostController extends AbstractController
 
         return $this->render('post/show.html.twig', [
             'post' => $post,
+            'new_post_id' => $newPostId,
             'form' => $form->createView(),
         ]);
     }

@@ -69,12 +69,13 @@ class BoardController extends AbstractController
     }
 
     /**
-     * @Route("{name}/post/{id}", name="post_show", methods={"GET"})
+     * @Route("{name}/post/{id}/{newPostId?}", name="post_show", methods={"GET"})
      */
-    public function showPost(Post $post)
+    public function showPost(Post $post, int $newPostId = null)
     {
     $response = $this->forward('App\Controller\PostController::show', [
         'post'  => $post,
+        'newPostId' => $newPostId
     ]);
 
     return $response;
