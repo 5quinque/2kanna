@@ -10,7 +10,7 @@ class BoardFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $board = new Board();
             $board->setName('board'.$i);
             $manager->persist($board);

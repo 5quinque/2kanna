@@ -69,7 +69,7 @@ class BoardController extends AbstractController
     }
 
     /**
-     * @Route("{name}/post/{id}/{newPostId?}", name="post_show", methods={"GET"})
+     * @Route("{name}/post/{id}/{newPostId?}", name="post_show", methods={"GET"}, requirements={"id"="\d+", "newPostId"="\d+"})
      */
     public function showPost(Post $post, int $newPostId = null)
     {

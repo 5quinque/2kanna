@@ -13,16 +13,20 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-6 m-auto">
-            <div class="list-group list-group-flush">
-                {% for board in boards %}
-                    <a href="{{ path('board_show', {'name': board.name}) }}" class="list-group-item list-group-item-action">
-                        {{ board.name }}
-                    </a>
-                {% else %}
-                    <span class="list-group-item">No boards found.</span>
-                {% endfor %}
-            </div>
-        </div>
+        {% if boards|length %}
+            {% for col in boards|batch(boards|length/2) %}
+                <div class="col-lg-6">
+                    <div class="list-group list-group-flush">
+                        {% for board in col %}
+                            <a href="{{ path('board_show', {'name': board.name}) }}" class="list-group-item list-group-item-action">
+                                {{ board.name }}
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <span class="list-group-item">No boards found.</span>
+        {% endif %}
     </div>
 {% endblock %}

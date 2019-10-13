@@ -46,7 +46,7 @@ class PostController extends AbstractController
                 ]);
         }
 
-        // [todo] evnetually get rid of this 
+        // [todo] eventually get rid of this 
         return $this->render('post/new.html.twig', [
             'post' => $post,
             'form' => $form->createView(),
@@ -54,7 +54,7 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/{newpost?}", methods={"GET"})
+     * @Route("/{id}/{newPostId?}", methods={"GET"}, requirements={"id"="\d+", "newPostId"="\d+"})
      */
     public function show(Post $post, int $newPostId = null): Response
     {

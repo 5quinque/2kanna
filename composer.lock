@@ -1426,34 +1426,35 @@
         },
         {
             "name": "ocramius/package-versions",
-            "version": "1.4.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Ocramius/PackageVersions.git",
-                "reference": "a4d4b60d0e60da2487bd21a2c6ac089f85570dbb"
+                "reference": "1d32342b8c1eb27353c8887c366147b4c2da673c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Ocramius/PackageVersions/zipball/a4d4b60d0e60da2487bd21a2c6ac089f85570dbb",
-                "reference": "a4d4b60d0e60da2487bd21a2c6ac089f85570dbb",
+                "url": "https://api.github.com/repos/Ocramius/PackageVersions/zipball/1d32342b8c1eb27353c8887c366147b4c2da673c",
+                "reference": "1d32342b8c1eb27353c8887c366147b4c2da673c",
                 "shasum": ""
             },
             "require": {
                 "composer-plugin-api": "^1.0.0",
-                "php": "^7.1.0"
+                "php": "^7.3.0"
             },
             "require-dev": {
-                "composer/composer": "^1.6.3",
-                "doctrine/coding-standard": "^5.0.1",
+                "composer/composer": "^1.8.6",
+                "doctrine/coding-standard": "^6.0.0",
                 "ext-zip": "*",
-                "infection/infection": "^0.7.1",
-                "phpunit/phpunit": "^7.0.0"
+                "infection/infection": "^0.13.4",
+                "phpunit/phpunit": "^8.2.5",
+                "vimeo/psalm": "^3.4.9"
             },
             "type": "composer-plugin",
             "extra": {
                 "class": "PackageVersions\\Installer",
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "1.6.x-dev"
                 }
             },
             "autoload": {
@@ -1472,7 +1473,7 @@
                 }
             ],
             "description": "Composer plugin that provides efficient querying for installed package versions (no runtime IO)",
-            "time": "2019-02-21T12:16:21+00:00"
+            "time": "2019-07-17T15:49:50+00:00"
         },
         {
             "name": "ocramius/proxy-manager",
@@ -2163,12 +2164,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/cache.git",
-                "reference": "043bb2cbafa1ada6aa178a2d7af4d8aedb18eef8"
+                "reference": "340649c7431578b861de09a0034e767c9081edde"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/cache/zipball/043bb2cbafa1ada6aa178a2d7af4d8aedb18eef8",
-                "reference": "043bb2cbafa1ada6aa178a2d7af4d8aedb18eef8",
+                "url": "https://api.github.com/repos/symfony/cache/zipball/340649c7431578b861de09a0034e767c9081edde",
+                "reference": "340649c7431578b861de09a0034e767c9081edde",
                 "shasum": ""
             },
             "require": {
@@ -2233,7 +2234,7 @@
                 "caching",
                 "psr6"
             ],
-            "time": "2019-10-11T12:17:27+00:00"
+            "time": "2019-10-11T18:45:35+00:00"
         },
         {
             "name": "symfony/cache-contracts",
@@ -3328,12 +3329,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-client.git",
-                "reference": "62f67175d6acfb683a1550583220710b2c6d4ed9"
+                "reference": "4eaa6ef9c48a3e7cf1c9aaaebeeca88c0ccf9af8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-client/zipball/62f67175d6acfb683a1550583220710b2c6d4ed9",
-                "reference": "62f67175d6acfb683a1550583220710b2c6d4ed9",
+                "url": "https://api.github.com/repos/symfony/http-client/zipball/4eaa6ef9c48a3e7cf1c9aaaebeeca88c0ccf9af8",
+                "reference": "4eaa6ef9c48a3e7cf1c9aaaebeeca88c0ccf9af8",
                 "shasum": ""
             },
             "require": {
@@ -3388,7 +3389,7 @@
             ],
             "description": "Symfony HttpClient component",
             "homepage": "https://symfony.com",
-            "time": "2019-10-10T08:55:24+00:00"
+            "time": "2019-10-12T08:50:39+00:00"
         },
         {
             "name": "symfony/http-client-contracts",
