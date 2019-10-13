@@ -1,4 +1,20 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-primary">{{ button_label|default('Post') }}</button>
+<div class="my-custom-class-for-errors">
+    {{ form_errors(form) }}
+</div>
+<div class="form-row mb-2">
+    <div class="col">
+        <div class="input-group">
+            {{ form_widget(form.title) }}
+            <div class="input-group-append">
+                <button tabindex="3" class="btn btn-primary">{{ button_label|default('Post') }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-row">
+    <div class="col">
+        {{ form_widget(form.message) }}
+    </div>
+</div>
 {{ form_end(form) }}

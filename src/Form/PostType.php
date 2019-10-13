@@ -19,7 +19,7 @@ class PostType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'attr' => ['placeholder' => 'Title'],
+                'attr' => ['placeholder' => 'Title', 'tabindex' => 1],
                 'label' => false,
                 'required' => false,
             ])
@@ -30,7 +30,7 @@ class PostType extends AbstractType
                 'class' => Post::class,
             ])
             ->add('message', null, [
-                'attr' => ['placeholder' => 'Message'],
+                'attr' => ['placeholder' => 'Message', 'tabindex' => 2, 'rows' => 5],
                 'label' => false
             ]);
 

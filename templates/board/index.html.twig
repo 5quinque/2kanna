@@ -12,10 +12,10 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row text-center">
         {% if boards|length %}
-            {% for col in boards|batch(boards|length/2) %}
-                <div class="col-lg-6">
+            {% for col in boards|batch(boards|length/3) %}
+                <div class="col-lg-4">
                     <div class="list-group list-group-flush">
                         {% for board in col %}
                             <a href="{{ path('board_show', {'name': board.name}) }}" class="list-group-item list-group-item-action">
