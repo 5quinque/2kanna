@@ -3736,12 +3736,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/mime.git",
-                "reference": "c7238f7732e267f302422d75a2f118c9aeb28f89"
+                "reference": "592a01c2569acaebc0cd64355047d8af755b2b95"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/mime/zipball/c7238f7732e267f302422d75a2f118c9aeb28f89",
-                "reference": "c7238f7732e267f302422d75a2f118c9aeb28f89",
+                "url": "https://api.github.com/repos/symfony/mime/zipball/592a01c2569acaebc0cd64355047d8af755b2b95",
+                "reference": "592a01c2569acaebc0cd64355047d8af755b2b95",
                 "shasum": ""
             },
             "require": {
@@ -3790,7 +3790,7 @@
                 "mime",
                 "mime-type"
             ],
-            "time": "2019-10-08T12:15:27+00:00"
+            "time": "2019-10-12T08:43:49+00:00"
         },
         {
             "name": "symfony/monolog-bridge",
@@ -4907,12 +4907,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/serializer.git",
-                "reference": "14c0ace77b530ed37cc06b236ea9f73bb4b2ac28"
+                "reference": "ec4eded4c519c85a189dc42dcb7e0d2e10a6634e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/serializer/zipball/14c0ace77b530ed37cc06b236ea9f73bb4b2ac28",
-                "reference": "14c0ace77b530ed37cc06b236ea9f73bb4b2ac28",
+                "url": "https://api.github.com/repos/symfony/serializer/zipball/ec4eded4c519c85a189dc42dcb7e0d2e10a6634e",
+                "reference": "ec4eded4c519c85a189dc42dcb7e0d2e10a6634e",
                 "shasum": ""
             },
             "require": {
@@ -4979,7 +4979,7 @@
             ],
             "description": "Symfony Serializer Component",
             "homepage": "https://symfony.com",
-            "time": "2019-10-03T11:24:15+00:00"
+            "time": "2019-10-13T08:45:12+00:00"
         },
         {
             "name": "symfony/serializer-pack",

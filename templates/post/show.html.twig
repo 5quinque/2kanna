@@ -21,10 +21,12 @@
             <div class="card border-primary mb-3">
                 <div class="card-header">
                     {{ post.title }}
+                    {% if is_granted('ROLE_ADMIN') %}
                     <span class="float-right">
                         <a href="{{ path('post_edit', {'id': post.id}) }}">edit</a>
                         {{ include('post/_delete_form.html.twig') }}
                     </span>
+                    {% endif %}
                 </div>
                 <div id="{{ post.id }}">
                     <div class="card-body">
