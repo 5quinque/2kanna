@@ -1,5 +1,5 @@
 <form class="d-inline" method="post" action="{{ path('post_delete', {'id': post.id}) }}" onsubmit="return confirm('Are you sure you want to delete post \'{{ post.title }}\'?');">
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ post.id) }}">
-    <button class="btn btn-link p-0"><span aria-hidden="true" class="close text-muted">&times;</span></button>
+    <button class="btn btn-link m-0 p-0" type="submit" style="font-size: 1em;">Delete</a>
 </form>

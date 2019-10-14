@@ -1,24 +1,24 @@
 {% for post in post.childpost %}
-    <div class="row">
-        <div class="col-12 child-post">
-            <div class="child-border">
-                <div class="card border-{{ post.id == new_post_id ? 'success' : 'secondary' }} mb-3">
-                    <div class="card-header">
-                        <button type="button" class="btn-collapse" aria-label="Collapse" data-toggle="collapse" data-target="#{{ post.id }}" aria-expanded="true" aria-controls="{{ post.id }}">
-                            <span aria-hidden="true" class="text-muted">&minus;</span>
-                        </button>
-                        {{ post.title }}
-                        <span class="float-right">
-                            <a href="{{ path('post_show', {'name': post.board.name, 'id': post.id}) }}" class="">Reply</a>
-                        </span>
-                    </div>
-                    <div id="{{ post.id }}" class="collapse show">
-                        <div class="card-body">
-                            <sub class="float-right text-muted">{{ post.created|date("Y-m-d H:i:s") }}</sub>
-                            <p class="card-text">{{ post.message|nl2br|gt2quote }}</p>
-                        </div>
-                    </div>
-                </div>
+    <div class="media border p-2 m-2" style="background-color: white; border-left: 2px solid #E95420 !important;">
+        <div class="media-body">
+            <div class="mt-0">
+                <button type="button" class="btn-collapse" aria-label="Collapse" data-toggle="collapse" data-target="#{{ post.id }}" aria-expanded="true" aria-controls="{{ post.id }}">
+                    <span aria-hidden="true" class="text-muted">&minus;</span>
+                </button>
+                {{ post.title }}
+                <sub class="float-right text-muted">
+                    {{ post.created|date("Y-m-d H:i:s") }}
+                    <a href="{{ path('post_show', {'name': post.board.name, 'id': post.id}) }}" class="">Reply</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('post_edit', {'id': post.id}) }}">edit</a>
+                        {{ include('post/_delete_form.html.twig') }}
+                    {% endif %}
+
+                </sub>
+
+            </div>
+            <div id="{{ post.id }}" class="collapse show">
+                <p class="m-0">{{ post.message|nl2br|gt2quote }}</p>
                 {% include "post/_tree.html.twig" %}
             </div>
         </div>

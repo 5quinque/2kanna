@@ -22,6 +22,8 @@ class PostController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        // dump($request);
+        // exit;
         $post = new Post();
         $post->setCreated(new DateTime());
 
@@ -42,7 +44,8 @@ class PostController extends AbstractController
             return $this->redirectToRoute('post_show', [
                 'name' => $boardName,
                 'id' => $rootPost->getId(),
-                'newPostId' => $newPostId
+                // Only show newPostId if it's a child post
+                'newPostId' => $rootPost->getId() == $newPostId ? null : $newPostId
                 ]);
         }
 
