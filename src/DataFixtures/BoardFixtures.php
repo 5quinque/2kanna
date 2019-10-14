@@ -18,15 +18,10 @@ class BoardFixtures extends Fixture
         $this->addReference(self::COWBOY_BOARD_REFERENCE, $board);
 
         $boardNames = ['miscellaneous', 'technology', 'programming', 'music',
-            'television', 'cooking'];
+            'television', 'cooking', 'literature'];
         foreach ($boardNames as $name) {
             $board = new Board();
             $board->setName($name);
-            $manager->persist($board);
-        }
-        for ($i = 0; $i < 14; $i++) {
-            $board = new Board();
-            $board->setName('board'.$i);
             $manager->persist($board);
         }
 

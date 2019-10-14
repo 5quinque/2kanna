@@ -50,6 +50,11 @@ class Post
      */
     private $created;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $latestpost;
+
     public function __construct()
     {
         $this->child_post = new ArrayCollection();
@@ -94,6 +99,20 @@ class Post
         $this->board = $board;
 
         return $this;
+    }
+
+    public function getRootParentPost(): self
+    {
+        if ($this->getParentPost() === null) {
+            return $this;
+        }
+
+        $parent = $this->getParentPost();
+        while ($parent->getParentPost()) {
+            $parent = $parent->getParentPost();
+        }
+
+        return $parent;
     }
 
     public function getParentPost(): ?self
@@ -147,6 +166,18 @@ class Post
     public function setCreated(\DateTimeInterface $created): self
     {
         $this->created = $created;
+
+        return $this;
+    }
+
+    public function getLatestpost(): ?\DateTimeInterface
+    {
+        return $this->latestpost;
+    }
+
+    public function setLatestpost(?\DateTimeInterface $latestpost): self
+    {
+        $this->latestpost = $latestpost;
 
         return $this;
     }

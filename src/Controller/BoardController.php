@@ -59,11 +59,10 @@ class BoardController extends AbstractController
             'action' => $this->generateUrl('post_new'),
         ]);
 
-        // [todo] sort by newest child_post
         $repPosts = $postRepository->findBy([
             'parent_post' => null,
             'board' => $board],
-            ["created" => "ASC"],
+            ["latestpost" => "DESC"],
             10,
             $page_no * 10);
  

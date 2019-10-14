@@ -29,19 +29,19 @@ class PostController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $rootPost = $post->getRootParentPost()->setLatestpost(new DateTime);
+
             $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($rootPost);
             $entityManager->persist($post);
             $entityManager->flush();
 
             $boardName = $post->getBoard()->getName();
             $newPostId = $redirectPostId = $post->getId();
 
-            while ($post = $post->getParentPost()) {
-                $redirectPostId = $post->getId();
-            }
             return $this->redirectToRoute('post_show', [
                 'name' => $boardName,
-                'id' => $redirectPostId,
+                'id' => $rootPost->getId(),
                 'newPostId' => $newPostId
                 ]);
         }
@@ -111,12 +111,9 @@ class PostController extends AbstractController
         $boardName = $post->getBoard()->getName();
 
         if ($post->getParentPost()) {
-            while ($post = $post->getParentPost()) {
-                $parentId = $post->getId();
-            }
             return $this->redirectToRoute('post_show', [
                 'name' => $boardName,
-                'id' => $parentId
+                'id' => $post->getRootParentPost()->getId()
                 ]);
         } else {
             return $this->redirectToRoute('board_show', ['name' => $boardIndex]);
