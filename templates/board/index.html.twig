@@ -20,7 +20,7 @@
                 <div class="col-lg-4">
                     <div class="list-group list-group-flush">
                         {% for board in col %}
-                            <a href="{{ path('board_show', {'name': board.name}) }}" class="list-group-item list-group-item-action">
+                            <a href="{{ path('board_show', {'name': board.name}) }}" class="list-group-item list-group-item-action mb-2">
                                 {{ board.name }}
                             </a>
                         {% endfor %}

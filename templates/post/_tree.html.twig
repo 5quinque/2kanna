@@ -1,5 +1,5 @@
 {% for post in post.childpost %}
-    <div class="media border p-2 m-2" style="background-color: white; border-left: 2px solid #E95420 !important;">
+    <div class="media p-2 m-2 {{ post.id == new_post_id ? 'media-highlight' }}">
         <div class="media-body">
             <div class="mt-0">
                 <button type="button" class="btn-collapse" aria-label="Collapse" data-toggle="collapse" data-target="#{{ post.id }}" aria-expanded="true" aria-controls="{{ post.id }}">

@@ -21,6 +21,16 @@ body {
 .sticky-top {
     top: 1rem !important;
 }
+.media {
+    background-color: white;
+    border: 1px solid #dee2e6 !important;
+    border-left: 0px !important;
+    box-shadow: -2px 0 0 0px #E95420;
+}
+.media-highlight {
+    background-color: #ececec;
+    box-shadow: -2px 0 0 0px #772953;
+}
 /*!
  * Bootswatch v4.3.1
  * Homepage: https://bootswatch.com
