@@ -7,7 +7,9 @@
         <div class="col-lg-12">
             <div class="page-header">
                 <h1 id="board_index">Boards
-                    <a class="btn btn-sm btn-dark float-right" href="{{ path('board_new') }}">New Board</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a class="btn btn-sm btn-dark float-right" href="{{ path('board_new') }}">New Board</a>
+                    {% endif %}
                 </h1>
             </div>
         </div>
