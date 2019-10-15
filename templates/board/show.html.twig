@@ -26,60 +26,15 @@
             {% for row in posts|batch(posts|length/3) %}
                 <div class="col-4">
                     {% for post in row %}
-                        <div class="media p-2 m-2">
-                            <div class="media-body">
-                                <div class="mt-0">
-                                    <button type="button" class="btn-collapse" aria-label="Collapse" data-toggle="collapse" data-target="#{{ post.id }}" aria-expanded="true" aria-controls="{{ post.id }}">
-                                        <span aria-hidden="true" class="text-muted">&minus;</span>
-                                    </button>
-                                    {{ post.title }}
-                                    <sub class="float-right text-muted">
-                                        {{ post.created|date("Y-m-d H:i:s") }}
-                                        <a href="{{ path('post_show', {'name': post.board.name, 'id': post.id}) }}" class="">Reply</a>
-                                        {% if is_granted('ROLE_ADMIN') %}
-                                            <a href="{{ path('post_edit', {'id': post.id}) }}">edit</a>
-                                            {{ include('post/_delete_form.html.twig') }}
-                                        {% endif %}
-                                    </sub>
-                                </div>
-                                <div id="{{ post.id }}" class="collapse show">
-                                    <p class="m-0">{{ post.message|nl2br|gt2quote }}</p>
-                                    {% for post in post.childpost|slice(0, 3) %}
-                                        <div class="media p-2 m-2">
-                                            <div class="media-body">
-                                                <div class="mt-0">
-                                                    <button type="button" class="btn-collapse" aria-label="Collapse" data-toggle="collapse" data-target="#{{ post.id }}" aria-expanded="true" aria-controls="{{ post.id }}">
-                                                        <span aria-hidden="true" class="text-muted">&minus;</span>
-                                                    </button>
-                                                    {{ post.title }}
-                                                    <sub class="float-right text-muted">
-                                                        {{ post.created|date("Y-m-d H:i:s") }}
-                                                        <a href="{{ path('post_show', {'name': post.board.name, 'id': post.id}) }}" class="">Reply</a>
-                                                        {% if is_granted('ROLE_ADMIN') %}
-                                                            <a href="{{ path('post_edit', {'id': post.id}) }}">edit</a>
-                                                            {{ include('post/_delete_form.html.twig') }}
-                                                        {% endif %}
-                                                    </sub>
-                                                </div>
-                                                <div id="{{ post.id }}" class="collapse show">
-                                                    <p class="m-0">{{ post.message|nl2br|gt2quote }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </div>
-
+                        {% set only3 = true %}
+                        {% include 'post/_post.html.twig' %}
                     {% endfor %}
                 </div>
             {% endfor %}
-
         {% else %}
             <div class="col-12">
                 <p>No posts to show.</p>
             </div>
         {% endif %}
     </div>
-
 {% endblock %}

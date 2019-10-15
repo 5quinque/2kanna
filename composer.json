@@ -27,7 +27,8 @@
         "symfony/twig-bundle": "4.4.*",
         "symfony/validator": "4.4.*",
         "symfony/web-link": "4.4.*",
-        "symfony/yaml": "4.4.*"
+        "symfony/yaml": "4.4.*",
+        "vich/uploader-bundle": "^1.10@dev"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.3@dev",

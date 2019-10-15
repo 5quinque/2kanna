@@ -12,6 +12,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type\HiddenEntityType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class PostType extends AbstractType
 {
@@ -32,7 +33,9 @@ class PostType extends AbstractType
             ->add('message', null, [
                 'attr' => ['placeholder' => 'Message', 'tabindex' => 2, 'rows' => 5],
                 'label' => false
-            ]);
+            ])
+            ->add('imageFile', VichImageType::class, ['required' => false]);
+
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
             $post = $event->getData();

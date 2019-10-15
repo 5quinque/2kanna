@@ -5,9 +5,12 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
+ * @Vich\Uploadable
  */
 class Post
 {
@@ -54,6 +57,18 @@ class Post
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $latestpost;
+
+    /**
+     * @ORM\Column(type="string", length=127, nullable=true)
+     */
+    private $imageName;
+
+    /**
+     * @Vich\UploadableField(mapping="post_image", fileNameProperty="imageName")
+     * 
+     * @var File
+     */
+    private $imageFile;
 
     public function __construct()
     {
@@ -178,6 +193,33 @@ class Post
     public function setLatestpost(?\DateTimeInterface $latestpost): self
     {
         $this->latestpost = $latestpost;
+
+        return $this;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    public function setImageName(?string $imageName): self
+    {
+        $this->imageName = $imageName;
+
+        return $this;
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /*
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $imageFile
+     */
+    public function setImageFile($imageFile): self
+    {
+        $this->imageFile = $imageFile;
 
         return $this;
     }

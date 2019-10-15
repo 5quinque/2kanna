@@ -16,11 +16,11 @@
     <hr>
     <div class="row">
         <div class="col-8">
+            {% set only3 = false %}
             {% include "post/_post.html.twig" %}
-            {% include "post/_tree.html.twig" %}
         </div>
         <div class="col-4">
-            <div class="sticky-top mt-2">
+            <div class="sticky-top">
             {% set button_label='Reply' %}
             {{ include('post/_form.html.twig') }}
             </div>

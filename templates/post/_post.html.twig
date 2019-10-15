@@ -1,6 +1,27 @@
-<div class="media p-2 m-2">
-  <div class="media-body">
-    <h5 class="mt-0">{{ post.title }}<sub class="float-right text-muted">{{ post.created|date("Y-m-d H:i:s") }}</sub></h5>
-    <p class="m-0">{{ post.message|nl2br|gt2quote }}</p>
-  </div>
+<div class="media p-2 mb-2">
+    {% if post.imageName is not null %}
+        <img src="{{ vich_uploader_asset(post, 'imageFile') }}" class="mr-3" alt="{{ post.title }}" width="64px">
+    {% endif %}
+    <div class="media-body">
+        <h5 class="mt-0">{{ post.title }}
+            <sub class="float-right text-muted">
+                {{ post.created|date("Y-m-d H:i:s") }}
+                <a href="{{ path('post_show', {'name': post.board.name, 'id': post.id}) }}" class="">Reply</a>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('post_edit', {'id': post.id}) }}">edit</a>
+                    {{ include('post/_delete_form.html.twig') }}
+                {% endif %}
+            </sub>
+        </h5>
+        <p class="m-0">{{ post.message|nl2br|gt2quote }}</p>
+        {% if only3 %}
+            {% for post in post.childpost|slice(0, 3) %}
+                {{ include('post/_post.html.twig') }}
+            {% endfor %}
+        {% else %}
+            {% for post in post.childpost %}
+                {{ include('post/_post.html.twig') }}
+            {% endfor %}
+        {% endif %}
+    </div>
 </div>
