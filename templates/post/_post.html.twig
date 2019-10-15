@@ -1,6 +1,8 @@
 <div class="media p-2 mb-2">
     {% if post.imageName is not null %}
-        <img src="{{ vich_uploader_asset(post, 'imageFile') }}" class="mr-3" alt="{{ post.title }}" width="64px">
+        <a href="{{ vich_uploader_asset(post, 'imageFile') }}">
+            <img src="{{ vich_uploader_asset(post, 'imageFile') }}" class="mr-3" alt="{{ post.title }}" width="64px">
+        </a>
     {% endif %}
     <div class="media-body">
         <h5 class="mt-0">{{ post.title }}

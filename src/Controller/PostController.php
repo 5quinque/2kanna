@@ -22,8 +22,6 @@ class PostController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        // dump($request);
-        // exit;
         $post = new Post();
         $post->setCreated(new DateTime());
 
@@ -39,17 +37,16 @@ class PostController extends AbstractController
             $entityManager->flush();
 
             $boardName = $post->getBoard()->getName();
-            $newPostId = $redirectPostId = $post->getId();
+            $newPostId = $post->getId();
 
             return $this->redirectToRoute('post_show', [
                 'name' => $boardName,
                 'id' => $rootPost->getId(),
                 // Only show newPostId if it's a child post
                 'newPostId' => $rootPost->getId() == $newPostId ? null : $newPostId
-                ]);
+            ]);
         }
-
-        // [todo] eventually get rid of this 
+        // [todo] eventually get rid of this
         return $this->render('post/new.html.twig', [
             'post' => $post,
             'form' => $form->createView(),

@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
@@ -65,7 +66,14 @@ class Post
 
     /**
      * @Vich\UploadableField(mapping="post_image", fileNameProperty="imageName")
-     * 
+     * @Assert\Image(
+     *     payload={"severity"="error"},
+     *     minWidth = 0,
+     *     maxWidth = 4000,
+     *     minHeight = 0,
+     *     maxHeight = 4000
+     * )
+     *
      * @var File
      */
     private $imageFile;
@@ -223,5 +231,4 @@ class Post
 
         return $this;
     }
-
 }
