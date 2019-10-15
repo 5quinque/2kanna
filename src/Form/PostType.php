@@ -34,7 +34,16 @@ class PostType extends AbstractType
                 'attr' => ['placeholder' => 'Message', 'tabindex' => 2, 'rows' => 5],
                 'label' => false
             ])
-            ->add('imageFile', VichImageType::class, ['required' => false]);
+            ->add('imageFile', VichImageType::class, [
+                'attr' => ['placeholder' => 'Choose Image'],
+                'required' => false,
+                'label' => false,
+                'allow_delete' => true,
+                'download_label' => 'hello',
+                'download_uri' => true,
+                'image_uri' => true,
+                'asset_helper' => true,
+            ]);
 
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
