@@ -14,7 +14,7 @@
             </sub>
         </h5>
         <p class="m-0">{{ post.message|nl2br|gt2quote }}</p>
-        {% if only3 %}
+        {% if only3 is defined %}
             {% for post in post.childpost|slice(0, 3) %}
                 {{ include('post/_post.html.twig') }}
             {% endfor %}
