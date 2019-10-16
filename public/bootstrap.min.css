@@ -31,6 +31,9 @@ body {
     background-color: #ececec;
     box-shadow: -2px 0 0 0px #772953;
 }
+.custom-file-label {
+    overflow: hidden;
+}
 /*!
  * Bootswatch v4.3.1
  * Homepage: https://bootswatch.com
