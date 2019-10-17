@@ -6,8 +6,7 @@
         <link href="{{ asset('/bootstrap.min.css') }}" rel="stylesheet">
         <link rel="icon" href="{{ asset('/violet_icon.png') }}">
         <title>
-            {% block title %}TextBoard
-            {% endblock %}
+            {% block title %}{{ sitename }}{% endblock %}
         </title>
         {% block stylesheets %}{% endblock %}
     </head>
@@ -15,8 +14,8 @@
         <div class="container pt-4">
             <div class="page-header text-center">
                 <img src="{{ asset('/violet_icon.png') }}" width="120px">
-                <h1>TextBoard</h1>
-                <p class="lead text-muted">lead text</p>
+                <h1>{{ sitename }}</h1>
+                <p class="lead text-muted">{{ leadtext }}</p>
             </div>
             <hr>
             {% block body %}{% endblock %}
