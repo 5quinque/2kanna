@@ -35,7 +35,7 @@
             "repo": "github.com/symfony/recipes",
             "branch": "master",
             "version": "1.6",
-            "ref": "5e476e8edf3fa8e7f045ad034f89bb464424f5c1"
+            "ref": "05802762c395b1e9f0f2645ebbd6128a87942f09"
         },
         "files": [
             "config/packages/doctrine.yaml",
@@ -116,6 +116,9 @@
     },
     "jms/metadata": {
         "version": "2.x-dev"
+    },
+    "linnit/dt2icon": {
+        "version": "v1.0"
     },
     "monolog/monolog": {
         "version": "1.x-dev"

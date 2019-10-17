@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1e586c183e531da51b409da4efd6e5d3",
+    "content-hash": "369c9bd42ce389427ddd518e4f5ea121",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1448,6 +1448,40 @@
             "time": "2019-09-17T15:30:40+00:00"
         },
         {
+            "name": "linnit/dt2icon",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/linnit/DT2Icon.git",
+                "reference": "0340facf0bb42de05697b123d638e1c8051c3e62"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/linnit/DT2Icon/zipball/0340facf0bb42de05697b123d638e1c8051c3e62",
+                "reference": "0340facf0bb42de05697b123d638e1c8051c3e62",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0",
+                "twig/twig": "^1.41|^2.10|^3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Linnit\\Twig\\Extension\\": "./src/Linnit/Twig/Extension/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A twig extension to convert datetime to an icon",
+            "time": "2019-10-17T11:24:56+00:00"
+        },
+        {
             "name": "monolog/monolog",
             "version": "1.x-dev",
             "source": {
@@ -1993,37 +2027,40 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
-                "reference": "df02159d5a6e6d2506e403c7dbb8bfbf1f8ffd0f"
+                "reference": "dfc2c4df9f7d465a65c770e9feb578fe071636f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/df02159d5a6e6d2506e403c7dbb8bfbf1f8ffd0f",
-                "reference": "df02159d5a6e6d2506e403c7dbb8bfbf1f8ffd0f",
+                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/dfc2c4df9f7d465a65c770e9feb578fe071636f7",
+                "reference": "dfc2c4df9f7d465a65c770e9feb578fe071636f7",
                 "shasum": ""
             },
             "require": {
                 "doctrine/annotations": "^1.0",
                 "php": ">=7.1.3",
-                "symfony/config": "^3.4|^4.3",
-                "symfony/dependency-injection": "^3.4|^4.3",
-                "symfony/framework-bundle": "^3.4|^4.3",
-                "symfony/http-kernel": "^3.4|^4.3"
+                "symfony/config": "^4.3|^5.0",
+                "symfony/dependency-injection": "^4.3|^5.0",
+                "symfony/framework-bundle": "^4.3|^5.0",
+                "symfony/http-kernel": "^4.3|^5.0"
+            },
+            "conflict": {
+                "doctrine/doctrine-cache-bundle": "<1.3.1"
             },
             "require-dev": {
-                "doctrine/doctrine-bundle": "^1.6",
+                "doctrine/doctrine-bundle": "^1.11|^2.0",
                 "doctrine/orm": "^2.5",
                 "nyholm/psr7": "^1.1",
-                "symfony/browser-kit": "^3.4|^4.3",
-                "symfony/dom-crawler": "^3.4|^4.3",
-                "symfony/expression-language": "^3.4|^4.3",
-                "symfony/finder": "^3.4|^4.3",
-                "symfony/monolog-bridge": "^3.0|^4.0",
+                "symfony/browser-kit": "^4.3|^5.0",
+                "symfony/dom-crawler": "^4.3|^5.0",
+                "symfony/expression-language": "^4.3|^5.0",
+                "symfony/finder": "^4.3|^5.0",
+                "symfony/monolog-bridge": "^4.0|^5.0",
                 "symfony/monolog-bundle": "^3.2",
-                "symfony/phpunit-bridge": "^3.4.19|^4.1.8",
+                "symfony/phpunit-bridge": "^4.3.5|^5.0",
                 "symfony/psr-http-message-bridge": "^1.1",
-                "symfony/security-bundle": "^3.4|^4.3",
-                "symfony/twig-bundle": "^3.4|^4.3",
-                "symfony/yaml": "^3.4|^4.3",
+                "symfony/security-bundle": "^4.3|^5.0",
+                "symfony/twig-bundle": "^4.3|^5.0",
+                "symfony/yaml": "^4.3|^5.0",
                 "twig/twig": "^1.34|^2.4|^3.0"
             },
             "suggest": {
@@ -2034,15 +2071,15 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "5.4.x-dev"
+                    "dev-master": "5.5.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Sensio\\Bundle\\FrameworkExtraBundle\\": ""
+                    "Sensio\\Bundle\\FrameworkExtraBundle\\": "src/"
                 },
                 "exclude-from-classmap": [
-                    "/Tests/"
+                    "/tests/"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2060,7 +2097,7 @@
                 "annotations",
                 "controllers"
             ],
-            "time": "2019-10-05T14:34:17+00:00"
+            "time": "2019-10-16T18:54:45+00:00"
         },
         {
             "name": "shapecode/hidden-entity-type-bundle",
@@ -3483,12 +3520,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-client.git",
-                "reference": "11e2eb654b9ff09ccb3e6ad7daa93de83f72055a"
+                "reference": "62911f62f10ca2adbf8a1dcb9467d2109dc08e35"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-client/zipball/11e2eb654b9ff09ccb3e6ad7daa93de83f72055a",
-                "reference": "11e2eb654b9ff09ccb3e6ad7daa93de83f72055a",
+                "url": "https://api.github.com/repos/symfony/http-client/zipball/62911f62f10ca2adbf8a1dcb9467d2109dc08e35",
+                "reference": "62911f62f10ca2adbf8a1dcb9467d2109dc08e35",
                 "shasum": ""
             },
             "require": {
@@ -3543,7 +3580,7 @@
             ],
             "description": "Symfony HttpClient component",
             "homepage": "https://symfony.com",
-            "time": "2019-10-15T12:38:35+00:00"
+            "time": "2019-10-15T15:38:24+00:00"
         },
         {
             "name": "symfony/http-client-contracts",
@@ -6000,12 +6037,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "6a50ca063904a8bf657e95cd0cfa89db138dc7ac"
+                "reference": "9e0b90b27b0d7f7fbb826f0e9e8cc7aa4be0026b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/6a50ca063904a8bf657e95cd0cfa89db138dc7ac",
-                "reference": "6a50ca063904a8bf657e95cd0cfa89db138dc7ac",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/9e0b90b27b0d7f7fbb826f0e9e8cc7aa4be0026b",
+                "reference": "9e0b90b27b0d7f7fbb826f0e9e8cc7aa4be0026b",
                 "shasum": ""
             },
             "require": {
@@ -6056,7 +6093,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2019-10-01T10:35:06+00:00"
+            "time": "2019-10-17T07:30:08+00:00"
         },
         {
             "name": "vich/uploader-bundle",
@@ -6064,12 +6101,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dustin10/VichUploaderBundle.git",
-                "reference": "5526f985991235b12aa1ae014962118df04fff47"
+                "reference": "e91d4d1db7e0c6cddcc17b6a54e8d0e8bd688f6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dustin10/VichUploaderBundle/zipball/5526f985991235b12aa1ae014962118df04fff47",
-                "reference": "5526f985991235b12aa1ae014962118df04fff47",
+                "url": "https://api.github.com/repos/dustin10/VichUploaderBundle/zipball/e91d4d1db7e0c6cddcc17b6a54e8d0e8bd688f6e",
+                "reference": "e91d4d1db7e0c6cddcc17b6a54e8d0e8bd688f6e",
                 "shasum": ""
             },
             "require": {
@@ -6152,7 +6189,7 @@
                 "file uploads",
                 "upload"
             ],
-            "time": "2019-10-11T13:37:44+00:00"
+            "time": "2019-10-16T16:24:22+00:00"
         },
         {
             "name": "webmozart/assert",
