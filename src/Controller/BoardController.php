@@ -49,7 +49,7 @@ class BoardController extends AbstractController
     }
 
     /**
-     * @Route("/{name}/{page_no<\d+>?0}", name="board_show", methods={"GET"})
+     * @Route("/{name}/{page_no<\d+>?1}", name="board_show", methods={"GET"})
      */
     public function show(Board $board, int $page_no, PostRepository $postRepository): Response
     {
@@ -58,17 +58,20 @@ class BoardController extends AbstractController
         $form = $this->createForm(PostType::class, $post, [
             'action' => $this->generateUrl('post_new'),
         ]);
+        $criteria = ['parent_post' => null, 'board' => $board];
 
-        $repPosts = $postRepository->findBy([
-            'parent_post' => null,
-            'board' => $board],
+        $repPosts = $postRepository->findBy($criteria,
             ["latestpost" => "DESC"],
             10,
-            $page_no * 10);
+            ($page_no-1) * 10);
+        
+        $pageCount = ceil($postRepository->getPageCount($criteria) / 10);
+        
  
         return $this->render('board/show.html.twig', [
             'board' => $board,
             'posts' => $repPosts,
+            'page_count' => $pageCount,
             'form' => $form->createView(),
         ]);
     }
