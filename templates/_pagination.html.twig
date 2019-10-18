@@ -12,44 +12,42 @@
     {% set next_page_no = page_no + 1 %}
 {% endif %}
 {% set nearbyPagesLimit = 4 %}
-    <div class="col-sm-12 col-md-5">
-    </div>
-    <div class="col-sm-12 col-md-7">
-        {% if page_count > 1 %}
-            <ul class="pagination justify-content-end">
-                <li class="paginate_button page-item previous {% if page_no == 1 %}disabled{% endif %}"
-                    id="dataTable_previous"><a
-                            href="{{ path(route, {'name': board, 'page_no': previous_page_no}) }}"
-                            aria-controls="dataTable" data-dt-idx="0" tabindex="0"
-                            class="page-link">Previous</a></li>
-                {% for i in range(1, page_count) %}
-                    {% if (loop.index == 1) or (loop.index == page_count) %} {# Always show page 1 & last page#}
-                        <li class="paginate_button page-item {% if page_no == i %}active{% endif %}"><a
-                                    href="{{ path(route, {'name': board, 'page_no': i}) }}"
-                                    aria-controls="dataTable"
-                                    data-dt-idx="{{ i }}" tabindex="0"
-                                    class="page-link">{{ i }}</a></li>
-                    {% elseif 0 == (page_no - nearbyPagesLimit) - loop.index %} {# dot before #}
-                        <li class="paginate_button page-item disabled"><a class="page-link" href="#">...</a></li>
-                    {% elseif 0 == (page_no + nearbyPagesLimit) - loop.index %} {# dot after #}
-                        <li class="paginate_button page-item disabled"><a class="page-link" href="#">...</a></li>
-                    {% elseif 0 < (page_no - nearbyPagesLimit) - loop.index %} {# hide all before #}
-                    {% elseif 0 > (page_no + nearbyPagesLimit) - loop.index %} {# hide all after #}
-                    {% else %}
-                        <li class="paginate_button page-item {% if page_no == i %}active{% endif %}"><a
-                                    href="{{ path(route, {'name': board, 'page_no': i}) }}"
-                                    aria-controls="dataTable"
-                                    data-dt-idx="{{ i }}" tabindex="0"
-                                    class="page-link">{{ i }}</a></li>
-                    {% endif %}                {% endfor %}
-                <li class="paginate_button page-item next {% if page_no == page_count %}disabled{% endif %}"
-                    id="dataTable_next"><a
-                            href="{{ path(route, {'name': board, 'page_no': page_no+1}) }}"
-                            aria-controls="dataTable"
-                            data-dt-idx="{{ page_count }}"
-                            tabindex="0"
-                            class="page-link">Next</a>
-                </li>
-            </ul>
-        {% endif %}
-    </div>
+<div class="col-sm-12 col-md-5"></div>
+<div class="col-sm-12 col-md-7">
+    {% if page_count > 1 %}
+        <ul class="pagination pagination-sm">
+            <li class="page-item previous {% if page_no == 1 %}disabled{% endif %}">
+                <a href="{{ path(route, {'name': board, 'page_no': previous_page_no}) }}" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+            </li>
+            {% for i in range(1, page_count) %}
+                {% if (loop.index == 1) or (loop.index == page_count) %}
+                    {# Always show page 1 & last page#}
+                    <li class="page-item {% if page_no == i %}active{% endif %}">
+                        <a href="{{ path(route, {'name': board, 'page_no': i}) }}" data-dt-idx="{{ i }}" tabindex="0" class="page-link">{{ i }}</a>
+                    </li>
+                {% elseif 0 == (page_no - nearbyPagesLimit) - loop.index %}
+                    {# dot before #}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">...</a>
+                    </li>
+                {% elseif 0 == (page_no + nearbyPagesLimit) - loop.index %}
+                    {# dot after #}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">...</a>
+                    </li>
+                {% elseif 0 < (page_no - nearbyPagesLimit) - loop.index %}
+                    {# hide all before #}
+                {% elseif 0 > (page_no + nearbyPagesLimit) - loop.index %}
+                    {# hide all after #}
+                {% else %}
+                    <li class="page-item {% if page_no == i %}active{% endif %}">
+                        <a href="{{ path(route, {'name': board, 'page_no': i}) }}" data-dt-idx="{{ i }}" tabindex="0" class="page-link">{{ i }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            <li class="page-item next {% if page_no == page_count %}disabled{% endif %}">
+                <a href="{{ path(route, {'name': board, 'page_no': page_no+1}) }}" data-dt-idx="{{ page_count }}" tabindex="0" class="page-link">Next</a>
+            </li>
+        </ul>
+    {% endif %}
+</div>
