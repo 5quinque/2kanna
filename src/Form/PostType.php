@@ -32,7 +32,8 @@ class PostType extends AbstractType
             ])
             ->add('message', null, [
                 'attr' => ['placeholder' => 'Message', 'tabindex' => 2, 'rows' => 5],
-                'label' => false
+                'label' => false,
+                'required' => true
             ])
             ->add('imageFile', VichImageType::class, [
                 'attr' => ['placeholder' => 'Choose Image'],

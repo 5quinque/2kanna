@@ -7,8 +7,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="page-header">
-                <h1 id="post_show">{{post.board.name }} {{ post.title }}
-            <a class="btn btn-sm btn-dark float-right" href="{{ path('board_show', {'name': post.board.name}) }}">{{ post.board.name }}</a>
+                <h1 id="post_show"><a href="{{ path('board_show', {'name': post.board.name}) }}">{{post.board.name }}</a> {{ post.title }}
                 </h1>
             </div>
         </div>

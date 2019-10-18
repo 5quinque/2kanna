@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
@@ -28,7 +29,11 @@ class Post
     private $title;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
+     * @Assert\Length(
+     *     max = 500,
+     *     maxMessage = "Your message cannot be longer than {{ limit }} characters"
+     * )
      */
     private $message;
 
@@ -230,5 +235,22 @@ class Post
         $this->imageFile = $imageFile;
 
         return $this;
+    }
+
+    /**
+     * @Assert\Callback
+     */
+    public function messageOrImageValidate(ExecutionContextInterface $context, $payload)
+    {
+        if ($this->getMessage() === null && $this->getImageFile() === null) {
+            $context->buildViolation('Either an image or message is required')
+            ->atPath('message')
+            ->addViolation();
+        }
+        if ($this->getMessage() !== null && strlen($this->getMessage()) < 2) {
+            $context->buildViolation('Your message must be at least 2 characters long')
+            ->atPath('message')
+            ->addViolation();
+        }
     }
 }

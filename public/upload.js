@@ -3,4 +3,6 @@ $('#post_imageFile_file').on('change', function() {
     let fileName = fullPath.split(/(\\|\/)/g).pop();
 
     $('.custom-file-label').text(fileName);
+
+    $('#post_message').removeAttr('required');
 })
