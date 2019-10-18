@@ -62,10 +62,10 @@ class BoardController extends AbstractController
 
         $repPosts = $postRepository->findBy($criteria,
             ["latestpost" => "DESC"],
-            10,
-            ($page_no-1) * 10);
+            12,
+            ($page_no-1) * 12);
         
-        $pageCount = ceil($postRepository->getPageCount($criteria) / 10);
+        $pageCount = ceil($postRepository->getPageCount($criteria) / 12);
         
  
         return $this->render('board/show.html.twig', [
