@@ -1,31 +1,39 @@
-<div class="media p-2 mb-2">
-    {% if post.imageName is not null %}
-        <a href="{{ vich_uploader_asset(post, 'imageFile') }}" class="img-thumbnail mr-3" style="max-width: 25% !important">
-            <img src="{{ vich_uploader_asset(post, 'imageFile') }}" class="" alt="{{ post.title }}" style="max-width: 100%">
-        </a>
-    {% endif %}
-    <div class="media-body">
-        <h5 class="mt-0">{{ post.title }}
-            <sub class="float-right text-muted">
-                <abbr title="{{ post.created|date("d/m/y H:i:s") }}">{{ post.created|dt2clock }}</abbr>
-                <a href="{{ path('post_show', {'name': post.board.name, 'id': post.id}) }}" class="">Reply</a>
-                {% if is_granted('ROLE_ADMIN') %}
-                    <a href="{{ path('post_edit', {'id': post.id}) }}">edit</a>
-                    {{ include('post/_delete_form.html.twig') }}
-                {% endif %}
-            </sub>
-        </h5>
-        <p class="m-0">{{ post.message|nl2br|gt2quote }}</p>
-        {% if childLevel is defined and childLevel == true %}
-        {% elseif only3 is defined and only3 == true %}
-            {% set childLevel = true %}
-            {% for post in post.childpost|slice(0, 3) %}
-                {{ include('post/_post.html.twig') }}
-            {% endfor %}
-        {% else %}
-            {% for post in post.childpost %}
-                {{ include('post/_post.html.twig') }}
-            {% endfor %}
+<div class="post {{ post.id == new_post_id ? 'post-highlight' }} p-2 mb-2">
+    <button type="button" class="btn-collapse" aria-label="Collapse" data-toggle="collapse" data-target="#{{ post.id }}" aria-expanded="true" aria-controls="{{ post.id }}">
+        <span aria-hidden="true" class="text-muted">&minus;</span>
+    </button>
+    <small class="float-right text-muted">
+        <abbr title="{{ post.created|date("d/m/y H:i:s") }}">{{ post.created|dt2clock }}</abbr>
+        <a href="{{ path('post_show', {'name': post.board.name, 'id': post.id}) }}" class="">Reply</a>
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('post_edit', {'id': post.id}) }}">edit</a>
+            {{ include('post/_delete_form.html.twig') }}
         {% endif %}
+    </small>
+    <div id="{{ post.id }}" class="collapse show">
+        <div class="media">
+            {% if post.imageName is not null %}
+                <a href="{{ vich_uploader_asset(post, 'imageFile') }}" class="img-thumbnail mr-3" style="max-width: 25% !important">
+                    <img src="{{ vich_uploader_asset(post, 'imageFile') }}" class="" alt="{{ post.title }}" style="max-width: 100%">
+                </a>
+            {% endif %}
+            <div class="media-body">
+                <h5 class="mt-0">
+                    {{ post.title }}
+                </h5>
+                <p class="m-0">{{ post.message|nl2br|gt2quote }}</p>
+                {% if childLevel is defined and childLevel == true %}
+                    {% elseif only3 is defined and only3 == true %}
+                        {% set childLevel = true %}
+                        {% for post in post.childpost|slice(0, 3) %}
+                            {{ include('post/_post.html.twig') }}
+                        {% endfor %}
+                    {% else %}
+                        {% for post in post.childpost %}
+                            {{ include('post/_post.html.twig') }}
+                        {% endfor %}
+                {% endif %}
+            </div>
+        </div>
     </div>
 </div>

@@ -21,15 +21,15 @@ body {
 .sticky-top {
     top: 1rem !important;
 }
-.media {
+.post {
     background-color: white;
     border: 1px solid #dee2e6 !important;
     border-left: 0px !important;
     box-shadow: -2px 0 0 0px #E95420;
 }
-.media-highlight {
-    background-color: #ececec;
-    box-shadow: -2px 0 0 0px #772953;
+.post-highlight {
+    background-color: #ececec !important;
+    box-shadow: -2px 0 0 0px #772953 !important;
 }
 .custom-file-label {
     overflow: hidden;
