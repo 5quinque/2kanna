@@ -18,58 +18,51 @@ use Symfony\Component\Routing\Annotation\Route;
 class PostController extends AbstractController
 {
     /**
-     * @Route("/new", name="post_new", methods={"GET","POST"})
+     * @Route("/{id}/{newPostId?}", methods={"GET", "POST"}, requirements={"id"="\d+", "newPostId"="\d+"})
      */
-    public function new(Request $request): Response
-    {
-        $post = new Post();
-        $post->setCreated(new DateTime());
-
-        $form = $this->createForm(PostType::class, $post);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $rootPost = $post->getRootParentPost()->setLatestpost(new DateTime);
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($rootPost);
-            $entityManager->persist($post);
-            $entityManager->flush();
-
-            $boardName = $post->getBoard()->getName();
-            $newPostId = $post->getId();
-
-            return $this->redirectToRoute('post_show', [
-                'name' => $boardName,
-                'id' => $rootPost->getId(),
-                // Only show newPostId if it's a child post
-                'newPostId' => $rootPost->getId() == $newPostId ? null : $newPostId
-            ]);
-        }
-        // [todo] eventually get rid of this
-        return $this->render('post/new.html.twig', [
-            'post' => $post,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/{newPostId?}", methods={"GET"}, requirements={"id"="\d+", "newPostId"="\d+"})
-     */
-    public function show(Post $post, int $newPostId = null): Response
+    public function show(Post $post, int $newPostId = null, Request $request): Response
     {
         $newChildPost = new Post();
         $newChildPost->setBoard($post->getBoard());
         $newChildPost->setParentPost($post);
 
-        $form = $this->createForm(PostType::class, $newChildPost, [
-            'action' => $this->generateUrl('post_new'),
-        ]);
+        $form = $this->createForm(PostType::class, $newChildPost);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            return $this->postFormSubmitted($newChildPost);
+        }
 
         return $this->render('post/show.html.twig', [
             'post' => $post,
             'new_post_id' => $newPostId,
             'form' => $form->createView(),
+        ]);
+    }
+
+    public function postFormSubmitted(Post $post)
+    {
+        $post->setCreated(new DateTime());
+
+        $rootPost = $post->getRootParentPost();
+        $boardName = $post->getBoard()->getName();
+
+        // Upsate parent post timestamp
+        $rootPost->setLatestpost(new DateTime);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($rootPost);
+        $entityManager->persist($post);
+        $entityManager->flush();
+
+        $newPostId = $post->getId();
+
+        return $this->redirectToRoute('post_show', [
+            'name' => $boardName,
+            'id' => $rootPost->getId(),
+            // Only show newPostId if it's a child post
+            'newPostId' => $rootPost->getId() == $newPostId ? null : $newPostId
         ]);
     }
 

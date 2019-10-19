@@ -49,21 +49,32 @@ class BoardController extends AbstractController
     }
 
     /**
-     * @Route("/{name}/{page_no<\d+>?1}", name="board_show", methods={"GET"})
+     * @Route("/{name}/{page_no<\d+>?1}", name="board_show", methods={"GET", "POST"})
      */
-    public function show(Board $board, int $page_no, PostRepository $postRepository): Response
+    public function show(Board $board, int $page_no, PostRepository $postRepository, Request $request): Response
     {
         $post = new Post();
         $post->setBoard($board);
-        $form = $this->createForm(PostType::class, $post, [
-            'action' => $this->generateUrl('post_new'),
-        ]);
+        $form = $this->createForm(PostType::class, $post);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $response = $this->forward('App\Controller\PostController::postFormSubmitted', [
+                'post' => $post
+            ]);
+
+            return $response;
+        }
+
         $criteria = ['parent_post' => null, 'board' => $board];
 
-        $repPosts = $postRepository->findBy($criteria,
+        $repPosts = $postRepository->findBy(
+            $criteria,
             ["latestpost" => "DESC"],
             12,
-            ($page_no-1) * 12);
+            ($page_no-1) * 12
+        );
         
         $pageCount = ceil($postRepository->getPageCount($criteria) / 12);
         
@@ -77,17 +88,17 @@ class BoardController extends AbstractController
     }
 
     /**
-     * @Route("{name}/post/{id}/{newPostId?}", name="post_show", methods={"GET"}, requirements={"id"="\d+", "newPostId"="\d+"})
+     * @Route("{name}/post/{id}/{newPostId?}", name="post_show", methods={"GET", "POST"}, requirements={"id"="\d+", "newPostId"="\d+"})
      */
     public function showPost(Post $post, int $newPostId = null)
     {
-    $response = $this->forward('App\Controller\PostController::show', [
-        'post'  => $post,
-        'newPostId' => $newPostId
-    ]);
+        $response = $this->forward('App\Controller\PostController::show', [
+            'post'  => $post,
+            'newPostId' => $newPostId
+        ]);
 
-    return $response;
-}
+        return $response;
+    }
 
     /**
      * @Route("/{name}/edit", name="board_edit", methods={"GET","POST"})

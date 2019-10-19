@@ -46,19 +46,18 @@ class PostType extends AbstractType
                 'asset_helper' => true,
             ]);
 
+        // $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+        //     $post = $event->getData();
+        //     $form = $event->getForm();
 
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-            $post = $event->getData();
-            $form = $event->getForm();
-
-            if (null === $post->getBoard()) {
-                $form->add('board', EntityType::class, [
-                    'class' => Board::class,
-                    'choice_label' => 'name',
-                    'label' => false
-                ]);
-            }
-        });
+        //     if (null === $post->getBoard()) {
+        //         $form->add('board', EntityType::class, [
+        //             'class' => Board::class,
+        //             'choice_label' => 'name',
+        //             'label' => false
+        //         ]);
+        //     }
+        // });
     }
 
     public function configureOptions(OptionsResolver $resolver)

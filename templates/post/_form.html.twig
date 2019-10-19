@@ -1,7 +1,5 @@
 {{ form_start(form) }}
-<div class="form-group">
-    {{ form_errors(form) }}
-</div>
+{{ form_errors(form) }}
 <div class="form-group">
     <div class="form-row">
         <div class="col">
@@ -14,15 +12,11 @@
         </div>
     </div>
 </div>
-<div class="form-group">
-    {{ form_errors(form.message) }}
-</div>
+{{ form_errors(form.message) }}
 <div class="form-group">
     {{ form_widget(form.message) }}
 </div>
-<div class="form-group">
-    {{ form_errors(form.imageFile) }}
-</div>
+{{ form_errors(form.imageFile) }}
 <div class="form-group">
     {{ form_widget(form.imageFile) }}
 </div>
