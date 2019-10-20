@@ -56,3 +56,7 @@ $(".reply_button").click(function(event) {
         }
     });
 });
+
+$(".delete_button").click(function(event) {
+    this.parentElement.submit();
+});

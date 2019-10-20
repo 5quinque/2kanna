@@ -30,6 +30,8 @@ class PostType extends AbstractType
             ->add('parent_post', EntityType::class, [
                 'class' => Post::class,
                 'choice_label' => 'id',
+                'empty_data'  => null,
+                'required' => false
             ])
             ->add('message', null, [
                 'attr' => ['placeholder' => 'Message', 'tabindex' => 2, 'rows' => 5],
