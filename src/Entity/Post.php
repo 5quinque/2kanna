@@ -83,6 +83,12 @@ class Post
      */
     private $imageFile;
 
+    /**
+     * @ORM\Column(type="string", length=64)
+     * @Assert\Ip
+     */
+    private $ipAddress;
+
     public function __construct()
     {
         $this->child_post = new ArrayCollection();
@@ -252,5 +258,17 @@ class Post
             ->atPath('message')
             ->addViolation();
         }
+    }
+
+    public function getIpAddress(): ?string
+    {
+        return $this->ipAddress;
+    }
+
+    public function setIpAddress(string $ipAddress): self
+    {
+        $this->ipAddress = $ipAddress;
+
+        return $this;
     }
 }

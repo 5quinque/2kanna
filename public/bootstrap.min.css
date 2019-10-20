@@ -34,6 +34,10 @@ body {
 .custom-file-label {
     overflow: hidden;
 }
+
+.media-body p {
+    overflow-wrap: anywhere;
+}
 /*!
  * Bootswatch v4.3.1
  * Homepage: https://bootswatch.com

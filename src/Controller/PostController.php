@@ -44,6 +44,11 @@ class PostController extends AbstractController
     public function postFormSubmitted(Post $post)
     {
         $post->setCreated(new DateTime());
+        if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $post->setIpAddress($_SERVER['HTTP_X_FORWARDED_FOR']);
+        } else {
+            $post->setIpAddress($_SERVER['REMOTE_ADDR']);
+        }
 
         $rootPost = $post->getRootParentPost();
         $boardName = $post->getBoard()->getName();

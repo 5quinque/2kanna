@@ -24,15 +24,12 @@ class PostRepository extends ServiceEntityRepository
         return count($this->findBy($criteria));
     }
 
-    /*
-    public function findOneBySomeField($value): ?Post
+    public function findByOlderThan($value): ?array
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('p.latestpost < :olderThan')
+            ->setParameter('olderThan', new \DateTime($value))
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getResult();
     }
-    */
 }
