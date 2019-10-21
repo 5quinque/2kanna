@@ -8,6 +8,7 @@ use App\Form\BoardType;
 use App\Form\PostType;
 use App\Repository\BoardRepository;
 use App\Repository\PostRepository;
+use App\Repository\BannedRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -51,20 +52,29 @@ class BoardController extends AbstractController
     /**
      * @Route("/{name}/{page_no<\d+>?1}", name="board_show", methods={"GET", "POST"})
      */
-    public function show(Board $board, int $page_no, PostRepository $postRepository, Request $request): Response
+    public function show(Board $board, int $page_no, PostRepository $postRepository, Request $request, BannedRepository $bannedRepository): Response
     {
         $post = new Post();
         $post->setBoard($board);
         $form = $this->createForm(PostType::class, $post);
 
         $form->handleRequest($request);
+        $banned = $bannedRepository->findOneBy(["ipAddress" => $_SERVER["REMOTE_ADDR"]]);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() &&
+            $form->isValid() &&
+            $banned == false) {
             $response = $this->forward('App\Controller\PostController::postFormSubmitted', [
                 'post' => $post
             ]);
 
             return $response;
+        }
+        if ($form->isSubmitted() && $banned) {
+            $this->addFlash(
+                'danger',
+                "Your IP address is banned. You are unable to post until {$banned->getUnbanTime()->format('Y-m-d H:i:s')}"
+            );
         }
 
         $criteria = ['parent_post' => null, 'board' => $board];
@@ -75,10 +85,9 @@ class BoardController extends AbstractController
             12,
             ($page_no-1) * 12
         );
-        
+
         $pageCount = ceil($postRepository->getPageCount($criteria) / 12);
-        
- 
+
         return $this->render('board/show.html.twig', [
             'board' => $board,
             'posts' => $repPosts,

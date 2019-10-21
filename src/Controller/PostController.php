@@ -3,9 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Post;
-use App\Entity\Board;
 use App\Form\PostType;
-use App\Repository\PostRepository;
+use App\Repository\BannedRepository;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +19,7 @@ class PostController extends AbstractController
     /**
      * @Route("/{id}/{newPostId?}", methods={"GET", "POST"}, requirements={"id"="\d+", "newPostId"="\d+"})
      */
-    public function show(Post $post, int $newPostId = null, Request $request): Response
+    public function show(Post $post, int $newPostId = null, Request $request, BannedRepository $bannedRepository): Response
     {
         $newChildPost = new Post();
         $newChildPost->setBoard($post->getBoard());
@@ -30,7 +29,18 @@ class PostController extends AbstractController
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        $banned = $bannedRepository->findOneBy(["ipAddress" => $_SERVER["REMOTE_ADDR"]]);
+
+        if ($banned) {
+            $this->addFlash(
+                'danger',
+                "Your IP address is banned. You are unable to post until {$banned->getUnbanTime()->format('Y-m-d H:i:s')}"
+            );
+        }
+
+        if ($form->isSubmitted() &&
+            $form->isValid() &&
+            $banned == false) {
             return $this->postFormSubmitted($newChildPost);
         }
 

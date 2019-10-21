@@ -7,7 +7,9 @@
         <link href="{{ asset('/boards.css') }}" rel="stylesheet">
         <link rel="icon" href="{{ asset('/violet_icon.png') }}">
         <title>
-            {% block title %}{{ sitename }}{% endblock %}
+            {% block title %}
+                {{ sitename }}
+            {% endblock %}
         </title>
         {% block stylesheets %}{% endblock %}
     </head>
@@ -15,10 +17,23 @@
         <div class="container pt-4">
             <div class="page-header text-center">
                 <a href="{{ path('board_index') }}"><img src="{{ asset('/violet_icon.png') }}" width="120px">
-                <h1>{{ sitename }}</h1></a>
+                    <h1>{{ sitename }}</h1>
+                </a>
                 <p class="lead text-muted">{{ leadtext }}</p>
             </div>
             <hr>
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="alert alert-dismissible alert-{{ label }}">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                {{ message }}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endfor %}
             {% block body %}{% endblock %}
         </div>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
