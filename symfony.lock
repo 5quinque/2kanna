@@ -120,6 +120,9 @@
     "linnit/dt2icon": {
         "version": "v1.0"
     },
+    "linnit/greentext": {
+        "version": "dev-master"
+    },
     "monolog/monolog": {
         "version": "1.x-dev"
     },

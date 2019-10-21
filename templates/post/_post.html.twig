@@ -22,7 +22,7 @@
                 <h5 class="mt-0">
                     {{ post.title }}
                 </h5>
-                <p class="m-0 message">{{ post.message|nl2br|gt2quote }}</p>
+                <p class="m-0 message">{{ post.message|nl2br|greentext }}</p>
                 {% if childLevel is defined and childLevel == true %}
                     {% elseif only3 is defined and only3 == true %}
                         {% set childLevel = true %}
