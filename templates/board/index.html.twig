@@ -16,7 +16,7 @@
         {% if boards|length %}
             {% for col in boards|batch(boards|length/3) %}
                 <div class="col-lg-4">
-                    <div class="list-group list-group-flush">
+                    <div class="list-group">
                         {% for board in col %}
                             <a href="{{ path('board_show', {'name': board.name}) }}" class="list-group-item list-group-item-action mb-2">
                                 {{ board.name }}

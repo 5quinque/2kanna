@@ -1,0 +1,16 @@
+{{ form_start(banned_form) }}
+{{ form_errors(banned_form) }}
+<div class="form-group">
+    <div class="form-row">
+    {{ form_errors(banned_form.ipAddress) }}
+        <div class="col">
+            <div class="input-group">
+                {{ form_widget(banned_form.ipAddress) }}
+                <div class="input-group-append">
+                    <button tabindex="3" class="btn btn-primary">{{ button_label|default('Ban') }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{ form_end(banned_form) }}
