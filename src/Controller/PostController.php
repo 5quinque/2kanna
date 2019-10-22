@@ -82,29 +82,6 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="post_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, Post $post): Response
-    {
-        $form = $this->createForm(PostType::class, $post);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('post_show', [
-                'name' => $post->getBoard()->getName(),
-                'id' => $post->getId()
-                ]);
-        }
-
-        return $this->render('post/edit.html.twig', [
-            'post' => $post,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
      * @Route("/{id}", name="post_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Post $post): Response

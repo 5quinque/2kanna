@@ -7,8 +7,8 @@
         <abbr title="{{ post.created|date("d/m/y H:i:s") }}">{{ post.created|dt2clock }}</abbr>
         <a href="{{ path('post_show', {'name': post.board.name, 'id': post.id}) }}" class="reply_button post_{{ post.id }}">Reply</a>
         {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ path('post_edit', {'id': post.id}) }}">edit</a>
             {{ include('post/_delete_form.html.twig') }}
+            <span class="text-info">({{ post.ipAddress }})</span>
         {% endif %}
     </small>
     <div id="{{ post.id }}" class="collapse show">

@@ -88,6 +88,8 @@ class PostType extends AbstractType
                 $context->buildViolation('you sunk my battleship')
                 ->atPath('message')
                 ->addViolation();
+
+                return false;
             }
         }
     }

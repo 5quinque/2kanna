@@ -13,7 +13,7 @@ class BoardFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $board = new Board();
-        $board->setName('🤠miscellaneous');
+        $board->setName('miscellaneous');
         $manager->persist($board);
         $this->addReference(self::COWBOY_BOARD_REFERENCE, $board);
 
