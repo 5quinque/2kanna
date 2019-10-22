@@ -20,4 +20,16 @@ php bin/console doctrine:migrations:migrate
 php bin/console doctrine:fixtures:load
 ```
 
+Cron
+----
+
+Cron is used to remove old posts and unban IP addresses
+
+Obviously replace `<path-to-textboard>` with the full location on the repository
+
+```
+*/15 * * * *    <path-to-textboard>/bin/console app:delete-old-posts
+*/15 * * * *    <path-to-textboard>/bin/console app:unban-ips
+```
+
 [1]: https://symfony.com/doc/4.4/setup.html

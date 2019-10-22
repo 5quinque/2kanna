@@ -30,8 +30,8 @@ class DeleteOldPostsCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln('Find Old Posts');
-        $output->writeln('==============');
+        $output->writeln('Deleting Old Posts');
+        $output->writeln('==================');
 
         $serviceOutput = $this->service->findOldPosts();
         $output->writeln($serviceOutput);

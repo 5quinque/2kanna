@@ -19,6 +19,7 @@ class PostFixtures extends Fixture
             $post->setMessage("Some message 🤠");
             $post->setBoard($cowboyBoard);
             $post->setCreated(new DateTime());
+            $post->setLatestpost(new DateTime());
             $post->setIpAddress("127.0.0.1");
             $manager->persist($post);
         }

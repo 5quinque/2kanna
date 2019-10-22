@@ -1,7 +1,6 @@
 <?php
 namespace App\Service;
 use Doctrine\Common\Persistence\ObjectManager;
-// use App\Entity\Post;
 use App\Repository\PostRepository;
 
 class DeleteOldPosts
@@ -24,13 +23,15 @@ class DeleteOldPosts
 
     public function findOldPosts()
     {
-        $oldPosts = $this->postRepository->findByOlderThan('-2 days');
-        foreach ($oldPosts as $p) {
-            echo $p->getMessage() . "\n";
-        }
+        $debug = [];
 
-        $debug = ["test1\n"];
-        $debug[] = "test2\n";
+        $oldPosts = $this->postRepository->findByOlderThan('-7 days');
+        foreach ($oldPosts as $p) {
+            $debug[] = "Deleting Post ID: {$p->getId()}\n";
+
+            $this->om->remove($p);
+            $this->om->flush();
+        }
 
         $this->printDebug($debug);
     }
