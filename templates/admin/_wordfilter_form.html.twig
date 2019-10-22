@@ -1,0 +1,16 @@
+{{ form_start(word_filter_form) }}
+{{ form_errors(word_filter_form) }}
+<div class="form-group">
+    <div class="form-row">
+    {{ form_errors(word_filter_form.badWord) }}
+        <div class="col">
+            <div class="input-group">
+                {{ form_widget(word_filter_form.badWord) }}
+                <div class="input-group-append">
+                    <button tabindex="3" class="btn btn-primary">{{ button_label|default('Add to filter') }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{ form_end(word_filter_form) }}
