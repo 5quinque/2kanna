@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\WordFilterRepository")
@@ -37,4 +39,17 @@ class WordFilter
 
         return $this;
     }
+
+    /**
+     * @Assert\Callback
+     */
+    public function validRegex(ExecutionContextInterface $context, $payload)
+    {
+        if (@preg_match($this->getBadWord(), null) === false) {
+            $context->buildViolation('Not Valid Regex')
+            ->atPath('badWord')
+            ->addViolation();
+        }
+    }
+
 }

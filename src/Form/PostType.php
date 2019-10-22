@@ -13,9 +13,16 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type\HiddenEntityType;
 use Vich\UploaderBundle\Form\Type\VichImageType;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use App\Service\GetWordFilters;
 
 class PostType extends AbstractType
 {
+    public function __construct(GetWordFilters $getWordFilters) {
+        $this->GetWordFilters = $getWordFilters;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -67,6 +74,21 @@ class PostType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Post::class,
+            'constraints' => array(
+                new Assert\Callback(array($this, 'messageFilter'))
+            )
         ]);
+    }
+
+    public function messageFilter(Post $post, ExecutionContextInterface $context)
+    {
+        $badWords = $this->GetWordFilters->findAllFilters();
+        foreach($badWords as $word) {
+            if (preg_match($word->getBadWord(), $post->getMessage())) {
+                $context->buildViolation('you sunk my battleship')
+                ->atPath('message')
+                ->addViolation();
+            }
+        }
     }
 }
