@@ -8,8 +8,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type\HiddenEntityType;
 use Vich\UploaderBundle\Form\Type\VichImageType;
@@ -60,19 +58,6 @@ class PostType extends AbstractType
                 'image_uri' => true,
                 'asset_helper' => true,
             ]);
-
-        // $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-        //     $post = $event->getData();
-        //     $form = $event->getForm();
-
-        //     if (null === $post->getBoard()) {
-        //         $form->add('board', EntityType::class, [
-        //             'class' => Board::class,
-        //             'choice_label' => 'name',
-        //             'label' => false
-        //         ]);
-        //     }
-        // });
     }
 
     public function configureOptions(OptionsResolver $resolver)
