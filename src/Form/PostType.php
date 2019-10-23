@@ -16,11 +16,16 @@ use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use App\Service\GetWordFilters;
+use App\Service\BannedIP;
 
 class PostType extends AbstractType
 {
-    public function __construct(GetWordFilters $getWordFilters) {
-        $this->GetWordFilters = $getWordFilters;
+    private $getWordFilters;
+    private $bannedIP;
+
+    public function __construct(GetWordFilters $getWordFilters, BannedIP $bannedIP) {
+        $this->getWordFilters = $getWordFilters;
+        $this->bannedIP = $bannedIP;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -75,14 +80,15 @@ class PostType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Post::class,
             'constraints' => array(
-                new Assert\Callback(array($this, 'messageFilter'))
+                new Assert\Callback(array($this, 'messageFilter')),
+                new Assert\Callback(array($this, 'bannedFilter'))
             )
         ]);
     }
 
     public function messageFilter(Post $post, ExecutionContextInterface $context)
     {
-        $badWords = $this->GetWordFilters->findAllFilters();
+        $badWords = $this->getWordFilters->findAllFilters();
         foreach($badWords as $word) {
             if (preg_match($word->getBadWord(), $post->getMessage())) {
                 $context->buildViolation('you sunk my battleship')
@@ -91,6 +97,16 @@ class PostType extends AbstractType
 
                 return false;
             }
+        }
+    }
+
+    public function bannedFilter(Post $post, ExecutionContextInterface $context)
+    {
+        $banned = $this->bannedIP->isRequesterBanned();
+        if ($banned) {
+            $context->buildViolation("Your IP address is banned. You are unable to post until {$banned->getUnbanTime()->format('Y-m-d H:i:s')}")
+                ->atPath('message')
+                ->addViolation();
         }
     }
 }
