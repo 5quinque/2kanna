@@ -12,6 +12,22 @@ function getQuoteText() {
         return false;
     }
 
+    if (isValidQuote() === false) {
+        return false;
+    }
+
+    var quote = "";
+    
+    if (window.getSelection) {
+        quote = window.getSelection().toString();
+    } else if (document.selection && document.selection.type != "Control") {
+        quote = document.selection.createRange().text;
+    }
+
+    return quote;
+}
+
+function isValidQuote() {
     var isSameNode = window.getSelection().anchorNode.isSameNode(window.getSelection().focusNode);
 
     if (isSameNode === false) {
@@ -28,15 +44,7 @@ function getQuoteText() {
         return false;
     }
 
-    var quote = "";
-    
-    if (window.getSelection) {
-        quote = window.getSelection().toString();
-    } else if (document.selection && document.selection.type != "Control") {
-        quote = document.selection.createRange().text;
-    }
-
-    return quote;
+    return true;
 }
 
 $(".delete_button").click(function(event) {
