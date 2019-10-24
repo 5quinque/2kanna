@@ -19,6 +19,10 @@ class WordFilterRepository extends ServiceEntityRepository
         parent::__construct($registry, WordFilter::class);
     }
 
+    public function countEntities()
+    {
+        return count($this->findAll());
+    }
     // /**
     //  * @return WordFilter[] Returns an array of WordFilter objects
     //  */

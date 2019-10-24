@@ -19,6 +19,11 @@ class BannedRepository extends ServiceEntityRepository
         parent::__construct($registry, Banned::class);
     }
 
+    public function countEntities()
+    {
+        return count($this->findAll());
+    }
+
     // /**
     //  * @return Banned[] Returns an array of Banned objects
     //  */

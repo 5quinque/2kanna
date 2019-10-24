@@ -18,9 +18,15 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin", name="admin_index")
      */
-    public function index(): Response
+    public function index(BannedRepository $bannedRepository, WordFilterRepository $wordFilterRepository): Response
     {
-        return $this->render('admin/index.html.twig');
+        $bannedCount = $bannedRepository->countEntities();
+        $wordFilterCount = $wordFilterRepository->countEntities();
+
+        return $this->render('admin/index.html.twig', [
+            'banned_count' => $bannedCount,
+            'word_filter_count' => $wordFilterCount,
+        ]);
     }
 
     /**

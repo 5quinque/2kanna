@@ -38,6 +38,7 @@ class PostType extends AbstractType
                 'class' => Board::class,
             ])
             ->add('parent_post', EntityType::class, [
+                'attr' => ['disabled' => true],
                 'class' => Post::class,
                 'choice_label' => 'id',
                 'empty_data'  => null,

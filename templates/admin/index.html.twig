@@ -31,7 +31,35 @@
     </div>
     <div class="row">
         <div class="col-12 mb-5">
-            {% block adminsection %}Administrator Dashboard.
+            {% block adminsection %}
+                <div class="container">
+                    <div class="card-deck mb-3 text-center">
+                        <div class="card mb-4 shadow-sm">
+                            <div class="card-header">
+                                <h4 class="my-0 font-weight-normal">Bans</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title">{{ banned_count }}</h1>
+                            </div>
+                        </div>
+                        <div class="card mb-4 shadow-sm">
+                            <div class="card-header">
+                                <h4 class="my-0 font-weight-normal">Users</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title">0</h1>
+                            </div>
+                        </div>
+                        <div class="card mb-4 shadow-sm">
+                            <div class="card-header">
+                                <h4 class="my-0 font-weight-normal">Word Filters</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title">{{ word_filter_count }}</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             {% endblock %}
         </div>
     </div>
