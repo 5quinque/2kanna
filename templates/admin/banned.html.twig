@@ -1,0 +1,25 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Admin Dashboard - Banned
+{% endblock %}
+
+{% block adminsection %}
+    <div class="row">
+        <div class="col-6">
+            {{ include('admin/_banned_form.html.twig') }}
+        </div>
+        <div class="col-6">
+            <ul class="list-group">
+                {% for banned in banned_ips %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>{{ banned.ipAddress }}
+                            <abbr title="{{ banned.banTime|date("Y/m/d H:i") }}-{{ banned.unbanTime|date("Y/m/d H:i") }}">
+                                {{ banned.banTime|dt2clock }}</abbr>
+                        </span>
+                        {{ include('admin/_unban_form.html.twig') }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

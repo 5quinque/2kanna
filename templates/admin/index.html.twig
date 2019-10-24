@@ -3,6 +3,8 @@
 {% block title %}Admin Dashboard
 {% endblock %}
 
+{% set route = app.request.get('_route') %}
+
 {% block body %}
     <div class="row">
         <div class="col-lg-12">
@@ -12,61 +14,25 @@
         </div>
     </div>
     <hr>
-    <div class="row">
+    <div class="row mb-4">
         <div class="col-12">
-            <ul class="nav nav-tabs">
+            <ul class="nav nav-pills">
                 <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#bans">Bans</a>
+                    <a class="nav-link {{ route == 'admin_index' ? 'active' }}" href="{{ path('admin_index') }}">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#users">Users</a>
+                    <a class="nav-link {{ route == 'admin_banned' ? 'active' }}" href="{{ path('admin_banned') }}">Bans</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#wordfilter">Word Filter</a>
+                    <a class="nav-link {{ route == 'admin_wordfilter' ? 'active' }}" href="{{ path('admin_wordfilter') }}">Word Filter</a>
                 </li>
             </ul>
-            <div class="tab-content pt-2">
-                <div class="tab-pane active show" id="bans">
-                    <div class="row">
-                        <div class="col-6">
-                            {{ include('admin/_banned_form.html.twig') }}
-                        </div>
-                        <div class="col-6">
-                            <ul class="list-group">
-                                {% for banned in banned_ips %}
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <span>{{ banned.ipAddress }}
-                                            <abbr title="{{ banned.banTime|date("Y/m/d H:i") }}-{{ banned.unbanTime|date("Y/m/d H:i") }}">
-                                                {{ banned.banTime|dt2clock }}</abbr>
-                                        </span>
-                                        {{ include('admin/_unban_form.html.twig') }}
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane" id="users">
-                    <p>Users</p>
-                </div>
-                <div class="tab-pane" id="wordfilter">
-                    <div class="row">
-                        <div class="col-6">
-                            {{ include('admin/_wordfilter_form.html.twig') }}
-                        </div>
-                        <div class="col-6">
-                            <ul class="list-group">
-                                {% for word in word_filter_strings %}
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        {{ word.badWord }}
-                                        {{ include('admin/_removebadword_form.html.twig') }}
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 mb-5">
+            {% block adminsection %}Administrator Dashboard.
+            {% endblock %}
         </div>
     </div>
 {% endblock %}

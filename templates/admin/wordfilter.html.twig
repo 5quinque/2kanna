@@ -1,0 +1,22 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Admin Dashboard - Word Filter
+{% endblock %}
+
+{% block adminsection %}
+    <div class="row">
+        <div class="col-6">
+            {{ include('admin/_wordfilter_form.html.twig') }}
+        </div>
+        <div class="col-6">
+            <ul class="list-group">
+                {% for word in word_filter_strings %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ word.badWord }}
+                        {{ include('admin/_removebadword_form.html.twig') }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
