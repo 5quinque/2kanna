@@ -25,11 +25,13 @@ class BannedType extends AbstractType
                 'date_widget' => 'single_text',
                 'time_widget' => 'single_text',
                 'label' => 'Ban starts',
+                'data' => new \DateTime(),
             ])
             ->add('unbanTime', DateTimeType::class, [
                 'date_widget' => 'single_text',
                 'time_widget' => 'single_text',
                 'label' => 'Ban ends',
+                'data' => new \DateTime('+3 day'),
             ]);
     }
 
