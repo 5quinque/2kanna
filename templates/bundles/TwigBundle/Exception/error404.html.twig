@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}404 - Page Not Found
+{% endblock %}
+
+{% set route = app.request.get('_route') %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+                <h1 id="404">404 - Page Not Found!</h1>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            <a href="{{ path('board_index') }}"><img src="{{ asset('/vi.png') }}">
+            </a>
+        </div>
+    </div>
+</div>{% endblock %}
