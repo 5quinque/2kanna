@@ -31,6 +31,9 @@ body {
     background-color: #ececec !important;
     box-shadow: -2px 0 0 0px #772953 !important;
 }
+.post-reply {
+    border: 1px solid #E95420 !important;
+}
 .custom-file-label {
     overflow: hidden;
 }

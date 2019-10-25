@@ -22,14 +22,13 @@ $(".reply_button").click(function(event) {
     var quote;
     var messageElement = $("#post_message");
 
-    console.log(this.parentElement.parentElement);
+    $(".post-reply").removeClass("post-reply");
+    this.parentElement.parentElement.className += " post-reply";
 
     this.classList.forEach(function(a_class) {
         id = a_class.match(/^post_(\d+)$/);
         if (id) {
             id = id[1]
-            console.log(id);
-            parentId = id;
 
             $("#post_parent_post").val(id);
 
