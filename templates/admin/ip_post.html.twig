@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}IP
+{% endblock %}
+
+{% set childLevel = true %}
+{% block body %}
+    {% dump posts %}
+    <div class="row">
+        {% if posts|length %}
+            {% for row in posts|batch(posts|length/3) %}
+                <div class="col-4">
+                    {% for post in row %}
+                        {% include 'post/_post.html.twig' %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12">
+                <p>No posts to show.</p>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

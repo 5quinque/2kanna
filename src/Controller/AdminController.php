@@ -7,6 +7,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Repository\BannedRepository;
+use App\Repository\PostRepository;
+use App\Entity\Post;
 use App\Entity\Banned;
 use App\Entity\WordFilter;
 use App\Form\BannedType;
@@ -26,6 +28,18 @@ class AdminController extends AbstractController
         return $this->render('admin/index.html.twig', [
             'banned_count' => $bannedCount,
             'word_filter_count' => $wordFilterCount,
+        ]);
+    }
+
+    /**
+     * @Route("/admin/ip/{ipAddress}", name="admin_ip_posts")
+     */
+    public function showPostsByIP(string $ipAddress, PostRepository $postRepository)
+    {
+        $posts = $postRepository->findBy(['ipAddress' => $ipAddress]);
+
+        return $this->render('admin/ip_post.html.twig', [
+            'posts' => $posts
         ]);
     }
 
