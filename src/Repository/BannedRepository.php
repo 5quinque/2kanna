@@ -24,6 +24,15 @@ class BannedRepository extends ServiceEntityRepository
         return count($this->findAll());
     }
 
+    public function findByUnbanBeforeNow(): ?array
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.unbanTime < :olderThan')
+            ->setParameter('olderThan', new \DateTime())
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Banned[] Returns an array of Banned objects
     //  */

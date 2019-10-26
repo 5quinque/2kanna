@@ -33,4 +33,20 @@ class BannedIP
 
         return $banned;
     }
+
+    public function findOldBans()
+    {
+        $debug = [];
+
+        $oldBans = $this->bannedRepository->findByUnbanBeforeNow();
+        foreach ($oldBans as $b) {
+            $debug[] = "Deleting Banned IP Address: {$b->getIPAddress()}\n";
+
+            $this->om->remove($b);
+            $this->om->flush();
+        }
+
+        $this->printDebug($debug);
+    }
+
 }
