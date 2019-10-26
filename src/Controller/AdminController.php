@@ -20,8 +20,10 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin", name="admin_index")
      */
-    public function index(BannedRepository $bannedRepository, WordFilterRepository $wordFilterRepository): Response
-    {
+    public function index(
+        BannedRepository $bannedRepository,
+        WordFilterRepository $wordFilterRepository
+    ): Response {
         $bannedCount = $bannedRepository->countEntities();
         $wordFilterCount = $wordFilterRepository->countEntities();
 

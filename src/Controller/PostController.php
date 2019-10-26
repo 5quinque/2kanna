@@ -34,7 +34,7 @@ class PostController extends AbstractController
         }
 
         return $this->render('post/show.html.twig', [
-            'post' => $post,
+            'post' => $post->getRootParentPost(),
             'new_post_id' => $newPostId,
             'form' => $form->createView(),
         ]);
@@ -52,7 +52,7 @@ class PostController extends AbstractController
         $rootPost = $post->getRootParentPost();
         $boardName = $post->getBoard()->getName();
 
-        // Upsate parent post timestamp
+        // Update parent post timestamp
         $rootPost->setLatestpost(new DateTime);
 
         $entityManager = $this->getDoctrine()->getManager();
