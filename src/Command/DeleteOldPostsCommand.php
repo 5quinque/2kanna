@@ -2,7 +2,7 @@
 
 namespace App\Command;
 
-use App\Service\DeleteOldPosts;
+use App\Service\FindPosts;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -14,7 +14,7 @@ class DeleteOldPostsCommand extends Command
 
     private $service;
 
-    public function __construct(DeleteOldPosts $service)
+    public function __construct(FindPosts $service)
     {
         $this->service = $service;
 

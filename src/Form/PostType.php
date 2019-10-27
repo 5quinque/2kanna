@@ -15,15 +15,19 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use App\Service\GetWordFilters;
 use App\Service\BannedIP;
+use App\Service\FindPosts;
 
 class PostType extends AbstractType
 {
     private $getWordFilters;
     private $bannedIP;
+    private $findPosts;
 
-    public function __construct(GetWordFilters $getWordFilters, BannedIP $bannedIP) {
+    public function __construct(GetWordFilters $getWordFilters, BannedIP $bannedIP, FindPosts $findPosts)
+    {
         $this->getWordFilters = $getWordFilters;
         $this->bannedIP = $bannedIP;
+        $this->findPosts = $findPosts;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -64,7 +68,8 @@ class PostType extends AbstractType
             'data_class' => Post::class,
             'constraints' => array(
                 new Assert\Callback(array($this, 'messageFilter')),
-                new Assert\Callback(array($this, 'bannedFilter'))
+                new Assert\Callback(array($this, 'bannedFilter')),
+                new Assert\Callback(array($this, 'cooldown'))
             )
         ]);
     }
@@ -72,7 +77,7 @@ class PostType extends AbstractType
     public function messageFilter(Post $post, ExecutionContextInterface $context)
     {
         $badWords = $this->getWordFilters->findAllFilters();
-        foreach($badWords as $word) {
+        foreach ($badWords as $word) {
             if (preg_match($word->getBadWord(), $post->getMessage())) {
                 $context->buildViolation('you sunk my battleship')
                 ->atPath('message')
@@ -88,6 +93,23 @@ class PostType extends AbstractType
         $banned = $this->bannedIP->isRequesterBanned();
         if ($banned) {
             $context->buildViolation("Your IP address is banned. You are unable to post until {$banned->getUnbanTime()->format('Y-m-d H:i:s')}")
+                ->atPath('message')
+                ->addViolation();
+        }
+    }
+
+    public function cooldown(Post $post, ExecutionContextInterface $context)
+    {
+        if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $userIP = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } else {
+            $userIP = $_SERVER['REMOTE_ADDR'];
+        }
+
+        $posts = $this->findPosts->isPosterHot($userIP);
+
+        if (!empty($posts)) {
+            $context->buildViolation("You're posting too frequently")
                 ->atPath('message')
                 ->addViolation();
         }

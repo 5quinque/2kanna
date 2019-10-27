@@ -4,7 +4,6 @@ ToDo
  * Images converted to thumbnails (?)
  * Admin view to create users
  * User role that only allows moderation
- * Cooldown between posting
 
 Done
 ====
@@ -14,3 +13,4 @@ Done
  * ~~View that shows all messages from IP address~~
  * ~~When clicking `Reply` on a child post, take to the parent but highlight the child~~
  * ~~CRON command to remove banned IP addresses~~
+ * ~~Cooldown between posting~~

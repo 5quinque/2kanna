@@ -1,9 +1,10 @@
 <?php
 namespace App\Service;
+
 use Doctrine\Common\Persistence\ObjectManager;
 use App\Repository\PostRepository;
 
-class DeleteOldPosts
+class FindPosts
 {
     private $om;
     private $postRepository;
@@ -21,11 +22,18 @@ class DeleteOldPosts
         }
     }
 
+    public function isPosterHot($userIP)
+    {
+        $posts = $this->postRepository->findByChildNewerThan('-60 seconds', $userIP);
+
+        return $posts;
+    }
+
     public function findOldPosts()
     {
         $debug = [];
 
-        $oldPosts = $this->postRepository->findByOlderThan('-7 days');
+        $oldPosts = $this->postRepository->findByParentOlderThan('-7 days');
         foreach ($oldPosts as $p) {
             $debug[] = "Deleting Post ID: {$p->getId()}\n";
 

@@ -24,12 +24,35 @@ class PostRepository extends ServiceEntityRepository
         return count($this->findBy($criteria));
     }
 
-    public function findByOlderThan($value): ?array
+    public function findByParentOlderThan($value, $ipAddress = null): ?array
     {
-        return $this->createQueryBuilder('p')
+        $query = $this->createQueryBuilder('p')
             ->andWhere('p.latestpost < :olderThan')
-            ->setParameter('olderThan', new \DateTime($value))
-            ->getQuery()
+            ->setParameter('olderThan', new \DateTime($value));
+
+        if (null !== $ipAddress) {
+            $query
+            ->andWhere('p.ipAddress = :ipAddress')
+            ->setParameter('ipAddress', $ipAddress);
+        }
+
+        return $query->getQuery()
+            ->getResult();
+    }
+
+    public function findByChildNewerThan($value, $ipAddress = null): ?array
+    {
+        $query = $this->createQueryBuilder('p')
+            ->andWhere('p.created > :olderThan')
+            ->setParameter('olderThan', new \DateTime($value));
+
+        if (null !== $ipAddress) {
+            $query
+            ->andWhere('p.ipAddress = :ipAddress')
+            ->setParameter('ipAddress', $ipAddress);
+        }
+
+        return $query->getQuery()
             ->getResult();
     }
 }
