@@ -4,6 +4,7 @@ ToDo
  * Images converted to thumbnails (?)
  * Admin view to create users
  * User role that only allows moderation
+ * ~~Link to other boards with `>>>/technology`~~ and `>>>/music/3452`
 
 Done
 ====
