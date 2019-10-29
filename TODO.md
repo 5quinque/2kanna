@@ -4,7 +4,6 @@ ToDo
  * Images converted to thumbnails (?)
  * Admin view to create users
  * User role that only allows moderation
- * ~~Link to other boards with `>>>/technology`~~ and `>>>/music/3452`
 
 Done
 ====
@@ -15,3 +14,4 @@ Done
  * ~~When clicking `Reply` on a child post, take to the parent but highlight the child~~
  * ~~CRON command to remove banned IP addresses~~
  * ~~Cooldown between posting~~
+ * ~~Link to other boards with `>>>/technology` and `>>>/music/3452`~~
