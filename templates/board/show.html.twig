@@ -23,8 +23,8 @@
     <hr>
     <div class="row">
         {% if posts|length %}
-            {% for row in posts|batch(posts|length/3) %}
-                <div class="col-4">
+            {% for row in posts|batch(posts|length/2) %}
+                <div class="col-6">
                     {% for post in row %}
                         {% set only3 = true %}
                         {% include 'post/_post.html.twig' %}
