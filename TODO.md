@@ -4,6 +4,8 @@ ToDo
  * Images converted to thumbnails (?)
  * Admin view to create users
  * User role that only allows moderation
+ * Allow code blocks
+ * Remove jQuery dependancy
 
 Done
 ====

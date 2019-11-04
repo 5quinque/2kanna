@@ -15,14 +15,21 @@ function getQuoteText() {
     return quote;
 }
 
-$(".reply_button").click(function(event) {
+Array.from(document.getElementsByClassName("reply_button")).forEach(function(item) {
+    item.onclick = replyClick;
+});
+
+function replyClick(event) {
     event.preventDefault();
     
-    var id;
-    var quote;
-    var messageElement = $("#post_message");
+    let id;
+    let quote;
+    let messageElement = document.getElementById("post_message");
 
-    $(".post-reply").removeClass("post-reply");
+    Array.from(document.getElementsByClassName("post-reply")).forEach(function(item) {
+        item.classList.remove("post-reply");
+    });
+
     this.parentElement.parentElement.className += " post-reply";
 
     this.classList.forEach(function(a_class) {
@@ -30,15 +37,15 @@ $(".reply_button").click(function(event) {
         if (id) {
             id = id[1]
 
-            $("#post_parent_post").val(id);
+            document.getElementById("post_parent_post").value = id;
 
             // Retrieve any quote text and place in reply form message textarea
             quote = getQuoteText();
             if (quote !== false) {
-                messageElement.val(`${messageElement.val()}>${quote}\n`);
+                messageElement.value = `${messageElement.value}>${quote}\n`;
             }
 
             return true;
         }
     });
-});
+}
