@@ -2,7 +2,7 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-12">
             <div class="page-header">
                 <h1 id="board_index">Boards
                     {% if is_granted('ROLE_ADMIN') %}
@@ -15,7 +15,7 @@
     <div class="row text-center">
         {% if boards|length %}
             {% for col in boards|batch(boards|length/3) %}
-                <div class="col-lg-4">
+                <div class="col-4">
                     <div class="list-group">
                         {% for board in col %}
                             <a href="{{ path('board_show', {'name': board.name}) }}" class="list-group-item list-group-item-action mb-2">
