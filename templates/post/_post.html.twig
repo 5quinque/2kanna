@@ -1,5 +1,5 @@
-{% set new_post_id = new_post_id ?? null %}
-{% set reply_id = reply_id ?? null %}
+{%- set new_post_id = new_post_id ?? null -%}
+{%- set reply_id = reply_id ?? null -%}
 <div class="post p-2 mb-2{{ post.id == new_post_id ? ' post-highlight' }}{{ post.id == reply_id ? ' post-reply' }}">
     <button type="button" class="btn-collapse" aria-label="Collapse" data-toggle="collapse" data-target="#{{ post.id }}" aria-expanded="true" aria-controls="{{ post.id }}">
         <span aria-hidden="true" class="text-muted">&minus;</span>
@@ -7,34 +7,34 @@
     <small class="float-right text-muted">
         {{ post.created|date("d/m/Y H:i:s") }}
         <a href="{{ path('post_show', {'name': post.board.name, 'id': post.id}) }}" class="reply_button post_{{ post.id }}">Reply</a>
-        {% if is_granted('ROLE_ADMIN') %}
+        {%- if is_granted('ROLE_ADMIN') -%}
             {{ include('post/_delete_form.html.twig') }}
             <span class="text-info">(<a href="{{ path('admin_ip_posts', {'ipAddress': post.ipAddress}) }}">{{ post.ipAddress }}</a>)</span>
-        {% endif %}
+        {%- endif -%}
     </small>
     <div id="{{ post.id }}" class="collapse show">
         <div class="media">
-            {% if post.imageName is not null %}
+            {%- if post.imageName is not null -%}
                 <a href="{{ vich_uploader_asset(post, 'imageFile') }}" class="img-thumbnail mr-3" style="max-width: 25% !important">
                     <img src="{{ vich_uploader_asset(post, 'imageFile') }}" class="" alt="{{ post.title }}" style="max-width: 100%">
                 </a>
-            {% endif %}
+            {%- endif -%}
             <div class="media-body">
                 <h5 class="mt-0">
                     {{ post.title }}
                 </h5>
                 <p class="m-0 message">{{ post.message|nl2br|urltoanchor|crosslink|greentext }}</p>
-                {% if childLevel is defined and childLevel == true %}
-                    {% elseif only3 is defined and only3 == true %}
-                        {% set childLevel = true %}
-                        {% for post in post.childpost|slice(0, 3) %}
+                {%- if childLevel is defined and childLevel == true -%}
+                    {%- elseif only3 is defined and only3 == true -%}
+                        {%- set childLevel = true -%}
+                        {%- for post in post.childpost|slice(0, 3) -%}
                             {{ include('post/_post.html.twig') }}
-                        {% endfor %}
-                    {% else %}
-                        {% for post in post.childpost %}
+                        {%- endfor -%}
+                    {%- else -%}
+                        {%- for post in post.childpost -%}
                             {{ include('post/_post.html.twig') }}
-                        {% endfor %}
-                {% endif %}
+                        {%- endfor -%}
+                {%- endif -%}
             </div>
         </div>
     </div>
