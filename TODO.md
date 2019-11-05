@@ -5,7 +5,14 @@ ToDo
  * Admin view to create users
  * User role that only allows moderation
  * Allow code blocks
+ * Maybe replace bootstrap with Tailwind - https://tailwindcss.com
+
+In Progress
+===========
+
  * Remove jQuery dependancy
+   * Removed need for jQuery in upload.js and reply.js
+   * Replace functionality of collapse.js and alert.js 
 
 Done
 ====
