@@ -16,3 +16,7 @@
 ###< symfony/phpunit-bridge ###
 
 /templates/_analytics.html.twig
+
+###> liip/imagine-bundle ###
+/public/media/cache/
+###< liip/imagine-bundle ###

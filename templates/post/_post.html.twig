@@ -16,7 +16,7 @@
         <div class="media">
             {%- if post.imageName is not null -%}
                 <a href="{{ vich_uploader_asset(post, 'imageFile') }}" class="img-thumbnail mr-3" style="max-width: 25% !important">
-                    <img src="{{ vich_uploader_asset(post, 'imageFile') }}" class="" alt="{{ post.title }}" style="max-width: 100%">
+                    <img src="{{ vich_uploader_asset(post, 'imageFile') | imagine_filter('thumb') }}" class="" alt="{{ post.title }}" style="max-width: 100%">
                 </a>
             {%- endif -%}
             <div class="media-body">
