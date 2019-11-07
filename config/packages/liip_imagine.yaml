@@ -3,15 +3,26 @@ liip_imagine:
     # valid drivers options include "gd" or "gmagick" or "imagick"
     driver: "gd"
 
+    resolvers:
+       post_thumbs:
+          web_path:
+            web_root: '%kernel.project_dir%/public/'
+            cache_prefix: "t"
+
     filter_sets:
         cache: ~
 
         # the name of the "filter set"
         thumb:
-            # adjust the image quality to 75%
+            cache: post_thumbs
             quality: 75
+            png_compression_level: 8
+
             # list of transformations to apply (the "filters")
             filters:
                 # create a thumbnail: set size to 120x120 and use the "outbound" mode
                 # to crop the image when the size ratio of the input differs
                 thumbnail: { size: [120, 120], mode: outbound }
+
+                # auto rotate the image using EXIF metadata
+                auto_rotate: ~
