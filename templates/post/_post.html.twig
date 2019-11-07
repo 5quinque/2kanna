@@ -1,7 +1,7 @@
 {%- set new_post_id = new_post_id ?? null -%}
 {%- set reply_id = reply_id ?? null -%}
 <div class="post p-2 mb-2{{ post.id == new_post_id ? ' post-highlight' }}{{ post.id == reply_id ? ' post-reply' }}">
-    <button type="button" class="btn-collapse" aria-label="Collapse" data-toggle="collapse" data-target="#{{ post.id }}" aria-expanded="true" aria-controls="{{ post.id }}">
+    <button type="button" class="btn-collapse" data-toggle="collapse" data-target="#p{{ post.id }}" aria-expanded="true" aria-controls="{{ post.id }}">
         <span aria-hidden="true" class="text-muted">&minus;</span>
     </button>
     <small class="float-right text-muted">
@@ -12,7 +12,7 @@
             <span class="text-info">(<a href="{{ path('admin_ip_posts', {'ipAddress': post.ipAddress}) }}">{{ post.ipAddress }}</a>)</span>
         {%- endif -%}
     </small>
-    <div id="{{ post.id }}" class="collapse show">
+    <div id="p{{ post.id }}" class="collapse show">
         <div class="media">
             {%- if post.imageName is not null -%}
                 <a href="{{ vich_uploader_asset(post, 'imageFile') }}" class="img-thumbnail mr-3" style="max-width: 25% !important">

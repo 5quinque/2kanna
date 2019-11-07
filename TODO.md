@@ -1,21 +1,21 @@
 ToDo
 ====
 
- * Admin view to create users
- * User role that only allows moderation
  * Allow code blocks - Possibly use https://prismjs.com
  * Maybe replace bootstrap with Tailwind - https://tailwindcss.com
 
 In Progress
 ===========
 
- * Remove jQuery dependancy
-   * Removed need for jQuery in upload.js and reply.js
-   * Replace functionality of collapse.js and alert.js
+ * Admin view to create users
+ * User role that only allows moderation
 
 Done
 ====
 
+ * ~~Remove jQuery dependancy~~
+   * ~~Removed need for jQuery in upload.js and reply.js~~
+   * ~~Replace functionality of collapse.js and alert.js~~
  * ~~Images converted to thumbnails~~
  * ~~When adding banned IP address, date/time already populated with `now` and `now` + 3 days~~
  * ~~When clicking `Reply` message is somehow highlighted to denote message is being replied to~~

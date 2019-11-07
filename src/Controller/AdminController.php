@@ -102,7 +102,7 @@ class AdminController extends AbstractController
             $banned->getIpAddress() . " is now unbanned"
         );
 
-        return $this->redirectToRoute('admin');
+        return $this->redirectToRoute('admin_index');
     }
 
     /**
@@ -121,7 +121,7 @@ class AdminController extends AbstractController
             $wordFilter->getBadWord() . " is now removed"
         );
 
-        return $this->redirectToRoute('admin');
+        return $this->redirectToRoute('admin_index');
     }
 
     public function banIP(Banned $banned)
