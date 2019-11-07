@@ -8,12 +8,16 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Repository\BannedRepository;
 use App\Repository\PostRepository;
+use App\Entity\Admin;
 use App\Entity\Post;
 use App\Entity\Banned;
 use App\Entity\WordFilter;
 use App\Form\BannedType;
 use App\Form\WordFilterType;
+use App\Form\AdminUser;
 use App\Repository\WordFilterRepository;
+use App\Repository\AdminRepository;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AdminController extends AbstractController
 {
@@ -43,6 +47,44 @@ class AdminController extends AbstractController
         return $this->render('admin/ip_post.html.twig', [
             'posts' => $posts
         ]);
+    }
+
+    /**
+     * @Route("/admin/users", name="admin_users")
+     */
+    public function Users(AdminRepository $adminRepository, Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $user = new Admin();
+        $userForm = $this->createForm(AdminUser::class, $user);
+        $userForm->handleRequest($request);
+
+        if ($userForm->isSubmitted() && $userForm->isValid()) {
+            $user->setPassword($passwordEncoder->encodePassword(
+                $user,
+                $user->getPassword()
+            ));
+
+            $this->addUser($user);
+        }
+
+        $users = $adminRepository->findAll();
+        return $this->render('admin/users.html.twig', [
+            'users' => $users,
+            'user_form' => $userForm->createView()
+        ]);
+    }
+
+
+    public function addUser(Admin $user)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        $this->addFlash(
+            'success',
+            $user->getUsername() . " is now created :)"
+        );
     }
 
     /**

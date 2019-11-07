@@ -7,12 +7,12 @@ ToDo
 In Progress
 ===========
 
- * Admin view to create users
  * User role that only allows moderation
 
 Done
 ====
 
+ * ~~Admin view to create users~~
  * ~~Remove jQuery dependancy~~
    * ~~Removed need for jQuery in upload.js and reply.js~~
    * ~~Replace functionality of collapse.js and alert.js~~
