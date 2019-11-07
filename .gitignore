@@ -18,5 +18,5 @@
 /templates/_analytics.html.twig
 
 ###> liip/imagine-bundle ###
-/public/media/cache/
+/public/t/
 ###< liip/imagine-bundle ###
