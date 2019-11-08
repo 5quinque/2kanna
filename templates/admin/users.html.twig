@@ -13,7 +13,8 @@
                 {% for user in users %}
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         {{ user.username }}
-                        {# {{ include('admin/_removebadword_form.html.twig') }} #}
+                        <a class="btn btn-primary" href="{{ path('admin_user_edit', {'id': user.id}) }}">Edit</a>
+                        {# {{ include('admin/_removeuser_form.html.twig') }} #}
                     </li>
                 {% endfor %}
             </ul>

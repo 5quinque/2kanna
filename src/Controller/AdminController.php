@@ -74,6 +74,28 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/admin/users/edit/{id}", name="admin_user_edit")
+     */
+    public function UserEdit(Admin $user, Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $userForm = $this->createForm(AdminUser::class, $user);
+        $userForm->handleRequest($request);
+
+        if ($userForm->isSubmitted() && $userForm->isValid()) {
+            $user->setPassword($passwordEncoder->encodePassword(
+                $user,
+                $user->getPassword()
+            ));
+
+            $this->addUser($user);
+        }
+
+        return $this->render('admin/user_edit.html.twig', [
+            'user_form' => $userForm->createView()
+        ]);
+
+    }
 
     public function addUser(Admin $user)
     {
