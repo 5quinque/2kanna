@@ -1,13 +1,15 @@
 ToDo
 ====
 
- * Allow code blocks - Possibly use https://prismjs.com
  * Maybe replace bootstrap with Tailwind - https://tailwindcss.com
+ * When clicking an image, expand inside the post
+ * Strip EXIF data from images (Maybe https://symfony.com/doc/current/bundles/LiipImagineBundle/filters/general.html#filter-strip)
 
 In Progress
 ===========
 
  * User role that only allows moderation
+ * Allow code blocks - Possibly use https://prismjs.com
 
 Done
 ====
