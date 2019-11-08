@@ -4,13 +4,8 @@ html {
 body {
     height: 100%;
     margin: 0;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
 }
-/* body {
-    background-color: #d9d9d9;
-    background-image: linear-gradient(315deg, #d9d9d9 0%, #f6f2f2 74%);
-} */
+
 .child-post > .child-border {
     border-left: 2px solid #E95420;
     margin-left: 0.5rem;
@@ -40,6 +35,10 @@ body {
 
 .media-body p {
     overflow-wrap: anywhere;
+}
+
+.post-head {
+    background-color: #dee2e6;
 }
 
 button.btn-collapse{

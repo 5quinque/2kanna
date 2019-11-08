@@ -1,18 +1,25 @@
 {%- set new_post_id = new_post_id ?? null -%}
 {%- set reply_id = reply_id ?? null -%}
-<div class="post p-2 mb-2{{ post.id == new_post_id ? ' post-highlight' }}{{ post.id == reply_id ? ' post-reply' }}">
-    <button type="button" class="btn-collapse" data-toggle="collapse" data-target="#p{{ post.id }}" aria-expanded="true" aria-controls="{{ post.id }}">
-        <span aria-hidden="true" class="text-muted">&minus;</span>
-    </button>
-    <small class="float-right text-muted">
-        {{ post.created|date("d/m/Y H:i:s") }}
-        <a href="{{ path('post_show', {'name': post.board.name, 'id': post.id}) }}" class="reply_button post_{{ post.id }}">Reply</a>
-        {%- if is_granted('ROLE_ADMIN') -%}
-            {{ include('post/_delete_form.html.twig') }}
-            <span class="text-info">(<a href="{{ path('admin_ip_posts', {'ipAddress': post.ipAddress}) }}">{{ post.ipAddress }}</a>)</span>
+<div class="post my-2{{ post.id == new_post_id ? ' post-highlight' }}{{ post.id == reply_id ? ' post-reply' }}">
+    <div class="post-head px-2">
+        <button type="button" class="btn-collapse" data-toggle="collapse" data-target="#p{{ post.id }}" aria-expanded="true" aria-controls="{{ post.id }}">
+            <span aria-hidden="true" class="text-muted">&minus;</span>
+        </button>
+        {%- if post.title is not empty -%}
+            <span>
+                {{ post.title }}
+            </span>
         {%- endif -%}
-    </small>
-    <div id="p{{ post.id }}" class="collapse show">
+        <small class="float-right text-muted">
+            {{ post.created|date("d/m/Y H:i:s") }}
+            <a href="{{ path('post_show', {'name': post.board.name, 'id': post.id}) }}" class="reply_button post_{{ post.id }}">Reply</a>
+            {%- if is_granted('ROLE_ADMIN') -%}
+                {{ include('post/_delete_form.html.twig') }}
+                <span class="text-info">(<a href="{{ path('admin_ip_posts', {'ipAddress': post.ipAddress}) }}">{{ post.ipAddress }}</a>)</span>
+            {%- endif -%}
+        </small>
+    </div>
+    <div id="p{{ post.id }}" class="collapse show p-2">
         <div class="media">
             {%- if post.imageName is not null -%}
                 <a href="{{ vich_uploader_asset(post, 'imageFile') }}" class="img-thumbnail mr-3" style="max-width: 25% !important">
@@ -20,9 +27,6 @@
                 </a>
             {%- endif -%}
             <div class="media-body">
-                <h5 class="mt-0">
-                    {{ post.title }}
-                </h5>
                 <p class="m-0 message">{{ post.message|nl2br|urltoanchor|crosslink|greentext }}</p>
                 {%- if childLevel is defined and childLevel == true -%}
                     {%- elseif only3 is defined and only3 == true -%}

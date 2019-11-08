@@ -10,7 +10,7 @@
     --teal: #20c997;
     --cyan: #1F9BCF;
     --white: #fff;
-    --gray: #919aa1;
+    --gray: #040404;
     --gray-dark: #343a40;
     --primary: #1a1a1a;
     --secondary: #fff;
@@ -62,7 +62,7 @@ body {
     font-size: 0.875rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #919aa1;
+    color: #040404;
     text-align: left;
     background-color: #fff
 }
@@ -197,7 +197,7 @@ table {
 caption {
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
-    color: #919aa1;
+    color: #040404;
     text-align: left;
     caption-side: bottom
 }
@@ -413,11 +413,6 @@ small,
     margin-right: 0.5rem
 }
 
-.initialism {
-    font-size: 90%;
-    text-transform: uppercase
-}
-
 .blockquote {
     margin-bottom: 1rem;
     font-size: 1.09375rem
@@ -426,7 +421,7 @@ small,
 .blockquote-footer {
     display: block;
     font-size: 80%;
-    color: #919aa1
+    color: #040404
 }
 
 .blockquote-footer::before {
@@ -703,7 +698,7 @@ pre code {
 .table {
     width: 100%;
     margin-bottom: 1rem;
-    color: #919aa1
+    color: #040404
 }
 
 .table th,
@@ -856,17 +851,17 @@ pre code {
 }
 
 .form-control::-webkit-input-placeholder {
-    color: #919aa1;
+    color: #040404;
     opacity: 1
 }
 
 .form-control::-ms-input-placeholder {
-    color: #919aa1;
+    color: #040404;
     opacity: 1
 }
 
 .form-control::placeholder {
-    color: #919aa1;
+    color: #040404;
     opacity: 1
 }
 
@@ -916,7 +911,7 @@ select.form-control:focus::-ms-value {
     padding-bottom: 0.75rem;
     margin-bottom: 0;
     line-height: 1.5;
-    color: #919aa1;
+    color: #040404;
     background-color: transparent;
     border: solid transparent;
     border-width: 0px 0
@@ -989,7 +984,7 @@ textarea.form-control {
 }
 
 .form-check-input:disabled~.form-check-label {
-    color: #919aa1
+    color: #040404
 }
 
 .form-check-label {
@@ -1407,7 +1402,7 @@ textarea.form-control.is-invalid {
 .btn {
     display: inline-block;
     font-weight: 600;
-    color: #919aa1;
+    color: #040404;
     text-align: center;
     vertical-align: middle;
     -webkit-user-select: none;
@@ -1434,7 +1429,7 @@ textarea.form-control.is-invalid {
 }
 
 .btn:hover {
-    color: #919aa1;
+    color: #040404;
     text-decoration: none
 }
 
@@ -2099,7 +2094,7 @@ fieldset:disabled a.btn {
 
 .btn-link:disabled,
 .btn-link.disabled {
-    color: #919aa1;
+    color: #040404;
     pointer-events: none
 }
 
@@ -2445,7 +2440,7 @@ input[type="button"].btn-block {
 }
 
 .custom-control-input:disabled~.custom-control-label {
-    color: #919aa1
+    color: #040404
 }
 
 .custom-control-input:disabled~.custom-control-label::before {
@@ -2595,7 +2590,7 @@ input[type="button"].btn-block {
 }
 
 .custom-select:disabled {
-    color: #919aa1;
+    color: #040404;
     background-color: #f7f7f9
 }
 
@@ -2889,7 +2884,7 @@ input[type="button"].btn-block {
 }
 
 .nav-link.disabled {
-    color: #919aa1;
+    color: #040404;
     pointer-events: none;
     cursor: default
 }
@@ -2912,7 +2907,7 @@ input[type="button"].btn-block {
 }
 
 .nav-tabs .nav-link.disabled {
-    color: #919aa1;
+    color: #040404;
     background-color: transparent;
     border-color: transparent
 }
@@ -3118,7 +3113,7 @@ input[type="button"].btn-block {
 }
 
 .page-item.disabled .page-link {
-    color: #919aa1;
+    color: #040404;
     pointer-events: none;
     cursor: auto;
     background-color: #fff;
@@ -3318,7 +3313,7 @@ input[type="button"].btn-block {
 }
 
 .list-group-item-action:active {
-    color: #919aa1;
+    color: #040404;
     background-color: #f7f7f9
 }
 
@@ -3337,7 +3332,7 @@ input[type="button"].btn-block {
 
 .list-group-item.disabled,
 .list-group-item:disabled {
-    color: #919aa1;
+    color: #040404;
     pointer-events: none;
     background-color: #fff
 }
@@ -4632,11 +4627,11 @@ a.text-dark:focus {
 }
 
 .text-body {
-    color: #919aa1 !important
+    color: #040404 !important
 }
 
 .text-muted {
-    color: #919aa1 !important
+    color: #040404 !important
 }
 
 .text-black-50 {
@@ -4729,8 +4724,8 @@ a.text-dark:focus {
 }
 
 .btn-outline-secondary {
-    border-color: #919aa1;
-    color: #919aa1
+    border-color: #040404;
+    color: #040404
 }
 
 .btn-outline-secondary:not([disabled]):not(.disabled):hover,
@@ -4765,17 +4760,15 @@ h3,
 h4,
 h5,
 h6 {
-    text-transform: uppercase;
     letter-spacing: 3px
 }
 
 .text-secondary {
-    color: #919aa1 !important
+    color: #040404 !important
 }
 
 th {
     font-size: 0.765625rem;
-    text-transform: uppercase
 }
 
 .table th,

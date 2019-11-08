@@ -373,6 +373,12 @@
     
     // public methods
     this.toggle = function(e) {
+        if (e.srcElement.innerHTML === "−") {
+            e.srcElement.innerHTML = "&plus;";
+        } else {
+            e.srcElement.innerHTML = "&minus;";
+        }
+
       e[preventDefault]();
       if (!hasClass(collapse,showClass)) { self.show(); } 
       else { self.hide(); }
