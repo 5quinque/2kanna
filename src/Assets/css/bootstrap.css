@@ -3869,6 +3869,12 @@ button.bg-dark:focus {
     display: none !important
 }
 
+.d-flex {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important
+}
+
 .d-inline {
     display: inline !important
 }
@@ -3920,6 +3926,11 @@ button.bg-dark:focus {
 .justify-content-around {
     -ms-flex-pack: distribute !important;
     justify-content: space-around !important
+}
+
+.align-items-center {
+    -ms-flex-align: center !important;
+    align-items: center !important;
 }
 
 .float-left {

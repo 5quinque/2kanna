@@ -26,14 +26,17 @@ class AdminController extends AbstractController
      */
     public function index(
         BannedRepository $bannedRepository,
-        WordFilterRepository $wordFilterRepository
+        WordFilterRepository $wordFilterRepository,
+        AdminRepository $adminRepository
     ): Response {
         $bannedCount = $bannedRepository->countEntities();
         $wordFilterCount = $wordFilterRepository->countEntities();
+        $userCount = $adminRepository->countEntities();
 
         return $this->render('admin/index.html.twig', [
             'banned_count' => $bannedCount,
             'word_filter_count' => $wordFilterCount,
+            'user_count' => $userCount
         ]);
     }
 

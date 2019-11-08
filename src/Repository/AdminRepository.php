@@ -22,6 +22,11 @@ class AdminRepository extends ServiceEntityRepository implements PasswordUpgrade
         parent::__construct($registry, Admin::class);
     }
 
+    public function countEntities()
+    {
+        return count($this->findAll());
+    }
+
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
      */
