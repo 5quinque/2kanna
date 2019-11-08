@@ -5,7 +5,6 @@
 
 {% set childLevel = true %}
 {% block body %}
-    {% dump posts %}
     <div class="row">
         {% if posts|length %}
             {% for row in posts|batch(posts|length/3) %}
