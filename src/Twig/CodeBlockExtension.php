@@ -14,19 +14,31 @@ class CodeBlockExtension extends AbstractExtension
     }
     public function createCodeBlock(string $string)
     {
-        $regex = '/```(\w+)?(.+)```/sm';
+        $regex = '/```(\w+)?[^\w].+\n(.+)```/smU';
 
-        $language = $this->getLanguage("JavaScript");
+        preg_match_all($regex, $string, $matches);
 
-        return preg_replace($regex, "<pre class='line-numbers'><code class='language-{$language}'>$2</code></pre>", $string);
+        for ($i = 0; $i < count($matches[0]); $i++) {
+            $text = $matches[0][$i];
+            $language = strtolower($matches[1][$i]);
+            $language = $this->getLanguage($language);
+
+            $code = $matches[2][$i];
+
+            $string = str_replace($text, "<pre class='line-numbers'><code class='language-{$language}'>{$code}</code></pre>", $string);
+        }
+
+        return $string;
     }
+
+
 
     private static function getLanguage(string $language)
     {
-        $languages = ["C", "JavaScript", "PHP"];
+        $languages = ["clike", "c", "javascript", "php"];
 
         return $languages[
             array_search($language, $languages, true)
         ];
     }
-} 
+}
