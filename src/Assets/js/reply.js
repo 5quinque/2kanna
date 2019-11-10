@@ -30,7 +30,7 @@ function replyClick(event) {
         item.classList.remove("post-reply");
     });
 
-    this.parentElement.parentElement.className += " post-reply";
+    this.parentElement.parentElement.parentElement.className += " post-reply";
 
     this.classList.forEach(function(a_class) {
         id = a_class.match(/^post_(\d+)$/);
