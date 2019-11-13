@@ -24,7 +24,7 @@ class FindPosts
 
     public function isPosterHot($userIP)
     {
-        $posts = $this->postRepository->findByChildNewerThan('-60 seconds', $userIP);
+        $posts = $this->postRepository->findByChildNewerThan('-10 seconds', $userIP);
 
         return $posts;
     }

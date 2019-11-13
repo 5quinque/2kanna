@@ -4,6 +4,7 @@ ToDo
  * Maybe replace bootstrap with Tailwind - https://tailwindcss.com
  * When clicking an image, expand inside the post
  * Strip EXIF data from images (Maybe https://symfony.com/doc/current/bundles/LiipImagineBundle/filters/general.html#filter-strip)
+ * Message div gets too small, text gets crush.. also text wordwrap needs fixing
 
 In Progress
 ===========
@@ -14,6 +15,7 @@ In Progress
 Done
 ====
 
+ * ~~When posting form returns error, keep reply post id~~
  * ~~Admin view to create users~~
  * ~~Remove jQuery dependancy~~
    * ~~Removed need for jQuery in upload.js and reply.js~~

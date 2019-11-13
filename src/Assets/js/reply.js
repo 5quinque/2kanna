@@ -49,3 +49,17 @@ function replyClick(event) {
         }
     });
 }
+
+function highlightReply() {
+    let id = document.getElementById("post_parent_post").value;
+    let post;
+
+    Array.from(document.getElementsByClassName(`post_${id}`)).forEach(function(item) {
+        post = item.parentElement.parentElement.parentElement;
+        if (post.classList.contains('post-reply') === false) {
+            item.parentElement.parentElement.parentElement.className += " post-reply";
+        }
+    });
+}
+
+highlightReply();
