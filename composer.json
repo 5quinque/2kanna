@@ -1,4 +1,6 @@
 {
+    "name": "linnit/textboard",
+    "description": "Imageboard type software",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "dev",
