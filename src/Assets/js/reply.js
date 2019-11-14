@@ -26,9 +26,7 @@ function replyClick(event) {
     let quote;
     let messageElement = document.getElementById("post_message");
 
-    Array.from(document.getElementsByClassName("post-reply")).forEach(function(item) {
-        item.classList.remove("post-reply");
-    });
+    removeHighlight();
 
     this.parentElement.parentElement.parentElement.className += " post-reply";
 
@@ -50,7 +48,15 @@ function replyClick(event) {
     });
 }
 
+function removeHighlight() {
+    Array.from(document.getElementsByClassName("post-reply")).forEach(function(item) {
+        item.classList.remove("post-reply");
+    });
+}
+
 function highlightReply() {
+    removeHighlight();
+    
     let id = document.getElementById("post_parent_post").value;
     let post;
 
