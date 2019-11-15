@@ -28,7 +28,7 @@ function replyClick(event) {
 
     removeHighlight();
 
-    this.parentElement.parentElement.parentElement.className += " post-reply";
+    this.parentElement.parentElement.parentElement.parentElement.className += " post-reply";
 
     this.classList.forEach(function(a_class) {
         id = a_class.match(/^post_(\d+)$/);
@@ -61,9 +61,9 @@ function highlightReply() {
     let post;
 
     Array.from(document.getElementsByClassName(`post_${id}`)).forEach(function(item) {
-        post = item.parentElement.parentElement.parentElement;
+        post = item.parentElement.parentElement.parentElement.parentElement;
         if (post.classList.contains('post-reply') === false) {
-            item.parentElement.parentElement.parentElement.className += " post-reply";
+            post.className += " post-reply";
         }
     });
 }
