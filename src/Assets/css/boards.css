@@ -41,6 +41,10 @@ body {
     background-color: #dee2e6;
 }
 
+.message {
+    word-break: break-all;
+}
+
 button.btn-collapse{
     padding: 0;
     background-color: transparent;

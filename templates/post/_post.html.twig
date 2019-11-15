@@ -7,7 +7,10 @@
         </button>
         {%- if post.title is not empty -%}
             <span>
-                {{ post.title }}
+                {{ post.title[:35] }}
+                {% if post.title|length > 35 %}
+                    <abbr title="{{ post.title }}">...</abbr>
+                {% endif %}
             </span>
         {%- endif -%}
         <small class="float-right text-muted">
