@@ -34,7 +34,10 @@ body {
 }
 
 .media-body p {
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
+}
+.post-title {
+    word-break: break-word
 }
 
 .post-head {

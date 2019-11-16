@@ -33,7 +33,7 @@ class PostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class, [
+            ->add('title', null, [
                 'attr' => ['placeholder' => 'Title', 'tabindex' => 1],
                 'label' => false,
                 'required' => false,

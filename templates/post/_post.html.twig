@@ -6,11 +6,6 @@
             <span aria-hidden="true" class="text-muted">&minus;</span>
         </button>
         {%- if post.title is not empty -%}
-            <span>
-                {{ post.title[:35] }}
-                {% if post.title|length > 35 %}
-                    <abbr title="{{ post.title }}">...</abbr>
-                {% endif %}
             </span>
         {%- endif -%}
         <small class="float-right text-muted">
@@ -30,6 +25,7 @@
                 </a>
             {%- endif -%}
             <div class="media-body">
+                <h5 class="post-title">{{ post.title }}</h5>
                 <p class="m-0 message">{{ post.message|nl2br|codeblock|urltoanchor|crosslink|greentext }}</p>
                 {%- if childLevel is defined and childLevel == true -%}
                     {%- elseif only3 is defined and only3 == true -%}

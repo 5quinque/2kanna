@@ -25,6 +25,10 @@ class Post
 
     /**
      * @ORM\Column(type="string", length=127, nullable=true)
+     * @Assert\Length(
+     *     max = 30,
+     *     maxMessage = "Your title cannot be longer than {{ limit }} characters"
+     * )
      */
     private $title;
 
@@ -73,10 +77,10 @@ class Post
      * @Vich\UploadableField(mapping="post_image", fileNameProperty="imageName")
      * @Assert\Image(
      *     payload={"severity"="error"},
-     *     minWidth = 0,
-     *     maxWidth = 4000,
-     *     minHeight = 0,
-     *     maxHeight = 4000
+     *     minWidth = 1,
+     *     maxWidth = 5000,
+     *     minHeight = 1,
+     *     maxHeight = 5000
      * )
      *
      * @var File
