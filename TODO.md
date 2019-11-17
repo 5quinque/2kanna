@@ -10,11 +10,11 @@ In Progress
 ===========
 
  * User role that only allows moderation
- * Allow code blocks - Possibly use https://prismjs.com
 
 Done
 ====
 
+ * ~~Allow code blocks - Possibly use https://prismjs.com~~
  * ~~When posting form returns error, keep reply post id~~
  * ~~Admin view to create users~~
  * ~~Remove jQuery dependancy~~
