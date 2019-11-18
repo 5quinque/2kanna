@@ -45,7 +45,7 @@ body {
 }
 
 .message {
-    word-break: break-all;
+    word-break: break-word;
 }
 
 button.btn-collapse{

@@ -1,7 +1,9 @@
 {%- set new_post_id = new_post_id ?? null -%}
 {%- set reply_id = reply_id ?? null -%}
-<div class="post my-2{{ post.id == new_post_id ? ' post-highlight' }}{{ post.id == reply_id ? ' post-reply' }}">
-    <div class="post-head px-2">
+
+<div class="container mt-2 post{{ post.id == new_post_id ? ' post-highlight' }}{{ post.id == reply_id ? ' post-reply' }}">
+    <div class="row">
+    <div class="post-head px-2 w-100 ">
         <button type="button" class="btn-collapse" data-toggle="collapse" data-target="#p{{ post.id }}" aria-expanded="true" aria-controls="{{ post.id }}">
             <span aria-hidden="true" class="text-muted">&minus;</span>
         </button>
@@ -17,28 +19,37 @@
             {%- endif -%}
         </small>
     </div>
-    <div id="p{{ post.id }}" class="collapse show p-2">
-        <div class="media">
-            {%- if post.imageName is not null -%}
-                <a href="{{ vich_uploader_asset(post, 'imageFile') }}" class="img-thumbnail mr-3" style="max-width: 25% !important">
-                    <img src="{{ vich_uploader_asset(post, 'imageFile') | imagine_filter('thumb') }}" class="" alt="{{ post.title }}" style="max-width: 100%">
-                </a>
-            {%- endif -%}
-            <div class="media-body">
-                <h5 class="post-title">{{ post.title }}</h5>
-                <p class="m-0 message">{{ post.message|nl2br|codeblock|urltoanchor|crosslink|greentext }}</p>
-                {%- if childLevel is defined and childLevel == true -%}
-                    {%- elseif only3 is defined and only3 == true -%}
-                        {%- set childLevel = true -%}
-                        {%- for post in post.childpost|slice(0, 3) -%}
-                            {{ include('post/_post.html.twig') }}
-                        {%- endfor -%}
-                    {%- else -%}
-                        {%- for post in post.childpost -%}
-                            {{ include('post/_post.html.twig') }}
-                        {%- endfor -%}
-                {%- endif -%}
-            </div>
-        </div>
     </div>
+
+    <div id="p{{ post.id }}" class="row collapse show p-2">
+        {%- if post.imageName is not null -%}
+            <div class="col-3">
+                <a href="{{ vich_uploader_asset(post, 'imageFile') }}" class="mr-3">
+                    <img src="{{ vich_uploader_asset(post, 'imageFile') | imagine_filter('thumb') }}" class="img-thumbnail" alt="{{ post.title }}">
+                </a>
+            </div>
+        {%- endif -%}
+
+        <div class="col">
+        <h5 class="post-title">{{ post.title }}</h5>
+        <p class="m-0 message">{{ post.message|nl2br|codeblock|urltoanchor|crosslink|greentext }}</p>
+        </div>
+
+
+    {%- if childLevel is defined and childLevel == true -%}
+        {%- elseif only3 is defined and only3 == true -%}
+            {%- set childLevel = true -%}
+            {%- for post in post.childpost|slice(0, 3) -%}
+                {{ include('post/_post.html.twig') }}
+            {%- endfor -%}
+        {%- else -%}
+            {%- for post in post.childpost -%}
+                {{ include('post/_post.html.twig') }}
+            {%- endfor -%}
+    {%- endif -%}
+
+    </div>
+
+
 </div>
+
