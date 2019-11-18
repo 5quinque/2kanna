@@ -1,8 +1,5 @@
 pre {
   overflow: auto;
-  word-wrap: normal !important;
-  white-space: pre !important;
-/* width: 400px; */
 }
 
 code[class*="language-"],
@@ -13,10 +10,12 @@ pre[class*="language-"] {
 	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 	font-size: 1em;
 	text-align: left;
-	white-space: normal !important;
+
+	white-space: pre;
 	word-spacing: normal;
-	word-break: break-all;
+	word-break: normal;
 	word-wrap: normal;
+
 	line-height: 1.5;
 
 	-moz-tab-size: 4;
