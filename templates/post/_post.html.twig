@@ -23,7 +23,7 @@
         {%- if post.imageName is not null -%}
         <div class="col-3">
             <a href="{{ vich_uploader_asset(post, 'imageFile') }}" class="mr-3">
-                <img src="{{ vich_uploader_asset(post, 'imageFile') | imagine_filter('thumb') }}" class="img-thumbnail" alt="{{ post.title }}">
+                <img src="{{ vich_uploader_asset(post, 'imageFile') | imagine_filter('thumb') }}" class="post-image img-thumbnail" alt="{{ post.title }}">
             </a>
         </div>
         {%- endif -%}
