@@ -821,7 +821,7 @@ pre code {
     font-size: 0.875rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #55595c;
+    color: #000000;
     background-color: #f7f7f9;
     background-clip: padding-box;
     border: 0px solid #ced4da;
@@ -845,7 +845,7 @@ pre code {
 }
 
 .form-control:focus {
-    color: #55595c;
+    color: #000000;
     background-color: #f7f7f9;
     border-color: #5a5a5a;
     outline: 0;
@@ -875,7 +875,7 @@ pre code {
 }
 
 select.form-control:focus::-ms-value {
-    color: #55595c;
+    color: #000000;
     background-color: #f7f7f9
 }
 
@@ -2352,7 +2352,7 @@ input[type="button"].btn-block {
     font-size: 0.875rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #55595c;
+    color: #000000;
     text-align: center;
     white-space: nowrap;
     background-color: #eceeef;
@@ -2562,7 +2562,7 @@ input[type="button"].btn-block {
     font-size: 0.875rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #55595c;
+    color: #000000;
     vertical-align: middle;
     background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") no-repeat right 1.5rem center/8px 10px;
     background-color: #f7f7f9;
@@ -2581,7 +2581,7 @@ input[type="button"].btn-block {
 }
 
 .custom-select:focus::-ms-value {
-    color: #55595c;
+    color: #000000;
     background-color: #f7f7f9
 }
 
@@ -2662,7 +2662,7 @@ input[type="button"].btn-block {
     padding: 0.75rem 1.5rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #55595c;
+    color: #000000;
     background-color: #f7f7f9;
     border: 0px solid #ced4da
 }
@@ -2677,7 +2677,7 @@ input[type="button"].btn-block {
     height: calc(1.5em + 1.5rem);
     padding: 0.75rem 1.5rem;
     line-height: 1.5;
-    color: #55595c;
+    color: #000000;
     content: "Browse";
     background-color: #eceeef;
     border-left: inherit
@@ -2917,7 +2917,7 @@ input[type="button"].btn-block {
 
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
-    color: #55595c;
+    color: #000000;
     background-color: #fff;
     border-color: #eceeef #eceeef #fff
 }
@@ -3303,14 +3303,14 @@ input[type="button"].btn-block {
 
 .list-group-item-action {
     width: 100%;
-    color: #55595c;
+    color: #000000;
     text-align: inherit
 }
 
 .list-group-item-action:hover,
 .list-group-item-action:focus {
     z-index: 1;
-    color: #55595c;
+    color: #000000;
     text-decoration: none;
     background-color: #f8f9fa
 }
