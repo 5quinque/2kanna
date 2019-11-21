@@ -1,17 +1,15 @@
 ToDo
 ====
 
- * Maybe replace bootstrap with Tailwind - https://tailwindcss.com
  * Strip EXIF data from images (Maybe https://symfony.com/doc/current/bundles/LiipImagineBundle/filters/general.html#filter-strip)
 
 In Progress
 ===========
 
- * User role that only allows moderation
-
 Done
 ====
 
+ * ~~User role that only allows moderation~~
  * ~~When clicking an image, expand inside the post~~
  * ~~Message div gets too small, text gets crush.. also text wordwrap needs fixing~~
  * ~~Allow code blocks - Possibly use https://prismjs.com~~
