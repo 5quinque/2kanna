@@ -1,10 +1,10 @@
 ToDo
 ====
 
- * Strip EXIF data from images (Maybe https://symfony.com/doc/current/bundles/LiipImagineBundle/filters/general.html#filter-strip)
-
 In Progress
 ===========
+
+ * Strip EXIF data from images (Maybe https://symfony.com/doc/current/bundles/LiipImagineBundle/filters/general.html#filter-strip)
 
 Done
 ====

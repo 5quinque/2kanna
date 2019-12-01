@@ -4,13 +4,24 @@ liip_imagine:
     driver: "gd"
 
     resolvers:
-       post_thumbs:
-          web_path:
-            web_root: '%kernel.project_dir%/public/'
-            cache_prefix: "t"
+        post_thumbs:
+            web_path:
+                web_root: '%kernel.project_dir%/public/'
+                cache_prefix: "t"
+
+        post_stripped:
+            web_path:
+                web_root: '%kernel.project_dir%/public/'
+                cache_prefix: "test"
+
 
     filter_sets:
-        cache: ~
+        # cache: ~
+
+        strip_exif:
+            # cache: post_stripped
+            filters:
+                strip: ~
 
         # the name of the "filter set"
         thumb:
