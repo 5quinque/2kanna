@@ -1,17 +1,17 @@
 <?php
 namespace App\Service;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\PostRepository;
 
 class FindPosts
 {
-    private $om;
+    private $em;
     private $postRepository;
 
-    public function __construct(ObjectManager $objectManager, PostRepository $postRepository)
+    public function __construct(EntityManagerInterface $em, PostRepository $postRepository)
     {
-        $this->om = $objectManager;
+        $this->em = $em;
         $this->postRepository = $postRepository;
     }
 
@@ -37,8 +37,8 @@ class FindPosts
         foreach ($oldPosts as $p) {
             $debug[] = "Deleting Post ID: {$p->getId()}\n";
 
-            $this->om->remove($p);
-            $this->om->flush();
+            $this->em->remove($p);
+            $this->em->flush();
         }
 
         $this->printDebug($debug);

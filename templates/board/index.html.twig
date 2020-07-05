@@ -2,7 +2,7 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-12">
+        <div class="col-100">
             <div class="page-header">
                 <h1 id="board_index">Boards
                     {% if is_granted('ROLE_ADMIN') %}
@@ -14,19 +14,15 @@
     </div>
     <div class="row text-center">
         {% if boards|length %}
-            {% for col in boards|batch(boards|length/2) %}
-                <div class="col-6">
-                    <div class="list-group">
-                        {% for board in col %}
-                            <a href="{{ path('board_show', {'name': board.name}) }}" class="list-group-item list-group-item-action mb-2">
-                                {{ board.name }}
-                            </a>
-                        {% endfor %}
-                    </div>
+            {% for board in boards %}
+                <div class="col-25">
+                    <a href="{{ path('board_show', {'name': board.name}) }}" class="list-group-item list-group-item-action mb-2">
+                        {{ board.name }}
+                    </a>
                 </div>
             {% endfor %}
         {% else %}
-            <span class="list-group-item">No boards found.</span>
+            <div class="col-100">No boards found.</div>
         {% endif %}
     </div>
 {% endblock %}

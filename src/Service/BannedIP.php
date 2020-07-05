@@ -1,16 +1,17 @@
 <?php
 namespace App\Service;
-use Doctrine\Common\Persistence\ObjectManager;
+
+use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\BannedRepository;
 
 class BannedIP
 {
-    private $om;
+    private $em;
     private $bannedRepository;
 
-    public function __construct(ObjectManager $objectManager, BannedRepository $bannedRepository)
+    public function __construct(EntityManagerInterface $em, BannedRepository $bannedRepository)
     {
-        $this->om = $objectManager;
+        $this->em = $em;
         $this->bannedRepository = $bannedRepository;
     }
 
@@ -42,11 +43,10 @@ class BannedIP
         foreach ($oldBans as $b) {
             $debug[] = "Deleting Banned IP Address: {$b->getIPAddress()}\n";
 
-            $this->om->remove($b);
-            $this->om->flush();
+            $this->em->remove($b);
+            $this->em->flush();
         }
 
         $this->printDebug($debug);
     }
-
 }

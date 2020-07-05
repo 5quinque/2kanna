@@ -28,6 +28,12 @@ class Board
      */
     private $post;
 
+    /**
+     * @var string The hashed password to delete/maintain the board
+     * @ORM\Column(type="string")
+     */
+    private $password;
+
     public function __construct()
     {
         $this->post = new ArrayCollection();
@@ -77,6 +83,18 @@ class Board
                 $post->setBoard(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
 
         return $this;
     }

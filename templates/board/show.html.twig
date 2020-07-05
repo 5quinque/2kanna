@@ -8,14 +8,14 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-12">
+        <div class="col-100">
             <div class="page-header">
                 <h1 id="boards">{{ board.name }}</h1>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-4 m-auto">
+        <div class="col-30 m-auto">
             {% set button_label='New Post' %}
             {{ include('post/_form.html.twig') }}
         </div>
@@ -24,7 +24,7 @@
     <div class="row">
         {% if posts|length %}
             {% for row in posts|batch(posts|length/2) %}
-                <div class="col-6">
+                <div class="col-100">
                     {% for post in row %}
                         {% set only3 = true %}
                         {% include 'post/_post.html.twig' %}
@@ -32,7 +32,7 @@
                 </div>
             {% endfor %}
         {% else %}
-            <div class="col-12">
+            <div class="col-100">
                 <p>No posts to show.</p>
             </div>
         {% endif %}

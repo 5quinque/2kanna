@@ -6,6 +6,7 @@ use App\Entity\Board;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class BoardType extends AbstractType
 {
@@ -18,6 +19,11 @@ class BoardType extends AbstractType
                 ['attr' => ['placeholder' => 'Board Name'],
                 'label' => false,
             ]
+            )
+            ->add(
+                'password',
+                PasswordType::class,
+                ['label' => false, 'attr' => ['placeholder' => 'Password']],
             );
     }
 

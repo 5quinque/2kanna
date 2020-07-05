@@ -1,23 +1,18 @@
 {%- set new_post_id = new_post_id ?? null -%}
 {%- set reply_id = reply_id ?? null -%}
-<div class="container mt-2 post{{ post.id == new_post_id ? ' post-highlight' }}{{ post.id == reply_id ? ' post-reply' }}">
-    <div class="row">
-        <div class="post-head px-2 w-100 ">
-            <button type="button" class="btn-collapse" data-toggle="collapse" data-target="#p{{ post.id }}" aria-expanded="true" aria-controls="{{ post.id }}">
-                <span aria-hidden="true">&minus;</span>
-            </button>
-            {%- if post.title is not empty -%}
-                </span>
+<div class="mt-2 post{{ post.id == new_post_id ? ' post-highlight' }}{{ post.id == reply_id ? ' post-reply' }}">
+    <div class="post-head px-2 ">
+        <button type="button" class="btn-collapse" data-toggle="collapse" data-target="#p{{ post.id }}" aria-expanded="true" aria-controls="{{ post.id }}">
+            <span aria-hidden="true">&minus;</span>
+        </button>
+        <span>
+            {{ post.created|date("d/m/Y H:i:s") }}
+            <strong><a href="{{ path('post_show', {'name': post.board.name, 'id': post.id}) }}" class="reply_button post_{{ post.id }}">Reply</a></strong>
+            {%- if is_granted('ROLE_USER') -%}
+                {{ include('post/_delete_form.html.twig') }}
+                <span class="text-info">(<a href="{{ path('admin_ip_posts', {'ipAddress': post.ipAddress}) }}">{{ post.ipAddress }}</a>)</span>
             {%- endif -%}
-            <span class="float-right">
-                {{ post.created|date("d/m/Y H:i:s") }}
-                <strong><a href="{{ path('post_show', {'name': post.board.name, 'id': post.id}) }}" class="reply_button post_{{ post.id }}">Reply</a></strong>
-                {%- if is_granted('ROLE_USER') -%}
-                    {{ include('post/_delete_form.html.twig') }}
-                    <span class="text-info">(<a href="{{ path('admin_ip_posts', {'ipAddress': post.ipAddress}) }}">{{ post.ipAddress }}</a>)</span>
-                {%- endif -%}
-            </span>
-        </div>
+        </span>
     </div>
     <div id="p{{ post.id }}" class="row collapse show p-2">
         {%- if post.imageName is not null -%}
@@ -31,7 +26,8 @@
             <h5 class="post-title">{{ post.title }}</h5>
             <p class="m-0 message">{{ post.message|nl2br|codeblock|urltoanchor|crosslink|greentext }}</p>
         </div>
-        {%- if childLevel is defined and childLevel == true -%}
+    </div>
+            {%- if childLevel is defined and childLevel == true -%}
             {%- elseif only3 is defined and only3 == true -%}
                 {%- set childLevel = true -%}
                 {%- for post in post.childpost|slice(0, 3) -%}
@@ -42,6 +38,5 @@
                     {{ include('post/_post.html.twig') }}
                 {%- endfor -%}
         {%- endif -%}
-    </div>
 </div>
 

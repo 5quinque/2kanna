@@ -2,17 +2,17 @@
 
 namespace App\Service;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\WordFilterRepository;
 
 class GetWordFilters
 {
-    private $om;
+    private $em;
     private $wordFilterRepository;
 
-    public function __construct(ObjectManager $objectManager, WordFilterRepository $wordFilterRepository)
+    public function __construct(EntityManagerInterface $em, WordFilterRepository $wordFilterRepository)
     {
-        $this->om = $objectManager;
+        $this->em = $em;
         $this->wordFilterRepository = $wordFilterRepository;
     }
 
