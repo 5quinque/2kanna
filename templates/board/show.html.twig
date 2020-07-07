@@ -41,6 +41,9 @@
         {% include '_pagination.html.twig' %}
     </div>
 {% endblock %}
+{%- block footer -%}
+<a href="{{ path('board_edit', {'name': board.name}) }}">Edit</a>
+{%- endblock -%}
 {% block javascripts %}
     <script src="{{ asset('js/upload.min.js') }}"></script>
 {% endblock %}

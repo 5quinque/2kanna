@@ -12,6 +12,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class BoardController extends AbstractController
 {
@@ -28,13 +30,18 @@ class BoardController extends AbstractController
     /**
      * @Route("/new", name="board_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $board = new Board();
         $form = $this->createForm(BoardType::class, $board);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $board->setPassword($passwordEncoder->encodePassword(
+                $board,
+                $board->getPassword()
+            ));
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($board);
             $entityManager->flush();
@@ -101,14 +108,21 @@ class BoardController extends AbstractController
     }
 
     /**
-     * @Route("/{name}/edit", name="board_edit", methods={"GET","POST"})
+     * @Route("/boardadmin/{name}/edit", name="board_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Board $board): Response
+    public function edit(Request $request, Board $board, UserPasswordEncoderInterface $passwordEncoder): Response
     {
+        $this->denyAccessUnlessGranted('BOARD_EDIT', $board);
+
         $form = $this->createForm(BoardType::class, $board);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $board->setPassword($passwordEncoder->encodePassword(
+                $board,
+                $board->getPassword()
+            ));
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('board_index');

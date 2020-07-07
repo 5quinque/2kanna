@@ -2,6 +2,9 @@ security:
     encoders:
         App\Entity\Admin:
             algorithm: auto
+        App\Entity\Board:
+            algorithm: auto
+
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
@@ -10,19 +13,35 @@ security:
             entity:
                 class: App\Entity\Admin
                 property: username
-
+        board_provider:
+            entity:
+                class: App\Entity\Board
+                property: name
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        main:
+        board:
+            pattern: ^/boardadmin/
             anonymous: lazy
-            provider: users_in_memory
+            provider: board_provider
+            guard:
+                authenticators:
+                    - App\Security\BoardLoginFormAuthenticator
+            logout:
+                path: board_logout
+            remember_me:
+                secret:   '%kernel.secret%'
+                lifetime: 604800 # 1 week in seconds
+                path:     /
+        default:
+            anonymous: lazy
+            provider: app_user_provider
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
             logout:
-                path: app_logout
+                path: admin_logout
             remember_me:
                 secret:   '%kernel.secret%'
                 lifetime: 604800 # 1 week in seconds
@@ -42,5 +61,5 @@ security:
         - { path: ^/admin/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: '^/admin/users', roles: ROLE_ADMIN }
         - { path: '^/admin', roles: ROLE_USER }
-        - { path: '^/new', roles: ROLE_ADMIN }
-        - { path: '^/.*/edit', roles: ROLE_ADMIN}
+        - { path: ^/boardadmin/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: '^/boardadmin/.*/edit', roles: ROLE_BOARDADMIN}

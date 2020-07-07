@@ -6,7 +6,7 @@
         <link href="{{ asset('/css/main.css') }}" rel="stylesheet">
         {# <link href="{{ asset('/css/bs.css') }}" rel="stylesheet"> #}
         {# <link href="{{ asset('/css/b.css') }}" rel="stylesheet"> #}
-        {# <link href="{{ asset('/css/p.css') }}" rel="stylesheet"> #}
+        <link href="{{ asset('/css/p.css') }}" rel="stylesheet">
         <link rel="icon" href="{{ asset('/vi.png') }}">
         <title>
             {%- block title -%}
@@ -39,12 +39,16 @@
             {%- endfor -%}
             {%- block body -%}{%- endblock -%}
             <hr>
-            <div class="page-footer text-center">
-            {%- if app.user -%}
-                <a href="{{ path('admin_index' ) }}">{{ app.user.username }}</a> <a href="{{ path('app_logout' ) }}">Logout</a>
+            <div class="page-footer">
+            {%- if is_granted("ROLE_ADMIN") -%}
+                <a href="{{ path('admin_index') }}">{{ app.user.username }}</a> <a href="{{ path('admin_logout' ) }}">Admin Logout</a>
             {%- else -%}
-                <a href="{{ path('app_login' ) }}">Login</a>
+                <a href="{{ path('admin_login') }}">Admin Login</a>
             {%- endif -%}
+            {%- if is_granted("ROLE_BOARDADMIN") -%}
+                <a href="{{ path('board_logout') }}">Board Logout</a>
+            {%- endif -%}
+            {%- block footer -%}{%- endblock -%}
             </div>
         </div>
         <script src="{{ asset('js/bs.min.js') }}"></script>

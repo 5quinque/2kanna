@@ -24,7 +24,9 @@
         {%- endif -%}
         <div class="col">
             <h5 class="post-title">{{ post.title }}</h5>
-            <p class="m-0 message">{{ post.message|nl2br|codeblock|urltoanchor|crosslink|greentext }}</p>
+            <div class="m-0 message">
+            @@{{ post.message|nl2br|codeblock|urltoanchor|crosslink|greentext }}@@
+            </div>
         </div>
     </div>
             {%- if childLevel is defined and childLevel == true -%}

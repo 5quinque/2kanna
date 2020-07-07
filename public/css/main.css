@@ -94,3 +94,8 @@ hr {
   background: none;
   border: none;
 }
+
+.page-footer {
+  display: flex;
+  justify-content: space-between;
+}
