@@ -34,6 +34,7 @@ security:
                 secret:   '%kernel.secret%'
                 lifetime: 604800 # 1 week in seconds
                 path:     /
+            access_denied_handler: App\Security\AccessDeniedHandler
         default:
             anonymous: lazy
             provider: app_user_provider

@@ -1,5 +1,14 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
+    font-size: .875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #040404;
+}
+
+*, ::before, ::after {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 a {
@@ -10,6 +19,10 @@ a {
 hr {
     border-top: 1px solid #229933;
     border-bottom: 0;
+}
+
+input, button, select, optgroup, textarea {
+    font-family: inherit;
 }
 
 @media(min-width:576px) {
@@ -91,7 +104,110 @@ hr {
     }
 }
 
+.post-highlight {
+    background-color: #ececec !important;
+    box-shadow: -2px 0 0 0px #772953 !important;
+}
+
+.sticky-top {
+    top: 1rem;
+    position: sticky;
+}
+
 .page-footer{
     display: flex;
     justify-content: space-between;
+}
+.btn {
+    display: inline-block;
+    font-weight: 600;
+    border: 0 solid transparent;
+    padding: .75rem 1.5rem;
+    line-height: 1.5rem;
+border-radius: 0;
+
+}
+.btn-primary {
+    color: #fff;
+    background-color: #1a1a1a;
+    border-color: #1a1a1a;
+}
+.form-group {
+    margin-bottom: 1rem;
+}
+.form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + 1.5rem + 0px);
+    padding: .75rem 1.5rem;
+    font-size: .875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #000;
+    background-color: #f7f7f9;
+    background-clip: padding-box;
+    border: 0 solid #ced4da;
+    border-radius: 0;
+}
+.input-group {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+}
+.input-group > .form-control {
+    position: relative;
+    flex: 1 1 auto;
+    width: 1%;
+    margin-bottom: 0;
+}
+.input-group-append {
+    margin-left: 0;
+    display: flex;
+    .btn {
+        position: relative;
+        z-index: 2;
+    }
+}
+textarea.form-control {
+    height: auto;
+}
+textarea {
+    overflow: auto;
+    resize: vertical;
+}
+.custom-file {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: calc(1.5em + 1.5rem + 0px);
+    margin-bottom: 0;
+}
+.custom-file-input {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: calc(1.5em + 1.5rem + 0px);
+    margin: 0;
+    opacity: 0;
+}
+.custom-file-label {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+    height: calc(1.5em + 1.5rem + 0px);
+    padding: .75rem 1.5rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #000;
+    background-color: #f7f7f9;
+    border: 0 solid #ced4da;
+    overflow: hidden;
+}
+label {
+    display: inline-block;
+    margin-bottom: .5rem;
 }

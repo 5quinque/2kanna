@@ -135,6 +135,24 @@ class BoardController extends AbstractController
     }
 
     /**
+     * @Route("/boardadmin/{name}/denied", name="board_denied", methods={"GET"})
+     */
+    public function denied(Board $board): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $user = $this->getUser();
+
+        if ($board === $user) {
+            return $this->redirectToRoute('board_edit', ['name' => $board->getName()]);
+        }
+
+        return $this->render('board/denied.html.twig', [
+            'user' => $user
+        ]);
+    }
+
+    /**
      * @Route("/{name}", name="board_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Board $board): Response
