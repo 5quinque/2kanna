@@ -28,6 +28,18 @@ input, button, select, optgroup, textarea {
     font-family: inherit;
 }
 
+pre {
+    white-space: pre-wrap !important;
+    word-wrap: break-word !important;
+    code {
+        white-space: pre-wrap !important;
+        word-wrap: anywhere !important;
+    }
+}
+.message {
+    word-wrap: anywhere;
+}
+
 @media(min-width:576px) {
     .container {
         max-width:540px
@@ -117,7 +129,11 @@ ul.nav {
 
 .posts {
     flex-grow: 1;
+    flex-basis: 75%;
     padding-right: 10px;
+}
+.reply-form {
+    flex-basis: 25%;
 }
 
 .post {
