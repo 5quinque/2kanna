@@ -7,15 +7,15 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-100">
             <div class="page-header">
                 <h1 id="admin">Admin Dashboard</h1>
             </div>
         </div>
     </div>
     <hr>
-    <div class="row mb-4">
-        <div class="col-12">
+    <div class="row">
+        <div class="col-100">
             <ul class="nav nav-pills">
                 <li class="nav-item">
                     <a class="nav-link {{ route == 'admin_index' ? 'active' }}" href="{{ path('admin_index') }}">Dashboard</a>
@@ -33,11 +33,11 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-12 mb-5">
+        <div class="col-100">
             {% block adminsection %}
                 <div class="container">
-                    <div class="card-deck mb-3 text-center">
-                        <div class="card mb-4 shadow-sm">
+                    <div class="row text-center">
+                        <div class="card col-30">
                             <div class="card-header">
                                 <h4 class="my-0 font-weight-normal">Bans</h4>
                             </div>
@@ -45,7 +45,7 @@
                                 <h1 class="card-title pricing-card-title">{{ banned_count }}</h1>
                             </div>
                         </div>
-                        <div class="card mb-4 shadow-sm">
+                        <div class="card col-30">
                             <div class="card-header">
                                 <h4 class="my-0 font-weight-normal">Users</h4>
                             </div>
@@ -53,7 +53,7 @@
                                 <h1 class="card-title pricing-card-title">{{ user_count }}</h1>
                             </div>
                         </div>
-                        <div class="card mb-4 shadow-sm">
+                        <div class="card col-30">
                             <div class="card-header">
                                 <h4 class="my-0 font-weight-normal">Word Filters</h4>
                             </div>
