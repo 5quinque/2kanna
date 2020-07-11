@@ -7,13 +7,15 @@ function imageClick(event) {
 
     let column = this.parentElement.parentElement;
 
-    if (column.classList.contains('col-3')) {
-        this.src = this.src.replace(/t\/thumb\//, '');
+    if (column.classList.contains('col-20')) {
+        let fullImagePath = this.parentElement.pathname;
+        
+        this.src = fullImagePath;
 
-        column.classList.add('col-12');
-        column.classList.remove('col-3');
+        column.classList.add('col-100');
+        column.classList.remove('col-20');
     } else {
-        column.classList.add('col-3');
-        column.classList.remove('col-12');
+        column.classList.add('col-20');
+        column.classList.remove('col-100');
     }
 } 

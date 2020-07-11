@@ -82,6 +82,9 @@ pre {
     .col-25 {
         flex-basis: 25%;
     }
+    .col-20 {
+        flex-basis: 20%;
+    }
 }
 .row.space-even {
     justify-content: space-evenly;
@@ -156,6 +159,10 @@ ul.nav {
             border: none;
         }
     }
+}
+
+.post-image {
+    max-width: 100%;
 }
 
 .post-highlight {

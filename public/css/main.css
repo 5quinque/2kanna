@@ -89,6 +89,10 @@ pre code {
   flex-basis: 25%;
 }
 
+.row .col-20 {
+  flex-basis: 20%;
+}
+
 .row.space-even {
   justify-content: space-evenly;
 }
@@ -158,6 +162,10 @@ ul.nav li.nav-item a.active {
 .post .post-head .btn-collapse {
   background: none;
   border: none;
+}
+
+.post-image {
+  max-width: 100%;
 }
 
 .post-highlight {
