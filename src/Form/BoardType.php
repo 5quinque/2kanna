@@ -7,6 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class BoardType extends AbstractType
 {
@@ -31,6 +33,18 @@ class BoardType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Board::class,
+            'constraints' => array(
+                new Assert\Callback(array($this, 'boardNameValid')),
+            ),
         ]);
+    }
+
+    public function boardNameValid(Board $board, ExecutionContextInterface $context)
+    {
+        if (!preg_match('/^\w+$/', $board->getName())) {
+            $context->buildViolation("Illegal characters in board name")
+                ->atPath('name')
+                ->addViolation();
+        }
     }
 }

@@ -1,10 +1,14 @@
 ToDo
 ====
+ * Upgrade to Symfony 5
+ * Write documentation
+ * Add remove user form
+ * Seperate form for setting user password
+ * Seperate form for setting board password
 
 In Progress
 ===========
-
- * Strip EXIF data from images (Maybe https://symfony.com/doc/current/bundles/LiipImagineBundle/filters/general.html#filter-strip)
+ * CSS. Moving away from Bootstrap
 
 Done
 ====
@@ -26,3 +30,5 @@ Done
  * ~~CRON command to remove banned IP addresses~~
  * ~~Cooldown between posting~~
  * ~~Link to other boards with `>>>/technology` and `>>>/music/3452`~~
+ * ~~Strip EXIF data from images (Maybe https://symfony.com/doc/current/bundles/LiipImagineBundle/filters/general.html#filter-strip)~~
+ * ~~Check boardname matches [azAZ0-9] only~~
