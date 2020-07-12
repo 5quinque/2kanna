@@ -1,5 +1,9 @@
-$green: #229933;
+$green: #4CAF50;
+$green-light: #d5e0d7;
 $grey-1: #9c9c9c;
+
+$primary: $green;
+$primary-light: $green-light;
 
 body {
     font-family: Arial, Helvetica, sans-serif;
@@ -15,12 +19,12 @@ body {
 }
 
 a {
-    color: $green;
+    color: $primary;
     text-decoration: none;
 }
 
 hr {
-    border-top: 1px solid $green;
+    border-top: 1px solid $primary;
     border-bottom: 0;
 }
 
@@ -67,7 +71,6 @@ pre {
 
 .row {
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
 
     .col-100 {
@@ -85,9 +88,20 @@ pre {
     .col-20 {
         flex-basis: 20%;
     }
+
+    .col-g {
+        flex-grow: 1;
+    }
 }
-.row.space-even {
+.space-even {
     justify-content: space-evenly;
+}
+.space-between {
+    justify-content: space-between;
+}
+
+.align-items-center {
+    align-items: center;
 }
 
 .m-auto {
@@ -101,6 +115,13 @@ pre {
 .d-inline {
     display: inline;
 }
+.d-flex {
+    display: flex;
+}
+
+.float-right {
+    float: right;
+}
 
 .text-center {
     text-align: center;
@@ -110,24 +131,50 @@ pre {
     color: $grey-1;
 }
 
+.border-left {
+    border-left: 1px solid $primary;
+    margin-left: 10px;
+}
+
 ul.nav {
     list-style: none;
     padding: 0;
-    border-bottom: 1px solid $green;
+    border-bottom: 1px solid $primary;
     padding-bottom: 7px;
 
     li.nav-item {
         display: inline;
         padding: 10px 20px;
-        border: 1px solid $green;
+        border: 1px solid $primary;
         border-bottom: none;
         border-radius: 10px 10px 0px 0px;
-        margin-right: 5px;
+        margin: 5px;
 
         a.active {
             color: #772953;
         }
     }
+}
+
+ul.boards-list {
+    list-style: none;
+    border: 1px solid $primary;
+    margin: 0;
+    padding: 10px;
+    li {
+        border-bottom: 1px solid $primary;
+        a {
+            font-size: 1.4em;
+        }
+    }
+    li:last-child {
+        border-bottom: none;
+    }
+}
+
+ul.list-group {
+    list-style: none;
+    margin: 0;
 }
 
 .posts {
@@ -186,16 +233,25 @@ ul.nav {
     display: inline-block;
     font-weight: 600;
     border: 0 solid transparent;
-    padding: .75rem 1.5rem;
+    padding: 0.5rem 1.5rem;
     line-height: 1.5rem;
-border-radius: 0;
+    border-radius: 0;
+    background-color: $primary;
+    color: #FFFFFF;
+    font-size: 14px;
+    cursor: pointer;
+    text-transform: uppercase;
+    outline: 0;
+}
+.btn:hover {
+    background: #43A047;
+}
 
-}
-.btn-primary {
-    color: #fff;
-    background-color: #1a1a1a;
-    border-color: #1a1a1a;
-}
+// .btn-primary {
+//     color: #fff;
+//     background-color: #1a1a1a;
+//     border-color: #1a1a1a;
+// }
 .form-group {
     margin-bottom: 1rem;
 }
@@ -276,9 +332,25 @@ label {
     margin-bottom: .5rem;
 }
 
+/* Admin */
+.banned-list, .user-list, .filter-list {
+    padding: 10px;
+
+    li {
+        background-color: $primary-light;
+        margin: 5px 0;
+        padding-left: 10px;
+    }
+}
+
+
+/* Background */
+.bg-light {
+    background-color: $primary-light;
+}
+
 
 /* Cards */
-
 .card {
     border: 1px solid rgba(0,0,0,.125);
     border-radius: .25rem;

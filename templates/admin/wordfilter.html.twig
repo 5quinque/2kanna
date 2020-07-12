@@ -5,13 +5,13 @@
 
 {% block adminsection %}
     <div class="row">
-        <div class="col-6">
+        <div class="col-g">
             {{ include('admin/_wordfilter_form.html.twig') }}
         </div>
-        <div class="col-6">
-            <ul class="list-group">
+        <div class="col-g border-left">
+            <ul class="list-group filter-list">
                 {% for word in word_filter_strings %}
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <li class="list-group-item d-flex space-between align-items-center">
                         {{ word.badWord }}
                         {{ include('admin/_removebadword_form.html.twig') }}
                     </li>

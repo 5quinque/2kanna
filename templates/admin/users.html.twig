@@ -5,15 +5,15 @@
 
 {% block adminsection %}
     <div class="row">
-        <div class="col-6">
+        <div class="col-g">
             {{ include('admin/_adminuser_form.html.twig') }}
         </div>
-        <div class="col-6">
-            <ul class="list-group">
+        <div class="col-g border-left">
+            <ul class="list-group user-list">
                 {% for user in users %}
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        {{ user.username }}
-                        <a class="btn btn-primary" href="{{ path('admin_user_edit', {'id': user.id}) }}">Edit</a>
+                    <li class="list-group-item d-flex space-between align-items-center">
+                        <span>{{ user.username }}</span>
+                        <a class="btn btn-primary" href="{{ path('admin_user_edit', {'username': user.username}) }}">Edit</a>
                         {# {{ include('admin/_removeuser_form.html.twig') }} #}
                     </li>
                 {% endfor %}
