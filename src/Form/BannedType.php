@@ -21,6 +21,14 @@ class BannedType extends AbstractType
                     'label' => false,
                 ]
             )
+            ->add(
+                'reason',
+                null,
+                [
+                    'attr' => ['placeholder' => 'Ban Reason'],
+                    'label' => false,
+                ]
+            )
             ->add('banTime', DateTimeType::class, [
                 'date_widget' => 'single_text',
                 'time_widget' => 'single_text',

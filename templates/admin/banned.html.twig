@@ -15,6 +15,7 @@
                         <span>{{ banned.ipAddress }}
                             <abbr title="{{ banned.banTime|date("Y/m/d H:i") }}-{{ banned.unbanTime|date("Y/m/d H:i") }}">
                                 {{ banned.banTime|dt2clock }}</abbr>
+                            {{ banned.reason }}
                         </span>
                         {{ include('admin/_unban_form.html.twig') }}
                     </li>

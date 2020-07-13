@@ -31,6 +31,11 @@ class Banned
      */
     private $unbanTime;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $reason;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -68,6 +73,18 @@ class Banned
     public function setUnbanTime(\DateTimeInterface $unbanTime): self
     {
         $this->unbanTime = $unbanTime;
+
+        return $this;
+    }
+
+    public function getReason(): ?string
+    {
+        return $this->reason;
+    }
+
+    public function setReason(?string $reason): self
+    {
+        $this->reason = $reason;
 
         return $this;
     }
