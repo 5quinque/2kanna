@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Board;
 
 use App\Entity\Board;
 use Symfony\Component\Form\AbstractType;
@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-class BoardType extends AbstractType
+class NewBoardType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Board;
 use App\Entity\Post;
-use App\Form\BoardType;
+use App\Form\Board\NewBoardType;
 use App\Form\PostType;
 use App\Repository\BoardRepository;
 use App\Repository\PostRepository;
@@ -33,7 +33,7 @@ class BoardController extends AbstractController
     public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $board = new Board();
-        $form = $this->createForm(BoardType::class, $board);
+        $form = $this->createForm(NewBoardType::class, $board);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -108,51 +108,6 @@ class BoardController extends AbstractController
         ]);
 
         return $response;
-    }
-
-    /**
-     * @Route("/boardadmin/{name}/edit", name="board_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, Board $board, UserPasswordEncoderInterface $passwordEncoder): Response
-    {
-        $this->denyAccessUnlessGranted('BOARD_EDIT', $board);
-
-        $form = $this->createForm(BoardType::class, $board);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $board->setPassword($passwordEncoder->encodePassword(
-                $board,
-                $board->getPassword()
-            ));
-
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('board_index');
-        }
-
-        return $this->render('board/edit.html.twig', [
-            'board' => $board,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/boardadmin/{name}/denied", name="board_denied", methods={"GET"})
-     */
-    public function denied(Board $board): Response
-    {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-
-        $user = $this->getUser();
-
-        if ($board === $user) {
-            return $this->redirectToRoute('board_edit', ['name' => $board->getName()]);
-        }
-
-        return $this->render('board/denied.html.twig', [
-            'user' => $user
-        ]);
     }
 
     /**
