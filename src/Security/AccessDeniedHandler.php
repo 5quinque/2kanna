@@ -11,6 +11,8 @@ class AccessDeniedHandler implements AccessDeniedHandlerInterface
 {
     public function handle(Request $request, AccessDeniedException $accessDeniedException)
     {
-        return new RedirectResponse('denied');
+        $redirectPath = preg_replace('/(boardadmin\/[^\/]+).*/', '\1/denied', $request->getPathInfo());
+
+        return new RedirectResponse($redirectPath);
     }
 }

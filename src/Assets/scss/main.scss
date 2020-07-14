@@ -1,16 +1,25 @@
 $green: #4CAF50;
 $green-light: #d5e0d7;
+$green-dark: #43A047;
+$red: #ff6b6b;
+$red-dark: #ee5253;
+$blue: #48dbfb;
+$blue-light: #00d2d3;
+$blue-dark: #0abde3;
 $grey-1: #9c9c9c;
 
-$primary: $green;
-$primary-light: $green-light;
+$primary: #50717b;
+$primary-light: #8ecccc;
+$primary-dark: #3a4042;
+
+$black: #212121;
 
 body {
     font-family: Arial, Helvetica, sans-serif;
     font-size: .875rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #040404;
+    color: $black;
 }
 
 *, ::before, ::after {
@@ -112,6 +121,9 @@ pre {
     margin-top: 2em;
 }
 
+.d-block {
+    display: block;
+}
 .d-inline {
     display: inline;
 }
@@ -151,7 +163,8 @@ ul.nav {
         margin: 5px;
 
         a.active {
-            color: #772953;
+            color: $primary-dark;
+            font-weight: bold;
         }
     }
 }
@@ -230,7 +243,7 @@ ul.list-group {
     justify-content: space-between;
 }
 .btn {
-    display: inline-block;
+    // display: inline-block;
     font-weight: 600;
     border: 0 solid transparent;
     padding: 0.5rem 1.5rem;
@@ -244,7 +257,14 @@ ul.list-group {
     outline: 0;
 }
 .btn:hover {
-    background: #43A047;
+    background: $primary-dark;
+}
+
+.btn-warning {
+    background-color: $red;
+}
+.btn-warning:hover {
+    background-color: $red-dark;
 }
 
 // .btn-primary {
@@ -263,7 +283,7 @@ ul.list-group {
     font-size: .875rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #000;
+    color: $black;
     background-color: #f7f7f9;
     background-clip: padding-box;
     border: 0 solid #ced4da;
@@ -322,7 +342,7 @@ textarea {
     padding: .75rem 1.5rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #000;
+    color: $black;
     background-color: #f7f7f9;
     border: 0 solid #ced4da;
     overflow: hidden;
@@ -369,4 +389,23 @@ label {
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
     padding: 1.25rem;
+}
+
+/* Alerts */
+
+.alert {
+    button {
+        border: 0;
+        background: none;
+        color: #fff;
+        float: right;
+        font-size: 1.5em;
+        line-height: 1em;
+    }
+}
+
+.alert-success {
+    background-color: $primary;
+    color: #fff;
+    padding: 15px;
 }

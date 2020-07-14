@@ -8,13 +8,16 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Repository\BannedRepository;
 use App\Repository\PostRepository;
+use App\Util\AdminUtil;
 use App\Entity\Admin;
 use App\Entity\Post;
 use App\Entity\Banned;
 use App\Entity\WordFilter;
 use App\Form\BannedType;
 use App\Form\WordFilterType;
-use App\Form\AdminUser;
+use App\Form\Admin\NewAdminType;
+use App\Form\Admin\AdminNameType;
+use App\Form\Admin\AdminPasswordType;
 use App\Repository\WordFilterRepository;
 use App\Repository\AdminRepository;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -55,10 +58,14 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin/users", name="admin_users")
      */
-    public function Users(AdminRepository $adminRepository, Request $request, UserPasswordEncoderInterface $passwordEncoder)
-    {
+    public function Users(
+        AdminRepository $adminRepository,
+        Request $request,
+        UserPasswordEncoderInterface $passwordEncoder,
+        AdminUtil $adminUtil
+    ) {
         $user = new Admin();
-        $userForm = $this->createForm(AdminUser::class, $user);
+        $userForm = $this->createForm(NewAdminType::class, $user);
         $userForm->handleRequest($request);
 
         if ($userForm->isSubmitted() && $userForm->isValid()) {
@@ -67,11 +74,15 @@ class AdminController extends AbstractController
                 $user->getPassword()
             ));
 
-            $this->addUser($user);
+            $adminUtil->addUser($user);
+            $this->addFlash(
+                'success',
+                $user->getUsername() . " is now created :)"
+            );
         }
 
         $users = $adminRepository->findAll();
-        return $this->render('admin/users.html.twig', [
+        return $this->render('admin/users/users.html.twig', [
             'users' => $users,
             'user_form' => $userForm->createView()
         ]);
@@ -80,9 +91,13 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin/users/edit/{username}", name="admin_user_edit")
      */
-    public function UserEdit(Admin $user, Request $request, UserPasswordEncoderInterface $passwordEncoder)
-    {
-        $userForm = $this->createForm(AdminUser::class, $user);
+    public function UserEdit(
+        Admin $user,
+        Request $request,
+        UserPasswordEncoderInterface $passwordEncoder,
+        AdminUtil $adminUtil
+    ) {
+        $userForm = $this->createForm(AdminNameType::class, $user);
         $userForm->handleRequest($request);
 
         if ($userForm->isSubmitted() && $userForm->isValid()) {
@@ -91,41 +106,69 @@ class AdminController extends AbstractController
                 $user->getPassword()
             ));
 
-            $this->addUser($user);
+            $adminUtil->addUser($user);
+
+            $this->addFlash(
+                'success',
+                $user->getUsername() . " now updated"
+            );
+
+            return $this->redirectToRoute("admin_user_edit", ["username" => $user->getUsername()]);
         }
 
-        return $this->render('admin/user_edit.html.twig', [
+        return $this->render('admin/users/user_edit.html.twig', [
             'user_form' => $userForm->createView()
         ]);
     }
 
-    public function addUser(Admin $user)
-    {
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($user);
-        $entityManager->flush();
+    /**
+     * @Route("/admin/users/password/{username}", name="admin_user_password")
+     */
+    public function UserPassword(
+        Admin $user,
+        Request $request,
+        UserPasswordEncoderInterface $passwordEncoder,
+        AdminUtil $adminUtil
+    ) {
+        $userForm = $this->createForm(AdminPasswordType::class, $user);
+        $userForm->handleRequest($request);
 
-        $this->addFlash(
-            'success',
-            $user->getUsername() . " is now created :)"
-        );
+        if ($userForm->isSubmitted() && $userForm->isValid()) {
+            $user->setPassword($passwordEncoder->encodePassword(
+                $user,
+                $user->getPassword()
+            ));
+
+            $this->addFlash(
+                'success',
+                $user->getUsername() . " password updated"
+            );
+        }
+
+        return $this->render('admin/users/user_password.html.twig', [
+            'user_form' => $userForm->createView()
+        ]);
     }
 
     /**
      * @Route("/admin/wordfilter", name="admin_wordfilter")
      */
-    public function wordFilter(WordFilterRepository $wordFilterRepository, Request $request): Response
+    public function wordFilter(WordFilterRepository $wordFilterRepository, Request $request, AdminUtil $adminUtil): Response
     {
         $wordFilter = new WordFilter();
         $wordFilterForm = $this->createForm(WordFilterType::class, $wordFilter);
         $wordFilterForm->handleRequest($request);
 
-        $wordFilterStrings = $wordFilterRepository->findAll();
-
         if ($wordFilterForm->isSubmitted() && $wordFilterForm->isValid()) {
-            $this->addBadWord($wordFilter);
+            $adminUtil->addBadWord($wordFilter);
+
+            $this->addFlash(
+                'success',
+                $wordFilter->getBadWord() . " is added to the bad words list"
+            );
         }
 
+        $wordFilterStrings = $wordFilterRepository->findAll();
         return $this->render('admin/wordfilter.html.twig', [
             'word_filter_strings' => $wordFilterStrings,
             'word_filter_form' => $wordFilterForm->createView()
@@ -135,17 +178,22 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin/bans", name="admin_banned")
      */
-    public function banned(BannedRepository $bannedRepository, Request $request): Response
+    public function banned(BannedRepository $bannedRepository, Request $request, AdminUtil $adminUtil): Response
     {
         $banned = new Banned();
         $bannedForm = $this->createForm(BannedType::class, $banned);
         $bannedForm->handleRequest($request);
-        $bannedIPs = $bannedRepository->findAll();
 
         if ($bannedForm->isSubmitted() && $bannedForm->isValid()) {
-            $this->banIP($banned);
+            $adminUtil->banIP($banned);
+
+            $this->addFlash(
+                'success',
+                $banned->getIpAddress() . " is now banned :)"
+            );
         }
 
+        $bannedIPs = $bannedRepository->findAll();
         return $this->render('admin/banned.html.twig', [
             'banned_ips' => $bannedIPs,
             'banned_form' => $bannedForm->createView()
@@ -168,7 +216,7 @@ class AdminController extends AbstractController
             $banned->getIpAddress() . " is now unbanned"
         );
 
-        return $this->redirectToRoute('admin_index');
+        return $this->redirectToRoute('admin_banned');
     }
 
     /**
@@ -187,30 +235,6 @@ class AdminController extends AbstractController
             $wordFilter->getBadWord() . " is now removed"
         );
 
-        return $this->redirectToRoute('admin_index');
-    }
-
-    public function banIP(Banned $banned)
-    {
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($banned);
-        $entityManager->flush();
-
-        $this->addFlash(
-            'success',
-            $banned->getIpAddress() . " is now banned :)"
-        );
-    }
-
-    public function addBadWord(WordFilter $wordFilter)
-    {
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($wordFilter);
-        $entityManager->flush();
-
-        $this->addFlash(
-            'success',
-            $wordFilter->getBadWord() . " is added to the bad words list"
-        );
+        return $this->redirectToRoute('admin_wordfilter');
     }
 }

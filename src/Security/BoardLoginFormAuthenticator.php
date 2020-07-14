@@ -111,7 +111,7 @@ class BoardLoginFormAuthenticator extends AbstractFormLoginAuthenticator impleme
 
         dump($pathInfo);
 
-        preg_match('/boardadmin\/([^\/]+)\//', $pathInfo, $matches);
+        preg_match('/boardadmin\/([^\/]+)\/?/', $pathInfo, $matches);
 
         return $matches[1];
     }

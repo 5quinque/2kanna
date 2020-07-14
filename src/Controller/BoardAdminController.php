@@ -36,7 +36,12 @@ class BoardAdminController extends AbstractController
 
             $this->getDoctrine()->getManager()->flush();
 
-            // return $this->redirectToRoute('board_index');
+            $this->addFlash(
+                'success',
+                $board->getName() . " updated"
+            );
+
+            return $this->redirectToRoute("board_edit", ["name" => $board->getName()]);
         }
 
         return $this->render('board_admin/index.html.twig', [
@@ -46,7 +51,7 @@ class BoardAdminController extends AbstractController
     }
 
     /**
-     * @Route("/{name}/editpassword", name="board_editpassword", methods={"GET","POST"})
+     * @Route("/{name}/password", name="board_editpassword", methods={"GET","POST"})
      */
     public function editPassword(Request $request, Board $board, UserPasswordEncoderInterface $passwordEncoder): Response
     {
@@ -63,7 +68,10 @@ class BoardAdminController extends AbstractController
 
             $this->getDoctrine()->getManager()->flush();
 
-            // return $this->redirectToRoute('board_index');
+            $this->addFlash(
+                'success',
+                $board->getName() . " password updated"
+            );
         }
 
         return $this->render('board_admin/editpassword.html.twig', [
