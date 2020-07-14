@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c5102f312dca5280885770b82a6f1c07",
+    "content-hash": "5bdccfd0bbcbcec175b2d6544bed5ee2",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -77,16 +77,16 @@
         },
         {
             "name": "doctrine/cache",
-            "version": "1.10.1",
+            "version": "1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/cache.git",
-                "reference": "35a4a70cd94e09e2259dfae7488afc6b474ecbd3"
+                "reference": "13e3381b25847283a91948d04640543941309727"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/cache/zipball/35a4a70cd94e09e2259dfae7488afc6b474ecbd3",
-                "reference": "35a4a70cd94e09e2259dfae7488afc6b474ecbd3",
+                "url": "https://api.github.com/repos/doctrine/cache/zipball/13e3381b25847283a91948d04640543941309727",
+                "reference": "13e3381b25847283a91948d04640543941309727",
                 "shasum": ""
             },
             "require": {
@@ -155,20 +155,20 @@
                 "redis",
                 "xcache"
             ],
-            "time": "2020-05-27T16:24:54+00:00"
+            "time": "2020-07-07T18:54:01+00:00"
         },
         {
             "name": "doctrine/collections",
-            "version": "1.6.5",
+            "version": "1.6.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/collections.git",
-                "reference": "fc0206348e17e530d09463fef07ba8968406cd6d"
+                "reference": "5f0470363ff042d0057006ae7acabc5d7b5252d5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/collections/zipball/fc0206348e17e530d09463fef07ba8968406cd6d",
-                "reference": "fc0206348e17e530d09463fef07ba8968406cd6d",
+                "url": "https://api.github.com/repos/doctrine/collections/zipball/5f0470363ff042d0057006ae7acabc5d7b5252d5",
+                "reference": "5f0470363ff042d0057006ae7acabc5d7b5252d5",
                 "shasum": ""
             },
             "require": {
@@ -220,7 +220,7 @@
                 "iterators",
                 "php"
             ],
-            "time": "2020-05-25T19:24:35+00:00"
+            "time": "2020-06-22T19:14:02+00:00"
         },
         {
             "name": "doctrine/common",
@@ -2487,6 +2487,28 @@
                 "mailer"
             ],
             "time": "2019-11-12T09:31:26+00:00"
+        },
+        {
+            "name": "symfony/apache-pack",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/apache-pack.git",
+                "reference": "3aa5818d73ad2551281fc58a75afd9ca82622e6c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/apache-pack/zipball/3aa5818d73ad2551281fc58a75afd9ca82622e6c",
+                "reference": "3aa5818d73ad2551281fc58a75afd9ca82622e6c",
+                "shasum": ""
+            },
+            "type": "symfony-pack",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A pack for Apache support in Symfony",
+            "time": "2017-12-12T01:46:35+00:00"
         },
         {
             "name": "symfony/asset",
