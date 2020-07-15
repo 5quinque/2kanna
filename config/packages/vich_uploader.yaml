@@ -1,10 +1,11 @@
+# https://github.com/dustin10/VichUploaderBundle/blob/master/docs/storage/flysystem.md
 vich_uploader:
     db_driver: orm
+    storage: flysystem
 
     mappings:
         post_image:
-            uri_prefix: "uploads"
-            upload_destination: '%kernel.project_dir%/public/uploads'
+            upload_destination: default_filesystem
             namer:
                 service: Vich\UploaderBundle\Naming\Base64Namer
                 options: { length: '6'}

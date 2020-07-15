@@ -1,0 +1,12 @@
+# Read the documentation: https://github.com/1up-lab/OneupFlysystemBundle/tree/master/Resources/doc/index.md
+# https://symfony.com/doc/2.0/bundles/LiipImagineBundle/data-loader/flysystem.html
+oneup_flysystem:
+    adapters:
+        default_adapter:
+            local:
+                directory: '%kernel.project_dir%/var/storage/default'
+    filesystems:
+        default_filesystem:
+            adapter: default_adapter
+            alias: League\Flysystem\Filesystem
+            mount: default_filesystem
