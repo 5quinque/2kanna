@@ -8,6 +8,7 @@
         "php": "^7.1.3",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "league/flysystem-aws-s3-v3": "^1.0",
         "liip/imagine-bundle": "^2.2",
         "linnit/dt2icon": "1.0.1",
         "linnit/greentext": "1.0",

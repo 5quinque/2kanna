@@ -1,4 +1,7 @@
 {
+    "aws/aws-sdk-php": {
+        "version": "3.146.0"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -96,6 +99,15 @@
     "egulias/email-validator": {
         "version": "2.1.18"
     },
+    "guzzlehttp/guzzle": {
+        "version": "7.0.1"
+    },
+    "guzzlehttp/promises": {
+        "version": "v1.3.1"
+    },
+    "guzzlehttp/psr7": {
+        "version": "1.6.1"
+    },
     "imagine/imagine": {
         "version": "1.2.3"
     },
@@ -107,6 +119,9 @@
     },
     "league/flysystem": {
         "version": "1.0.69"
+    },
+    "league/flysystem-aws-s3-v3": {
+        "version": "1.0.25"
     },
     "liip/imagine-bundle": {
         "version": "1.8",
@@ -129,6 +144,9 @@
     },
     "monolog/monolog": {
         "version": "1.25.4"
+    },
+    "mtdowling/jmespath.php": {
+        "version": "2.5.0"
     },
     "nikic/php-parser": {
         "version": "v4.6.0"
@@ -169,11 +187,20 @@
     "psr/container": {
         "version": "1.0.0"
     },
+    "psr/http-client": {
+        "version": "1.0.1"
+    },
+    "psr/http-message": {
+        "version": "1.0.1"
+    },
     "psr/link": {
         "version": "1.0.0"
     },
     "psr/log": {
         "version": "1.1.3"
+    },
+    "ralouphie/getallheaders": {
+        "version": "3.0.3"
     },
     "sensio/framework-extra-bundle": {
         "version": "5.2",

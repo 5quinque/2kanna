@@ -31,3 +31,13 @@ services:
         tags: ['twig.extension']
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    acme.s3_client:
+        class: Aws\S3\S3Client
+        arguments:
+            -
+                version: 'latest'
+                region: '%env(AWS_S3_REGION)%'
+                credentials:
+                    key: '%env(AWS_S3_KEY)%'
+                    secret: '%env(AWS_S3_SECRET)%'
