@@ -14,6 +14,20 @@ liip_imagine:
         #         web_root: '%kernel.project_dir%/public/'
         #         cache_prefix: "/img"
 
+        thumb:
+            aws_s3:
+                client_config:
+                    credentials:
+                        key:    '%env(AWS_S3_KEY)%'
+                        secret: '%env(AWS_S3_SECRET)%'
+                    region: '%env(AWS_S3_REGION)%'
+                    version: 'latest'
+                bucket: '%env(AWS_S3_BUCKET)%'
+                get_options:
+                    Scheme: https
+                put_options:
+                    CacheControl: "max-age=86400"
+
         default:
             web_path:
                 cache_prefix: "/"
@@ -30,7 +44,7 @@ liip_imagine:
 
         # the name of the "filter set"
         thumb:
-            # cache: thumb
+            cache: thumb
             quality: 75
             png_compression_level: 8
 
