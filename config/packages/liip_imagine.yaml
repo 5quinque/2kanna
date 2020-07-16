@@ -4,6 +4,7 @@ liip_imagine:
     driver: "gd"
 
     resolvers:
+        # https://symfony.com/doc/2.0/bundles/LiipImagineBundle/cache-resolver/aws_s3.html
         s3_cache:
             aws_s3:
                 client_config:

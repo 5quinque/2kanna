@@ -26,6 +26,7 @@ class CrossLinkExtension extends AbstractExtension
         ];
     }
 
+    // [TODO] tidy this
     public function createCrossLinks(string $string)
     {
         $regex = '/&gt;&gt;&gt;\/(\w+)\/?(\d+)?/';

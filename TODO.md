@@ -3,12 +3,12 @@ ToDo
  * Upgrade to Symfony 5
  * Write documentation
  * Add remove user form
- * Seperate form for setting user password
- * Seperate form for setting board password
+
 
 In Progress
 ===========
  * CSS. Moving away from Bootstrap
+ * Images are removed on post deletion, but also need to remove cached images, (img, thumb)
 
 Done
 ====
@@ -32,3 +32,5 @@ Done
  * ~~Link to other boards with `>>>/technology` and `>>>/music/3452`~~
  * ~~Strip EXIF data from images (Maybe https://symfony.com/doc/current/bundles/LiipImagineBundle/filters/general.html#filter-strip)~~
  * ~~Check boardname matches [azAZ0-9] only~~
+ * ~~Seperate form for setting user password~~
+ * ~~Seperate form for setting board password~~

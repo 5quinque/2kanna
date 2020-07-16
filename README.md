@@ -4,7 +4,7 @@ TextBoard
 Requirements
 ------------
    * PHP 7.1+
-   * PHP Extensions mysqlnd, gd
+   * PHP Extensions mysqlnd, gd, php-pgsql
    * Mariadb-server 5.5+
    * and the [usual Symfony application requirements][1].
 
