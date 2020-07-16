@@ -4,17 +4,7 @@ liip_imagine:
     driver: "gd"
 
     resolvers:
-        # thumb:
-        #     web_path:
-        #         web_root: '%kernel.project_dir%/public/'
-        #         cache_prefix: "/thumbs"
-
-        # strip:
-        #     web_path:
-        #         web_root: '%kernel.project_dir%/public/'
-        #         cache_prefix: "/img"
-
-        thumb:
+        s3_cache:
             aws_s3:
                 client_config:
                     credentials:
@@ -38,13 +28,13 @@ liip_imagine:
 
         # Strip EXIF information
         img:
-            # cache: strip
+            cache: s3_cache
             filters:
                 strip: ~
 
         # the name of the "filter set"
         thumb:
-            cache: thumb
+            cache: s3_cache
             quality: 75
             png_compression_level: 8
 
