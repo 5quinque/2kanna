@@ -13,6 +13,9 @@ liip_imagine:
                         secret: '%env(AWS_S3_SECRET)%'
                     region: '%env(AWS_S3_REGION)%'
                     version: 'latest'
+                    # https://github.com/aws/aws-sdk-php/issues/692#issuecomment-121731538
+                    endpoint: 'https://%env(AWS_S3_ENDPOINT)%'
+                    bucket_endpoint: true
                 bucket: '%env(AWS_S3_BUCKET)%'
                 get_options:
                     Scheme: https
