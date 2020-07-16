@@ -12,7 +12,7 @@ function imageClick(event) {
 
     if (column.classList.contains(conColumn)) {
         // Expand the image
-        let fullImagePath = this.parentElement.pathname;
+        let fullImagePath = this.parentElement.href;
         
         this.src = fullImagePath;
 
