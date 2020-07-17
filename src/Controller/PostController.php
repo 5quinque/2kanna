@@ -49,6 +49,11 @@ class PostController extends AbstractController
             $post->setIpAddress($_SERVER['REMOTE_ADDR']);
         }
 
+        // We will lose access to Post::imageFile so need to save the mimetype
+        if ($post->getImageFile()) {
+            $post->setImageMimeType($post->getImageFile()->getMimeType());
+        }
+
         $rootPost = $post->getRootParentPost();
         $boardName = $post->getBoard()->getName();
 

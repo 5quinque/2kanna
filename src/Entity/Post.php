@@ -75,12 +75,19 @@ class Post
 
     /**
      * @Vich\UploadableField(mapping="post_image", fileNameProperty="imageName")
-     * @Assert\Image(
+     * We're using Assert\File, instead of Assert\Image, as we accept videos
+     * So we also assert with 'imageDimensionsValidate' to check the width/height of images
+     * @Assert\File(
      *     payload={"severity"="error"},
-     *     minWidth = 1,
-     *     maxWidth = 5000,
-     *     minHeight = 1,
-     *     maxHeight = 5000
+     *     maxSize = "4096k",
+     *     maxSizeMessage = "Exceeded file size limit of 4MB",
+     *     mimeTypes = {
+     *          "image/png",
+     *          "image/jpeg",
+     *          "image/gif",
+     *          "video/webm"
+     *     },
+     *     mimeTypesMessage = "We don't support that filetype."
      * )
      *
      * @var File
@@ -92,6 +99,11 @@ class Post
      * @Assert\Ip
      */
     private $ipAddress;
+
+    /**
+     * @ORM\Column(type="string", length=127, nullable=true)
+     */
+    private $imageMimeType;
 
     public function __construct()
     {
@@ -264,6 +276,26 @@ class Post
         }
     }
 
+    /**
+     * @Assert\Callback
+     */
+    public function imageDimensionsValidate(ExecutionContextInterface $context, $payload)
+    {
+        if (preg_match('/^image\//', $this->imageFile->getMimeType())) {
+            list($imageWidth, $imageHeight) = getimagesize($this->imageFile->getPathname());
+            if ($imageWidth < 1 || $imageHeight < 1) {
+                $context->buildViolation('Your image is too small')
+                ->atPath('imageFile')
+                ->addViolation();
+            }
+            if ($imageWidth > 5000 || $imageHeight > 5000) {
+                $context->buildViolation('Your image is too big')
+                ->atPath('imageFile')
+                ->addViolation();
+            }
+        }
+    }
+
     public function getIpAddress(): ?string
     {
         return $this->ipAddress;
@@ -272,6 +304,18 @@ class Post
     public function setIpAddress(string $ipAddress): self
     {
         $this->ipAddress = $ipAddress;
+
+        return $this;
+    }
+
+    public function getImageMimeType(): ?string
+    {
+        return $this->imageMimeType;
+    }
+
+    public function setImageMimeType(?string $imageMimeType): self
+    {
+        $this->imageMimeType = $imageMimeType;
 
         return $this;
     }

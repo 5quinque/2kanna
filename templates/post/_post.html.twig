@@ -17,9 +17,21 @@
     <div id="p{{ post.id }}" class="row collapse show p-2">
         {%- if post.imageName is not null -%}
         <div class="col-20">
+            {%- if post.imageMimeType == 'video/webm' -%}
+                <video src="{{ vich_uploader_asset(post) }}" width="120" height="120" controls></video>
+            {% endif %}
+
+            {%- if post.imageMimeType == 'image/jpeg' -%}
+            <a href="{{ post.imageName | imagine_filter('jpeg') }}" class="mr-3">
+                <img src="{{ post.imageName | imagine_filter('thumb') }}" class="post-image img-thumbnail" alt="{{ post.title }}">
+            </a>
+            {%- elseif post.imageMimeType starts with 'image/' -%}
             <a href="{{ post.imageName | imagine_filter('img') }}" class="mr-3">
                 <img src="{{ post.imageName | imagine_filter('thumb') }}" class="post-image img-thumbnail" alt="{{ post.title }}">
             </a>
+            {%- endif -%}
+                
+
         </div>
         {%- endif -%}
         <div class="col">

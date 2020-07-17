@@ -79,7 +79,7 @@ class PostType extends AbstractType
         $badWords = $this->getWordFilters->findAllFilters();
         foreach ($badWords as $word) {
             if (preg_match($word->getBadWord(), $post->getMessage())) {
-                $context->buildViolation('you sunk my battleship')
+                $context->buildViolation('Choose something more interesting to say.')
                 ->atPath('message')
                 ->addViolation();
 

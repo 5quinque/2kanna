@@ -1,7 +1,7 @@
 # See dos how to configure the bundle: https://symfony.com/doc/current/bundles/LiipImagineBundle/basic-usage.html
 liip_imagine:
     # valid drivers options include "gd" or "gmagick" or "imagick"
-    driver: "gd"
+    driver: "imagick"
 
     resolvers:
         # https://symfony.com/doc/2.0/bundles/LiipImagineBundle/cache-resolver/aws_s3.html
@@ -31,16 +31,24 @@ liip_imagine:
         cache: ~
 
         # Strip EXIF information
-        img:
+        jpeg:
             cache: s3_cache
             filters:
                 strip: ~
+            # post_processors:
+            #     mozjpeg: { quality: 70 }
+
+
+        img:
+            cache: s3_cache
+            animated: true
 
         # the name of the "filter set"
         thumb:
             cache: s3_cache
             quality: 75
             png_compression_level: 8
+            animated: true
 
             # list of transformations to apply (the "filters")
             filters:
@@ -50,6 +58,8 @@ liip_imagine:
 
                 # auto rotate the image using EXIF metadata
                 auto_rotate: ~
+            # post_processors:
+            #     mozjpeg: { quality: 70 }
 
     # https://symfony.com/doc/2.0/bundles/LiipImagineBundle/data-loader/flysystem.html
     loaders:
