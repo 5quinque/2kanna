@@ -281,6 +281,10 @@ class Post
      */
     public function imageDimensionsValidate(ExecutionContextInterface $context, $payload)
     {
+        if (is_null($this->imageFile)) {
+            return;
+        }
+        
         if (preg_match('/^image\//', $this->imageFile->getMimeType())) {
             list($imageWidth, $imageHeight) = getimagesize($this->imageFile->getPathname());
             if ($imageWidth < 1 || $imageHeight < 1) {
