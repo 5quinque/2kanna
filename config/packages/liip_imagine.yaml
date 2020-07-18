@@ -1,5 +1,7 @@
 # See dos how to configure the bundle: https://symfony.com/doc/current/bundles/LiipImagineBundle/basic-usage.html
 liip_imagine:
+    enqueue: true
+
     # valid drivers options include "gd" or "gmagick" or "imagick"
     driver: "imagick"
 
@@ -33,11 +35,11 @@ liip_imagine:
         # Strip EXIF information
         jpeg:
             cache: s3_cache
+            quality: 75
             filters:
                 strip: ~
             # post_processors:
             #     mozjpeg: { quality: 70 }
-
 
         img:
             cache: s3_cache
@@ -65,6 +67,6 @@ liip_imagine:
     loaders:
         flysystem_loader:
             flysystem:
-                filesystem_service: oneup_flysystem.default_filesystem_filesystem
+                filesystem_service: oneup_flysystem.s3_filesystem
 
     data_loader: flysystem_loader

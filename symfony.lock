@@ -99,6 +99,37 @@
     "egulias/email-validator": {
         "version": "2.1.18"
     },
+    "enqueue/dsn": {
+        "version": "0.10.1"
+    },
+    "enqueue/enqueue": {
+        "version": "0.10.1"
+    },
+    "enqueue/enqueue-bundle": {
+        "version": "0.9",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "0.9",
+            "ref": "c6ec89b63f963d10ad0d7a7bea170359c119c8bc"
+        },
+        "files": [
+            "config/packages/enqueue.yaml",
+            "config/packages/test/enqueue.yaml"
+        ]
+    },
+    "enqueue/fs": {
+        "version": "0.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "0.4",
+            "ref": "4d45d1e6b113832ad13f6d321506c004ed12fe2e"
+        }
+    },
+    "enqueue/null": {
+        "version": "0.10.1"
+    },
     "guzzlehttp/guzzle": {
         "version": "7.0.1"
     },
@@ -141,6 +172,9 @@
     },
     "linnit/greentext": {
         "version": "v1.0"
+    },
+    "makasim/temp-file": {
+        "version": "0.2.0"
     },
     "monolog/monolog": {
         "version": "1.25.4"
@@ -199,8 +233,17 @@
     "psr/log": {
         "version": "1.1.3"
     },
+    "queue-interop/amqp-interop": {
+        "version": "0.8.1"
+    },
+    "queue-interop/queue-interop": {
+        "version": "0.8.0"
+    },
     "ralouphie/getallheaders": {
         "version": "3.0.3"
+    },
+    "ramsey/uuid": {
+        "version": "3.9.3"
     },
     "sensio/framework-extra-bundle": {
         "version": "5.2",

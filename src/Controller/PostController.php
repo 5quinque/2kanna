@@ -10,6 +10,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
+use Enqueue\Client\ProducerInterface;
+use Liip\ImagineBundle\Async\Commands;
+use Liip\ImagineBundle\Async\ResolveCache;
 
 /**
  * @Route("/post")
@@ -19,7 +22,7 @@ class PostController extends AbstractController
     /**
      * @Route("/{id}/{newPostId?}", methods={"GET", "POST"}, requirements={"id"="\d+", "newPostId"="\d+"})
      */
-    public function show(Post $post, int $newPostId = null, Request $request): Response
+    public function show(Post $post, int $newPostId = null, Request $request, ProducerInterface $producer): Response
     {
         $newChildPost = new Post();
         $newChildPost->setBoard($post->getBoard());
@@ -31,7 +34,7 @@ class PostController extends AbstractController
 
         if ($form->isSubmitted() &&
             $form->isValid()) {
-            return $this->postFormSubmitted($newChildPost);
+            return $this->postFormSubmitted($newChildPost, $producer);
         }
 
         return $this->render('post/show.html.twig', [
@@ -41,7 +44,7 @@ class PostController extends AbstractController
         ]);
     }
 
-    public function postFormSubmitted(Post $post)
+    public function postFormSubmitted(Post $post, ProducerInterface $producer)
     {
         $post->setCreated(new DateTime());
         if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
@@ -65,6 +68,14 @@ class PostController extends AbstractController
         $entityManager->persist($rootPost);
         $entityManager->persist($post);
         $entityManager->flush();
+
+        // Resolve cached images in the background (thumbnails, stripping exif)
+        if (preg_match('/^image\//', $post->getImageMimeType())) {
+            $producer->sendCommand(
+                Commands::RESOLVE_CACHE,
+                new ResolveCache($post->getImageName(), ['thumb', 'jpeg'])
+            );
+        }
 
         $newPostId = $post->getId();
 

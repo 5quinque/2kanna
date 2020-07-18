@@ -11,9 +11,14 @@ oneup_flysystem:
                 client: acme.s3_client
                 bucket: '%env(AWS_S3_BUCKET)%'
                 prefix: ~
+                options:
+                    ACL: 'public-read'
         
     filesystems:
-        default_filesystem:
+        s3:
             adapter: acme.flysystem_adapter
             alias: League\Flysystem\Filesystem
-            mount: default_filesystem
+            mount: s3_filesystem
+        local:
+            adapter: default_adapter
+            mount: local_filesystem

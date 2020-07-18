@@ -9,6 +9,8 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-imagick": "^3.4",
+        "enqueue/enqueue-bundle": "^0.10.1",
+        "enqueue/fs": "^0.10.1",
         "league/flysystem-aws-s3-v3": "^1.0",
         "liip/imagine-bundle": "^2.2",
         "linnit/dt2icon": "1.0.1",
