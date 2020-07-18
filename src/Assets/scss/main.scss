@@ -347,6 +347,21 @@ textarea {
     border: 0 solid #ced4da;
     overflow: hidden;
 }
+.custom-file-label::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    display: block;
+    height: calc(1.5em + 1.5rem);
+    padding: .75rem 1.5rem;
+    line-height: 1.5;
+    color: #000;
+    content: "Browse";
+    background-color: #eceeef;
+    border-left: inherit;
+}
 label {
     display: inline-block;
     margin-bottom: .5rem;
