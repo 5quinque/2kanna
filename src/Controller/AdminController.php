@@ -122,6 +122,25 @@ class AdminController extends AbstractController
     }
 
     /**
+     * @Route("/admin/users/remove/{username}", name="admin_user_remove", methods={"DELETE"})
+     */
+    public function removeUser(Request $request, Admin $user)
+    {
+        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($user);
+            $entityManager->flush();
+        }
+
+        $this->addFlash(
+            'success',
+            $user->getUsername() . " is now removed"
+        );
+
+        return $this->redirectToRoute('admin_users');
+    }
+
+    /**
      * @Route("/admin/users/password/{username}", name="admin_user_password")
      */
     public function UserPassword(

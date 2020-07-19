@@ -1,0 +1,5 @@
+<form class="d-inline" method="post" action="{{ path('admin_user_remove', {'username': user.username}) }}" onsubmit="return confirm('Are you sure you want to remove user \'{{ user.username }}\'?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+    <button type="submit" class="btn btn-warning">Remove User</a>
+</form>

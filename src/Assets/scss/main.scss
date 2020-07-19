@@ -226,7 +226,7 @@ ul.list-group {
     border-color: $primary;
 }
 .page-item.disabled .page-link {
-    color: #6c757d;
+    color: $primary-dark;
     pointer-events: none;
     cursor: auto;
     background-color: #fff;

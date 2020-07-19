@@ -232,7 +232,7 @@ ul.list-group {
 }
 
 .page-item.disabled .page-link {
-  color: #6c757d;
+  color: #3a4042;
   pointer-events: none;
   cursor: auto;
   background-color: #fff;

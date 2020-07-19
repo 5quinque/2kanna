@@ -20,6 +20,10 @@
                             {{ include('admin/_removebadword_form.html.twig') }}
                         </div>
                     </li>
+                {% else %}
+                    <li class="list-group-item">
+                        No filters.
+                    </li>
                 {% endfor %}
             </ul>
         </div>

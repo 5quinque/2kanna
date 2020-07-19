@@ -12,9 +12,13 @@
             <ul class="list-group user-list">
                 {% for user in users %}
                     <li class="list-group-item d-flex space-between align-items-center">
-                        <span>{{ user.username }}</span>
-                        <a class="btn btn-primary" href="{{ path('admin_user_edit', {'username': user.username}) }}">Edit</a>
-                        {# {{ include('admin/_removeuser_form.html.twig') }} #}
+                        {{ user.username }}
+                        <div>
+                            <div>
+                                <a class="btn btn-primary d-block text-center" href="{{ path('admin_user_edit', {'username': user.username}) }}">Edit</a>
+                            </div>
+                            {{ include('admin/users/_removeuser_form.html.twig') }}
+                        </div>
                     </li>
                 {% endfor %}
             </ul>

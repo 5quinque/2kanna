@@ -19,6 +19,10 @@
                         </span>
                         {{ include('admin/_unban_form.html.twig') }}
                     </li>
+                {% else %}
+                    <li class="list-group-item">
+                        No IP addresses banned.
+                    </li>
                 {% endfor %}
             </ul>
         </div>
