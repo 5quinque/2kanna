@@ -44,6 +44,7 @@ class PostController extends AbstractController
         ]);
     }
 
+    // [TODO] Tidy
     public function postFormSubmitted(Post $post, ProducerInterface $producer)
     {
         $post->setCreated(new DateTime());
@@ -71,10 +72,13 @@ class PostController extends AbstractController
 
         // Resolve cached images in the background (thumbnails, stripping exif)
         if (preg_match('/^image\//', $post->getImageMimeType())) {
-            $producer->sendCommand(
+            $reply = $producer->sendCommand(
                 Commands::RESOLVE_CACHE,
-                new ResolveCache($post->getImageName(), ['thumb', 'jpeg'])
+                new ResolveCache($post->getImageName(), ['thumb', 'jpeg']),
+                true
             );
+
+            $replyMessage = $reply->receive(20000); // wait for 20 sec
         }
 
         $newPostId = $post->getId();
