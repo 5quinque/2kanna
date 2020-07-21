@@ -1,8 +1,9 @@
 <?php
+
 namespace App\Service;
 
-use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\PostRepository;
+use Doctrine\ORM\EntityManagerInterface;
 
 class FindPosts
 {
@@ -18,15 +19,13 @@ class FindPosts
     public function printDebug(array $debug)
     {
         foreach ($debug as $d) {
-            print "$d";
+            echo "{$d}";
         }
     }
 
     public function isPosterHot($userIP)
     {
-        $posts = $this->postRepository->findByChildNewerThan('-10 seconds', $userIP);
-
-        return $posts;
+        return $this->postRepository->findByChildNewerThan('-10 seconds', $userIP);
     }
 
     public function findOldPosts()
