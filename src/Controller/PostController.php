@@ -20,7 +20,7 @@ class PostController extends AbstractController
     /**
      * @Route("/{id}/{newPostId?}", methods={"GET", "POST"}, requirements={"id"="\d+", "newPostId"="\d+"})
      */
-    public function show(Post $post, int $newPostId = null, Request $request, x): Response
+    public function show(Post $post, int $newPostId = null, Request $request, ImageCache $imageCache): Response
     {
         $childPost = new Post();
         $childPost->setBoard($post->getBoard());
