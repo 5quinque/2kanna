@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use App\Form\PostType;
+use App\Util\HelperUtil;
 use App\Util\ImageCache;
 use DateTime;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
@@ -45,11 +46,8 @@ class PostController extends AbstractController
     public function postFormSubmitted(Post $post, ImageCache $imageCache)
     {
         $post->setCreated(new DateTime());
-        if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            $post->setIpAddress($_SERVER['HTTP_X_FORWARDED_FOR']);
-        } else {
-            $post->setIpAddress($_SERVER['REMOTE_ADDR']);
-        }
+
+        $post->setIpAddress(HelperUtil::getIPAddress());
 
         // We will lose access to Post::imageFile so need to save the mimetype
         if ($post->getImageFile()) {
@@ -69,13 +67,11 @@ class PostController extends AbstractController
 
         $imageCache->queueImageFilter($post);
 
-        $newPostId = $post->getId();
-
         return $this->redirectToRoute('post_show', [
             'name' => $boardName,
             'id' => $rootPost->getId(),
             // Only show newPostId if it's a child post
-            'newPostId' => $rootPost->getId() == $newPostId ? null : $newPostId,
+            'newPostId' => $rootPost->getId() == $post->getId() ? null : $post->getId(),
         ]);
     }
 
