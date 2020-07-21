@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class BoardController extends AbstractController
 {
@@ -58,8 +57,12 @@ class BoardController extends AbstractController
     /**
      * @Route("/{name}/{page_no<\d+>?1}", name="board_show", methods={"GET", "POST"})
      */
-    public function show(Board $board, int $page_no, PostRepository $postRepository, Request $request): Response
-    {
+    public function show(
+        Board $board,
+        int $page_no,
+        Request $request,
+        PostRepository $postRepository
+    ): Response {
         $post = new Post();
         $post->setBoard($board);
         $form = $this->createForm(PostType::class, $post);
@@ -68,20 +71,18 @@ class BoardController extends AbstractController
 
         if ($form->isSubmitted() &&
             $form->isValid()) {
-            $response = $this->forward('App\Controller\PostController::postFormSubmitted', [
-                'post' => $post
+            return $this->forward('App\Controller\PostController::show', [
+                'post' => $post,
             ]);
-
-            return $response;
         }
 
         $criteria = ['parent_post' => null, 'board' => $board];
 
         $repPosts = $postRepository->findBy(
-            $criteria,
-            ["latestpost" => "DESC"],
-            12,
-            ($page_no-1) * 12
+            $criteria,                // Criteria
+            ['latestpost' => 'DESC'], // Order by
+            12,                       // Limit
+            ($page_no - 1) * 12       // Offset
         );
 
         $pageCount = ceil($postRepository->getPageCount($criteria) / 12);
@@ -95,19 +96,17 @@ class BoardController extends AbstractController
     }
 
     /**
-     * @Route("/{name}/post/{id}/{newPostId?}",
+     * @Route("/{name}/post/{id}/{childId?}",
      * name="post_show", methods={"GET", "POST"},
      * requirements={"id"="\d+",
-     * "newPostId"="\d+"})
+     * "childId"="\d+"})
      */
-    public function showPost(Post $post, int $newPostId = null)
+    public function showPost(Post $post, int $childId = null)
     {
-        $response = $this->forward('App\Controller\PostController::show', [
-            'post'  => $post,
-            'newPostId' => $newPostId
+        return $this->forward('App\Controller\PostController::show', [
+            'post' => $post,
+            'childId' => $childId,
         ]);
-
-        return $response;
     }
 
     /**

@@ -4,10 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use App\Form\PostType;
-use App\Util\HelperUtil;
-use App\Util\ImageCache;
-use DateTime;
-use Liip\ImagineBundle\Imagine\Cache\CacheManager;
+use App\Util\PostUtil;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,9 +16,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class PostController extends AbstractController
 {
     /**
-     * @Route("/{id}/{newPostId?}", methods={"GET", "POST"}, requirements={"id"="\d+", "newPostId"="\d+"})
+     * @Route("/{id}/{childId?}", methods={"GET", "POST"}, requirements={"id"="\d+", "childId"="\d+"})
      */
-    public function show(Post $post, int $newPostId = null, Request $request, ImageCache $imageCache): Response
+    public function show(Post $post, int $childId = null, Request $request, PostUtil $postUtil): Response
     {
         $childPost = new Post();
         $childPost->setBoard($post->getBoard());
@@ -33,64 +30,34 @@ class PostController extends AbstractController
 
         if ($form->isSubmitted() &&
             $form->isValid()) {
-            return $this->postFormSubmitted($childPost, $imageCache);
+            $postUtil->createPost($childPost);
+
+            $rootPost = $childPost->getRootParentPost();
+
+            return $this->redirectToRoute('post_show', [
+                'name' => $childPost->getBoard()->getName(),
+                'id' => $rootPost->getId(),
+                'childId' => $rootPost->getId() == $childPost->getId() ? null : $childPost->getId(),
+            ]);
         }
 
         return $this->render('post/show.html.twig', [
             'post' => $post->getRootParentPost(),
-            'new_post_id' => $newPostId,
+            'new_post_id' => $childId,
             'form' => $form->createView(),
-        ]);
-    }
-
-    public function postFormSubmitted(Post $post, ImageCache $imageCache)
-    {
-        $post->setCreated(new DateTime());
-
-        $post->setIpAddress(HelperUtil::getIPAddress());
-
-        // We will lose access to Post::imageFile so need to save the mimetype
-        if ($post->getImageFile()) {
-            $post->setImageMimeType($post->getImageFile()->getMimeType());
-        }
-
-        $rootPost = $post->getRootParentPost();
-        $boardName = $post->getBoard()->getName();
-
-        // Update parent post timestamp
-        $rootPost->setLatestpost(new DateTime());
-
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($rootPost);
-        $entityManager->persist($post);
-        $entityManager->flush();
-
-        $imageCache->queueImageFilter($post);
-
-        return $this->redirectToRoute('post_show', [
-            'name' => $boardName,
-            'id' => $rootPost->getId(),
-            // Only show newPostId if it's a child post
-            'newPostId' => $rootPost->getId() == $post->getId() ? null : $post->getId(),
         ]);
     }
 
     /**
      * @Route("/{id}", name="post_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Post $post, CacheManager $liipCacheManager): Response
+    public function delete(Request $request, Post $post, PostUtil $postUtil): Response
     {
-        $boardIndex = $post->getBoard()->getName();
-        if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {
-            // Remove LiipImagine image cache
-            $liipCacheManager->remove($post->getImageName());
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($post);
-            $entityManager->flush();
-        }
-
         $boardName = $post->getBoard()->getName();
+
+        if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {
+            $postUtil->deletePost($post);
+        }
 
         if ($post->getParentPost()) {
             return $this->redirectToRoute('post_show', [
@@ -99,6 +66,6 @@ class PostController extends AbstractController
             ]);
         }
 
-        return $this->redirectToRoute('board_show', ['name' => $boardIndex]);
+        return $this->redirectToRoute('board_show', ['name' => $boardName]);
     }
 }

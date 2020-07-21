@@ -4,7 +4,7 @@ namespace App\Util;
 
 class HelperUtil
 {
-    public static function getIPAddress()
+    public static function getIPAddress(): string
     {
         if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
             return $_SERVER['HTTP_CF_CONNECTING_IP'];
