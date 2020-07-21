@@ -2,6 +2,9 @@
     "aws/aws-sdk-php": {
         "version": "3.146.0"
     },
+    "bunny/bunny": {
+        "version": "v0.4.2"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -98,6 +101,18 @@
     },
     "egulias/email-validator": {
         "version": "2.1.18"
+    },
+    "enqueue/amqp-bunny": {
+        "version": "0.7",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "0.7",
+            "ref": "2ef9206636a23f2c50936de195f6bc54247dea65"
+        }
+    },
+    "enqueue/amqp-tools": {
+        "version": "0.10.0"
     },
     "enqueue/dsn": {
         "version": "0.10.1"
@@ -244,6 +259,12 @@
     },
     "ramsey/uuid": {
         "version": "3.9.3"
+    },
+    "react/event-loop": {
+        "version": "v1.1.1"
+    },
+    "react/promise": {
+        "version": "v2.8.0"
     },
     "sensio/framework-extra-bundle": {
         "version": "5.2",
