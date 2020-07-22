@@ -87,10 +87,6 @@ class BoardController extends AbstractController
 
         $latestPosts = $postRepository->findLatest($page_no, $board);
 
-        dump(
-            $latestPosts->getNumResults(),
-        );
-
         return $this->render('board/show.html.twig', [
             'board' => $board,
             'paginator' => $latestPosts,

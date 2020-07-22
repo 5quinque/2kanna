@@ -22,19 +22,19 @@ class BoardFixtures extends Fixture
         $board->setName('miscellaneous');
         $board->setPassword($this->passwordEncoder->encodePassword(
             $board,
-            "password"
+            'password'
         ));
         $manager->persist($board);
         $this->addReference(self::COWBOY_BOARD_REFERENCE, $board);
 
         $boardNames = ['technology', 'programming', 'music',
-            'television', 'cooking', 'literature', 'science', 'gaming'];
+            'television', 'literature', 'gaming', ];
         foreach ($boardNames as $name) {
             $board = new Board();
             $board->setName($name);
             $board->setPassword($this->passwordEncoder->encodePassword(
                 $board,
-                "password"
+                'password'
             ));
             $manager->persist($board);
         }
