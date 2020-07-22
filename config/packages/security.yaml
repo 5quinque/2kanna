@@ -4,8 +4,6 @@ security:
             algorithm: auto
         App\Entity\Board:
             algorithm: auto
-
-
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         users_in_memory: { memory: null }
@@ -23,7 +21,8 @@ security:
             security: false
         board:
             pattern: ^/boardadmin/
-            anonymous: lazy
+            anonymous: true
+            lazy: true
             provider: board_provider
             guard:
                 authenticators:
@@ -36,7 +35,8 @@ security:
                 path:     /
             access_denied_handler: App\Security\AccessDeniedHandler
         default:
-            anonymous: lazy
+            anonymous: true
+            lazy: true
             provider: app_user_provider
             guard:
                 authenticators:
@@ -47,8 +47,6 @@ security:
                 secret:   '%kernel.secret%'
                 lifetime: 604800 # 1 week in seconds
                 path:     /
-                # where to redirect after logout
-                # target: app_any_route
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
