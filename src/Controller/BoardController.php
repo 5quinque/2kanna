@@ -19,10 +19,19 @@ class BoardController extends AbstractController
     /**
      * @Route("/", name="board_index", methods={"GET"})
      */
-    public function index(BoardRepository $boardRepository): Response
+    public function index(BoardRepository $board, PostRepository $post): Response
     {
+        $boards = $board->findAll();
+        $postCount = [];
+
+        foreach ($boards as $b) {
+            $bp = $post->findLatest(1, $b);
+            $postCount[$b->getName()] = $bp->getNumResults();
+        }
+
         return $this->render('board/index.html.twig', [
-            'boards' => $boardRepository->findAll(),
+            'boards' => $boards,
+            'postCount' => $postCount,
         ]);
     }
 
@@ -77,6 +86,10 @@ class BoardController extends AbstractController
         }
 
         $latestPosts = $postRepository->findLatest($page_no, $board);
+
+        dump(
+            $latestPosts->getNumResults(),
+        );
 
         return $this->render('board/show.html.twig', [
             'board' => $board,

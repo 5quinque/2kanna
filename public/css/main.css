@@ -177,16 +177,22 @@ ul.boards-list {
   padding: 10px;
 }
 
-ul.boards-list li {
-  border-bottom: 1px solid #50717b;
+ul.boards-list li:first-child {
+  font-weight: bold;
 }
 
-ul.boards-list li a {
+ul.boards-list li {
+  border-bottom: 1px solid #50717b;
   font-size: 1.4em;
 }
 
 ul.boards-list li:last-child {
   border-bottom: none;
+}
+
+ul.boards-list a.list-group-item-action:hover {
+  background-color: #50717b;
+  color: #fff;
 }
 
 ul.list-group {

@@ -177,14 +177,20 @@ ul.boards-list {
     border: 1px solid $primary;
     margin: 0;
     padding: 10px;
+    li:first-child {
+        font-weight: bold;
+    }
     li {
         border-bottom: 1px solid $primary;
-        a {
-            font-size: 1.4em;
-        }
+        font-size: 1.4em;
     }
     li:last-child {
         border-bottom: none;
+    }
+
+    a.list-group-item-action:hover {
+        background-color: $primary;
+        color: #fff;
     }
 }
 
