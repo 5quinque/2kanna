@@ -22,24 +22,22 @@
     </div>
     <hr>
     <div class="row">
-        {% if posts|length %}
-            {% for row in posts|batch(posts|length/2) %}
-                <div class="col-100">
-                    {% for post in row %}
-                        {% set only3 = true %}
-                        {% include 'post/_post.html.twig' %}
-                    {% endfor %}
-                </div>
-            {% endfor %}
+        {% for post in paginator.results %}
+            <div class="col-100">
+                {% set only3 = true %}
+                {% include 'post/_post.html.twig' %}
+            </div>
         {% else %}
             <div class="col-100">
                 <p>No posts to show.</p>
             </div>
-        {% endif %}
+        {% endfor %}
     </div>
+    {% if paginator.hasToPaginate %}
     <div class="row">
         {% include '_pagination.html.twig' %}
     </div>
+    {% endif %}
 {% endblock %}
 {%- block footer -%}
 <a href="{{ path('board_edit', {'name': board.name}) }}">Edit</a>

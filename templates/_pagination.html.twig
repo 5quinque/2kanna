@@ -1,53 +1,34 @@
-{% set page_no = app.request.get('page_no') %}
 {% set board = app.request.get('name') %}
-{% set route = app.request.get('_route') %}
-{% if page_no == 1 %}
-    {% set previous_page_no = 1 %}
-{% else %}
-    {% set previous_page_no = page_no - 1 %}
-{% endif %}
-{% if page_no == page_count %}
-    {% set next_page_no = page_count %}
-{% else %}
-    {% set next_page_no = page_no + 1 %}
-{% endif %}
-{% set nearbyPagesLimit = 4 %}
-<div class="col-sm-12 col-md-5"></div>
-<div class="col-sm-12 col-md-7">
-    {% if page_count > 1 %}
+<div class="col-100">
         <ul class="pagination pagination-sm">
-            <li class="page-item previous {% if page_no == 1 %}disabled{% endif %}">
-                <a {% if page_no != 1 %}href="{{ path(route, {'name': board, 'page_no': previous_page_no}) }}"{% endif %} data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+        {% if paginator.hasPreviousPage %}
+            <li class="page-item previous">
+                <a href="{{ path('board_show', {'name': board, 'page_no': paginator.previousPage}) }}" tabindex="0" class="page-link">Previous</a>
             </li>
-            {% for i in range(1, page_count) %}
-                {% if (loop.index == 1) or (loop.index == page_count) %}
-                    {# Always show page 1 & last page#}
-                    <li class="page-item {% if page_no == i %}active{% endif %}">
-                        <a href="{{ path(route, {'name': board, 'page_no': i}) }}" data-dt-idx="{{ i }}" tabindex="0" class="page-link">{{ i }}</a>
-                    </li>
-                {% elseif 0 == (page_no - nearbyPagesLimit) - loop.index %}
-                    {# dot before #}
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#">...</a>
-                    </li>
-                {% elseif 0 == (page_no + nearbyPagesLimit) - loop.index %}
-                    {# dot after #}
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#">...</a>
-                    </li>
-                {% elseif 0 < (page_no - nearbyPagesLimit) - loop.index %}
-                    {# hide all before #}
-                {% elseif 0 > (page_no + nearbyPagesLimit) - loop.index %}
-                    {# hide all after #}
-                {% else %}
-                    <li class="page-item {% if page_no == i %}active{% endif %}">
-                        <a href="{{ path(route, {'name': board, 'page_no': i}) }}" data-dt-idx="{{ i }}" tabindex="0" class="page-link">{{ i }}</a>
-                    </li>
-                {% endif %}
-            {% endfor %}
-            <li class="page-item next {% if page_no == page_count %}disabled{% endif %}">
-                <a {% if page_no != page_count %}href="{{ path(route, {'name': board, 'page_no': page_no+1}) }}"{% endif %} data-dt-idx="{{ page_count }}" tabindex="0" class="page-link">Next</a>
+        {% else %}
+            <li class="page-item previous disabled">
+                <a class="page-link">Previous</a>
             </li>
+        {% endif %}
+        {% for i in 1..paginator.lastPage %}
+            {% if i == paginator.currentPage %}
+                <li class="page-item active">
+                    <a href="{{ path('board_show', {'name': board, 'page_no': i}) }}" tabindex="0" class="page-link">{{ i }}</a>
+                </li>
+            {% else %}
+                <li class="page-item">
+                    <a href="{{ path('board_show', {'name': board, 'page_no': i}) }}" tabindex="0" class="page-link">{{ i }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+        {% if paginator.hasNextPage %}
+            <li class="page-item next">
+                <a href="{{ path('board_show', {'name': board, 'page_no': paginator.nextPage}) }}" tabindex="0" class="page-link">Next</a>
+            </li>
+        {% else %}
+            <li class="page-item next disabled">
+                <a tabindex="0" class="page-link">Next</a>
+            </li>
+        {% endif %}
         </ul>
-    {% endif %}
 </div>

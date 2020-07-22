@@ -112,6 +112,10 @@ pre code {
   margin: auto;
 }
 
+.mt-1 {
+  margin-top: 1em;
+}
+
 .mt-2 {
   margin-top: 2em;
 }

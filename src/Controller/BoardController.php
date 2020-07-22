@@ -76,21 +76,11 @@ class BoardController extends AbstractController
             ]);
         }
 
-        $criteria = ['parent_post' => null, 'board' => $board];
-
-        $repPosts = $postRepository->findBy(
-            $criteria,                // Criteria
-            ['latestpost' => 'DESC'], // Order by
-            12,                       // Limit
-            ($page_no - 1) * 12       // Offset
-        );
-
-        $pageCount = ceil($postRepository->getPageCount($criteria) / 12);
+        $latestPosts = $postRepository->findLatest($page_no, $board);
 
         return $this->render('board/show.html.twig', [
             'board' => $board,
-            'posts' => $repPosts,
-            'page_count' => $pageCount,
+            'paginator' => $latestPosts,
             'form' => $form->createView(),
         ]);
     }
