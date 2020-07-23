@@ -258,9 +258,9 @@ ul.list-group {
     background-color: rgba(227, 235, 226, 0.342);
     
     
-    // .post {
-    //     margin-left: 10px;
-    // }
+    .post-body {
+        display: flex;
+    }
 
     .post-head {
         display: flex;
@@ -276,6 +276,10 @@ ul.list-group {
         video {
             max-width: 100%;
         }
+    }
+
+    .collapsed {
+        display: none;
     }
 }
 

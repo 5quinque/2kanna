@@ -11,16 +11,10 @@ function imageClick(event) {
     let column = this.parentElement.parentElement;
 
     if (column.classList.contains(conColumn)) {
-        // Expand the image
-        let fullImagePath = this.parentElement.href;
-        
-        this.src = fullImagePath;
-
-        column.classList.add(expandedColumn);
-        column.classList.remove(conColumn);
-    } else {
-        // Contract the image
-        column.classList.add(conColumn);
-        column.classList.remove(expandedColumn);
+        // Load the full size image
+        this.src = this.parentElement.href;
     }
+
+    column.classList.toggle(expandedColumn);
+    column.classList.toggle(conColumn);
 } 

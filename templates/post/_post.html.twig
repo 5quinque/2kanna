@@ -14,33 +14,30 @@
             {%- endif -%}
         </span>
     </div>
-    <div id="p{{ post.id }}" class="row collapse show p-2">
+    <div id="p{{ post.id }}" class="p-2">
+        <div class="post-body">
         {%- if post.imageName is not null -%}
-        <div class="col-20">
-            {%- if post.imageMimeType == 'video/webm' -%}
-                <video src="{{ vich_uploader_asset(post) }}" controls></video>
-            {% endif %}
+            <div class="col-20">
+                {%- if post.imageMimeType == 'video/webm' -%}
+                    <video src="{{ vich_uploader_asset(post) }}" controls></video>
+                {% endif %}
 
-            {%- if post.imageMimeType == 'image/jpeg' -%}
-            <a href="{{ post.imageName | imagine_filter('jpeg') | replace({'s3.eu-west-2.amazonaws.com/': '' }) }}" class="mr-3">
-                <img src="{{ post.imageName | imagine_filter('thumb') | replace({'s3.eu-west-2.amazonaws.com/': '' }) }}" class="post-image img-thumbnail" alt="{{ post.title }}">
-            </a>
-            {%- elseif post.imageMimeType starts with 'image/' -%}
-            <a href="{{ post.imageName | imagine_filter('img') | replace({'s3.eu-west-2.amazonaws.com/': '' }) }}" class="mr-3">
-                <img src="{{ post.imageName | imagine_filter('thumb') | replace({'s3.eu-west-2.amazonaws.com/': '' }) }}" class="post-image img-thumbnail" alt="{{ post.title }}">
-            </a>
-            {%- endif -%}
-                
-
-        </div>
+                {%- if post.imageMimeType == 'image/jpeg' -%}
+                <a href="{{ post.imageName | imagine_filter('jpeg') | replace({'s3.eu-west-2.amazonaws.com/': '' }) }}" class="mr-3">
+                    <img src="{{ post.imageName | imagine_filter('thumb') | replace({'s3.eu-west-2.amazonaws.com/': '' }) }}" class="post-image img-thumbnail" alt="{{ post.title }}">
+                </a>
+                {%- elseif post.imageMimeType starts with 'image/' -%}
+                <a href="{{ post.imageName | imagine_filter('img') | replace({'s3.eu-west-2.amazonaws.com/': '' }) }}" class="mr-3">
+                    <img src="{{ post.imageName | imagine_filter('thumb') | replace({'s3.eu-west-2.amazonaws.com/': '' }) }}" class="post-image img-thumbnail" alt="{{ post.title }}">
+                </a>
+                {%- endif -%}
+            </div>
         {%- endif -%}
-        <div class="col">
             <h5 class="post-title">{{ post.title }}</h5>
             <div class="m-0 message">
             {{ post.message|nl2br|codeblock|urltoanchor|crosslink|greentext }}
             </div>
         </div>
-    </div>
             {%- if childLevel is defined and childLevel == true -%}
             {%- elseif only3 is defined and only3 == true -%}
                 {%- set childLevel = true -%}
@@ -52,5 +49,6 @@
                     {{ include('post/_post.html.twig') }}
                 {%- endfor -%}
         {%- endif -%}
+    </div>
 </div>
 
