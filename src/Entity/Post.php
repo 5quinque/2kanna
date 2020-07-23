@@ -6,9 +6,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
@@ -55,6 +55,7 @@ class Post
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Post", mappedBy="parent_post")
+     * @ORM\OrderBy({"created" = "ASC"})
      */
     private $child_post;
 
@@ -153,7 +154,7 @@ class Post
 
     public function getRootParentPost(): self
     {
-        if ($this->getParentPost() === null) {
+        if (null === $this->getParentPost()) {
             return $this;
         }
 
@@ -249,9 +250,7 @@ class Post
         return $this->imageFile;
     }
 
-    /*
-     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $imageFile
-     */
+    // @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $imageFile
     public function setImageFile($imageFile): self
     {
         $this->imageFile = $imageFile;
@@ -261,41 +260,49 @@ class Post
 
     /**
      * @Assert\Callback
+     *
+     * @param mixed $payload
      */
     public function messageOrImageValidate(ExecutionContextInterface $context, $payload)
     {
-        if ($this->getMessage() === null && $this->getImageFile() === null) {
+        if (null === $this->getMessage() && null === $this->getImageFile()) {
             $context->buildViolation('Either an image or message is required')
-            ->atPath('message')
-            ->addViolation();
+                ->atPath('message')
+                ->addViolation()
+            ;
         }
-        if ($this->getMessage() !== null && strlen($this->getMessage()) < 2) {
+        if (null !== $this->getMessage() && strlen($this->getMessage()) < 2) {
             $context->buildViolation('Your message must be at least 2 characters long')
-            ->atPath('message')
-            ->addViolation();
+                ->atPath('message')
+                ->addViolation()
+            ;
         }
     }
 
     /**
      * @Assert\Callback
+     *
+     * @param mixed $payload
      */
     public function imageDimensionsValidate(ExecutionContextInterface $context, $payload)
     {
         if (is_null($this->imageFile)) {
             return;
         }
-        
+
         if (preg_match('/^image\//', $this->imageFile->getMimeType())) {
             list($imageWidth, $imageHeight) = getimagesize($this->imageFile->getPathname());
             if ($imageWidth < 1 || $imageHeight < 1) {
                 $context->buildViolation('Your image is too small')
-                ->atPath('imageFile')
-                ->addViolation();
+                    ->atPath('imageFile')
+                    ->addViolation()
+                ;
             }
             if ($imageWidth > 5000 || $imageHeight > 5000) {
                 $context->buildViolation('Your image is too big')
-                ->atPath('imageFile')
-                ->addViolation();
+                    ->atPath('imageFile')
+                    ->addViolation()
+                ;
             }
         }
     }
