@@ -23,10 +23,19 @@ class ImageCache
             $reply = $this->producer->sendCommand(
                 Commands::RESOLVE_CACHE,
                 new ResolveCache($post->getImageName(), ['thumb', 'jpeg']),
-                true
+                $this->needReply()
             );
 
-            $replyMessage = $reply->receive(20000); // wait for 20 sec
+            if ($reply) {
+                $reply->receive(10000); // wait for 10 sec
+            }
         }
+    }
+
+    private function needReply()
+    {
+        $envWait = strtolower($_ENV['WAIT_IMAGE_FILTER']);
+
+        return 'true' === $envWait || '1' === $envWait;
     }
 }
