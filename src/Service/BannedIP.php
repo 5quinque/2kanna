@@ -3,6 +3,7 @@ namespace App\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\BannedRepository;
+use App\Util\HelperUtil;
 
 class BannedIP
 {

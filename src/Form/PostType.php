@@ -16,6 +16,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use App\Service\GetWordFilters;
 use App\Service\BannedIP;
 use App\Service\FindPosts;
+use App\Util\HelperUtil;
 
 class PostType extends AbstractType
 {
