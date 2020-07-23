@@ -16,6 +16,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use App\Service\GetWordFilters;
 use App\Service\BannedIP;
 use App\Service\FindPosts;
+use App\Util\HelperUtil;
 
 class PostType extends AbstractType
 {
@@ -100,13 +101,7 @@ class PostType extends AbstractType
 
     public function cooldown(Post $post, ExecutionContextInterface $context)
     {
-        if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            $userIP = $_SERVER['HTTP_X_FORWARDED_FOR'];
-        } else {
-            $userIP = $_SERVER['REMOTE_ADDR'];
-        }
-
-        $posts = $this->findPosts->isPosterHot($userIP);
+        $posts = $this->findPosts->isPosterHot(HelperUtil::getIPAddress());
 
         if (!empty($posts)) {
             $context->buildViolation("You're posting too frequently")

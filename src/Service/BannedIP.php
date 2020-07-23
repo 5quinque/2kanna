@@ -3,6 +3,7 @@ namespace App\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\BannedRepository;
+use App\Util\HelperUtil;
 
 class BannedIP
 {
@@ -24,13 +25,7 @@ class BannedIP
 
     public function isRequesterBanned()
     {
-        if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            $userIP = $_SERVER['HTTP_X_FORWARDED_FOR'];
-        } else {
-            $userIP = $_SERVER['REMOTE_ADDR'];
-        }
-
-        $banned = $this->bannedRepository->findOneBy(["ipAddress" => $userIP]);
+        $banned = $this->bannedRepository->findOneBy(["ipAddress" => HelperUtil::getIPAddress()]);
 
         return $banned;
     }
