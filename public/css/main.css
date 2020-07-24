@@ -76,6 +76,10 @@ pre code {
   flex-basis: 100%;
 }
 
+.row .col-80 {
+  flex-basis: 80%;
+}
+
 .row .col-50 {
   flex-basis: 50%;
 }
@@ -268,6 +272,7 @@ ul.list-group {
 
 .post .post-body {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .post .post-head {
