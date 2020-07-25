@@ -13,4 +13,4 @@ vich_uploader:
             delete_on_update: true
             delete_on_remove: true
 
-            uri_prefix: 'https://%env(AWS_S3_ENDPOINT)%'
+            #uri_prefix: 'https://%env(S3_ENDPOINT)%'

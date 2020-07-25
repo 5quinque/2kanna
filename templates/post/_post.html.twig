@@ -23,12 +23,12 @@
                 {% endif %}
 
                 {%- if post.imageMimeType == 'image/jpeg' -%}
-                <a href="{{ post.imageName | imagine_filter('jpeg') | replace({'s3.eu-west-2.amazonaws.com/': '' }) }}" class="mr-3">
-                    <img src="{{ post.imageName | imagine_filter('thumb') | replace({'s3.eu-west-2.amazonaws.com/': '' }) }}" class="post-image img-thumbnail" alt="{{ post.title }}">
+                <a href="{{ post.imageName | imagine_filter('jpeg') }}" class="mr-3">
+                    <img src="{{ post.imageName | imagine_filter('thumb') }}" class="post-image img-thumbnail" alt="{{ post.title }}">
                 </a>
                 {%- elseif post.imageMimeType starts with 'image/' -%}
-                <a href="{{ post.imageName | imagine_filter('img') | replace({'s3.eu-west-2.amazonaws.com/': '' }) }}" class="mr-3">
-                    <img src="{{ post.imageName | imagine_filter('thumb') | replace({'s3.eu-west-2.amazonaws.com/': '' }) }}" class="post-image img-thumbnail" alt="{{ post.title }}">
+                <a href="{{ post.imageName | imagine_filter('img') }}" class="mr-3">
+                    <img src="{{ post.imageName | imagine_filter('thumb') }}" class="post-image img-thumbnail" alt="{{ post.title }}">
                 </a>
                 {%- endif -%}
             </div>

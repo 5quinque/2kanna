@@ -44,7 +44,8 @@ services:
         arguments:
             -
                 version: 'latest'
-                region: '%env(AWS_S3_REGION)%'
+                region: '%env(S3_REGION)%'
                 credentials:
-                    key: '%env(AWS_S3_KEY)%'
-                    secret: '%env(AWS_S3_SECRET)%'
+                    key: '%env(S3_KEY)%'
+                    secret: '%env(S3_SECRET)%'
+                endpoint: '%env(S3_ENDPOINT)%'
