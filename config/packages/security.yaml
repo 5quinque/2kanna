@@ -33,6 +33,8 @@ security:
                 secret:   '%kernel.secret%'
                 lifetime: 604800 # 1 week in seconds
                 path:     /
+                name: board
+                always_remember_me: true
             access_denied_handler: App\Security\AccessDeniedHandler
         default:
             anonymous: true
@@ -47,6 +49,8 @@ security:
                 secret:   '%kernel.secret%'
                 lifetime: 604800 # 1 week in seconds
                 path:     /
+                name: admin
+                always_remember_me: true
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication

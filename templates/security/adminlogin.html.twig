@@ -26,12 +26,6 @@
                             <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
                         </div>
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                        <div class="form-group btn-group-toggle" data-toggle="buttons">
-                            <label class="btn btn-dark btn-block active">
-                                <input type="checkbox" name="_remember_me">
-                                Remember me
-                            </label>
-                        </div>
                         <div class="input-group-append">
                             <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
                         </div>
