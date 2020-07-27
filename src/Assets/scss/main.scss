@@ -153,6 +153,13 @@ pre {
     border-left: 1px solid $primary;
     margin-left: 10px;
 }
+.border-right {
+    border-right: 1px solid $primary;
+    margin-right: 10px;
+}
+.border-thick {
+    border-width: 3px;
+}
 
 ul.nav {
     list-style: none;
@@ -355,11 +362,16 @@ ul.list-group {
     border: 0 solid #ced4da;
     border-radius: 0;
 }
+.form-control[readonly="true"] {
+    background-color: #d1d1d4;
+    color: #353535;
+}
 .input-group {
     position: relative;
     display: flex;
     flex-wrap: wrap;
     align-items: stretch;
+    justify-content: space-between;
     width: 100%;
 }
 .input-group > .form-control {

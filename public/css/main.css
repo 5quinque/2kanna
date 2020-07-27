@@ -153,6 +153,15 @@ pre code {
   margin-left: 10px;
 }
 
+.border-right {
+  border-right: 1px solid #50717b;
+  margin-right: 10px;
+}
+
+.border-thick {
+  border-width: 3px;
+}
+
 ul.nav {
   list-style: none;
   padding: 0;
@@ -361,11 +370,17 @@ ul.list-group {
   border-radius: 0;
 }
 
+.form-control[readonly="true"] {
+  background-color: #d1d1d4;
+  color: #353535;
+}
+
 .input-group {
   position: relative;
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
+  justify-content: space-between;
   width: 100%;
 }
 

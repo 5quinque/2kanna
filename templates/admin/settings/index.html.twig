@@ -1,0 +1,14 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Admin Dashboard - Word Filter
+{% endblock %}
+
+{% block adminsection %}
+<div class="row">
+    <div class="col-g">
+    {% for setting_form in forms %}
+        {% include('admin/settings/_setting_form.html.twig') %}
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

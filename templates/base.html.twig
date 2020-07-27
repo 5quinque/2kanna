@@ -8,7 +8,7 @@
         <link rel="icon" href="{{ asset('/vi.png') }}">
         <title>
             {%- block title -%}
-                {{- sitename -}}
+                {{ setting('sitename') }}
             {%- endblock -%}
         </title>
         {%- block stylesheets -%}{%- endblock -%}
@@ -18,9 +18,9 @@
             <div class="page-header text-center">
                 <a href="{{ path('board_index') }}">
                     <img src="{{ asset('/vi.png') }}" width="120px">
-                    <h1>{{ sitename }}</h1>
+                    <h1>{{ setting('sitename') }}</h1>
                 </a>
-                <p class="lead text-muted">{{ leadtext }}</p>
+                <p class="lead text-muted">{{ setting('leadtext') }}</p>
             </div>
             <hr>
             {%- for label, messages in app.flashes -%}

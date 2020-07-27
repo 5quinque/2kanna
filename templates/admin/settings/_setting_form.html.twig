@@ -1,0 +1,22 @@
+{{ form_start(setting_form) }}
+{{ form_errors(setting_form) }}
+<div class="form-group">
+    <div class="form-row">
+        <div class="col">
+            <div class="input-group">
+                <div class="col-30 border-right border-thick">
+                {{ form_widget(setting_form.name) }}
+                </div>
+                {% if setting_form.value is defined %}
+                {{ form_widget(setting_form.value) }}
+                {% else %}
+                {{ form_widget(setting_form.value_bool) }}
+                {% endif %}
+                <div class="input-group-append">
+                    <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{ form_end(setting_form) }}

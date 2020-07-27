@@ -10,10 +10,12 @@ use Liip\ImagineBundle\Async\ResolveCache;
 class ImageCache
 {
     private $producer;
+    private $settingUtil;
 
-    public function __construct(ProducerInterface $producer)
+    public function __construct(ProducerInterface $producer, SettingUtil $settingUtil)
     {
         $this->producer = $producer;
+        $this->settingUtil = $settingUtil;
     }
 
     public function queueImageFilter(Post $post)
@@ -22,7 +24,7 @@ class ImageCache
         if (preg_match('/^image\//', $post->getImageMimeType())) {
             $reply = $this->producer->sendCommand(
                 Commands::RESOLVE_CACHE,
-                new ResolveCache($post->getImageName(), ['thumb', 'jpeg']),
+                new ResolveCache($post->getImageName(), ['thumb', 'img']),
                 $this->needReply()
             );
 
@@ -34,8 +36,6 @@ class ImageCache
 
     private function needReply()
     {
-        $envWait = strtolower($_ENV['WAIT_IMAGE_FILTER']);
-
-        return 'true' === $envWait || '1' === $envWait;
+        return $this->settingUtil->setting('wait_image_filter');
     }
 }
