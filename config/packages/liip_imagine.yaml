@@ -8,8 +8,6 @@ liip_imagine:
     driver: "imagick"
 
     resolvers:
-        # https://symfony.com/doc/2.0/bundles/LiipImagineBundle/cache-resolver/aws_s3.html
-
         s3_cache:
             flysystem:
                 filesystem_service: oneup_flysystem.s3_filesystem
@@ -23,18 +21,11 @@ liip_imagine:
 
 
     filter_sets:
-        # Strip EXIF information
-        jpeg:
-            cache: s3_cache
-            quality: 75
-            filters:
-                strip: ~
-            # post_processors:
-            #     mozjpeg: { quality: 70 }
-
         img:
             cache: s3_cache
             animated: true
+            filters:
+                strip: ~
 
         # the name of the "filter set"
         thumb:

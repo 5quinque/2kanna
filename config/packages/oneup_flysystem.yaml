@@ -11,8 +11,9 @@ oneup_flysystem:
                 client: acme.s3_client
                 bucket: '%env(S3_BUCKET)%'
                 prefix: ~
-                options:
-                    ACL: 'public-read'
+                # Un-comment below to have original image public
+                # options:
+                #     ACL: 'public-read'
         
     filesystems:
         s3:

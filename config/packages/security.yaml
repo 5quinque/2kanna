@@ -31,7 +31,7 @@ security:
                 path: board_logout
             remember_me:
                 secret:   '%kernel.secret%'
-                lifetime: 604800 # 1 week in seconds
+                lifetime: 31536000 # 1 year in seconds
                 path:     /
                 name: board
                 always_remember_me: true
@@ -47,7 +47,7 @@ security:
                 path: admin_logout
             remember_me:
                 secret:   '%kernel.secret%'
-                lifetime: 604800 # 1 week in seconds
+                lifetime: 31536000 # 1 year in seconds
                 path:     /
                 name: admin
                 always_remember_me: true
@@ -61,8 +61,8 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/admin/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: '^/admin/login$', roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: '^/admin/users', roles: ROLE_ADMIN }
         - { path: '^/admin', roles: ROLE_USER }
-        - { path: ^/boardadmin/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: '^/boardadmin/.*/edit', roles: ROLE_BOARDADMIN}
+        - { path: '^/boardadmin/login$', roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: '^/boardadmin', roles: ROLE_BOARDADMIN}

@@ -22,11 +22,7 @@
                     <video class="post-video" src="{{ vich_uploader_asset(post) }}" controls></video>
                 {% endif %}
 
-                {%- if post.imageMimeType == 'image/jpeg' -%}
-                <a href="{{ post.imageName | imagine_filter('jpeg') }}" class="mr-3">
-                    <img src="{{ post.imageName | imagine_filter('thumb') }}" class="post-image img-thumbnail" alt="{{ post.title }}">
-                </a>
-                {%- elseif post.imageMimeType starts with 'image/' -%}
+                {%- if post.imageMimeType starts with 'image/' -%}
                 <a href="{{ post.imageName | imagine_filter('img') }}" class="mr-3">
                     <img src="{{ post.imageName | imagine_filter('thumb') }}" class="post-image img-thumbnail" alt="{{ post.title }}">
                 </a>
