@@ -25,15 +25,18 @@ class DeleteOldPostsCommand extends Command
     {
         $this
             ->setDescription('Remove posts not updated for more than 7 days')
-            ->setHelp('This command deletes old posts');
+            ->setHelp('This command deletes old posts')
+        ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln('Deleting Old Posts');
         $output->writeln('==================');
 
         $serviceOutput = $this->service->findOldPosts();
         $output->writeln($serviceOutput);
+
+        return Command::SUCCESS;
     }
 }

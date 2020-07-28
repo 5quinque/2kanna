@@ -25,15 +25,18 @@ class DeleteOldBansCommand extends Command
     {
         $this
             ->setDescription('Remove bans')
-            ->setHelp('This command deletes old bans');
+            ->setHelp('This command deletes old bans')
+        ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln('Deleting Old Bans');
         $output->writeln('=================');
 
         $serviceOutput = $this->service->findOldBans();
         $output->writeln($serviceOutput);
+
+        return Command::SUCCESS;
     }
 }
