@@ -6,6 +6,7 @@ namespace App\Controller\Admin;
 
 use App\Form\SettingType;
 use App\Repository\SettingRepository;
+use App\Util\SettingUtil;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,7 +16,7 @@ class AdminSettingsController extends AbstractController
     /**
      * @Route("/admin/settings", name="admin_settings")
      */
-    public function index(Request $request, SettingRepository $repository)
+    public function index(Request $request, SettingRepository $repository, SettingUtil $util)
     {
         $settings = $repository->findBy([], ['placement' => 'ASC']);
         $forms = [];
@@ -36,6 +37,9 @@ class AdminSettingsController extends AbstractController
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($setting);
                 $entityManager->flush();
+
+                // Clear cache
+                $util->clearSetting($setting->getName());
 
                 $this->addFlash(
                     'success',

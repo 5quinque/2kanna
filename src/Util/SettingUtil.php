@@ -44,4 +44,9 @@ class SettingUtil
             return null;
         });
     }
+
+    public function clearSetting(string $name)
+    {
+        $this->cache->delete($name);
+    }
 }
