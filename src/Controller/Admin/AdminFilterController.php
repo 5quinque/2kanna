@@ -33,7 +33,7 @@ class AdminFilterController extends AbstractController
 
         $wordFilterStrings = $wordFilterRepository->findAll();
 
-        return $this->render('admin/wordfilter.html.twig', [
+        return $this->render('admin/wordfilter/index.html.twig', [
             'word_filter_strings' => $wordFilterStrings,
             'word_filter_form' => $wordFilterForm->createView(),
         ]);

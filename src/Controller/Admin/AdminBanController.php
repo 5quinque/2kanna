@@ -33,7 +33,7 @@ class AdminBanController extends AbstractController
 
         $bannedIPs = $bannedRepository->findAll();
 
-        return $this->render('admin/banned.html.twig', [
+        return $this->render('admin/banned/index.html.twig', [
             'banned_ips' => $bannedIPs,
             'banned_form' => $bannedForm->createView(),
         ]);

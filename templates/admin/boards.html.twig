@@ -1,0 +1,29 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Admin Dashboard - Word Filter
+{% endblock %}
+
+{% block adminsection %}
+    <div class="row">
+        <div class="col-g">
+            <ul class="boards-list">
+                <li class="d-flex space-between">
+                    <span>Board Name</span>
+                    <span>Post Count</span>
+                    <span>Action</span>
+                </li>
+                {% for board in boards %}
+                <li class="d-flex space-between">
+                    <span>{{ board.name }}</span>
+                    <span>{{ postCount[board.name] }}</span>
+                    <div>
+                        {{ include('board_admin/_delete_form.html.twig') }}
+                    </div>
+                </li>
+                {% else %}
+                    <li>No boards found.<li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

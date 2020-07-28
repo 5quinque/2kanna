@@ -6,7 +6,7 @@
 {% block adminsection %}
     <div class="row">
         <div class="col-g">
-            {{ include('admin/_banned_form.html.twig') }}
+            {{ include('admin/banned/_banned_form.html.twig') }}
         </div>
         <div class="col-g border-left">
             <ul class="list-group banned-list">
@@ -17,7 +17,7 @@
                                 {{ banned.banTime|dt2clock }}</abbr>
                             {{ banned.reason }}
                         </span>
-                        {{ include('admin/_unban_form.html.twig') }}
+                        {{ include('admin/banned/_unban_form.html.twig') }}
                     </li>
                 {% else %}
                     <li class="list-group-item">
