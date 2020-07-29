@@ -2,16 +2,14 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Component\HttpFoundation\Response;
-use App\Form\Board\BoardPasswordType;
-use App\Form\Board\BoardNameType;
-use App\Form\Board\BoardType;
 use App\Entity\Board;
+use App\Form\Board\BoardNameType;
+use App\Form\Board\BoardPasswordType;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @Route("/boardadmin")
@@ -29,19 +27,14 @@ class BoardAdminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $board->setPassword($passwordEncoder->encodePassword(
-                $board,
-                $board->getPassword()
-            ));
-
             $this->getDoctrine()->getManager()->flush();
 
             $this->addFlash(
                 'success',
-                $board->getName() . " updated"
+                $board->getName().' updated'
             );
 
-            return $this->redirectToRoute("board_edit", ["name" => $board->getName()]);
+            return $this->redirectToRoute('board_edit', ['name' => $board->getName()]);
         }
 
         return $this->render('board_admin/index.html.twig', [
@@ -70,7 +63,7 @@ class BoardAdminController extends AbstractController
 
             $this->addFlash(
                 'success',
-                $board->getName() . " password updated"
+                $board->getName().' password updated'
             );
         }
 
@@ -94,7 +87,23 @@ class BoardAdminController extends AbstractController
         }
 
         return $this->render('board_admin/denied.html.twig', [
-            'user' => $user
+            'user' => $user,
         ]);
+    }
+
+    /**
+     * @Route("/{name}", name="board_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, Board $board): Response
+    {
+        $this->denyAccessUnlessGranted('BOARD_EDIT', $board);
+
+        if ($this->isCsrfTokenValid('delete'.$board->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($board);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('board_index');
     }
 }

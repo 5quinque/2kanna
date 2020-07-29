@@ -34,7 +34,7 @@ class BoardController extends AbstractController
     /**
      * @Route("/new", name="board_new", methods={"GET","POST"})
      */
-    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder, BoardUtil $boardUtil): Response
     {
         $board = new Board();
         $form = $this->createForm(NewBoardType::class, $board);
@@ -49,6 +49,8 @@ class BoardController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($board);
             $entityManager->flush();
+
+            $boardUtil->clearSetting('boardlist');
 
             return $this->redirectToRoute('board_index');
         }

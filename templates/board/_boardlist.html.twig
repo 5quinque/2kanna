@@ -1,0 +1,16 @@
+<ul class="boards-list">
+    <li class="d-flex space-between">
+        <span>Board Name</span>
+        <span>Post Count</span>
+    </li>
+    {% for board in boards %}
+    <li class="">
+        <a href="{{ path('board_show', {'name': board.name}) }}" class="list-group-item list-group-item-action mb-2 d-flex space-between">
+            <span>{{ board.name }}</span>
+            <span>{{ postCount[board.name] }}</span>
+        </a>
+    </li>
+    {% else %}
+        <li>No boards found.<li>
+    {% endfor %}
+</ul>

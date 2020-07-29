@@ -19,7 +19,6 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use Symfony\Component\Security\Guard\PasswordAuthenticatedInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 class BoardLoginFormAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface
 {
@@ -85,6 +84,8 @@ class BoardLoginFormAuthenticator extends AbstractFormLoginAuthenticator impleme
 
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
+     *
+     * @param mixed $credentials
      */
     public function getPassword($credentials): ?string
     {
@@ -102,16 +103,24 @@ class BoardLoginFormAuthenticator extends AbstractFormLoginAuthenticator impleme
 
     protected function getLoginUrl()
     {
-        return $this->urlGenerator->generate(self::LOGIN_ROUTE, ['name' => $this->getBoardName()]);
+        $boardName = $this->getBoardName();
+
+        if (!$boardName) {
+            throw new CustomUserMessageAuthenticationException('Board could not be found.');
+        }
+
+        return $this->urlGenerator->generate(self::LOGIN_ROUTE, ['name' => $boardName]);
     }
 
     private function getBoardName()
     {
         $pathInfo = $this->urlGenerator->getContext()->getPathInfo();
 
-        dump($pathInfo);
-
         preg_match('/boardadmin\/([^\/]+)\/?/', $pathInfo, $matches);
+
+        if (!$matches) {
+            return false;
+        }
 
         return $matches[1];
     }
