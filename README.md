@@ -23,6 +23,15 @@ heroku addons:create cloudamqp:lemur --as=ENQUEUE
 heroku addons:create scheduler:standard
 ```
 
+### CloudFlare Proxy
+
+If you're using CloudFlare to proxy requests, you'll need to set the `TRUSTED_PROXIES` variable, so we can securely get the user's IP address
+
+```bash
+TRUSTED_PROXIES=$(curl -s https://www.cloudflare.com/ips-v4 https://www.cloudflare.com/ips-v6 | tr '\n' ',')
+heroku config:set TRUSTED_PROXIES=$TRUSTED_PROXIES --app textboard 
+```
+
 Apache/PHP-FPM Deployment
 -------------------------
 
@@ -84,7 +93,7 @@ To ensure thumbnails and other filters are applied to images and a clean URL is 
 php bin/console enqueue:consume --setup-broker
 ```
 
-If you're using Heroku, this will should be running as defined in the Procfile
+If you're using Heroku, this should be running as defined in the Procfile
 
 
 

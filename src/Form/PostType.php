@@ -2,21 +2,19 @@
 
 namespace App\Form;
 
-use App\Entity\Post;
 use App\Entity\Board;
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type\HiddenEntityType;
-use Vich\UploaderBundle\Form\Type\VichImageType;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use App\Service\GetWordFilters;
+use App\Entity\Post;
 use App\Service\BannedIP;
 use App\Service\FindPosts;
-use App\Util\HelperUtil;
+use App\Service\GetWordFilters;
+use Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type\HiddenEntityType;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class PostType extends AbstractType
 {
@@ -44,12 +42,12 @@ class PostType extends AbstractType
             ])
             ->add('parent_post', HiddenEntityType::class, [
                 'class' => Post::class,
-                'required' => false
+                'required' => false,
             ])
             ->add('message', null, [
                 'attr' => ['placeholder' => 'Message', 'tabindex' => 2, 'rows' => 5],
                 'label' => false,
-                'required' => true
+                'required' => true,
             ])
             ->add('imageFile', VichImageType::class, [
                 'attr' => ['placeholder' => 'Choose Image'],
@@ -60,18 +58,19 @@ class PostType extends AbstractType
                 'download_uri' => true,
                 'image_uri' => true,
                 'asset_helper' => true,
-            ]);
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => Post::class,
-            'constraints' => array(
-                new Assert\Callback(array($this, 'messageFilter')),
-                new Assert\Callback(array($this, 'bannedFilter')),
-                new Assert\Callback(array($this, 'cooldown'))
-            )
+            'constraints' => [
+                new Assert\Callback([$this, 'messageFilter']),
+                new Assert\Callback([$this, 'bannedFilter']),
+                new Assert\Callback([$this, 'cooldown']),
+            ],
         ]);
     }
 
@@ -81,8 +80,9 @@ class PostType extends AbstractType
         foreach ($badWords as $word) {
             if (preg_match($word->getBadWord(), $post->getMessage())) {
                 $context->buildViolation('Choose something more interesting to say.')
-                ->atPath('message')
-                ->addViolation();
+                    ->atPath('message')
+                    ->addViolation()
+                ;
 
                 return false;
             }
@@ -95,18 +95,22 @@ class PostType extends AbstractType
         if ($banned) {
             $context->buildViolation("Your IP address is banned. You are unable to post until {$banned->getUnbanTime()->format('Y-m-d H:i:s')}")
                 ->atPath('message')
-                ->addViolation();
+                ->addViolation()
+            ;
         }
     }
 
     public function cooldown(Post $post, ExecutionContextInterface $context)
     {
-        $posts = $this->findPosts->isPosterHot(HelperUtil::getIPAddress());
+        $request = Request::createFromGlobals();
+
+        $posts = $this->findPosts->isPosterHot($request->getClientIp());
 
         if (!empty($posts)) {
             $context->buildViolation("You're posting too frequently")
                 ->atPath('message')
-                ->addViolation();
+                ->addViolation()
+            ;
         }
     }
 }

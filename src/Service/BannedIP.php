@@ -1,9 +1,10 @@
 <?php
+
 namespace App\Service;
 
-use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\BannedRepository;
-use App\Util\HelperUtil;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 class BannedIP
 {
@@ -19,15 +20,15 @@ class BannedIP
     public function printDebug(array $debug)
     {
         foreach ($debug as $d) {
-            print "$d";
+            echo "{$d}";
         }
     }
 
     public function isRequesterBanned()
     {
-        $banned = $this->bannedRepository->findOneBy(["ipAddress" => HelperUtil::getIPAddress()]);
+        $request = Request::createFromGlobals();
 
-        return $banned;
+        return $this->bannedRepository->findOneBy(['ipAddress' => $request->getClientIp()]);
     }
 
     public function findOldBans()

@@ -6,6 +6,7 @@ use App\Entity\Post;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
+use Symfony\Component\HttpFoundation\Request;
 
 class PostUtil
 {
@@ -35,9 +36,11 @@ class PostUtil
 
     public function createPost(Post $post)
     {
+        $request = Request::createFromGlobals();
+
         $post->setCreated(new DateTime());
 
-        $post->setIpAddress(HelperUtil::getIPAddress());
+        $post->setIpAddress($request->getClientIp());
 
         // We will lose access to Post::imageFile so need to save the mimetype
         if ($post->getImageFile()) {
