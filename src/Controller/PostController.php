@@ -2,48 +2,45 @@
 
 namespace App\Controller;
 
+use App\Entity\Board;
 use App\Entity\Post;
 use App\Form\PostType;
 use App\Util\PostUtil;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/post")
+ * @Route("/")
  */
 class PostController extends AbstractController
 {
     /**
-     * @Route("/{id}/{childId?}", methods={"GET", "POST"}, requirements={"id"="\d+", "childId"="\d+"})
+     * @Route("/{name}/p/{id}",
+     * name="post_show",
+     * methods={"GET", "POST"},
+     * requirements={"id"="\d+"})
+     * @ParamConverter("board", options={"mapping": {"name": "name"}})
+     * @ParamConverter("post", options={"mapping": {"id": "id"}})
      */
-    public function show(Post $post, int $childId = null, Request $request, PostUtil $postUtil): Response
+    public function show(Board $board, Post $post, Request $request, PostUtil $postUtil): Response
     {
         $childPost = new Post();
         $childPost->setBoard($post->getBoard());
         $childPost->setParentPost($post);
 
         $form = $this->createForm(PostType::class, $childPost);
-
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() &&
-            $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $postUtil->createPost($childPost);
-
-            $rootPost = $childPost->getRootParentPost();
-
-            return $this->redirectToRoute('post_show', [
-                'name' => $childPost->getBoard()->getName(),
-                'id' => $rootPost->getId(),
-                'childId' => $rootPost->getId() == $childPost->getId() ? null : $childPost->getId(),
-            ]);
         }
 
         return $this->render('post/show.html.twig', [
             'post' => $post->getRootParentPost(),
-            'new_post_id' => $childId,
+            'new_post_id' => $childPost->getId(),
             'form' => $form->createView(),
         ]);
     }
