@@ -32,6 +32,8 @@ class PostController extends AbstractController
         }
 
         dump(
+            $request,
+            $request->isFromTrustedProxy(),
             $request->getTrustedProxies(),
             $request->getClientIp(),
             $request->getClientIps(),
