@@ -31,15 +31,6 @@ class PostController extends AbstractController
             throw $this->createNotFoundException('Post Not Found');
         }
 
-        dump(
-            $request,
-            $request->isFromTrustedProxy(),
-            $request->getTrustedProxies(),
-            $request->getClientIp(),
-            $request->getClientIps(),
-            $_SERVER
-        );
-
         $childPost = new Post();
         $childPost->setBoard($post->getBoard());
         $childPost->setParentPost($post);
