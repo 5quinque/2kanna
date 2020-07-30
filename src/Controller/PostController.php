@@ -27,6 +27,17 @@ class PostController extends AbstractController
      */
     public function show(Board $board, Post $post, Request $request, PostUtil $postUtil): Response
     {
+        if ($board != $post->getBoard()) {
+            throw $this->createNotFoundException('Post Not Found');
+        }
+
+        dump(
+            $request->getTrustedProxies(),
+            $request->getClientIp(),
+            $request->getClientIps(),
+            $_SERVER
+        );
+
         $childPost = new Post();
         $childPost->setBoard($post->getBoard());
         $childPost->setParentPost($post);
