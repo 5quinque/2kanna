@@ -18,14 +18,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class PostController extends AbstractController
 {
     /**
-     * @Route("/{name}/p/{id}",
+     * @Route("/{board}/p/{post}/{child?}",
      * name="post_show",
      * methods={"GET", "POST"},
      * requirements={"id"="\d+"})
-     * @ParamConverter("board", options={"mapping": {"name": "name"}})
-     * @ParamConverter("post", options={"mapping": {"id": "id"}})
+     * @ParamConverter("board", options={"mapping": {"board": "name"}})
+     * @ParamConverter("post", options={"mapping": {"post": "id"}})
+     * @ParamConverter("child", options={"mapping": {"child": "id"}})
      */
-    public function show(Board $board, Post $post, Request $request, PostUtil $postUtil): Response
+    public function show(Board $board, Post $post, Post $child = null, Request $request, PostUtil $postUtil): Response
     {
         if ($board != $post->getBoard()) {
             throw $this->createNotFoundException('Post Not Found');
@@ -40,11 +41,17 @@ class PostController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $postUtil->createPost($childPost);
+
+            return $this->redirectToRoute('post_show', [
+                'board' => $board->getName(),
+                'post' => $post->getRootParentPost(),
+                'child' => $childPost->getId(),
+            ]);
         }
 
         return $this->render('post/show.html.twig', [
             'post' => $post->getRootParentPost(),
-            'new_post_id' => $childPost->getId(),
+            'child' => $child ?? new Post(),
             'form' => $form->createView(),
         ]);
     }
