@@ -18,13 +18,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class PostController extends AbstractController
 {
     /**
-     * @Route("/{board}/p/{post}/{child?}",
+     * @Route("/{board}/{post<\d+>}/{child<\d+>?}",
      * name="post_show",
-     * methods={"GET", "POST"},
-     * requirements={"id"="\d+"})
+     * methods={"GET", "POST"})
      * @ParamConverter("board", options={"mapping": {"board": "name"}})
-     * @ParamConverter("post", options={"mapping": {"post": "id"}})
-     * @ParamConverter("child", options={"mapping": {"child": "id"}})
      */
     public function show(Board $board, Post $post, Post $child = null, Request $request, PostUtil $postUtil): Response
     {

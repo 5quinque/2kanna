@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminBanController extends AbstractController
 {
     /**
-     * @Route("/admin/bans", name="admin_banned")
+     * @Route("/admin/bans", name="admin_banned", priority=2)
      */
     public function banned(BannedRepository $bannedRepository, Request $request, AdminUtil $adminUtil): Response
     {

@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminBoardController extends AbstractController
 {
     /**
-     * @Route("/admin/boards", name="admin_boards")
+     * @Route("/admin/boards", name="admin_boards", priority=2)
      */
     public function banned(BoardRepository $board, PostRepository $post): Response
     {

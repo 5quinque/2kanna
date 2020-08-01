@@ -62,7 +62,7 @@ class BoardController extends AbstractController
     }
 
     /**
-     * @Route("/{name}/{page_no<\d+>?1}", name="board_show", methods={"GET", "POST"})
+     * @Route("/{name}/{page<page>?page}/{page_no<\d+>?1}", name="board_show", methods={"GET", "POST"})
      */
     public function show(Board $board, int $page_no, Request $request, PostRepository $postRepository, PostUtil $postUtil): Response
     {
@@ -72,11 +72,10 @@ class BoardController extends AbstractController
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() &&
-            $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $postUtil->createPost($post);
 
-            return $this->redirectToRoute('post_show', ['name' => $board->getName(), 'id' => $post->getId()]);
+            return $this->redirectToRoute('post_show', ['board' => $board->getName(), 'post' => $post->getId()]);
         }
 
         return $this->render('board/show.html.twig', [
