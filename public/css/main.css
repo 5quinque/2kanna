@@ -519,3 +519,8 @@ label {
   color: #fff;
   padding: 15px;
 }
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 1s linear;
+}
