@@ -25,10 +25,10 @@
             <hr>
             {%- for label, messages in app.flashes -%}
                 {%- for message in messages -%}
-                    <div class="row">
+                    <div class="row alert">
                         <div class="col-100">
-                            <div class="alert alert-dismissible alert-{{ label }} fade show" role="alert">
-                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <div class="alert-dismissible alert-{{ label }}" role="alert">
+                                <button type="button" class="alert-close" data-dismiss="alert">&times;</button>
                                 {{ message }}
                             </div>
                         </div>
@@ -52,6 +52,7 @@
         <script src="{{ asset('js/p.min.js') }}"></script>
         <script src="{{ asset('js/i.min.js') }}"></script>
         <script src="{{ asset('js/collapse.min.js') }}"></script>
+        <script src="{{ asset('js/alert.min.js') }}"></script>
         {%- block javascripts -%}{%- endblock -%}
     </body>
 </html>
