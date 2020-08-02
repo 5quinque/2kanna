@@ -14,19 +14,22 @@ class SettingFixtures extends Fixture
         $sitename->setName('sitename');
         $sitename->setValue('TextBoard');
         $sitename->setType('text');
+        $sitename->setSection('Site');
         $sitename->setPlacement(0);
 
         $leadtext = new Setting();
         $leadtext->setName('leadtext');
         $leadtext->setValue('~');
         $leadtext->setType('text');
+        $leadtext->setSection('Site');
         $leadtext->setPlacement(1);
 
         $waitImageFilter = new Setting();
         $waitImageFilter->setName('wait_image_filter');
         $waitImageFilter->setValue('true');
         $waitImageFilter->setType('checkbox');
-        $waitImageFilter->setPlacement(2);
+        $waitImageFilter->setSection('Uploads');
+        $waitImageFilter->setPlacement(10);
 
         $manager->persist($sitename);
         $manager->persist($leadtext);

@@ -42,6 +42,11 @@ class Setting
      */
     private $value_bool;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $section;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +108,18 @@ class Setting
     public function setValueBool(?bool $value_bool): self
     {
         $this->value_bool = $value_bool;
+
+        return $this;
+    }
+
+    public function getSection(): ?string
+    {
+        return $this->section;
+    }
+
+    public function setSection(?string $section): self
+    {
+        $this->section = $section;
 
         return $this;
     }

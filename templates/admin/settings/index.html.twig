@@ -6,7 +6,12 @@
 {% block adminsection %}
 <div class="row">
     <div class="col-g">
+    {% set section = "" %}
     {% for setting_form in forms %}
+        {% if section != setting_form.vars.data.section %}
+            {% set section = setting_form.vars.data.section %}
+            <h3>{{ section }}</h3>
+        {% endif %}
         {% include('admin/settings/_setting_form.html.twig') %}
     {% endfor %}
     </div>
