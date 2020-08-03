@@ -5,6 +5,10 @@
     -
     {{ board.name }}
 {% endblock %}
+{%- block stylesheets -%}
+    {{ parent() }}
+    {{ encore_entry_link_tags('board') }}
+{%- endblock -%}
 
 {% block body %}
     <div class="row">
@@ -43,5 +47,6 @@
 <a href="{{ path('board_edit', {'name': board.name}) }}">Edit</a>
 {%- endblock -%}
 {% block javascripts %}
-    <script src="{{ asset('js/upload.min.js') }}"></script>
+    {{ parent() }}
+    {{ encore_entry_script_tags('board') }}
 {% endblock %}

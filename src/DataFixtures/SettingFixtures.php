@@ -26,7 +26,7 @@ class SettingFixtures extends Fixture
 
         $waitImageFilter = new Setting();
         $waitImageFilter->setName('wait_image_filter');
-        $waitImageFilter->setValue('true');
+        $waitImageFilter->setValueBool(true);
         $waitImageFilter->setType('checkbox');
         $waitImageFilter->setSection('Uploads');
         $waitImageFilter->setPlacement(10);
