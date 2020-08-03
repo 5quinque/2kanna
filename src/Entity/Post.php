@@ -106,6 +106,11 @@ class Post
      */
     private $imageMimeType;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
+
     public function __construct()
     {
         $this->child_post = new ArrayCollection();
@@ -327,6 +332,18 @@ class Post
     public function setImageMimeType(?string $imageMimeType): self
     {
         $this->imageMimeType = $imageMimeType;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

@@ -7,6 +7,7 @@ use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Uid\Uuid;
 
 class PostUtil
 {
@@ -37,10 +38,11 @@ class PostUtil
     public function createPost(Post $post)
     {
         $request = Request::createFromGlobals();
+        $uuid = Uuid::v4();
 
         $post->setCreated(new DateTime());
-
         $post->setIpAddress($request->getClientIp());
+        $post->setSlug($uuid->toBase58());
 
         // We will lose access to Post::imageFile so need to save the mimetype
         if ($post->getImageFile()) {
