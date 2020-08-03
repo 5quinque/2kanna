@@ -3,15 +3,15 @@
     <head>
         <meta charset="UTF-8">
         {%- include '_analytics.html.twig' ignore missing -%}
-        <link href="{{ asset('/css/p.css') }}" rel="stylesheet">
-        <link href="{{ asset('/css/main.css') }}" rel="stylesheet">
         <link rel="icon" href="{{ asset('/vi.png') }}">
         <title>
             {%- block title -%}
                 {{ setting('sitename') }}
             {%- endblock -%}
         </title>
-        {%- block stylesheets -%}{%- endblock -%}
+        {%- block stylesheets -%}
+            {{ encore_entry_link_tags('app') }}
+        {%- endblock -%}
     </head>
     <body>
         <div class="container pt-4">
@@ -49,10 +49,8 @@
             {%- block footer -%}{%- endblock -%}
             </div>
         </div>
-        <script src="{{ asset('js/p.min.js') }}"></script>
-        <script src="{{ asset('js/i.min.js') }}"></script>
-        <script src="{{ asset('js/collapse.min.js') }}"></script>
-        <script src="{{ asset('js/alert.min.js') }}"></script>
-        {%- block javascripts -%}{%- endblock -%}
+        {%- block javascripts -%}
+            {{ encore_entry_script_tags('app') }}
+        {%- endblock -%}
     </body>
 </html>

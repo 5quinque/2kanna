@@ -5,6 +5,10 @@
     -
     {{ post.board.name }} {{ post.title }}
 {% endblock %}
+{%- block stylesheets -%}
+    {{ parent() }}
+    {{ encore_entry_link_tags('post') }}
+{%- endblock -%}
 
 {% set reply_id = app.request.attributes.get('post').id %}
 
@@ -33,6 +37,6 @@
     </div>
 {% endblock %}
 {% block javascripts %}
-    <script src="{{ asset('js/reply.min.js') }}"></script>
-    <script src="{{ asset('js/upload.min.js') }}"></script>
+    {{ parent() }}
+    {{ encore_entry_script_tags('post') }}
 {% endblock %}
