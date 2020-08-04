@@ -75,7 +75,7 @@ class BoardController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $postUtil->createPost($post);
 
-            return $this->redirectToRoute('post_show', ['board' => $board->getName(), 'post' => $post->getId()]);
+            return $this->redirectToRoute('post_show', ['board' => $board->getName(), 'post' => $post->getSlug()]);
         }
 
         return $this->render('board/show.html.twig', [
