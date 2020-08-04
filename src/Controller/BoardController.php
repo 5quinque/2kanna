@@ -73,7 +73,7 @@ class BoardController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $postUtil->createPost($post);
+            $postUtil->createPost($post, $request);
 
             return $this->redirectToRoute('post_show', ['board' => $board->getName(), 'post' => $post->getSlug()]);
         }

@@ -35,9 +35,8 @@ class PostUtil
         $this->em->flush();
     }
 
-    public function createPost(Post $post)
+    public function createPost(Post $post, Request $request)
     {
-        $request = Request::createFromGlobals();
         $uuid = Uuid::v4();
 
         $post->setCreated(new DateTime());
