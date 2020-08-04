@@ -14,11 +14,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminBanController extends AbstractController
 {
     /**
-     * @Route("/admin/bans", name="admin_banned", priority=2)
+     * @Route("/admin/ban/{ipAddress}", name="admin_banned", defaults={"ipAddress": null}, priority=2)
      */
-    public function banned(BannedRepository $bannedRepository, Request $request, AdminUtil $adminUtil): Response
+    public function banned(string $ipAddress = null, BannedRepository $bannedRepository, Request $request, AdminUtil $adminUtil): Response
     {
         $banned = new Banned();
+
+        if ($ipAddress) {
+            $banned->setIpAddress($ipAddress);
+        }
+
         $bannedForm = $this->createForm(BannedType::class, $banned);
         $bannedForm->handleRequest($request);
 
