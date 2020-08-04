@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Repository\BannedRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\IpUtils;
 use Symfony\Component\HttpFoundation\Request;
 
 class BannedIP
@@ -28,7 +29,20 @@ class BannedIP
     {
         $request = Request::createFromGlobals();
 
-        return $this->bannedRepository->findOneBy(['ipAddress' => $request->getClientIp()]);
+        /**
+         * Following code is similar to IpUtils::checkIp, but returns the Banned Entity.
+         */
+        $requestIp = $request->getClientIp();
+
+        $method = substr_count($requestIp, ':') > 1 ? 'checkIp6' : 'checkIp4';
+
+        foreach ($this->bannedRepository->findAllArr() as $ip) {
+            if (IpUtils::$method($requestIp, $ip)) {
+                return $this->bannedRepository->findOneBy(['ipAddress' => $ip]);
+            }
+        }
+
+        return false;
     }
 
     public function findOldBans()

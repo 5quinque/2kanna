@@ -7,8 +7,8 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Banned|null find($id, $lockMode = null, $lockVersion = null)
- * @method Banned|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|Banned find($id, $lockMode = null, $lockVersion = null)
+ * @method null|Banned findOneBy(array $criteria, array $orderBy = null)
  * @method Banned[]    findAll()
  * @method Banned[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
@@ -26,11 +26,23 @@ class BannedRepository extends ServiceEntityRepository
 
     public function findByUnbanBeforeNow(): ?array
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.unbanTime < :olderThan')
+        return $this->createQueryBuilder('b')
+            ->andWhere('b.unbanTime < :olderThan')
             ->setParameter('olderThan', new \DateTime())
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
+    }
+
+    public function findAllArr()
+    {
+        $result = $this->createQueryBuilder('b')
+            ->select('b.ipAddress')
+            ->getQuery()
+            ->getScalarResult()
+        ;
+
+        return array_column($result, 'ipAddress');
     }
 
     // /**
