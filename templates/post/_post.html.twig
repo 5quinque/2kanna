@@ -5,7 +5,7 @@
             <span aria-hidden="true">&minus;</span>
         </button>
         <span>
-            {{ post.created|date("d/m/Y H:i:s") }}
+            {{ post.created|date("d/m/Y H:i:s", setting('timezone')) }}
             <strong><a href="{{ path('post_show', {'board': post.board.name, 'post': post.slug}) }}" class="reply_button post_{{ post.id }}">Reply</a></strong>
             {%- if is_granted('ROLE_USER') -%}
                 {{ include('post/_delete_form.html.twig') }}
@@ -32,7 +32,7 @@
             </div>
         {%- endif -%}
             <div class="col-80">
-                <h5 class="post-title">{{ post.title }}</h5>
+                {% if post.title %}<h5 class="post-title">{{ post.title }}</h5>{% endif %}
                 <div class="m-0 message">
                 {{ post.message|nl2br|codeblock|urltoanchor|crosslink|greentext }}
                 </div>

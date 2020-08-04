@@ -13,7 +13,7 @@
                 {% for banned in banned_ips %}
                     <li class="list-group-item d-flex space-between align-items-center">
                         <span>{{ banned.ipAddress }}
-                            <abbr title="{{ banned.banTime|date("Y/m/d H:i") }}-{{ banned.unbanTime|date("Y/m/d H:i") }}">
+                            <abbr title="{{ banned.banTime|date("Y/m/d H:i", setting('timezone')) }}-{{ banned.unbanTime|date("Y/m/d H:i", setting('timezone')) }}">
                                 {{ banned.banTime|dt2clock }}</abbr>
                             {{ banned.reason }}
                         </span>

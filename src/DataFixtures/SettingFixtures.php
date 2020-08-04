@@ -3,8 +3,10 @@
 namespace App\DataFixtures;
 
 use App\Entity\Setting;
+use App\Entity\SettingChoice;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Intl\Timezones;
 
 class SettingFixtures extends Fixture
 {
@@ -24,6 +26,13 @@ class SettingFixtures extends Fixture
         $leadtext->setSection('Site');
         $leadtext->setPlacement(1);
 
+        $timezone = new Setting();
+        $timezone->setName('timezone');
+        $timezone->setValue('Europe/London');
+        $timezone->setType('choice');
+        $timezone->setSection('Site');
+        $timezone->setPlacement(2);
+
         $waitImageFilter = new Setting();
         $waitImageFilter->setName('wait_image_filter');
         $waitImageFilter->setValueBool(true);
@@ -34,6 +43,18 @@ class SettingFixtures extends Fixture
         $manager->persist($sitename);
         $manager->persist($leadtext);
         $manager->persist($waitImageFilter);
+        $manager->persist($timezone);
+
+        $timezones = array_keys(Timezones::getNames());
+        sort($timezones);
+
+        foreach ($timezones as $tz) {
+            $tzChoice = new SettingChoice();
+            $tzChoice->setSetting($timezone);
+            $tzChoice->setKey($tz);
+            $tzChoice->setValue($tz);
+            $manager->persist($tzChoice);
+        }
 
         $manager->flush();
     }
