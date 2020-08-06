@@ -18,7 +18,7 @@ class SettingChoice
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Setting::class, inversedBy="choice")
+     * @ORM\ManyToOne(targetEntity=Setting::class, inversedBy="settingChoices")
      * @ORM\JoinColumn(nullable=false)
      */
     private $setting;
