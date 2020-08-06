@@ -1,9 +1,9 @@
 TextBoard
 =========
 
-![License](https://img.shields.io/github/license/linnit/textboard?style=for-the-badge)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/linnit/textboard/CI?style=for-the-badge)
-![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/linnit/textboard?style=for-the-badge)
+![GitHub](https://img.shields.io/github/license/linnit/textboard?style=flat-square)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/linnit/textboard/Symfony%20with%20PostgreSQL?style=flat-square)
+![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/linnit/textboard?style=flat-square)
 
 Requirements
 ------------
