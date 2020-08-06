@@ -42,11 +42,12 @@ jobs:
         env:
           DATABASE_URL: postgres://postgres:postgres@127.0.0.1:${{ job.services.postgres.ports[5432] }}/postgres?charset=UTF-8
 
-      - name: Run Migration
+      - name: Run Migration & data fixtures
         run: |
           composer require symfony/orm-pack
           php bin/console doctrine:schema:update --force || echo "No migrations found or schema update failed"
           php bin/console doctrine:migrations:migrate || echo "No migrations found or migration failed"
+          php bin/console doctrine:fixtures:load -n
         env:
           DATABASE_URL: postgres://postgres:postgres@127.0.0.1:${{ job.services.postgres.ports[5432] }}/postgres?charset=UTF-8
       
