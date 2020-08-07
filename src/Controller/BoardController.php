@@ -52,7 +52,7 @@ class BoardController extends AbstractController
 
             $boardUtil->clearSetting('boardlist');
 
-            return $this->redirectToRoute('board_index');
+            return $this->redirectToRoute('board_show', ['name' => $board->getName()]);
         }
 
         return $this->render('board/new.html.twig', [

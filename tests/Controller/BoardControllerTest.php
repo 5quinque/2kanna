@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
  * @internal
- * @coversNothing
+ * @covers \App\Controller\BoardController
  */
 class BoardControllerTest extends WebTestCase
 {
@@ -36,5 +36,48 @@ class BoardControllerTest extends WebTestCase
 
             $this->assertResponseIsSuccessful();
         }
+    }
+
+    public function testNewPost(): void
+    {
+        $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
+
+        $client = static::createClient();
+        $client->followRedirects();
+
+        // Find first board
+        $crawler = $client->request('GET', '/');
+        $boardLink = $crawler->filter('ul.boards-list a')->link();
+
+        $client->click($boardLink);
+        $crawler = $client->submitForm(
+            'New Post',
+            [
+                'post[title]' => 'Test Title!', 'post[message]' => 'Test Message',
+            ]
+        );
+
+        $newPostTitle = $crawler->filter('h5.post-title')->text();
+
+        $this->assertSame('Test Title!', $newPostTitle);
+    }
+
+    public function testNewBoard(): void
+    {
+        $client = static::createClient();
+        $client->followRedirects();
+
+        $crawler = $client->request('GET', '/new');
+
+        $crawler = $client->submitForm(
+            'Save',
+            [
+                'new_board[name]' => 'testboard', 'new_board[password]' => 'testpassword',
+            ]
+        );
+
+        $newBoardTitle = $crawler->filter('h1#boards')->text();
+
+        $this->assertSame('testboard', $newBoardTitle);
     }
 }

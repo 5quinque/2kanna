@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
  * @internal
- * @coversNothing
+ * @covers \App\Controller\PostController
  */
 class PostControllerTest extends WebTestCase
 {
@@ -30,27 +30,38 @@ class PostControllerTest extends WebTestCase
         }
     }
 
-    public function testNewPost(): void
+    public function testNewChildPost()
     {
-        $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
-
         $client = static::createClient();
         $client->followRedirects();
 
-        // Find first board
-        $crawler = $client->request('GET', '/');
-        $boardLink = $crawler->filter('ul.boards-list a')->link();
+        [$post] = self::$container->get(PostRepository::class)->findAll();
 
-        $client->click($boardLink);
+        $url = $client->getContainer()->get('router')->generate(
+            'post_show',
+            ['board' => $post->getBoard()->getName(), 'post' => $post->getSlug()]
+        );
+
+        $client->request('GET', $url);
+
         $crawler = $client->submitForm(
-            'New Post',
+            'Reply',
             [
-                'post[title]' => 'Test Title!', 'post[message]' => 'Test Message',
+                'post[title]' => 'Test Child Title!', 'post[message]' => 'Test Child Message',
             ]
         );
 
-        $newPostTitle = $crawler->filter('h5.post-title')->text();
+        $newPostTitle = $crawler->filter('.post-highlight h5.post-title')->text();
 
-        $this->assertSame('Test Title!', $newPostTitle);
+        $this->assertSame('Test Child Title!', $newPostTitle);
+    }
+
+    public function testShowPost404()
+    {
+        $client = static::createClient();
+
+        $client->request('GET', '/boardnamedoesntexist/postslug');
+
+        $this->assertTrue($client->getResponse()->isNotFound());
     }
 }
