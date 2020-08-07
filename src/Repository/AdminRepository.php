@@ -10,8 +10,8 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @method Admin|null find($id, $lockMode = null, $lockVersion = null)
- * @method Admin|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|Admin find($id, $lockMode = null, $lockVersion = null)
+ * @method null|Admin findOneBy(array $criteria, array $orderBy = null)
  * @method Admin[]    findAll()
  * @method Admin[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
@@ -58,15 +58,13 @@ class AdminRepository extends ServiceEntityRepository implements PasswordUpgrade
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Admin
+    public function findOneByUsername($value): ?Admin
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
+            ->andWhere('a.username = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
 }
