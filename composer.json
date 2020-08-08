@@ -45,6 +45,7 @@
         "vich/uploader-bundle": "^1.10@dev"
     },
     "require-dev": {
+        "dama/doctrine-test-bundle": "^6.3",
         "doctrine/doctrine-fixtures-bundle": "^3.3@dev",
         "symfony/browser-kit": "5.1.*",
         "symfony/css-selector": "5.1.*",
