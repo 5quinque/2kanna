@@ -64,6 +64,11 @@ class PostController extends AbstractController
 
         if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {
             $postUtil->deletePost($post);
+
+            $this->addFlash(
+                'success',
+                'Post Deleted'
+            );
         }
 
         if ($post->getParentPost()) {
