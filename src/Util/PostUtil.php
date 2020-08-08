@@ -28,8 +28,10 @@ class PostUtil
             $this->deletePost($childPost);
         }
 
-        // Remove LiipImagine image cache
-        $this->liipCacheManager->remove($post->getImageName());
+        if ($post->getImageName()) {
+            // Remove LiipImagine image cache
+            $this->liipCacheManager->remove($post->getImageName());
+        }
 
         $this->em->remove($post);
         $this->em->flush();
