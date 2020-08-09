@@ -190,6 +190,9 @@
     "league/flysystem-aws-s3-v3": {
         "version": "1.0.25"
     },
+    "league/mime-type-detection": {
+        "version": "1.4.0"
+    },
     "liip/imagine-bundle": {
         "version": "1.8",
         "recipe": {

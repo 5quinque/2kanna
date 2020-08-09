@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Banned;
 use App\Form\BannedType;
 use App\Repository\BannedRepository;
+use App\Service\BannedIP;
 use App\Util\AdminUtil;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,8 +17,13 @@ class AdminBanController extends AbstractController
     /**
      * @Route("/admin/ban/{ipAddress}", name="admin_banned", defaults={"ipAddress": null})
      */
-    public function banned(string $ipAddress = null, BannedRepository $bannedRepository, Request $request, AdminUtil $adminUtil): Response
-    {
+    public function banned(
+        string $ipAddress = null,
+        BannedRepository $bannedRepository,
+        Request $request,
+        AdminUtil $adminUtil,
+        BannedIP $bannedIP
+    ): Response {
         $banned = new Banned();
 
         if ($ipAddress) {
@@ -29,6 +35,7 @@ class AdminBanController extends AbstractController
 
         if ($bannedForm->isSubmitted() && $bannedForm->isValid()) {
             $adminUtil->banIP($banned);
+            $bannedIP->clearBanCache($banned->getIpAddress());
 
             $this->addFlash(
                 'success',
@@ -47,12 +54,14 @@ class AdminBanController extends AbstractController
     /**
      * @Route("/admin/unban/{id}", name="admin_unban", methods={"DELETE"})
      */
-    public function unban(Request $request, Banned $banned): Response
+    public function unban(Request $request, Banned $banned, BannedIP $bannedIP): Response
     {
         if ($this->isCsrfTokenValid('delete'.$banned->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($banned);
             $entityManager->flush();
+
+            $bannedIP->clearBanCache($banned->getIpAddress());
         }
 
         $this->addFlash(
