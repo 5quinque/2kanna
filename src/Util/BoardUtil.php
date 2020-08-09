@@ -5,7 +5,7 @@ namespace App\Util;
 use App\Entity\Board;
 use App\Repository\BoardRepository;
 use App\Repository\PostRepository;
-use Symfony\Component\Cache\Adapter\FilesystemAdapter;
+use Symfony\Contracts\Cache\TagAwareCacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 
 class BoardUtil
@@ -15,12 +15,15 @@ class BoardUtil
     private $board;
     private $cache;
 
-    public function __construct(BoardRepository $boardRepository, PostRepository $postRepository)
-    {
+    public function __construct(
+        BoardRepository $boardRepository,
+        PostRepository $postRepository,
+        TagAwareCacheInterface $boardsCache
+    ) {
         $this->boardRepository = $boardRepository;
         $this->postRepository = $postRepository;
 
-        $this->cache = new FilesystemAdapter();
+        $this->cache = $boardsCache;
     }
 
     public function setBoard(Board $board): self
@@ -34,6 +37,7 @@ class BoardUtil
     {
         return $this->cache->get('boardlist', function (ItemInterface $item) {
             $item->expiresAfter(3600);
+            $item->tag('boards');
 
             return $this->boardRepository->findAll();
         });
@@ -45,6 +49,8 @@ class BoardUtil
 
         return $this->cache->get("{$board->getName()}_postcount", function (ItemInterface $item) {
             $bp = $this->postRepository->findLatest(1, $this->board);
+            $item->tag('boards');
+            $item->expiresAfter(3600);
 
             return $bp->getNumResults();
         });

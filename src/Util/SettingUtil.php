@@ -3,7 +3,7 @@
 namespace App\Util;
 
 use App\Repository\SettingRepository;
-use Symfony\Component\Cache\Adapter\FilesystemAdapter;
+use Symfony\Contracts\Cache\TagAwareCacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 
 class SettingUtil
@@ -12,10 +12,10 @@ class SettingUtil
     private $cache;
     private $name;
 
-    public function __construct(SettingRepository $settingRepository)
+    public function __construct(SettingRepository $settingRepository, TagAwareCacheInterface $settingCache)
     {
         $this->settingRepository = $settingRepository;
-        $this->cache = new FilesystemAdapter();
+        $this->cache = $settingCache;
     }
 
     public function setName(string $name): self
@@ -31,6 +31,7 @@ class SettingUtil
 
         return $this->cache->get($name, function (ItemInterface $item) {
             $item->expiresAfter(3600);
+            $item->tag('setting');
 
             $result = $this->settingRepository->findOneBy(['name' => $this->name]);
             if ($result) {
