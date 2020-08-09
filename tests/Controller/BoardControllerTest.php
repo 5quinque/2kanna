@@ -5,10 +5,6 @@ namespace App\Tests\Controller;
 use App\Repository\BoardRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-/**
- * @internal
- * @covers \App\Controller\BoardController
- */
 class BoardControllerTest extends WebTestCase
 {
     public function testIndex(): void

@@ -5,10 +5,6 @@ namespace App\Tests\Controller;
 use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-/**
- * @internal
- * @covers \App\Controller\PostController
- */
 class PostControllerTest extends WebTestCase
 {
     public function testShowPosts()

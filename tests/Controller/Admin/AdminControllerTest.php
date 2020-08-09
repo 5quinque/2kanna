@@ -7,10 +7,6 @@ use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @internal
- * @covers \App\Controller\Admin\AdminController
- */
 class AdminControllerTest extends WebTestCase
 {
     public function testAdminIndex()
@@ -30,9 +26,32 @@ class AdminControllerTest extends WebTestCase
         $this->assertSelectorTextContains('h1#admin', 'Admin Dashboard');
     }
 
-    /**
-     * @covers \App\Controller\PostController::delete
-     */
+    public function testAdminLoginView()
+    {
+        $client = static::createClient();
+
+        $client->request('GET', '/admin/login');
+
+        $this->assertResponseIsSuccessful();
+        $this->assertSelectorTextContains('button[type="submit"]', 'Login');
+    }
+
+    public function testAdminLogout()
+    {
+        $client = static::createClient();
+        $adminRepository = static::$container->get(AdminRepository::class);
+
+        // retrieve the admin user
+        $testAdmin = $adminRepository->findOneByUsername('admin');
+
+        // simulate $testAdmin being logged in
+        $client->loginUser($testAdmin, 'default');
+
+        $client->request('GET', '/admin/logout');
+
+        $this->assertResponseRedirects('http://localhost/', Response::HTTP_FOUND);
+    }
+
     public function testDeletePost()
     {
         $client = static::createClient();
