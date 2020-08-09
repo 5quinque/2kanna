@@ -45,6 +45,7 @@ security:
                     - App\Security\LoginFormAuthenticator
             logout:
                 path: admin_logout
+                target: /
             remember_me:
                 secret:   '%kernel.secret%'
                 lifetime: 31536000 # 1 year in seconds

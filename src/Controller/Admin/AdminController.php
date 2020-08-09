@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminController extends AbstractController
 {
     /**
-     * @Route("/admin", name="admin_index", priority=2)
+     * @Route("/admin", name="admin_index")
      */
     public function index(
         BannedRepository $bannedRepository,
