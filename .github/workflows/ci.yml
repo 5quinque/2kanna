@@ -45,8 +45,6 @@ jobs:
       - name: Install Composer dependencies
         run: |
           composer install --no-progress --prefer-dist --optimize-autoloader
-        env:
-          DATABASE_URL: postgres://postgres:postgres@127.0.0.1:${{ job.services.postgres.ports[5432] }}/postgres?charset=UTF-8
 
       - name: Run Migration & data fixtures
         run: |
