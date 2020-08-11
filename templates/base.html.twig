@@ -14,6 +14,13 @@
         {%- endblock -%}
     </head>
     <body>
+        <div class="container mb-1">
+        <div class="board-menu text-center">
+            {% for board in boards() %}
+                [<a href="{{ path('board_show', {'name': board}) }}">{{ board }}</a>]
+            {% endfor %}
+        </div>
+        </div>
         <div class="container pt-4">
             <div class="page-header text-center">
                 <a href="{{ path('board_index') }}">
@@ -39,7 +46,7 @@
             <hr>
             <div class="page-footer">
             {%- if is_granted("ROLE_ADMIN") -%}
-                <a href="{{ path('admin_index') }}">{{ app.user.username }}</a> <a href="{{ path('admin_logout' ) }}">Admin Logout</a>
+                <a href="{{ path('admin_index') }}">{{ app.user.username }}</a> <a href="{{ path('admin_logout') }}">Admin Logout</a>
             {%- else -%}
                 <a href="{{ path('admin_login') }}">Admin Login</a>
             {%- endif -%}

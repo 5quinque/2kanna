@@ -10,7 +10,27 @@ use Symfony\Component\Intl\Timezones;
 
 class SettingFixtures extends Fixture
 {
+    private $manager;
+
+    private function setManager(ObjectManager $manager)
+    {
+        $this->manager = $manager;
+    }
+
     public function load(ObjectManager $manager)
+    {
+        $this->setManager($manager);
+
+        $this->sitename();
+        $this->leadtext();
+        $this->timezone();
+        $this->waitImageFilter();
+        $this->anonCanCreateBoard();
+
+        $manager->flush();
+    }
+
+    private function sitename()
     {
         $sitename = new Setting();
         $sitename->setName('sitename');
@@ -19,6 +39,11 @@ class SettingFixtures extends Fixture
         $sitename->setSection('Site');
         $sitename->setPlacement(0);
 
+        $this->manager->persist($sitename);
+    }
+
+    private function leadtext()
+    {
         $leadtext = new Setting();
         $leadtext->setName('leadtext');
         $leadtext->setValue('~');
@@ -26,6 +51,11 @@ class SettingFixtures extends Fixture
         $leadtext->setSection('Site');
         $leadtext->setPlacement(1);
 
+        $this->manager->persist($leadtext);
+    }
+    
+    private function timezone()
+    {
         $timezone = new Setting();
         $timezone->setName('timezone');
         $timezone->setValue('Europe/London');
@@ -33,17 +63,7 @@ class SettingFixtures extends Fixture
         $timezone->setSection('Site');
         $timezone->setPlacement(2);
 
-        $waitImageFilter = new Setting();
-        $waitImageFilter->setName('wait_image_filter');
-        $waitImageFilter->setValueBool(true);
-        $waitImageFilter->setType('checkbox');
-        $waitImageFilter->setSection('Uploads');
-        $waitImageFilter->setPlacement(10);
-
-        $manager->persist($sitename);
-        $manager->persist($leadtext);
-        $manager->persist($waitImageFilter);
-        $manager->persist($timezone);
+        $this->manager->persist($timezone);
 
         $timezones = array_keys(Timezones::getNames());
         sort($timezones);
@@ -53,9 +73,31 @@ class SettingFixtures extends Fixture
             $tzChoice->setSetting($timezone);
             $tzChoice->setKey($tz);
             $tzChoice->setValue($tz);
-            $manager->persist($tzChoice);
+            $this->manager->persist($tzChoice);
         }
+    }
 
-        $manager->flush();
+    private function waitImageFilter()
+    {
+        $waitImageFilter = new Setting();
+        $waitImageFilter->setName('wait_image_filter');
+        $waitImageFilter->setValueBool(true);
+        $waitImageFilter->setType('checkbox');
+        $waitImageFilter->setSection('Uploads');
+        $waitImageFilter->setPlacement(10);
+
+        $this->manager->persist($waitImageFilter);
+    }
+
+    private function anonCanCreateBoard()
+    {
+        $anonCanCreateBoard = new Setting();
+        $anonCanCreateBoard->setName('anon_can_create_board');
+        $anonCanCreateBoard->setValueBool(false);
+        $anonCanCreateBoard->setType('checkbox');
+        $anonCanCreateBoard->setSection('Site');
+        $anonCanCreateBoard->setPlacement(3);
+
+        $this->manager->persist($anonCanCreateBoard);
     }
 }

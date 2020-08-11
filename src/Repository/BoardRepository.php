@@ -19,6 +19,17 @@ class BoardRepository extends ServiceEntityRepository
         parent::__construct($registry, Board::class);
     }
 
+    public function findAllArr()
+    {
+        $result = $this->createQueryBuilder('b')
+            ->select('b.name')
+            ->getQuery()
+            ->getScalarResult()
+        ;
+
+        return array_column($result, 'name');
+    }
+
     // /**
     //  * @return Board[] Returns an array of Board objects
     //  */

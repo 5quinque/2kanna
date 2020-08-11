@@ -36,6 +36,8 @@ class BoardController extends AbstractController
      */
     public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder, BoardUtil $boardUtil): Response
     {
+        $this->denyAccessUnlessGranted('CAN_CREATE_BOARD');
+
         $board = new Board();
         $form = $this->createForm(NewBoardType::class, $board);
         $form->handleRequest($request);
