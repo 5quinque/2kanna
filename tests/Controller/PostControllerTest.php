@@ -43,13 +43,13 @@ class PostControllerTest extends WebTestCase
         $crawler = $client->submitForm(
             'Reply',
             [
-                'post[title]' => 'Test Child Title!', 'post[message]' => 'Test Child Message',
+                'post[message]' => 'Test Child Message',
             ]
         );
 
-        $newPostTitle = $crawler->filter('.post-highlight h5.post-title')->text();
+        $newPost = $crawler->filter('.post-highlight .post-body .message')->text();
 
-        $this->assertSame('Test Child Title!', $newPostTitle);
+        $this->assertSame('Test Child Message', $newPost);
     }
 
     public function testShowPost404()

@@ -20,7 +20,6 @@ class PostFixtures extends Fixture
             $uuid = Uuid::v4();
 
             $post = new Post();
-            $post->setTitle("Title-{$i}");
             $post->setMessage('Some message 🤠');
             $post->setBoard($cowboyBoard);
             $post->setCreated($date);

@@ -49,13 +49,13 @@ class BoardControllerTest extends WebTestCase
         $crawler = $client->submitForm(
             'New Post',
             [
-                'post[title]' => 'Test Title!', 'post[message]' => 'Test Message',
+                'post[message]' => 'Test Message',
             ]
         );
 
-        $newPostTitle = $crawler->filter('h5.post-title')->text();
+        $newPost = $crawler->filter('.post-body .message')->text();
 
-        $this->assertSame('Test Title!', $newPostTitle);
+        $this->assertSame('Test Message', $newPost);
     }
 
     public function testNewBoard(): void

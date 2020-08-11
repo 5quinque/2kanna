@@ -32,11 +32,6 @@ class PostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', null, [
-                'attr' => ['placeholder' => 'Title', 'tabindex' => 1],
-                'label' => false,
-                'required' => false,
-            ])
             ->add('board', HiddenEntityType::class, [
                 'class' => Board::class,
             ])
@@ -50,7 +45,7 @@ class PostType extends AbstractType
                 'required' => true,
             ])
             ->add('imageFile', VichImageType::class, [
-                'attr' => ['placeholder' => 'Choose Image'],
+                'attr' => ['placeholder' => 'Choose File'],
                 'required' => false,
                 'label' => false,
                 'allow_delete' => true,

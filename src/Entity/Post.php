@@ -24,15 +24,6 @@ class Post
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=127, nullable=true)
-     * @Assert\Length(
-     *     max = 30,
-     *     maxMessage = "Your title cannot be longer than {{ limit }} characters"
-     * )
-     */
-    private $title;
-
-    /**
      * @ORM\Column(type="text", nullable=true)
      * @Assert\Length(
      *     max = 500,
@@ -119,18 +110,6 @@ class Post
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
-
-    public function setTitle(?string $title): self
-    {
-        $this->title = $title;
-
-        return $this;
     }
 
     public function getMessage(): ?string
