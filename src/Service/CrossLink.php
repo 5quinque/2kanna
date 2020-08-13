@@ -18,8 +18,8 @@ class CrossLink
         return $this->router->generate('board_show', ['name' => $board]);
     }
 
-    public function generatePostUrl(string $board, int $post)
+    public function generatePostUrl(string $board, string $post)
     {
-        return $this->router->generate('post_show', ['name' => $board, 'id' => $post]);
+        return $this->router->generate('post_show', ['board' => $board, 'post' => $post]);
     }
 }

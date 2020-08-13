@@ -30,7 +30,7 @@ class CrossLinkExtension extends AbstractExtension
 
     public function createCrossLinks(string $string)
     {
-        $regex = '/&gt;&gt;&gt;\/(\w+)\/?(\d+)?/';
+        $regex = '/&gt;&gt;&gt;\/(\w+)\/?([A-F0-9]+)?/';
 
         preg_match_all($regex, $string, $matches);
 
@@ -55,7 +55,7 @@ class CrossLinkExtension extends AbstractExtension
 
     private function postEntity($post)
     {
-        return $this->postRepository->findOneBy(['id' => $post]);
+        return $this->postRepository->findOneBy(['slug' => $post]);
     }
 
     private function boardEntity($board)

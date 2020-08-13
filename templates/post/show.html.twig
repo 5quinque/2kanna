@@ -1,9 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ setting('sitename') }}
-    -
-    {{ post.board.name }} {{ post.title }}
+    {{ setting('sitename') }} - {{ post.board.name }}
 {% endblock %}
 {%- block stylesheets -%}
     {{ parent() }}

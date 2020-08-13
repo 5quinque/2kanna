@@ -25,15 +25,17 @@ class BoardVoter extends Voter
         }
 
         // you know $subject is a Board object, thanks to `supports()`
-        /** @var Board $baord */
+        /** @var Board $board */
         $board = $subject;
 
         switch ($attribute) {
             case 'BOARD_EDIT':
                 return $this->canEdit($board, $user);
+
                 break;
             case 'BOARD_VIEW':
                 return true;
+
                 break;
         }
 

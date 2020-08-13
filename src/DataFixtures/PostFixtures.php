@@ -18,6 +18,8 @@ class PostFixtures extends Fixture
 
         for ($i = 0; $i < 20; ++$i) {
             $uuid = Uuid::v4();
+            [$slug] = explode('-', $uuid->toRfc4122());
+            $slug = strtoupper($slug);
 
             $post = new Post();
             $post->setMessage('Some message 🤠');
@@ -25,7 +27,7 @@ class PostFixtures extends Fixture
             $post->setCreated($date);
             $post->setLatestpost($date);
             $post->setIpAddress('127.0.0.1');
-            $post->setSlug($uuid->toBase58());
+            $post->setSlug($slug);
             $manager->persist($post);
         }
 

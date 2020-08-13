@@ -40,10 +40,12 @@ class PostUtil
     public function createPost(Post $post, Request $request)
     {
         $uuid = Uuid::v4();
+        [$slug] = explode('-', $uuid->toRfc4122());
+        $slug = strtoupper($slug);
 
         $post->setCreated(new DateTime());
         $post->setIpAddress($request->getClientIp());
-        $post->setSlug($uuid->toBase58());
+        $post->setSlug($slug);
 
         // We will lose access to Post::imageFile so need to save the mimetype
         if ($post->getImageFile()) {

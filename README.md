@@ -26,7 +26,7 @@ Requirements
 ## Installation
 
    * [Heroku Deployment](docs/heroku_deployment.md)
-   * [Apache/PHP-FPM Deployment](docs/heroku_deployment.md)
+   * [Apache/PHP-FPM Deployment](docs/apache_php_deployment.md)
 
 ## File Uploads
 

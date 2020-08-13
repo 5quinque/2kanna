@@ -8,18 +8,26 @@ $blue-light: #00d2d3;
 $blue-dark: #0abde3;
 $grey-1: #9c9c9c;
 
-$primary: #50717b;
+$anchor-color: #34345c;
+
+// $primary: #50717b;
+$primary: #b7c5d9;
 $primary-light: #8ecccc;
 $primary-dark: #3a4042;
+$primary-highlight: #d6bad0;
 
 $black: #212121;
 
+$border-radius: 1px;
+
 body {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: .875rem;
+    font-size: 10pt;
     font-weight: 400;
     line-height: 1.5;
     color: $black;
+    margin-top: 5px;
+    background-color: #eef2ff;
 }
 
 *, ::before, ::after {
@@ -28,7 +36,7 @@ body {
 }
 
 a {
-    color: $primary;
+    color: $anchor-color;
     text-decoration: none;
 }
 
@@ -126,6 +134,12 @@ pre {
 .mt-2 {
     margin-top: 2em;
 }
+.mt-p5 {
+    margin-top: 5px;
+}
+.mb-1 {
+    margin-bottom: 1em;
+}
 
 .d-block {
     display: block;
@@ -172,11 +186,11 @@ ul.nav {
         padding: 10px 20px;
         border: 1px solid $primary;
         border-bottom: none;
-        border-radius: 10px 10px 0px 0px;
+        border-radius: $border-radius $border-radius 0px 0px;
         margin: 5px;
 
         a.active {
-            color: $primary-dark;
+            color: $anchor-color;
             font-weight: bold;
         }
     }
@@ -214,16 +228,16 @@ ul.list-group {
     display: flex;
     padding-left: 0;
     list-style: none;
-    border-radius: .25rem;
+    border-radius: $border-radius;
 }
 .page-item:first-child .page-link {
     margin-left: 0;
-    border-top-left-radius: .25rem;
-    border-bottom-left-radius: .25rem;
+    border-top-left-radius: $border-radius;
+    border-bottom-left-radius: $border-radius;
 }
 .page-item:last-child .page-link {
-    border-top-right-radius: .25rem;
-    border-bottom-right-radius: .25rem;
+    border-top-right-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
 }
 .page-link:not(:disabled):not(.disabled) {
     cursor: pointer;
@@ -236,7 +250,7 @@ ul.list-group {
     line-height: 1.25;
     color: $primary;
     background-color: #fff;
-    border: 1px solid #dee2e6;
+    border: 1px solid $primary;
 }
 .page-item.active .page-link {
     z-index: 1;
@@ -249,7 +263,7 @@ ul.list-group {
     pointer-events: none;
     cursor: auto;
     background-color: #fff;
-    border-color: #dee2e6;
+    border-color: $primary;
 }
 
 .posts {
@@ -261,11 +275,18 @@ ul.list-group {
     flex-basis: 25%;
 }
 
+.post-container {
+    padding-left: 5px;
+    border-left: 1px solid $primary;
+}
+
 .post {
-    border: 1px solid rgb(168, 168, 168);
-    border-radius: 2px;
+    border: 1px solid $primary;
+    border-top: none;
+    border-left: none;
+    border-radius: $border-radius;
     padding: 5px;
-    background-color: rgba(227, 235, 226, 0.342);
+    background-color: #d6daf0;
     
     
     .post-body {
@@ -293,17 +314,19 @@ ul.list-group {
         display: none;
     }
 }
+.reply_button {
+    font-family: 'Courier New', Courier, monospace;
+}
 
 .post-image {
     max-width: 100%;
 }
 
 .post-highlight {
-    background-color: #ececec !important;
-    box-shadow: -2px 0 0 0px #772953 !important;
+    background-color: $primary-highlight !important;
 }
 .post-reply {
-    border: 1px solid #E95420 !important;
+    border: 1px solid $primary-highlight !important;
 }
 
 .sticky-top {
@@ -357,7 +380,7 @@ ul.list-group {
     font-weight: 400;
     line-height: 1.5;
     color: $black;
-    background-color: #f7f7f9;
+    background-color: #fff;
     background-clip: padding-box;
     border: 0 solid #ced4da;
     border-radius: 0;
@@ -404,7 +427,7 @@ textarea {
 }
 .custom-file-input {
     position: relative;
-    z-index: 2;
+    z-index: 0;
     width: 100%;
     height: calc(1.5em + 1.5rem + 0px);
     margin: 0;
@@ -421,7 +444,7 @@ textarea {
     font-weight: 400;
     line-height: 1.5;
     color: $black;
-    background-color: #f7f7f9;
+    background-color: #fff;
     border: 0 solid #ced4da;
     overflow: hidden;
 }
@@ -434,11 +457,20 @@ textarea {
     display: block;
     height: calc(1.5em + 1.5rem);
     padding: .75rem 1.5rem;
-    line-height: 1.5;
-    color: #000;
     content: "Browse";
-    background-color: #eceeef;
+    background-color: $primary;
     border-left: inherit;
+    font-weight: 600;
+    border: 0 solid transparent;
+    border-radius: 0;
+    color: #FFFFFF;
+    font-size: 14px;
+    cursor: pointer;
+    text-transform: uppercase;
+    outline: 0;
+}
+.custom-file-label:hover::after {
+    background: $primary-dark;
 }
 label {
     display: inline-block;
@@ -466,7 +498,7 @@ label {
 /* Cards */
 .card {
     border: 1px solid rgba(0,0,0,.125);
-    border-radius: .25rem;
+    border-radius: $border-radius;
 }
 .card-header:first-child {
     border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
