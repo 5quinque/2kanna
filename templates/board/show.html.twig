@@ -1,14 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ setting('sitename') }}
-    -
-    {{ board.name }}
+    {{ setting('sitename') }} - {{ board.name }}
 {% endblock %}
 {%- block stylesheets -%}
     {{ parent() }}
     {{ encore_entry_link_tags('board') }}
 {%- endblock -%}
+{% set only3 = true %}
 
 {% block body %}
     <div class="row">
@@ -28,7 +27,6 @@
     <div class="row">
         {% for post in paginator.results %}
             <div class="col-100">
-                {% set only3 = true %}
                 {% include 'post/_post.html.twig' %}
             </div>
         {% else %}
@@ -43,9 +41,9 @@
     </div>
     {% endif %}
 {% endblock %}
-{%- block footer -%}
+{# {%- block footer -%}
 <a href="{{ path('board_edit', {'name': board.name}) }}">Edit</a>
-{%- endblock -%}
+{%- endblock -%} #}
 {% block javascripts %}
     {{ parent() }}
     {{ encore_entry_script_tags('board') }}

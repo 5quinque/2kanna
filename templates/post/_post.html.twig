@@ -42,13 +42,13 @@
     </div>
 </div>
 
-            {%- if childLevel is defined and childLevel == true -%}
-            {%- elseif only3 is defined and only3 == true -%}
+        {%- if childLevel is defined and childLevel == true -%}
+        {%- elseif only3 is defined and only3 == true -%}
                 {%- set childLevel = true -%}
-                {%- for post in post.childpost|slice(0, 3) -%}
+                {%- for post in post.childpost|slice(-3, 3) -%}
                     {{ include('post/_post.html.twig') }}
                 {%- endfor -%}
-            {%- else -%}
+        {%- else -%}
                 {%- for post in post.childpost -%}
                     {{ include('post/_post.html.twig') }}
                 {%- endfor -%}
