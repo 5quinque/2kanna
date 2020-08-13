@@ -2,6 +2,7 @@
 
 namespace App\Tests\Controller;
 
+use App\Repository\AdminRepository;
 use App\Repository\BoardRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -61,6 +62,12 @@ class BoardControllerTest extends WebTestCase
     public function testNewBoard(): void
     {
         $client = static::createClient();
+
+        // Need to be logged in to create board
+        $adminRepository = static::$container->get(AdminRepository::class);
+        $testAdmin = $adminRepository->findOneByUsername('admin');
+        $client->loginUser($testAdmin, 'default');
+
         $client->followRedirects();
 
         $crawler = $client->request('GET', '/new');
