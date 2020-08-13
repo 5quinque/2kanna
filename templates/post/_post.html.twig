@@ -27,7 +27,7 @@
 
                 {%- if post.imageMimeType starts with 'image/' -%}
                 <a href="{{ post.imageName | imagine_filter('img') }}" class="mr-3">
-                    <img src="{{ post.imageName | imagine_filter('thumb') }}" class="post-image img-thumbnail" alt="{{ post.title }}">
+                    <img src="{{ post.imageName | imagine_filter('thumb') }}" class="post-image img-thumbnail" alt="{{ post.imageName }}">
                 </a>
                 {%- endif -%}
             </div>
