@@ -16,13 +16,13 @@ class PostFixtures extends Fixture
 
         $date = new DateTime();
 
-        for ($i = 0; $i < 20; ++$i) {
+        for ($i = 0; $i < 100; ++$i) {
             $uuid = Uuid::v4();
             [$slug] = explode('-', $uuid->toRfc4122());
             $slug = strtoupper($slug);
 
             $post = new Post();
-            $post->setMessage('Some message 🤠');
+            $post->setMessage("Post {$i} 🤠");
             $post->setBoard($cowboyBoard);
             $post->setCreated($date);
             $post->setLatestpost($date);

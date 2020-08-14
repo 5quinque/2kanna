@@ -12,7 +12,7 @@ $anchor-color: #34345c;
 
 // $primary: #50717b;
 $primary: #b7c5d9;
-$primary-light: #8ecccc;
+$primary-light: #d6daf0;
 $primary-dark: #3a4042;
 $primary-highlight: #d6bad0;
 
@@ -163,6 +163,9 @@ pre {
     color: $grey-1;
 }
 
+.border {
+    border: 1px solid $primary;
+}
 .border-left {
     border-left: 1px solid $primary;
     margin-left: 10px;
@@ -248,22 +251,21 @@ ul.list-group {
     padding: .5rem .75rem;
     margin-left: -1px;
     line-height: 1.25;
-    color: $primary;
-    background-color: #fff;
+    color: $black;
     border: 1px solid $primary;
+    border-top: none;
+    border-left: none;
+    background-color: $primary-light;
 }
 .page-item.active .page-link {
     z-index: 1;
     color: #fff;
     background-color: $primary;
-    border-color: $primary;
 }
 .page-item.disabled .page-link {
-    color: $primary-dark;
+    color: $grey-1;
     pointer-events: none;
     cursor: auto;
-    background-color: #fff;
-    border-color: $primary;
 }
 
 .posts {
@@ -286,7 +288,7 @@ ul.list-group {
     border-left: none;
     border-radius: $border-radius;
     padding: 5px;
-    background-color: #d6daf0;
+    background-color: $primary-light;
     
     
     .post-body {
@@ -497,7 +499,7 @@ label {
 
 /* Cards */
 .card {
-    border: 1px solid rgba(0,0,0,.125);
+    border: 1px solid $primary;
     border-radius: $border-radius;
 }
 .card-header:first-child {
@@ -506,14 +508,15 @@ label {
 .card-header {
     padding: .75rem 1.25rem;
     margin-bottom: 0;
-    background-color: rgba(0,0,0,.03);
-    border-bottom: 1px solid rgba(0,0,0,.125);
+    background-color: $primary;
+    border-bottom: 1px solid $primary;
 }
 .card-body {
     -webkit-box-flex: 1;
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
     padding: 1.25rem;
+    background-color: $primary-light;
 }
 
 /* Alerts */

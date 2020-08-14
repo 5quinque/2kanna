@@ -2,12 +2,12 @@
 <div class="post-container">
 <div class="mt-p5 post{% if child is defined %}{{ post.id == child.id ? ' post-highlight' }}{% endif %}{{ post.id == reply_id ? ' post-reply' }}">
     <div class="post-head px-2 ">
-        <button type="button" class="btn-collapse" data-toggle="collapse" data-target="#p{{ post.id }}" aria-expanded="true" aria-controls="{{ post.id }}">
+        <button type="button" class="btn-collapse" data-toggle="collapse" data-target="#{{ post.slug }}" aria-expanded="true" aria-controls="{{ post.slug }}">
             <span aria-hidden="true">&minus;</span>
         </button>
         <span>
             {{ post.created|date("d/m/Y H:i:s", setting('timezone')) }}
-            [<a href="{{ path('post_show', {'board': post.board.name, 'post': post.slug}) }}" class="reply_button post_{{ post.id }}">{{ post.slug }}</a>]
+            [<a href="{{ path('post_show', {'board': post.board.name, 'post': post.slug}) }}" class="reply_button post_{{ post.slug }}">{{ post.slug }}</a>]
             {%- if is_granted('ROLE_USER') -%}
                 {{ include('post/_delete_form.html.twig') }}
                 <span class="text-info">
@@ -17,7 +17,7 @@
             {%- endif -%}
         </span>
     </div>
-    <div id="p{{ post.id }}" class="p-2">
+    <div id="{{ post.slug }}" class="p-2">
         <div class="post-body">
         {%- if post.imageName is not null -%}
             <div class="col-20">
