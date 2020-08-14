@@ -23,11 +23,15 @@ class BoardController extends AbstractController
     /**
      * @Route("/", name="board_index", methods={"GET"})
      */
-    public function index(BoardUtil $boardUtil): Response
+    public function index(BoardUtil $boardUtil, PostRepository $postRepository): Response
     {
+        $recentActive = $postRepository->findBy([], ['latestpost' => 'DESC'], 10);
+
+
         return $this->render('board/index.html.twig', [
             'boards' => $boardUtil->boards(),
             'postCount' => $boardUtil->boardPostCountAll(),
+            'recent_active_threads' => $recentActive
         ]);
     }
 

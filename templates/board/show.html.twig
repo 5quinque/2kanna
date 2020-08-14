@@ -26,7 +26,7 @@
     <hr>
     <div class="row">
         {% for post in paginator.results %}
-            <div class="col-100">
+            <div class="col-100 mt-1">
                 {% include 'post/_post.html.twig' %}
             </div>
         {% else %}
@@ -41,9 +41,6 @@
     </div>
     {% endif %}
 {% endblock %}
-{# {%- block footer -%}
-<a href="{{ path('board_edit', {'name': board.name}) }}">Edit</a>
-{%- endblock -%} #}
 {% block javascripts %}
     {{ parent() }}
     {{ encore_entry_script_tags('board') }}

@@ -2,6 +2,31 @@
 
 {% block body %}
     <div class="row">
+        <h3>Recently Active Threads</h3>
+    </div>
+    <div class="row">
+        <div class="col-50">
+            <ul class="list-group border">
+            {% for thread in recent_active_threads|slice(0,5) %}
+                <li class="list-group-item">
+                [<a href="{{ path('board_show', {'name': thread.board.name}) }}">{{ thread.board.name }}</a>]
+                <a href="{{ path('post_show', {'board': thread.board.name, 'post' : thread.slug}) }}">{{ thread.message }}</a>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+        <div class="col-50">
+            <ul class="list-group border">
+            {% for thread in recent_active_threads|slice(5,5) %}
+                <li class="list-group-item">
+                [<a href="{{ path('board_show', {'name': thread.board.name}) }}">{{ thread.board.name }}</a>]
+                <a href="{{ path('post_show', {'board': thread.board.name, 'post' : thread.slug}) }}">{{ thread.message }}</a>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-100">
             <div class="page-header">
                 <h1 id="board_index">Boards
