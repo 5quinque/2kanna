@@ -58,7 +58,7 @@ class SettingType extends AbstractType
 
         $builder
             ->add(
-                'name',
+                'label',
                 null,
                 [
                     'attr' => ['readonly' => 'true'],

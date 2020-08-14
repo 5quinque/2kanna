@@ -5,7 +5,7 @@
         <div class="col">
             <div class="input-group">
                 <div class="col-30 border-right border-thick">
-                {{ form_widget(setting_form.name) }}
+                {{ form_widget(setting_form.label) }}
                 </div>
                 {% if setting_form.value is defined %}
                 {{ form_widget(setting_form.value) }}

@@ -33,6 +33,7 @@ class SettingFixtures extends Fixture
     private function sitename()
     {
         $sitename = new Setting();
+        $sitename->setLabel('Site Name');
         $sitename->setName('sitename');
         $sitename->setValue('TextBoard');
         $sitename->setType('text');
@@ -45,6 +46,7 @@ class SettingFixtures extends Fixture
     private function leadtext()
     {
         $leadtext = new Setting();
+        $leadtext->setLabel('Lead Text');
         $leadtext->setName('leadtext');
         $leadtext->setValue('~');
         $leadtext->setType('text');
@@ -57,6 +59,7 @@ class SettingFixtures extends Fixture
     private function timezone()
     {
         $timezone = new Setting();
+        $timezone->setLabel('Time Zone');
         $timezone->setName('timezone');
         $timezone->setValue('Europe/London');
         $timezone->setType('choice');
@@ -80,6 +83,7 @@ class SettingFixtures extends Fixture
     private function waitImageFilter()
     {
         $waitImageFilter = new Setting();
+        $waitImageFilter->setLabel('Wait for thumbnails to resolve');
         $waitImageFilter->setName('wait_image_filter');
         $waitImageFilter->setValueBool(true);
         $waitImageFilter->setType('checkbox');
@@ -92,6 +96,7 @@ class SettingFixtures extends Fixture
     private function anonCanCreateBoard()
     {
         $anonCanCreateBoard = new Setting();
+        $anonCanCreateBoard->setLabel('Anyone can create boards');
         $anonCanCreateBoard->setName('anon_can_create_board');
         $anonCanCreateBoard->setValueBool(false);
         $anonCanCreateBoard->setType('checkbox');

@@ -55,6 +55,11 @@ class Setting
      */
     private $settingChoices;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $label;
+
     public function __construct()
     {
         $this->settingChoices = new ArrayCollection();
@@ -164,6 +169,18 @@ class Setting
                 $settingChoices->setSetting(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLabel(): ?string
+    {
+        return $this->label;
+    }
+
+    public function setLabel(?string $label): self
+    {
+        $this->label = $label;
 
         return $this;
     }
