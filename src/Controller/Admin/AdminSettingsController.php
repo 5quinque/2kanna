@@ -2,8 +2,6 @@
 
 namespace App\Controller\Admin;
 
-// use App\Entity\Setting;
-
 use App\Form\SettingType;
 use App\Repository\SettingRepository;
 use App\Util\SettingUtil;
@@ -43,7 +41,7 @@ class AdminSettingsController extends AbstractController
 
                 $this->addFlash(
                     'success',
-                    $setting->getName().' is updated'
+                    $setting->getLabel().' is updated'
                 );
             }
 
