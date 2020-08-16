@@ -3,7 +3,7 @@ Array.from(document.getElementsByClassName("btn-collapse")).forEach(function(but
 });
 
 function collapse(event) {
-    let postEl = document.querySelector(this.dataset.target);
+    let postEl = document.getElementById(this.dataset.target);
     let postCount = countChildren(postEl);
 
     if (postEl.classList.contains('collapsed')) {

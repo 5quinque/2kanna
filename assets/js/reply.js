@@ -15,10 +15,6 @@ function getQuoteText() {
     return quote;
 }
 
-Array.from(document.getElementsByClassName("reply_button")).forEach(function(item) {
-    item.onclick = replyClick;
-});
-
 function replyClick(event) {
     event.preventDefault();
     
@@ -70,5 +66,9 @@ function highlightReply() {
         }
     });
 }
+
+Array.from(document.getElementsByClassName("reply_button")).forEach(function(item) {
+    item.onclick = replyClick;
+});
 
 highlightReply();

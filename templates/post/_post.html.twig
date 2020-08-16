@@ -1,8 +1,8 @@
 {%- set reply_id = reply_id ?? null -%}
-<div class="post-container">
+<div id="{{ post.slug }}" class="post-container{% if ajax is defined %} post-fresh{% endif %}">
 <div class="mt-p5 post{% if child is defined %}{{ post.id == child.id ? ' post-highlight' }}{% endif %}{{ post.id == reply_id ? ' post-reply' }}">
     <div class="post-head px-2 ">
-        <button type="button" class="btn-collapse" data-toggle="collapse" data-target="#{{ post.slug }}" aria-expanded="true" aria-controls="{{ post.slug }}">
+        <button type="button" class="btn-collapse" data-toggle="collapse" data-target="{{ post.slug }}" aria-expanded="true" aria-controls="{{ post.slug }}">
             <span aria-hidden="true">&minus;</span>
         </button>
         <span>
@@ -17,13 +17,13 @@
             {%- endif -%}
         </span>
     </div>
-    <div id="{{ post.slug }}" class="p-2">
+    <div class="p-2">
         <div class="post-body">
         {%- if post.imageName is not null -%}
             <div class="col-20">
                 {%- if post.imageMimeType == 'video/webm' -%}
                     <video class="post-video" src="{{ vich_uploader_asset(post) }}" controls></video>
-                {% endif %}
+                {%- endif -%}
 
                 {%- if post.imageMimeType starts with 'image/' -%}
                 <a href="{{ post.imageName | imagine_filter('img') }}" class="mr-3">

@@ -63,4 +63,14 @@ class PostUtil
 
         $this->imageCache->queueImageFilter($post);
     }
+
+    public function getSlugTree(Post $post)
+    {
+        $childArr = [];
+        foreach ($post->getChildPost() as $p) {
+            $childArr[] = $this->getSlugTree($p);
+        }
+
+        return [$post->getSlug() => $childArr];
+    }
 }

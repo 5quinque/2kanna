@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -17,6 +18,33 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class PostController extends AbstractController
 {
+
+    /**
+     * @Route("/json/tree/{post<\w+>}",
+     * name="json_post_tree",
+     * methods={"GET"})
+     * @ParamConverter("board", options={"mapping": {"board": "name"}})
+     * @ParamConverter("post", options={"mapping": {"post": "slug"}})
+     */
+    public function jsonPostTree(Post $post, PostUtil $postUtil)
+    {
+        $data = $postUtil->getSlugTree($post);
+
+        return new JsonResponse($data);
+    }
+
+    /**
+     * @Route("/i/{board}/{post<\w+>}",
+     * name="individual_post",
+     * methods={"GET"})
+     * @ParamConverter("board", options={"mapping": {"board": "name"}})
+     * @ParamConverter("post", options={"mapping": {"post": "slug"}})
+     */
+    public function ajaxPost(Board $board, Post $post)
+    {
+        return $this->render('post/_post.html.twig', ['post' => $post, 'ajax' => true]);
+    }
+
     /**
      * @Route("/{board}/{post<\w+>}/{child<\w+>?}",
      * name="post_show",
@@ -73,8 +101,8 @@ class PostController extends AbstractController
 
         if ($post->getParentPost()) {
             return $this->redirectToRoute('post_show', [
-                'name' => $boardName,
-                'id' => $post->getRootParentPost()->getId(),
+                'board' => $boardName,
+                'post' => $post->getRootParentPost()->getId(),
             ]);
         }
 

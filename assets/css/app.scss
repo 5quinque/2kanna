@@ -15,6 +15,7 @@ $primary: #b7c5d9;
 $primary-light: #d6daf0;
 $primary-dark: #3a4042;
 $primary-highlight: #d6bad0;
+$primary-alt: #e4f0d6;
 
 $black: #212121;
 
@@ -290,7 +291,6 @@ ul.list-group {
     padding: 5px;
     background-color: $primary-light;
     
-    
     .post-body {
         display: flex;
         flex-wrap: wrap;
@@ -311,11 +311,17 @@ ul.list-group {
             max-width: 100%;
         }
     }
-
-    .collapsed {
-        display: none;
-    }
 }
+.post-fresh .post {
+    background-color: $primary-alt;
+}
+.collapsed .post-body{
+    display: none;
+}
+.post-container.collapsed .post-container {
+    display: none;
+}
+
 .reply_button {
     font-family: 'Courier New', Courier, monospace;
 }
