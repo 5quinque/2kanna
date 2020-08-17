@@ -35,7 +35,7 @@ class SettingFixtures extends Fixture
         $sitename = new Setting();
         $sitename->setLabel('Site Name');
         $sitename->setName('sitename');
-        $sitename->setValue('TextBoard');
+        $sitename->setValue('2Kanna');
         $sitename->setType('text');
         $sitename->setSection('Site');
         $sitename->setPlacement(0);

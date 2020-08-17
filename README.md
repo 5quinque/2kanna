@@ -1,5 +1,5 @@
-TextBoard
-=========
+2Kanna
+======
 
 ![GitHub](https://img.shields.io/github/license/linnit/textboard?style=flat-square)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/linnit/textboard/Symfony%20with%20PostgreSQL?style=flat-square)
@@ -21,7 +21,8 @@ Requirements
    * Tree post structure
    * Code formatting
    * Crosslinking posts and posts from other boards
-   * 
+   * Autoupdating threads
+   * Allow anonymous board creation
 
 ## Installation
 
