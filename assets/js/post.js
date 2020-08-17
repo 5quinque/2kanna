@@ -1,6 +1,17 @@
 import '../css/prism.css';
 
-import './reply';
+import * as Autoupdate from './autoupdate';
+import * as Collapse from './collapse';
+import * as Reply from './reply';
+import * as Image from './image';
 import './upload';
 import './prism';
-import './autoupdate';
+
+Reply.highlightReply();
+Reply.setReplyOnclick();
+Reply.setDeleteOnclick();
+Collapse.setCollapseOnclick();
+Image.setImageOnclick();
+
+setInterval(Autoupdate.updatePosts, 10000);
+

@@ -1,14 +1,6 @@
 const conColumn = "col-20";
 const expandedColumn = "col-100";
 
-Array.from(document.getElementsByClassName("post-image")).forEach(function(item) {
-    item.onclick = imageClick;
-});
-
-Array.from(document.getElementsByClassName("post-video")).forEach(function(item) {
-    item.onplay = videoClick;
-});
-
 function imageClick(event) {
     event.preventDefault();
 
@@ -32,4 +24,18 @@ function videoClick(event) {
 
     column.classList.toggle(expandedColumn);
     column.classList.toggle(conColumn);
+}
+
+export function setImageOnclick() {
+    Array.from(document.getElementsByClassName("post-image")).forEach(function(item) {
+        if (item.onclick === null) {
+            item.onclick = imageClick;
+        }
+    });
+
+    Array.from(document.getElementsByClassName("post-video")).forEach(function(item) {
+        if (item.onplay === null) {
+            item.onclick = videoClick;
+        }
+    });
 }

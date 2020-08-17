@@ -12,5 +12,3 @@ import '../css/app.scss';
 // import $ from 'jquery';
 
 import './alert';
-import './collapse';
-import './image';

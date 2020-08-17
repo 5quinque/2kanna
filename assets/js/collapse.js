@@ -1,6 +1,3 @@
-Array.from(document.getElementsByClassName("btn-collapse")).forEach(function(button) {
-    button.onclick = collapse;
-});
 
 function collapse(event) {
     let postEl = document.getElementById(this.dataset.target);
@@ -21,4 +18,12 @@ function countChildren(element) {
 
 function setButtonText(element, text) {
     element.innerText = text;
+}
+
+export function setCollapseOnclick() {
+    Array.from(document.getElementsByClassName("btn-collapse")).forEach(function(button) {
+        if (button.onclick === null) {
+            button.onclick = collapse;
+        }
+    });
 }

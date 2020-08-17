@@ -24,9 +24,6 @@ function replyClick(event) {
 
     removeHighlight();
 
-    // console.log(this.parentElement.parentElement.parentElement.parentElement);
-    // console.log(this);
-
     this.parentElement.parentElement.parentElement.className += " post-reply";
 
     this.classList.forEach(function(a_class) {
@@ -53,7 +50,7 @@ function removeHighlight() {
     });
 }
 
-function highlightReply() {
+export function highlightReply() {
     removeHighlight();
     
     let id = document.getElementById("post_parent_post").value;
@@ -67,8 +64,24 @@ function highlightReply() {
     });
 }
 
-Array.from(document.getElementsByClassName("reply_button")).forEach(function(item) {
-    item.onclick = replyClick;
-});
+export function setReplyOnclick() {
+    Array.from(document.getElementsByClassName("reply_button")).forEach(function(item) {
+        if (item.onclick === null) {
+            item.onclick = replyClick;
+        }
+    });
+}
 
-highlightReply();
+/* Delete button */
+
+function submitDeleteForm() {
+    this.parentElement.submit();
+}
+
+export function setDeleteOnclick() {
+    Array.from(document.getElementsByClassName("delete_button")).forEach(function(item) {
+        if (item.onclick === null) {
+            item.onclick = submitDeleteForm;
+        }
+    });
+}
