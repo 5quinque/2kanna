@@ -13,7 +13,8 @@ function collapse(event) {
 }
 
 function countChildren(element) {
-    return element.childElementCount;
+    // Plus 1, because it doesn't count itself
+    return element.querySelectorAll('.post-container').length + 1;
 }
 
 function setButtonText(element, text) {
