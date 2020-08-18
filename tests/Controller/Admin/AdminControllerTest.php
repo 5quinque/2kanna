@@ -83,7 +83,8 @@ class AdminControllerTest extends WebTestCase
         $testAdmin = $adminRepository->findOneByUsername('admin');
         $client->loginUser($testAdmin, 'default');
 
-        [$post] = self::$container->get(PostRepository::class)->findAll();
+        // We are only testing against a parent post
+        $post = self::$container->get(PostRepository::class)->findOneBy(['parent_post' => null]);
 
         $postId = $post->getId();
 

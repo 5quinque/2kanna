@@ -40,6 +40,30 @@ class AdminFilterController extends AbstractController
     }
 
     /**
+     * @Route("/admin/wordfilter/edit/{id}", name="admin_wordfilter_edit")
+     */
+    public function wordFilterEdit(WordFilter $wordFilter, Request $request, AdminUtil $adminUtil): Response
+    {
+        $wordFilterForm = $this->createForm(WordFilterType::class, $wordFilter);
+        $wordFilterForm->handleRequest($request);
+
+        if ($wordFilterForm->isSubmitted() && $wordFilterForm->isValid()) {
+            $adminUtil->addBadWord($wordFilter);
+
+            $this->addFlash(
+                'success',
+                $wordFilter->getBadWord().' is updated'
+            );
+
+            return $this->redirectToRoute('admin_wordfilter');
+        }
+
+        return $this->render('admin/wordfilter/edit.html.twig', [
+            'word_filter_form' => $wordFilterForm->createView(),
+        ]);
+    }
+
+    /**
      * @Route("/admin/removefilter/{id}", name="admin_removefilter", methods={"DELETE"})
      */
     public function removeFilter(Request $request, WordFilter $wordFilter)

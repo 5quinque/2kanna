@@ -15,7 +15,7 @@
                         {{ word.badWord }}
                         <div>
                             <div>
-                                <a class="btn btn-primary d-block text-center">Edit</a>
+                                <a class="btn btn-primary d-block text-center" href="{{ path('admin_wordfilter_edit', {'id': word.id}) }}">Edit</a>
                             </div>
                             {{ include('admin/wordfilter/_removefilter_form.html.twig') }}
                         </div>

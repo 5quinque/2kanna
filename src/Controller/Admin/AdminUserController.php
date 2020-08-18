@@ -37,7 +37,7 @@ class AdminUserController extends AbstractController
             $adminUtil->addUser($user);
             $this->addFlash(
                 'success',
-                $user->getUsername().' is now created :)'
+                $user->getUsername().' is now created'
             );
         }
 

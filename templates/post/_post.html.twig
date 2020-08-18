@@ -7,7 +7,8 @@
         </button>
         <span>
             {{ post.created|date("d/m/Y H:i:s", setting('timezone')) }}
-            [<a href="{{ path('post_show', {'board': post.board.name, 'post': post.slug}) }}" class="reply_button post_{{ post.id }}">{{ post.slug }}</a>]
+            [ID. {{ post.slug }}]
+            [<a href="{{ path('post_show', {'board': post.board.name, 'post': post.slug}) }}" class="reply_button post_{{ post.id }}">Reply</a>]
             {%- if is_granted('ROLE_USER') -%}
                 {{ include('post/_delete_form.html.twig') }}
                 <span class="text-info">

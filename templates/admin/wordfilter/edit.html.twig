@@ -1,0 +1,13 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Admin Dashboard - Word Filter
+{% endblock %}
+
+{% block adminsection %}
+    <div class="row">
+        <div class="col-g">
+            {% set button_label = 'Update' %}
+            {{ include('admin/wordfilter/_wordfilter_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}
