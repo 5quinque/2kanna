@@ -102,7 +102,7 @@ class PostController extends AbstractController
         if ($post->getParentPost()) {
             return $this->redirectToRoute('post_show', [
                 'board' => $boardName,
-                'post' => $post->getRootParentPost()->getId(),
+                'post' => $post->getRootParentPost()->getSlug(),
             ]);
         }
 

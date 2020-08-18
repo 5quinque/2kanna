@@ -36,6 +36,28 @@ class AdminControllerTest extends WebTestCase
         $this->assertSelectorTextContains('button[type="submit"]', 'Login');
     }
 
+    public function testShowPostsByIP()
+    {
+        $client = static::createClient();
+        $adminRepository = static::$container->get(AdminRepository::class);
+        $postRepository = static::$container->get(PostRepository::class);
+
+        $posts = $postRepository->findBy(['ipAddress' => '127.0.0.1']);
+
+        $testAdmin = $adminRepository->findOneByUsername('admin');
+        $client->loginUser($testAdmin, 'default');
+
+        $crawler = $client->request('GET', '/admin/ip/127.0.0.1');
+
+        $this->assertResponseIsSuccessful();
+
+        foreach ($posts as $p) {
+            if (!is_null($p->getMessage())) {
+                $this->assertSelectorTextContains(".message:contains('{$p->getMessage()}')", $p->getMessage());
+            }
+        }
+    }
+
     public function testAdminLogout()
     {
         $client = static::createClient();

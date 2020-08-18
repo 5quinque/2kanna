@@ -22,7 +22,7 @@ class PostFixtures extends Fixture
             $slug = strtoupper($slug);
 
             $post = new Post();
-            $post->setMessage("Post {$i} 🤠");
+            $post->setMessage("Post {$i}");
             $post->setBoard($cowboyBoard);
             $post->setCreated($date);
             $post->setLatestpost($date);

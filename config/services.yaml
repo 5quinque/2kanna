@@ -49,3 +49,4 @@ services:
                     key: '%env(S3_KEY)%'
                     secret: '%env(S3_SECRET)%'
                 endpoint: '%env(S3_ENDPOINT)%'
+                pathStyleEndpoint: true
