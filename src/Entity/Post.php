@@ -102,6 +102,11 @@ class Post
      */
     private $slug;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $sticky = false;
+
     public function __construct()
     {
         $this->child_post = new ArrayCollection();
@@ -323,6 +328,18 @@ class Post
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getSticky(): ?bool
+    {
+        return $this->sticky;
+    }
+
+    public function setSticky(?bool $sticky): self
+    {
+        $this->sticky = $sticky;
 
         return $this;
     }

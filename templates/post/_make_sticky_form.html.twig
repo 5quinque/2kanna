@@ -1,0 +1,4 @@
+<form class="d-inline" method="post" action="{{ path('post_make_sticky', {'id': post.id}) }}">
+    <input type="hidden" name="_token" value="{{ csrf_token('make_sticky' ~ post.id) }}">
+    [<a href="#" class="sticky_button text-danger">{{ sticky_label|default('Make Sticky') }}</a>]
+</form>

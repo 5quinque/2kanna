@@ -10,6 +10,7 @@ import './prism';
 Reply.highlightReply();
 Reply.setReplyOnclick();
 Reply.setDeleteOnclick();
+Reply.setStickyOnclick();
 Collapse.setCollapseOnclick();
 Image.setImageOnclick();
 

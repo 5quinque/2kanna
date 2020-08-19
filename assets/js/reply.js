@@ -78,10 +78,23 @@ function submitDeleteForm() {
     this.parentElement.submit();
 }
 
+function submitStickyForm() {
+    this.parentElement.submit();
+}
+
 export function setDeleteOnclick() {
     Array.from(document.getElementsByClassName("delete_button")).forEach(function(item) {
         if (item.onclick === null) {
             item.onclick = submitDeleteForm;
+        }
+    });
+}
+
+export function setStickyOnclick() {
+    Array.from(document.getElementsByClassName("sticky_button")).forEach(function(item) {
+        if (item.onclick === null) {
+            console.log('test');
+            item.onclick = submitStickyForm;
         }
     });
 }

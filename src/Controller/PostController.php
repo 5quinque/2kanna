@@ -88,7 +88,7 @@ class PostController extends AbstractController
      */
     public function delete(Request $request, Post $post, PostUtil $postUtil): Response
     {
-        $boardName = $post->getBoard()->getName();
+        $this->denyAccessUnlessGranted('ROLE_USER');
 
         if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {
             $postUtil->deletePost($post);
@@ -99,6 +99,37 @@ class PostController extends AbstractController
             );
         }
 
+        return $this->formRedirect($post->getBoard()->getName(), $post);
+    }
+
+    /**
+     * @Route("/makesticky/{id}", name="post_make_sticky", methods={"POST"}, priority=1)
+     */
+    public function makeSticky(Request $request, Post $post)
+    {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+        if ($this->isCsrfTokenValid('make_sticky'.$post->getId(), $request->request->get('_token'))) {
+            if ($post->getSticky()) {
+                $post->setSticky(false);
+                $flashMessage = 'Sticky removed';
+            } else {
+                $post->setSticky(true);
+                $flashMessage = 'Post Stickied';
+            }
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($post);
+            $entityManager->flush();
+
+            $this->addFlash('success', $flashMessage);
+        }
+
+        return $this->formRedirect($post->getBoard()->getName(), $post);
+    }
+
+    private function formRedirect(string $boardName, Post $post)
+    {
         if ($post->getParentPost()) {
             return $this->redirectToRoute('post_show', [
                 'board' => $boardName,

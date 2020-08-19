@@ -26,7 +26,8 @@ class PostRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('p')
             ->where('p.board = :board')
             ->andWhere('p.parent_post is null')
-            ->orderBy('p.latestpost', 'DESC')
+            ->addOrderBy('p.sticky', 'DESC')
+            ->addOrderBy('p.latestpost', 'DESC')
             ->setParameter('board', $board)
         ;
 
