@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Admin;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -10,16 +10,16 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @method null|Admin find($id, $lockMode = null, $lockVersion = null)
- * @method null|Admin findOneBy(array $criteria, array $orderBy = null)
- * @method Admin[]    findAll()
- * @method Admin[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method null|User find($id, $lockMode = null, $lockVersion = null)
+ * @method null|User findOneBy(array $criteria, array $orderBy = null)
+ * @method User[]    findAll()
+ * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class AdminRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
+class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Admin::class);
+        parent::__construct($registry, User::class);
     }
 
     public function countEntities()
@@ -42,7 +42,7 @@ class AdminRepository extends ServiceEntityRepository implements PasswordUpgrade
     }
 
     // /**
-    //  * @return Admin[] Returns an array of Admin objects
+    //  * @return User[] Returns an array of User objects
     //  */
     /*
     public function findByExampleField($value)
@@ -58,7 +58,7 @@ class AdminRepository extends ServiceEntityRepository implements PasswordUpgrade
     }
     */
 
-    public function findOneByUsername($value): ?Admin
+    public function findOneByUsername($value): ?User
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.username = :val')

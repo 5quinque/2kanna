@@ -45,13 +45,10 @@
             {%- block body -%}{%- endblock -%}
             <hr>
             <div class="page-footer">
-            {%- if is_granted("ROLE_ADMIN") -%}
-                <a href="{{ path('admin_index') }}">{{ app.user.username }}</a> <a href="{{ path('admin_logout') }}">Admin Logout</a>
+            {%- if app.user -%}
+                <a href="{{ path('user_index') }}">{{ app.user.username }}</a> <a href="{{ path('user_logout') }}">Logout</a>
             {%- else -%}
-                <a href="{{ path('admin_login') }}">Admin Login</a>
-            {%- endif -%}
-            {%- if is_granted("ROLE_BOARDADMIN") -%}
-                <a href="{{ path('board_logout') }}">Board Logout</a>
+                <a href="{{ path('user_login') }}">Login</a>
             {%- endif -%}
             {%- block footer -%}{%- endblock -%}
             </div>

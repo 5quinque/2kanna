@@ -4,13 +4,12 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BoardRepository")
  */
-class Board implements UserInterface
+class Board
 {
     /**
      * @ORM\Id()
@@ -28,12 +27,6 @@ class Board implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Post", mappedBy="board", orphanRemoval=true)
      */
     private $post;
-
-    /**
-     * @var string The hashed password to delete/maintain the board
-     * @ORM\Column(type="string")
-     */
-    private $password;
 
     public function __construct()
     {
@@ -55,24 +48,6 @@ class Board implements UserInterface
         $this->name = $name;
 
         return $this;
-    }
-
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
-    public function getUsername(): string
-    {
-        return (string) $this->name;
-    }
-
-    /**
-     * @see UserInterface
-     */
-    public function getRoles(): array
-    {
-        return ['ROLE_BOARDADMIN'];
     }
 
     /**
@@ -104,35 +79,5 @@ class Board implements UserInterface
         }
 
         return $this;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-
-    /**
-     * @see UserInterface
-     */
-    public function getSalt()
-    {
-        // not needed when using the "bcrypt" algorithm in security.yaml
-    }
-
-    /**
-     * @see UserInterface
-     */
-    public function eraseCredentials()
-    {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
     }
 }

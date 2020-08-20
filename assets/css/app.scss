@@ -182,21 +182,32 @@ pre {
 ul.nav {
     list-style: none;
     padding: 0;
-    border-bottom: 1px solid $primary;
     padding-bottom: 7px;
 
     li.nav-item {
         display: inline;
-        padding: 10px 20px;
-        border: 1px solid $primary;
-        border-bottom: none;
-        border-radius: $border-radius $border-radius 0px 0px;
         margin: 5px;
+        font-weight: bold;
+
+        a {
+            padding: 10px 20px;
+        }
 
         a.active {
             color: $anchor-color;
-            font-weight: bold;
+
+            border-bottom: 2px solid $anchor-color
         }
+    }
+}
+
+ul.nav.nav-pills {
+    border-bottom: 1px solid $primary;
+
+    li.nav-item {
+        border: 1px solid $primary;
+        border-bottom: none;
+        border-radius: $border-radius $border-radius 0px 0px;
     }
 }
 
@@ -486,7 +497,7 @@ label {
 }
 
 /* Admin */
-.banned-list, .user-list, .filter-list {
+.banned-list, .user-list, .filter-list, .admin-board-list {
     padding: 10px;
 
     li {
@@ -496,6 +507,9 @@ label {
     }
 }
 
+#new_user_roles, #user_name_roles {
+    height: 100px;
+}
 
 /* Background */
 .bg-light {

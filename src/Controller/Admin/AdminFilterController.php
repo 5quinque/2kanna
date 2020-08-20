@@ -5,7 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\WordFilter;
 use App\Form\WordFilterType;
 use App\Repository\WordFilterRepository;
-use App\Util\AdminUtil;
+use App\Util\UserUtil;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,14 +16,14 @@ class AdminFilterController extends AbstractController
     /**
      * @Route("/admin/wordfilter", name="admin_wordfilter")
      */
-    public function wordFilter(WordFilterRepository $wordFilterRepository, Request $request, AdminUtil $adminUtil): Response
+    public function wordFilter(WordFilterRepository $wordFilterRepository, Request $request, UserUtil $userUtil): Response
     {
         $wordFilter = new WordFilter();
         $wordFilterForm = $this->createForm(WordFilterType::class, $wordFilter);
         $wordFilterForm->handleRequest($request);
 
         if ($wordFilterForm->isSubmitted() && $wordFilterForm->isValid()) {
-            $adminUtil->addBadWord($wordFilter);
+            $userUtil->addBadWord($wordFilter);
 
             $this->addFlash(
                 'success',
@@ -42,13 +42,13 @@ class AdminFilterController extends AbstractController
     /**
      * @Route("/admin/wordfilter/edit/{id}", name="admin_wordfilter_edit")
      */
-    public function wordFilterEdit(WordFilter $wordFilter, Request $request, AdminUtil $adminUtil): Response
+    public function wordFilterEdit(WordFilter $wordFilter, Request $request, UserUtil $userUtil): Response
     {
         $wordFilterForm = $this->createForm(WordFilterType::class, $wordFilter);
         $wordFilterForm->handleRequest($request);
 
         if ($wordFilterForm->isSubmitted() && $wordFilterForm->isValid()) {
-            $adminUtil->addBadWord($wordFilter);
+            $userUtil->addBadWord($wordFilter);
 
             $this->addFlash(
                 'success',

@@ -5,9 +5,9 @@ namespace App\Util;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Banned;
 use App\Entity\WordFilter;
-use App\Entity\Admin;
+use App\Entity\User;
 
-class AdminUtil
+class UserUtil
 {
     private $em;
 
@@ -32,7 +32,7 @@ class AdminUtil
         return true;
     }
 
-    public function addUser(Admin $user)
+    public function addUser(User $user)
     {
         $this->em->persist($user);
         $this->em->flush();

@@ -2,12 +2,12 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Admin;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class AdminFixtures extends Fixture
+class UserFixtures extends Fixture
 {
     private $passwordEncoder;
 
@@ -18,7 +18,7 @@ class AdminFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        $admin = new Admin();
+        $admin = new User();
 
         $admin->setUsername('admin');
         $admin->setRoles(['ROLE_ADMIN']);

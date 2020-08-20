@@ -9,7 +9,7 @@
             {{ post.created|date("d/m/Y H:i:s", setting('timezone')) }}
             [ID. {{ post.slug }}]
             [<a href="{{ path('post_show', {'board': post.board.name, 'post': post.slug}) }}" class="reply_button post_{{ post.id }}">Reply</a>]
-            {%- if is_granted('ROLE_USER') -%}
+            {%- if is_granted('ROLE_MODERATOR') -%}
                 {{ include('post/_delete_form.html.twig') }}
                 {%- if post.sticky -%}{%- set sticky_label = 'Remove Sticky' -%}{%- endif -%}
                 {{ include('post/_make_sticky_form.html.twig') }}

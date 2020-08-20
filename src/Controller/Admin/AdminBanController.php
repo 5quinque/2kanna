@@ -6,7 +6,7 @@ use App\Entity\Banned;
 use App\Form\BannedType;
 use App\Repository\BannedRepository;
 use App\Service\BannedIP;
-use App\Util\AdminUtil;
+use App\Util\UserUtil;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,7 +21,7 @@ class AdminBanController extends AbstractController
         string $ipAddress = null,
         BannedRepository $bannedRepository,
         Request $request,
-        AdminUtil $adminUtil,
+        UserUtil $userUtil,
         BannedIP $bannedIP
     ): Response {
         $banned = new Banned();
@@ -34,7 +34,7 @@ class AdminBanController extends AbstractController
         $bannedForm->handleRequest($request);
 
         if ($bannedForm->isSubmitted() && $bannedForm->isValid()) {
-            $adminUtil->banIP($banned);
+            $userUtil->banIP($banned);
             $bannedIP->clearBanCache($banned->getIpAddress());
 
             $this->addFlash(

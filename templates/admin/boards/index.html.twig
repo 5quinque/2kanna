@@ -1,0 +1,28 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Admin Dashboard - Word Filter
+{% endblock %}
+
+{% block adminsection %}
+    <div class="row">
+        <div class="col-g">
+            <h3>Create Board</h3>
+            Board form here
+            {# {{ include('board_admin/_form.html.twig') }} #}
+        </div>
+        <div class="col-g border-left">
+            <ul class="list-group admin-board-list">
+                {% for board in boards %}
+                <li class="list-group-item d-flex space-between align-items-center">
+                    {{ board.name }}
+                    <div>
+                        {{ include('admin/boards/_removeboard_form.html.twig') }}
+                    </div>
+                </li>
+                {% else %}
+                    <li>No boards found.<li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

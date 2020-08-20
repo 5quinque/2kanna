@@ -15,7 +15,7 @@ class AdminBoardController extends AbstractController
     /**
      * @Route("/admin/boards", name="admin_boards")
      */
-    public function banned(BoardRepository $board, PostRepository $post): Response
+    public function boards(BoardRepository $board, PostRepository $post): Response
     {
         $boards = $board->findAll();
         $postCount = [];
@@ -25,7 +25,7 @@ class AdminBoardController extends AbstractController
             $postCount[$b->getName()] = $bp->getNumResults();
         }
 
-        return $this->render('admin/boards.html.twig', [
+        return $this->render('admin/boards/index.html.twig', [
             'boards' => $boards,
             'postCount' => $postCount,
         ]);

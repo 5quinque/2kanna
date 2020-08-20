@@ -6,6 +6,7 @@
 {% block adminsection %}
     <div class="row">
         <div class="col-g">
+            <h3>Create User</h3>
             {{ include('admin/users/_newuser_form.html.twig') }}
         </div>
         <div class="col-g border-left">
@@ -15,7 +16,7 @@
                         {{ user.username }}
                         <div>
                             <div>
-                                <a class="btn btn-primary d-block text-center" href="{{ path('admin_user_edit', {'username': user.username}) }}">Edit</a>
+                                <a class="btn btn-primary d-block text-center" href="{{ path('admin_users_edit', {'username': user.username}) }}">Edit</a>
                             </div>
                             {{ include('admin/users/_removeuser_form.html.twig') }}
                         </div>

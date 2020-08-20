@@ -47,11 +47,6 @@ class BoardController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $board->setPassword($passwordEncoder->encodePassword(
-                $board,
-                $board->getPassword()
-            ));
-
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($board);
             $entityManager->flush();
@@ -68,7 +63,7 @@ class BoardController extends AbstractController
     }
 
     /**
-     * @Route("/{name}/{page<page>?page}/{page_no<\d+>?1}", name="board_show", methods={"GET", "POST"})
+     * @Route("/{name}/{page<page>?page}/{page_no<\d+>?1}", name="board_show", methods={"GET", "POST"}, priority=-1)
      */
     public function show(Board $board, int $page_no, Request $request, PostRepository $postRepository, PostUtil $postUtil): Response
     {

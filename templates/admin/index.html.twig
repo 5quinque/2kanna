@@ -13,27 +13,26 @@
             </div>
         </div>
     </div>
-    <hr>
     <div class="row">
         <div class="col-100">
-            <ul class="nav nav-pills">
+            <ul class="nav">
                 <li class="nav-item">
-                    <a class="nav-link {{ route == 'admin_index' ? 'active' }}" href="{{ path('admin_index') }}">Dashboard</a>
+                    <a class="nav-link {{ route starts with 'admin_index' ? 'active' }}" href="{{ path('admin_index') }}">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ route == 'admin_settings' ? 'active' }}" href="{{ path('admin_settings') }}">Settings</a>
+                    <a class="nav-link {{ route starts with 'admin_settings' ? 'active' }}" href="{{ path('admin_settings') }}">Settings</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ route == 'admin_banned' ? 'active' }}" href="{{ path('admin_banned') }}">Bans</a>
+                    <a class="nav-link {{ route starts with 'admin_banned' ? 'active' }}" href="{{ path('admin_banned') }}">Bans</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ route == 'admin_users' ? 'active' }}" href="{{ path('admin_users') }}">Users</a>
+                    <a class="nav-link {{ route starts with 'admin_users' ? 'active' }}" href="{{ path('admin_users') }}">Users</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ route == 'admin_wordfilter' ? 'active' }}" href="{{ path('admin_wordfilter') }}">Word Filter</a>
+                    <a class="nav-link {{ route starts with 'admin_wordfilter' ? 'active' }}" href="{{ path('admin_wordfilter') }}">Word Filter</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ route == 'admin_boards' ? 'active' }}" href="{{ path('admin_boards') }}">Boards</a>
+                    <a class="nav-link {{ route starts with 'admin_boards' ? 'active' }}" href="{{ path('admin_boards') }}">Boards</a>
                 </li>
             </ul>
         </div>
@@ -43,25 +42,33 @@
             {% block adminsection %}
                 <div class="container">
                     <div class="row space-between text-center">
-                        <div class="card col-30">
+                        <div class="card col-20">
                             <div class="card-header">
-                                <h4 class="my-0 font-weight-normal">Bans</h4>
+                                <h4 class="my-0">Boards</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title">TBC</h1>
+                            </div>
+                        </div>
+                        <div class="card col-20">
+                            <div class="card-header">
+                                <h4 class="my-0">Bans</h4>
                             </div>
                             <div class="card-body">
                                 <h1 class="card-title pricing-card-title">{{ banned_count }}</h1>
                             </div>
                         </div>
-                        <div class="card col-30">
+                        <div class="card col-20">
                             <div class="card-header">
-                                <h4 class="my-0 font-weight-normal">Users</h4>
+                                <h4 class="my-0">Users</h4>
                             </div>
                             <div class="card-body">
                                 <h1 class="card-title pricing-card-title">{{ user_count }}</h1>
                             </div>
                         </div>
-                        <div class="card col-30">
+                        <div class="card col-20">
                             <div class="card-header">
-                                <h4 class="my-0 font-weight-normal">Word Filters</h4>
+                                <h4 class="my-0">Word Filters</h4>
                             </div>
                             <div class="card-body">
                                 <h1 class="card-title pricing-card-title">{{ word_filter_count }}</h1>

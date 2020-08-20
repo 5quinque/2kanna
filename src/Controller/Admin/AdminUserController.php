@@ -2,12 +2,12 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Admin;
-use App\Form\Admin\AdminNameType;
-use App\Form\Admin\AdminPasswordType;
-use App\Form\Admin\NewAdminType;
-use App\Repository\AdminRepository;
-use App\Util\AdminUtil;
+use App\Entity\User;
+use App\Form\User\UserNameType;
+use App\Form\User\UserPasswordType;
+use App\Form\User\NewUserType;
+use App\Repository\UserRepository;
+use App\Util\UserUtil;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,13 +19,13 @@ class AdminUserController extends AbstractController
      * @Route("/admin/users", name="admin_users")
      */
     public function Users(
-        AdminRepository $adminRepository,
+        UserRepository $adminRepository,
         Request $request,
         UserPasswordEncoderInterface $passwordEncoder,
-        AdminUtil $adminUtil
+        UserUtil $userUtil
     ) {
-        $user = new Admin();
-        $userForm = $this->createForm(NewAdminType::class, $user);
+        $user = new User();
+        $userForm = $this->createForm(NewUserType::class, $user);
         $userForm->handleRequest($request);
 
         if ($userForm->isSubmitted() && $userForm->isValid()) {
@@ -34,7 +34,7 @@ class AdminUserController extends AbstractController
                 $user->getPassword()
             ));
 
-            $adminUtil->addUser($user);
+            $userUtil->addUser($user);
             $this->addFlash(
                 'success',
                 $user->getUsername().' is now created'
@@ -50,24 +50,19 @@ class AdminUserController extends AbstractController
     }
 
     /**
-     * @Route("/admin/users/edit/{username}", name="admin_user_edit")
+     * @Route("/admin/users/edit/{username}", name="admin_users_edit")
      */
     public function UserEdit(
-        Admin $user,
+        User $user,
         Request $request,
         UserPasswordEncoderInterface $passwordEncoder,
-        AdminUtil $adminUtil
+        UserUtil $userUtil
     ) {
-        $userForm = $this->createForm(AdminNameType::class, $user);
+        $userForm = $this->createForm(UserNameType::class, $user);
         $userForm->handleRequest($request);
 
         if ($userForm->isSubmitted() && $userForm->isValid()) {
-            $user->setPassword($passwordEncoder->encodePassword(
-                $user,
-                $user->getPassword()
-            ));
-
-            $adminUtil->addUser($user);
+            $userUtil->addUser($user);
 
             $this->addFlash(
                 'success',
@@ -83,9 +78,9 @@ class AdminUserController extends AbstractController
     }
 
     /**
-     * @Route("/admin/users/remove/{username}", name="admin_user_remove", methods={"DELETE"})
+     * @Route("/admin/users/remove/{username}", name="admin_users_remove", methods={"DELETE"})
      */
-    public function removeUser(Request $request, Admin $user)
+    public function removeUser(Request $request, User $user)
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
@@ -102,15 +97,15 @@ class AdminUserController extends AbstractController
     }
 
     /**
-     * @Route("/admin/users/password/{username}", name="admin_user_password")
+     * @Route("/admin/users/password/{username}", name="admin_users_password")
      */
     public function UserPassword(
-        Admin $user,
+        User $user,
         Request $request,
         UserPasswordEncoderInterface $passwordEncoder,
-        AdminUtil $adminUtil
+        UserUtil $userUtil
     ) {
-        $userForm = $this->createForm(AdminPasswordType::class, $user);
+        $userForm = $this->createForm(UserPasswordType::class, $user);
         $userForm->handleRequest($request);
 
         if ($userForm->isSubmitted() && $userForm->isValid()) {
@@ -118,6 +113,7 @@ class AdminUserController extends AbstractController
                 $user,
                 $user->getPassword()
             ));
+            $userUtil->addUser($user);
 
             $this->addFlash(
                 'success',

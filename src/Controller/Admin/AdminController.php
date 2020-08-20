@@ -2,8 +2,8 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Admin;
-use App\Repository\AdminRepository;
+use App\Entity\User;
+use App\Repository\UserRepository;
 use App\Repository\BannedRepository;
 use App\Repository\PostRepository;
 use App\Repository\WordFilterRepository;
@@ -19,11 +19,11 @@ class AdminController extends AbstractController
     public function index(
         BannedRepository $bannedRepository,
         WordFilterRepository $wordFilterRepository,
-        AdminRepository $adminRepository
+        UserRepository $userRepository
     ): Response {
         $bannedCount = $bannedRepository->countEntities();
         $wordFilterCount = $wordFilterRepository->countEntities();
-        $userCount = $adminRepository->countEntities();
+        $userCount = $userRepository->countEntities();
 
         return $this->render('admin/index.html.twig', [
             'banned_count' => $bannedCount,

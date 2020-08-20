@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Form\Admin;
+namespace App\Form\User;
 
-use App\Entity\Admin;
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AdminNameType extends AbstractType
+class NewUserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -23,10 +23,18 @@ class AdminNameType extends AbstractType
                 ]
             )
             ->add(
+                'password',
+                PasswordType::class,
+                [
+                    'label' => false,
+                    'attr' => ['placeholder' => 'Password'],
+                ]
+            )
+            ->add(
                 'roles',
                 ChoiceType::class,
                 [
-                'choices' => ['Admin' => 'ROLE_ADMIN', 'Moderator' => 'ROLE_USER'],
+                'choices' => ['Admin' => 'ROLE_ADMIN', 'Moderator' => 'ROLE_MODERATOR', 'User' => 'ROLE_USER'],
                 'required'   => true,
                 'expanded' => false,
                 'multiple' => true,
@@ -38,7 +46,7 @@ class AdminNameType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Admin::class,
+            'data_class' => User::class,
         ]);
     }
 }
