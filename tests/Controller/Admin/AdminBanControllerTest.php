@@ -2,7 +2,7 @@
 
 namespace App\Tests\Controller\Admin;
 
-use App\Repository\AdminRepository;
+use App\Repository\UserRepository;
 use App\Repository\BannedRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,9 +12,9 @@ class AdminBanControllerTest extends WebTestCase
     public function testAdminBanIndex()
     {
         $client = static::createClient();
-        $adminRepository = static::$container->get(AdminRepository::class);
+        $userRepository = static::$container->get(UserRepository::class);
 
-        $testAdmin = $adminRepository->findOneByUsername('admin');
+        $testAdmin = $userRepository->findOneByUsername('admin');
         $client->loginUser($testAdmin, 'default');
 
 
@@ -28,10 +28,10 @@ class AdminBanControllerTest extends WebTestCase
         $client = static::createClient();
         $client->followRedirects();
 
-        $adminRepository = static::$container->get(AdminRepository::class);
+        $userRepository = static::$container->get(UserRepository::class);
         $bannedRepository = static::$container->get(BannedRepository::class);
 
-        $testAdmin = $adminRepository->findOneByUsername('admin');
+        $testAdmin = $userRepository->findOneByUsername('admin');
         $client->loginUser($testAdmin, 'default');
 
         $client->request('GET', '/admin/ban');
@@ -56,12 +56,12 @@ class AdminBanControllerTest extends WebTestCase
         $client = static::createClient();
         $client->followRedirects();
 
-        $adminRepository = static::$container->get(AdminRepository::class);
+        $userRepository = static::$container->get(UserRepository::class);
         $bannedRepository = static::$container->get(BannedRepository::class);
 
         [$bannedEntity] = $bannedRepository->findBy(['ipAddress' => '192.168.0.1']);
 
-        $testAdmin = $adminRepository->findOneByUsername('admin');
+        $testAdmin = $userRepository->findOneByUsername('admin');
         $client->loginUser($testAdmin, 'default');
 
         $crawler = $client->request('GET', '/admin/ban');

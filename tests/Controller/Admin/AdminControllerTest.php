@@ -2,7 +2,7 @@
 
 namespace App\Tests\Controller\Admin;
 
-use App\Repository\AdminRepository;
+use App\Repository\UserRepository;
 use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,10 +12,10 @@ class AdminControllerTest extends WebTestCase
     public function testAdminIndex()
     {
         $client = static::createClient();
-        $adminRepository = static::$container->get(AdminRepository::class);
+        $userRepository = static::$container->get(UserRepository::class);
 
         // retrieve the admin user
-        $testAdmin = $adminRepository->findOneByUsername('admin');
+        $testAdmin = $userRepository->findOneByUsername('admin');
 
         // simulate $testAdmin being logged in
         $client->loginUser($testAdmin, 'default');
@@ -30,7 +30,7 @@ class AdminControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('GET', '/admin/login');
+        $client->request('GET', '/login');
 
         $this->assertResponseIsSuccessful();
         $this->assertSelectorTextContains('button[type="submit"]', 'Login');
@@ -39,12 +39,12 @@ class AdminControllerTest extends WebTestCase
     public function testShowPostsByIP()
     {
         $client = static::createClient();
-        $adminRepository = static::$container->get(AdminRepository::class);
+        $userRepository = static::$container->get(UserRepository::class);
         $postRepository = static::$container->get(PostRepository::class);
 
         $posts = $postRepository->findBy(['ipAddress' => '127.0.0.1']);
 
-        $testAdmin = $adminRepository->findOneByUsername('admin');
+        $testAdmin = $userRepository->findOneByUsername('admin');
         $client->loginUser($testAdmin, 'default');
 
         $crawler = $client->request('GET', '/admin/ip/127.0.0.1');
@@ -61,15 +61,15 @@ class AdminControllerTest extends WebTestCase
     public function testAdminLogout()
     {
         $client = static::createClient();
-        $adminRepository = static::$container->get(AdminRepository::class);
+        $userRepository = static::$container->get(UserRepository::class);
 
         // retrieve the admin user
-        $testAdmin = $adminRepository->findOneByUsername('admin');
+        $testAdmin = $userRepository->findOneByUsername('admin');
 
         // simulate $testAdmin being logged in
         $client->loginUser($testAdmin, 'default');
 
-        $client->request('GET', '/admin/logout');
+        $client->request('GET', '/logout');
 
         $this->assertResponseRedirects('http://localhost/', Response::HTTP_FOUND);
     }
@@ -79,8 +79,8 @@ class AdminControllerTest extends WebTestCase
         $client = static::createClient();
 
         // Login as admin
-        $adminRepository = static::$container->get(AdminRepository::class);
-        $testAdmin = $adminRepository->findOneByUsername('admin');
+        $userRepository = static::$container->get(UserRepository::class);
+        $testAdmin = $userRepository->findOneByUsername('admin');
         $client->loginUser($testAdmin, 'default');
 
         // We are only testing against a parent post
