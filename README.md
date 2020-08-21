@@ -1,9 +1,9 @@
 2Kanna
 ======
 
-![GitHub](https://img.shields.io/github/license/linnit/textboard?style=flat-square)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/linnit/textboard/Symfony%20with%20PostgreSQL?style=flat-square)
-![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/linnit/textboard?style=flat-square)
+![GitHub](https://img.shields.io/github/license/linnit/2kanna?style=flat-square)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/linnit/2kanna/Symfony%20with%20PostgreSQL?style=flat-square)
+![Codecov](https://img.shields.io/codecov/c/github/linnit/2kanna?style=flat-square)
 
 Requirements
 ------------
