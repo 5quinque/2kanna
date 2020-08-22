@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -33,6 +35,16 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Board::class, mappedBy="owner")
+     */
+    private $boards;
+
+    public function __construct()
+    {
+        $this->boards = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -105,5 +117,36 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection|Board[]
+     */
+    public function getBoards(): Collection
+    {
+        return $this->boards;
+    }
+
+    public function addBoard(Board $board): self
+    {
+        if (!$this->boards->contains($board)) {
+            $this->boards[] = $board;
+            $board->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBoard(Board $board): self
+    {
+        if ($this->boards->contains($board)) {
+            $this->boards->removeElement($board);
+            // set the owning side to null (unless already changed)
+            if ($board->getOwner() === $this) {
+                $board->setOwner(null);
+            }
+        }
+
+        return $this;
     }
 }

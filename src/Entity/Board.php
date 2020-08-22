@@ -28,6 +28,12 @@ class Board
      */
     private $post;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="boards")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $owner;
+
     public function __construct()
     {
         $this->post = new ArrayCollection();
@@ -77,6 +83,18 @@ class Board
                 $post->setBoard(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?User $owner): self
+    {
+        $this->owner = $owner;
 
         return $this;
     }

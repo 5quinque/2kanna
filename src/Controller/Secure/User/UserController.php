@@ -1,19 +1,20 @@
 <?php
 
-namespace App\Controller\User;
+namespace App\Controller\Secure\User;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/user")
+ */
 class UserController extends AbstractController
 {
     /**
-     * @Route("/user", name="user_index")
+     * @Route("/", name="user_index")
      */
     public function index()
     {
-        return $this->render('user/index.html.twig', [
-            'controller_name' => 'UserController',
-        ]);
+        return $this->render('secure/user/index.html.twig');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Secure\Admin;
 
 use App\Entity\User;
 use App\Form\User\UserNameType;
@@ -43,7 +43,7 @@ class AdminUserController extends AbstractController
 
         $users = $adminRepository->findAll();
 
-        return $this->render('admin/users/index.html.twig', [
+        return $this->render('secure/admin/users/index.html.twig', [
             'users' => $users,
             'user_form' => $userForm->createView(),
         ]);
@@ -72,7 +72,7 @@ class AdminUserController extends AbstractController
             return $this->redirectToRoute('admin_user_edit', ['username' => $user->getUsername()]);
         }
 
-        return $this->render('admin/users/user_edit.html.twig', [
+        return $this->render('secure/admin/users/user_edit.html.twig', [
             'user_form' => $userForm->createView(),
         ]);
     }
@@ -121,7 +121,7 @@ class AdminUserController extends AbstractController
             );
         }
 
-        return $this->render('admin/users/user_password.html.twig', [
+        return $this->render('secure/admin/users/user_password.html.twig', [
             'user_form' => $userForm->createView(),
         ]);
     }

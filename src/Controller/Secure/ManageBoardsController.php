@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Secure;
 
 use App\Entity\Board;
 use App\Form\Board\NewBoardType;
@@ -12,10 +12,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AdminBoardController extends AbstractController
+/**
+ * @Route("/boards")
+ */
+class ManageBoardsController extends AbstractController
 {
     /**
-     * @Route("/admin/boards", name="admin_boards")
+     * @Route("/", name="list_boards")
      */
     public function boards(
         Request $request,
@@ -23,7 +26,12 @@ class AdminBoardController extends AbstractController
         PostRepository $post,
         BoardUtil $boardUtil
     ): Response {
-        $boards = $boardRepository->findAll();
+        if ($this->isGranted('ROLE_ADMIN')) {
+            $boards = $boardRepository->findAll();
+        } else {
+            $boards = $this->getUser()->getBoards();
+        }
+
         $postCount = [];
 
         foreach ($boards as $b) {
@@ -36,6 +44,8 @@ class AdminBoardController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $board->setOwner($this->getUser());
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($board);
             $entityManager->flush();
@@ -47,10 +57,10 @@ class AdminBoardController extends AbstractController
                 'New Board added'
             );
 
-            return $this->redirectToRoute('admin_boards');
+            return $this->redirectToRoute('list_boards');
         }
 
-        return $this->render('admin/boards/index.html.twig', [
+        return $this->render('secure/manage_boards/index.html.twig', [
             'boards' => $boards,
             'postCount' => $postCount,
             'form' => $form->createView()
@@ -58,10 +68,14 @@ class AdminBoardController extends AbstractController
     }
 
     /**
-     * @Route("/admin/boards/{name}", name="admin_board_delete", methods={"DELETE"})
+     * @Route("/{name}", name="board_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Board $board): Response
     {
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            $this->denyAccessUnlessGranted('BOARD_EDIT', $board);
+        }
+
         if ($this->isCsrfTokenValid('delete'.$board->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($board);
@@ -73,6 +87,6 @@ class AdminBoardController extends AbstractController
             );
         }
 
-        return $this->redirectToRoute('admin_boards');
+        return $this->redirectToRoute('list_boards');
     }
 }

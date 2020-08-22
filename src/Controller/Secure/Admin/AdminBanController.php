@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Secure\Admin;
 
 use App\Entity\Banned;
 use App\Form\BannedType;
@@ -45,7 +45,7 @@ class AdminBanController extends AbstractController
 
         $bannedIPs = $bannedRepository->findAll();
 
-        return $this->render('admin/banned/index.html.twig', [
+        return $this->render('secure/admin/banned/index.html.twig', [
             'banned_ips' => $bannedIPs,
             'banned_form' => $bannedForm->createView(),
         ]);

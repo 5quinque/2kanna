@@ -1,0 +1,24 @@
+    <div class="row">
+        <div class="col-100">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link {{ route starts with 'admin_index' ? 'active' }}" href="{{ path('admin_index') }}">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ route starts with 'admin_settings' ? 'active' }}" href="{{ path('admin_settings') }}">Settings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ route starts with 'admin_banned' ? 'active' }}" href="{{ path('admin_banned') }}">Bans</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ route starts with 'admin_users' ? 'active' }}" href="{{ path('admin_users') }}">Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ route starts with 'admin_wordfilter' ? 'active' }}" href="{{ path('admin_wordfilter') }}">Word Filter</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ route starts with 'list_boards' ? 'active' }}" href="{{ path('list_boards') }}">Boards</a>
+                </li>
+            </ul>
+        </div>
+    </div>

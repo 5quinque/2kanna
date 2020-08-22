@@ -1,13 +1,18 @@
-{% extends 'admin/index.html.twig' %}
+{% if is_granted('ROLE_ADMIN') %}
+    {% set parent_template = 'secure/admin/index.html.twig' %}
+{% else %}
+    {% set parent_template = 'secure/user/index.html.twig' %}
+{% endif %}
 
-{% block title %}Admin Dashboard - Word Filter
-{% endblock %}
+{% extends parent_template %}
 
-{% block adminsection %}
+{% block title %}Board List{% endblock %}
+
+{% block main %}
     <div class="row">
         <div class="col-g">
             <h3>Create Board</h3>
-            {{ include('board_admin/_form.html.twig') }}
+            {{ include('secure/manage_boards/_form.html.twig') }}
         </div>
         <div class="col-g border-left">
             <ul class="list-group admin-board-list">
@@ -15,7 +20,7 @@
                 <li class="list-group-item d-flex space-between align-items-center">
                     {{ board.name }}
                     <div>
-                        {{ include('admin/boards/_removeboard_form.html.twig') }}
+                        {{ include('secure/manage_boards/_removeboard_form.html.twig') }}
                     </div>
                 </li>
                 {% else %}

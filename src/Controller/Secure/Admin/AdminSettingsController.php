@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Secure\Admin;
 
 use App\Form\SettingType;
 use App\Repository\SettingRepository;
@@ -48,7 +48,7 @@ class AdminSettingsController extends AbstractController
             $forms[] = $form->createView();
         }
 
-        return $this->render('admin/settings/index.html.twig', [
+        return $this->render('secure/admin/settings/index.html.twig', [
             'settings' => $repository->findAll(),
             'forms' => $forms,
         ]);

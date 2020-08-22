@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User Dashboard
+{% endblock %}
+
+{% set route = app.request.get('_route') %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-100">
+            <div class="page-header">
+                <h1 id="user">User Dashboard</h1>
+            </div>
+        </div>
+    </div>
+    {{ include ('secure/user/_nav.html.twig') }}
+    <div class="row">
+        <div class="col-100">
+            {% block main %}
+                <div class="container">
+                    <div class="row space-between text-center">
+                        Something something something.
+                    </div>
+                </div>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

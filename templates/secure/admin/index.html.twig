@@ -13,33 +13,10 @@
             </div>
         </div>
     </div>
+    {{ include ('secure/admin/_nav.html.twig') }}
     <div class="row">
         <div class="col-100">
-            <ul class="nav">
-                <li class="nav-item">
-                    <a class="nav-link {{ route starts with 'admin_index' ? 'active' }}" href="{{ path('admin_index') }}">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ route starts with 'admin_settings' ? 'active' }}" href="{{ path('admin_settings') }}">Settings</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ route starts with 'admin_banned' ? 'active' }}" href="{{ path('admin_banned') }}">Bans</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ route starts with 'admin_users' ? 'active' }}" href="{{ path('admin_users') }}">Users</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ route starts with 'admin_wordfilter' ? 'active' }}" href="{{ path('admin_wordfilter') }}">Word Filter</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ route starts with 'admin_boards' ? 'active' }}" href="{{ path('admin_boards') }}">Boards</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-100">
-            {% block adminsection %}
+            {% block main %}
                 <div class="container">
                     <div class="row space-between text-center">
                         <div class="card col-20">

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Secure\Admin;
 
 use App\Entity\WordFilter;
 use App\Form\WordFilterType;
@@ -33,7 +33,7 @@ class AdminFilterController extends AbstractController
 
         $wordFilterStrings = $wordFilterRepository->findAll();
 
-        return $this->render('admin/wordfilter/index.html.twig', [
+        return $this->render('secure/admin/wordfilter/index.html.twig', [
             'word_filter_strings' => $wordFilterStrings,
             'word_filter_form' => $wordFilterForm->createView(),
         ]);
@@ -58,7 +58,7 @@ class AdminFilterController extends AbstractController
             return $this->redirectToRoute('admin_wordfilter');
         }
 
-        return $this->render('admin/wordfilter/edit.html.twig', [
+        return $this->render('secure/admin/wordfilter/edit.html.twig', [
             'word_filter_form' => $wordFilterForm->createView(),
         ]);
     }

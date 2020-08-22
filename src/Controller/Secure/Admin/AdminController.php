@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Secure\Admin;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
@@ -25,7 +25,7 @@ class AdminController extends AbstractController
         $wordFilterCount = $wordFilterRepository->countEntities();
         $userCount = $userRepository->countEntities();
 
-        return $this->render('admin/index.html.twig', [
+        return $this->render('secure/admin/index.html.twig', [
             'banned_count' => $bannedCount,
             'word_filter_count' => $wordFilterCount,
             'user_count' => $userCount,
@@ -39,7 +39,7 @@ class AdminController extends AbstractController
     {
         $posts = $postRepository->findBy(['ipAddress' => $ipAddress]);
 
-        return $this->render('admin/ip_post.html.twig', [
+        return $this->render('secure/admin/ip_post.html.twig', [
             'posts' => $posts,
         ]);
     }
