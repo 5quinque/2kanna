@@ -3,8 +3,10 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Board;
+use App\Form\Board\NewBoardType;
 use App\Repository\BoardRepository;
 use App\Repository\PostRepository;
+use App\Util\BoardUtil;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,9 +17,13 @@ class AdminBoardController extends AbstractController
     /**
      * @Route("/admin/boards", name="admin_boards")
      */
-    public function boards(BoardRepository $board, PostRepository $post): Response
-    {
-        $boards = $board->findAll();
+    public function boards(
+        Request $request,
+        BoardRepository $boardRepository,
+        PostRepository $post,
+        BoardUtil $boardUtil
+    ): Response {
+        $boards = $boardRepository->findAll();
         $postCount = [];
 
         foreach ($boards as $b) {
@@ -25,9 +31,29 @@ class AdminBoardController extends AbstractController
             $postCount[$b->getName()] = $bp->getNumResults();
         }
 
+        $board = new Board();
+        $form = $this->createForm(NewBoardType::class, $board);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($board);
+            $entityManager->flush();
+
+            $boardUtil->clearSetting('boardlist');
+
+            $this->addFlash(
+                'success',
+                'New Board added'
+            );
+
+            return $this->redirectToRoute('admin_boards');
+        }
+
         return $this->render('admin/boards/index.html.twig', [
             'boards' => $boards,
             'postCount' => $postCount,
+            'form' => $form->createView()
         ]);
     }
 
@@ -40,6 +66,11 @@ class AdminBoardController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($board);
             $entityManager->flush();
+
+            $this->addFlash(
+                'success',
+                'Board deleted'
+            );
         }
 
         return $this->redirectToRoute('admin_boards');
