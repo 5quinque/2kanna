@@ -1,4 +1,4 @@
-{% extends 'admin/index.html.twig' %}
+{% extends 'secure/admin/index.html.twig' %}
 
 {% block title %}Admin Dashboard - Word Filter
 {% endblock %}
@@ -12,7 +12,7 @@
             {% set section = setting_form.vars.data.section %}
             <h3>{{ section }}</h3>
         {% endif %}
-        {% include('admin/settings/_setting_form.html.twig') %}
+        {% include('secure/admin/settings/_setting_form.html.twig') %}
     {% endfor %}
     </div>
 </div>

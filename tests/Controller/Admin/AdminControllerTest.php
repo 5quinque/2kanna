@@ -53,7 +53,7 @@ class AdminControllerTest extends WebTestCase
 
         foreach ($posts as $p) {
             if (!is_null($p->getMessage())) {
-                $this->assertSelectorTextContains(".message:contains('{$p->getMessage()}')", $p->getMessage());
+                $this->assertSelectorExists("#{$p->getSlug()} .message");
             }
         }
     }

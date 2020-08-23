@@ -63,14 +63,16 @@ class BoardControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        // Need to be logged in to create board
         $userRepository = static::$container->get(UserRepository::class);
+        $boardRepository = static::$container->get(BoardRepository::class);
+
+        // Need to be logged in to create board
         $testAdmin = $userRepository->findOneByUsername('admin');
         $client->loginUser($testAdmin, 'default');
 
         $client->followRedirects();
 
-        $crawler = $client->request('GET', '/new');
+        $crawler = $client->request('GET', '/boards');
 
         $crawler = $client->submitForm(
             'Save',
@@ -79,8 +81,9 @@ class BoardControllerTest extends WebTestCase
             ]
         );
 
-        $newBoardTitle = $crawler->filter('h1#boards')->text();
+        $this->assertResponseIsSuccessful();
 
-        $this->assertSame('testboard', $newBoardTitle);
+        $newBoard = $boardRepository->findOneBy(['name' => 'testboard']);
+        $this->assertNotEmpty($newBoard);
     }
 }
