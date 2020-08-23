@@ -20,23 +20,12 @@ class ManageBoardsController extends AbstractController
     /**
      * @Route("/", name="list_boards")
      */
-    public function boards(
-        Request $request,
-        BoardRepository $boardRepository,
-        PostRepository $post,
-        BoardUtil $boardUtil
-    ): Response {
+    public function boards(Request $request, BoardRepository $boardRepository, PostRepository $post, BoardUtil $boardUtil): Response
+    {
         if ($this->isGranted('ROLE_ADMIN')) {
             $boards = $boardRepository->findAll();
         } else {
             $boards = $this->getUser()->getBoards();
-        }
-
-        $postCount = [];
-
-        foreach ($boards as $b) {
-            $bp = $post->findLatest(1, $b);
-            $postCount[$b->getName()] = $bp->getNumResults();
         }
 
         $board = new Board();
@@ -62,7 +51,6 @@ class ManageBoardsController extends AbstractController
 
         return $this->render('secure/manage_boards/index.html.twig', [
             'boards' => $boards,
-            'postCount' => $postCount,
             'form' => $form->createView()
         ]);
     }

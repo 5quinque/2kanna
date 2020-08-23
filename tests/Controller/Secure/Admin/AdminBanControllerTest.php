@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Controller\Admin;
+namespace App\Tests\Controller\Secure\Admin;
 
 use App\Repository\UserRepository;
 use App\Repository\BannedRepository;
@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AdminBanControllerTest extends WebTestCase
 {
-    public function testAdminBanIndex()
+    public function testBanIndex()
     {
         $client = static::createClient();
         $userRepository = static::$container->get(UserRepository::class);
@@ -17,13 +17,12 @@ class AdminBanControllerTest extends WebTestCase
         $testAdmin = $userRepository->findOneByUsername('admin');
         $client->loginUser($testAdmin, 'default');
 
-
         $client->request('GET', '/admin/ban');
         $this->assertResponseIsSuccessful();
         $this->assertSelectorTextContains('h1#admin', 'Admin Dashboard');
     }
 
-    public function testAdminBanForm()
+    public function testBanForm()
     {
         $client = static::createClient();
         $client->followRedirects();
@@ -51,7 +50,7 @@ class AdminBanControllerTest extends WebTestCase
         $this->assertNotEmpty($bannedEntity);
     }
 
-    public function testAdminUnban()
+    public function testUnban()
     {
         $client = static::createClient();
         $client->followRedirects();
