@@ -1,4 +1,4 @@
-{% extends 'admin/index.html.twig' %}
+{% extends 'secure/admin/index.html.twig' %}
 
 {% block title %}Admin Dashboard - Word Filter
 {% endblock %}
@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-50 m-auto">
             {% set button_label = 'Update' %}
-            {{ include('admin/wordfilter/_wordfilter_form.html.twig') }}
+            {{ include('secure/admin/wordfilter/_wordfilter_form.html.twig') }}
         </div>
     </div>
 {% endblock %}

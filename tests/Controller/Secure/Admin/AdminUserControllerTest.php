@@ -20,4 +20,31 @@ class AdminUserControllerTest extends WebTestCase
 
         $this->assertResponseIsSuccessful();
     }
+
+    public function testNewUser()
+    {
+        $client = static::createClient();
+        $client->followRedirects();
+
+        $userRepository = static::$container->get(UserRepository::class);
+
+        $testAdmin = $userRepository->findOneByUsername('admin');
+        $client->loginUser($testAdmin, 'default');
+
+        $client->request('GET', '/admin/users');
+
+        $crawler = $client->submitForm(
+            'Add User',
+            [
+                'new_user[username]' => 'test_user',
+                'new_user[password]' => 'test_password'
+            ]
+        );
+
+        $this->assertResponseIsSuccessful();
+
+        $newUser = $userRepository->findOneByUsername('test_user');
+
+        $this->assertNotEmpty($newUser);
+    }
 }

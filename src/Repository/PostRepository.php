@@ -34,11 +34,6 @@ class PostRepository extends ServiceEntityRepository
         return (new Paginator($qb))->paginate($page);
     }
 
-    public function getPageCount(array $criteria)
-    {
-        return count($this->findBy($criteria));
-    }
-
     public function findByParentOlderThan($value, $ipAddress = null): ?array
     {
         $query = $this->createQueryBuilder('p')
