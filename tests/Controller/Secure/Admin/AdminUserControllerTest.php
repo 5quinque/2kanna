@@ -47,4 +47,49 @@ class AdminUserControllerTest extends WebTestCase
 
         $this->assertNotEmpty($newUser);
     }
+
+    public function testEditUser()
+    {
+        $client = static::createClient();
+        $client->followRedirects();
+
+        $userRepository = static::$container->get(UserRepository::class);
+
+        $testAdmin = $userRepository->findOneByUsername('admin');
+        $client->loginUser($testAdmin, 'default');
+
+        $client->request('GET', '/admin/users/edit/admin');
+
+        $crawler = $client->submitForm(
+            'Save',
+            [
+                'user_name[username]' => 'test_admin'
+            ]
+        );
+
+        $this->assertResponseIsSuccessful();
+
+        $newUser = $userRepository->findOneByUsername('test_admin');
+
+        $this->assertNotEmpty($newUser);
+    }
+
+    public function testRemoveUser()
+    {
+        $client = static::createClient();
+        $client->followRedirects();
+
+        $userRepository = static::$container->get(UserRepository::class);
+
+        $testAdmin = $userRepository->findOneByUsername('admin');
+        $client->loginUser($testAdmin, 'default');
+
+        $crawler = $client->request('GET', '/admin/users');
+
+        $client->submit($crawler->filter("form[action='/admin/users/remove/user']")->form());
+
+        $this->assertResponseIsSuccessful();
+
+        $this->assertEmpty($userRepository->findOneByUsername('user'));
+    }
 }

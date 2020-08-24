@@ -7,6 +7,7 @@ use App\Form\Board\NewBoardType;
 use App\Repository\BoardRepository;
 use App\Repository\PostRepository;
 use App\Util\BoardUtil;
+use App\Util\SettingUtil;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,8 +21,12 @@ class ManageBoardsController extends AbstractController
     /**
      * @Route("/", name="list_boards")
      */
-    public function boards(Request $request, BoardRepository $boardRepository, PostRepository $post, BoardUtil $boardUtil): Response
-    {
+    public function boards(
+        Request $request,
+        BoardRepository $boardRepository,
+        BoardUtil $boardUtil,
+        SettingUtil $settingUtil
+    ): Response {
         if ($this->isGranted('ROLE_ADMIN')) {
             $boards = $boardRepository->findAll();
         } else {
@@ -33,6 +38,10 @@ class ManageBoardsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if (!$settingUtil->setting('anon_can_create_board') && !$this->isGranted('ROLE_ADMIN')) {
+                return $this->redirectToRoute('board_index');
+            }
+
             $board->setOwner($this->getUser());
 
             $entityManager = $this->getDoctrine()->getManager();

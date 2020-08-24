@@ -1,4 +1,4 @@
-{% extends 'admin/index.html.twig' %}
+{% extends 'secure/admin/index.html.twig' %}
 
 {% block title %}Admin Dashboard - User Edit
 {% endblock %}
@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-50 m-auto">
             {% set button_label = "Save" %}
-            {{ include('admin/users/_edit_form.html.twig') }}
+            {{ include('secure/admin/users/_edit_form.html.twig') }}
         </div>
     </div>
     <div class="row">

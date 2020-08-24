@@ -11,8 +11,12 @@
 {% block main %}
     <div class="row">
         <div class="col-g">
+            {% if setting('anon_can_create_board') or is_granted('ROLE_ADMIN') %}
             <h3>Create Board</h3>
             {{ include('secure/manage_boards/_form.html.twig') }}
+            {% else %}
+            <h3>Board creation currently disabled</h3>
+            {% endif %}
         </div>
         <div class="col-g border-left">
             <ul class="list-group admin-board-list">

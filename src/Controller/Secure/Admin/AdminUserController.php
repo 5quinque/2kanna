@@ -69,7 +69,7 @@ class AdminUserController extends AbstractController
                 $user->getUsername().' now updated'
             );
 
-            return $this->redirectToRoute('admin_user_edit', ['username' => $user->getUsername()]);
+            return $this->redirectToRoute('admin_users_edit', ['username' => $user->getUsername()]);
         }
 
         return $this->render('secure/admin/users/user_edit.html.twig', [
@@ -84,6 +84,11 @@ class AdminUserController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+
+            foreach ($user->getBoards() as $board) {
+                $user->removeBoard($board);
+            }
+
             $entityManager->remove($user);
             $entityManager->flush();
         }

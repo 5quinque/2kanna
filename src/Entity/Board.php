@@ -5,9 +5,11 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BoardRepository")
+ * @UniqueEntity(fields={"name"}, message="There is already a board with this name")
  */
 class Board
 {
@@ -30,7 +32,6 @@ class Board
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="boards")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $owner;
 
