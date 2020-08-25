@@ -13,18 +13,40 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $cowboyBoard = $this->getReference(BoardFixtures::COWBOY_BOARD_REFERENCE);
+        $board = $this->getReference(BoardFixtures::MISC_BOARD_REFERENCE);
 
         $date = new DateTime();
 
-        for ($i = 0; $i < 100; ++$i) {
+        $uuid = Uuid::v4();
+        [$slug] = explode('-', $uuid->toRfc4122());
+        $slug = strtoupper($slug);
+
+        $post = new Post();
+        $post->setMessage("Code test
+```c
+#include <stdio.h>
+
+int main() {
+    printf('Hello World\\n');
+
+    return 0;
+}
+```");
+        $post->setBoard($board);
+        $post->setCreated(new DateTime('+1 min'));
+        $post->setLatestpost(new DateTime('+1 min'));
+        $post->setIpAddress('127.0.0.1');
+        $post->setSlug($slug);
+        $manager->persist($post);
+
+        for ($i = 0; $i < 20; ++$i) {
             $uuid = Uuid::v4();
             [$slug] = explode('-', $uuid->toRfc4122());
             $slug = strtoupper($slug);
 
             $post = new Post();
             $post->setMessage("Post {$i}");
-            $post->setBoard($cowboyBoard);
+            $post->setBoard($board);
             $post->setCreated($date);
             $post->setLatestpost($date);
             $post->setIpAddress('127.0.0.1');

@@ -26,16 +26,6 @@ class AdminControllerTest extends WebTestCase
         $this->assertSelectorTextContains('h1#admin', 'Admin Dashboard');
     }
 
-    public function testAdminLoginView()
-    {
-        $client = static::createClient();
-
-        $client->request('GET', '/login');
-
-        $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('button[type="submit"]', 'Login');
-    }
-
     public function testShowPostsByIP()
     {
         $client = static::createClient();

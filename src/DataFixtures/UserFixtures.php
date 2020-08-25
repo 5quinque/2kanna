@@ -11,6 +11,7 @@ class UserFixtures extends Fixture
 {
     private $passwordEncoder;
     public const ADMIN_USER_REFERENCE = 'admin-user';
+    public const STANDARD_USER_REFERENCE = 'standard-user';
 
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -44,5 +45,6 @@ class UserFixtures extends Fixture
         $manager->flush();
 
         $this->addReference(self::ADMIN_USER_REFERENCE, $admin);
+        $this->addReference(self::STANDARD_USER_REFERENCE, $user);
     }
 }

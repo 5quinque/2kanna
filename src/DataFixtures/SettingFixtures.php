@@ -98,7 +98,7 @@ class SettingFixtures extends Fixture
         $anonCanCreateBoard = new Setting();
         $anonCanCreateBoard->setLabel('Anyone can create boards');
         $anonCanCreateBoard->setName('anon_can_create_board');
-        $anonCanCreateBoard->setValueBool(false);
+        $anonCanCreateBoard->setValueBool(true);
         $anonCanCreateBoard->setType('checkbox');
         $anonCanCreateBoard->setSection('Site');
         $anonCanCreateBoard->setPlacement(3);

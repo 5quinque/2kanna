@@ -1,3 +1,7 @@
+<p align="center">
+    <img width="150px" src="public/vi.png">
+</p>
+
 2Kanna
 ======
 

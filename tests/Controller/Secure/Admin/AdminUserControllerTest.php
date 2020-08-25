@@ -92,4 +92,26 @@ class AdminUserControllerTest extends WebTestCase
 
         $this->assertEmpty($userRepository->findOneByUsername('user'));
     }
+
+    public function testUserPasswordChange()
+    {
+        $client = static::createClient();
+        $client->followRedirects();
+
+        $userRepository = static::$container->get(UserRepository::class);
+
+        $testAdmin = $userRepository->findOneByUsername('admin');
+        $client->loginUser($testAdmin, 'default');
+
+        $client->request('GET', '/admin/users/password/user');
+
+        $crawler = $client->submitForm(
+            'Save',
+            [
+                'user_password[password]' => 'new_password'
+            ]
+        );
+
+        $this->assertResponseIsSuccessful();
+    }
 }

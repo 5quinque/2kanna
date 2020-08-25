@@ -98,8 +98,14 @@ class PostType extends AbstractType
     public function cooldown(Post $post, ExecutionContextInterface $context)
     {
         $request = Request::createFromGlobals();
+        $requesterIP = $request->getClientIp();
 
-        $posts = $this->findPosts->isPosterHot($request->getClientIp());
+        // Local host doesn't need to cooldown
+        if ($requesterIP === '127.0.0.1') {
+            return;
+        }
+
+        $posts = $this->findPosts->isPosterHot($requesterIP);
 
         if (!empty($posts)) {
             $context->buildViolation("You're posting too frequently")

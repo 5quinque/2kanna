@@ -54,6 +54,8 @@ class BoardControllerTest extends WebTestCase
             ]
         );
 
+        $this->assertResponseIsSuccessful();
+
         $newPost = $crawler->filter('.post-body .message')->text();
 
         $this->assertSame('Test Message', $newPost);

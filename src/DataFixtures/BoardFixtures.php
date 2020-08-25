@@ -9,17 +9,18 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class BoardFixtures extends Fixture implements DependentFixtureInterface
 {
-    public const COWBOY_BOARD_REFERENCE = 'cowboy_board';
+    public const MISC_BOARD_REFERENCE = 'misc-board';
 
     public function load(ObjectManager $manager)
     {
         $admin = $this->getReference(UserFixtures::ADMIN_USER_REFERENCE);
+        $user = $this->getReference(UserFixtures::STANDARD_USER_REFERENCE);
 
         $board = new Board();
         $board->setName('miscellaneous');
-        $board->setOwner($admin);
+        $board->setOwner($user);
         $manager->persist($board);
-        $this->addReference(self::COWBOY_BOARD_REFERENCE, $board);
+        $this->addReference(self::MISC_BOARD_REFERENCE, $board);
 
         $boardNames = ['technology', 'λ', 'Ω', 'music', 'literature'];
         foreach ($boardNames as $name) {
