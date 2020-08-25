@@ -68,7 +68,7 @@ class PostControllerTest extends WebTestCase
 
         $post = $postRepository->findOneBy(['parent_post' => null]);
 
-        $crawler = $client->request('GET', "/{$post->getBoard()->getName()}");
+        $crawler = $client->request('GET', "/{$post->getBoard()->getName()}/{$post->getSlug()}");
         $client->submit($crawler->filter("form[action='/makesticky/{$post->getId()}']")->form());
 
         $this->assertSelectorExists("#{$post->getSlug()} .sticky");
