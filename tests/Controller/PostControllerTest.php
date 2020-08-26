@@ -9,6 +9,30 @@ use Symfony\Component\HttpFoundation\Response;
 
 class PostControllerTest extends WebTestCase
 {
+    public function testPostTree()
+    {
+        $client = static::createClient();
+
+        $postRepository = self::$container->get(PostRepository::class);
+        $post = $postRepository->findOneBy(['parent_post' => null]);
+
+        $client->request('GET', "/json/tree/{$post->getSlug()}");
+
+        $this->assertResponseIsSuccessful();
+    }
+
+    public function testAjaxPost()
+    {
+        $client = static::createClient();
+
+        $postRepository = self::$container->get(PostRepository::class);
+        $post = $postRepository->findOneBy(['parent_post' => null]);
+
+        $client->request('GET', "/i/{$post->getBoard()->getName()}/{$post->getSlug()}");
+
+        $this->assertResponseIsSuccessful();
+    }
+
     public function testShowPosts()
     {
         $client = static::createClient();

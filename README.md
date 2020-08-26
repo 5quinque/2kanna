@@ -21,27 +21,39 @@ Requirements
 
 ## Features
 
-   * Image & Video WebM file upload
+   * Image & Video WebM file upload (Local storage or S3 compatible)
    * Tree post structure
    * Code formatting
    * Crosslinking posts and posts from other boards
    * Autoupdating threads
    * Allow anonymous board creation
+   * Sticky posts
+
+---
 
 ## Installation
 
    * [Heroku Deployment](docs/heroku_deployment.md)
    * [Apache/PHP-FPM Deployment](docs/apache_php_deployment.md)
 
+---
+
 ## File Uploads
 
 Files can either be stored on the local filesystem or on a S3 compatible object storage bucket
 
-### Local
+### Local File Storage
 
+In `config/packages/vich_uploader.yaml` change 'upload_destination' to 'local_filesystem'  
 In `config/packages/liip_imagine.yaml` change the filter caches to 'default'
 
-### Apply image filters with a worker process
+### S3 File Stoage
+
+In `config/packages/vich_uploader.yaml` ensure 'upload_destination' is set to 's3_filesystem'  
+In `config/packages/liip_imagine.yaml` ensure the filter caches are set to 's3_cache'
+
+
+### Apply image filters using a worker process
 
 To ensure thumbnails and other filters are applied to images and a clean URL is served from the first request, you will need to set the environment variable `WAIT_IMAGE_FILTER` to true. You will then need to have the following worker process running at all times
 
@@ -50,6 +62,8 @@ php bin/console enqueue:consume --setup-broker
 ```
 
 If you're using Heroku, this should be running as defined in the Procfile
+
+---
 
 ## Tests
 
