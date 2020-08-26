@@ -15,6 +15,10 @@ class UserController extends AbstractController
      */
     public function index()
     {
+        if ($this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('admin_index');
+        }
+
         return $this->render('secure/user/index.html.twig');
     }
 }
