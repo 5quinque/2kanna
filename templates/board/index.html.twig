@@ -10,7 +10,9 @@
             {% for thread in recent_active_threads|slice(0,5) %}
                 <li class="list-group-item">
                 [<a href="{{ path('board_show', {'name': thread.board.name}) }}">{{ thread.board.name }}</a>]
-                <a href="{{ path('post_show', {'board': thread.board.name, 'post' : thread.slug}) }}">{{ thread.message }}</a>
+                <a href="{{ path('post_show', {'board': thread.board.name, 'post' : thread.slug}) }}">
+                {{ thread.message|nl2br|codeblock|urltoanchor|crosslink|greentext|striptags[:50] }}
+                </a>
                 </li>
             {% endfor %}
             </ul>
@@ -20,7 +22,9 @@
             {% for thread in recent_active_threads|slice(5,5) %}
                 <li class="list-group-item">
                 [<a href="{{ path('board_show', {'name': thread.board.name}) }}">{{ thread.board.name }}</a>]
-                <a href="{{ path('post_show', {'board': thread.board.name, 'post' : thread.slug}) }}">{{ thread.message }}</a>
+                <a href="{{ path('post_show', {'board': thread.board.name, 'post' : thread.slug}) }}">
+                {{ thread.message|nl2br|codeblock|urltoanchor|crosslink|greentext|striptags[:50] }}
+                </a>
                 </li>
             {% endfor %}
             </ul>
