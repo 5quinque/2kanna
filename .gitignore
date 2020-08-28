@@ -25,6 +25,7 @@
 /public/thumb
 /public/img
 /.vscode/
+/build/coverage-report
 
 ###> symfony/webpack-encore-bundle ###
 /node_modules/
