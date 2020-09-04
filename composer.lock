@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.151.5",
+            "version": "3.151.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "d38bd349560bbbb25b0991950c858fabff1280b3"
+                "reference": "b34231eb116dd7dada37f6d30d88343a992c9c3e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/d38bd349560bbbb25b0991950c858fabff1280b3",
-                "reference": "d38bd349560bbbb25b0991950c858fabff1280b3",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/b34231eb116dd7dada37f6d30d88343a992c9c3e",
+                "reference": "b34231eb116dd7dada37f6d30d88343a992c9c3e",
                 "shasum": ""
             },
             "require": {
@@ -89,7 +89,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2020-09-02T18:18:35+00:00"
+            "time": "2020-09-03T18:17:59+00:00"
         },
         {
             "name": "brick/math",
@@ -8766,16 +8766,16 @@
     "packages-dev": [
         {
             "name": "dama/doctrine-test-bundle",
-            "version": "v6.3.2",
+            "version": "v6.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dmaicher/doctrine-test-bundle.git",
-                "reference": "06932e828b4e8ed8655b9b64ae30428e048b616e"
+                "reference": "a364cfee35acb7d37698c4749f7dd34d04646535"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dmaicher/doctrine-test-bundle/zipball/06932e828b4e8ed8655b9b64ae30428e048b616e",
-                "reference": "06932e828b4e8ed8655b9b64ae30428e048b616e",
+                "url": "https://api.github.com/repos/dmaicher/doctrine-test-bundle/zipball/a364cfee35acb7d37698c4749f7dd34d04646535",
+                "reference": "a364cfee35acb7d37698c4749f7dd34d04646535",
                 "shasum": ""
             },
             "require": {
@@ -8819,7 +8819,7 @@
                 "symfony",
                 "tests"
             ],
-            "time": "2020-03-02T20:42:23+00:00"
+            "time": "2020-09-04T05:50:21+00:00"
         },
         {
             "name": "doctrine/data-fixtures",
