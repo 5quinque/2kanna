@@ -5,7 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Board;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 class BoardFixtures extends Fixture implements DependentFixtureInterface
 {

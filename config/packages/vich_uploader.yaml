@@ -5,7 +5,8 @@ vich_uploader:
 
     mappings:
         post_image:
-            upload_destination: s3_filesystem
+            # upload_destination: s3_filesystem
+            upload_destination: local_filesystem
             namer:
                 service: Vich\UploaderBundle\Naming\Base64Namer
                 options: { length: '6'}

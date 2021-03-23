@@ -6,7 +6,7 @@ use App\Entity\Post;
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Uid\Uuid;
 
 class PostFixtures extends Fixture implements DependentFixtureInterface

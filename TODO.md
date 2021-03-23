@@ -5,6 +5,7 @@ ToDo
  * https://devcenter.heroku.com/articles/deploying-symfony4#trusting-the-heroku-router
  * Table prefixes? https://www.doctrine-project.org/projects/doctrine-orm/en/2.7/cookbook/sql-table-prefixes.html
  * JavaScript classes - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
+ * IPv6 addresses will not cache, due to ':' character being invalid
 
 In Progress
 ===========

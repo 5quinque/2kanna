@@ -2,7 +2,8 @@
 liip_imagine:
     enqueue: true
 
-    cache: s3_cache
+    # cache: s3_cache
+    cache: default
 
     # valid drivers options include "gd" or "gmagick" or "imagick"
     driver: "imagick"
@@ -22,14 +23,16 @@ liip_imagine:
 
     filter_sets:
         img:
-            cache: s3_cache
+            # cache: s3_cache
+            cache: default
             animated: true
             filters:
                 strip: ~
 
         # the name of the "filter set"
         thumb:
-            cache: s3_cache
+            # cache: s3_cache
+            cache: default
             quality: 75
             png_compression_level: 8
             animated: true

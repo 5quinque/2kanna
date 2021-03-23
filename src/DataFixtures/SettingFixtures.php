@@ -5,7 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Setting;
 use App\Entity\SettingChoice;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Intl\Timezones;
 
 class SettingFixtures extends Fixture
@@ -35,7 +35,7 @@ class SettingFixtures extends Fixture
         $sitename = new Setting();
         $sitename->setLabel('Site Name');
         $sitename->setName('sitename');
-        $sitename->setValue('2Kanna');
+        $sitename->setValue('TextBoard');
         $sitename->setType('text');
         $sitename->setSection('Site');
         $sitename->setPlacement(0);
