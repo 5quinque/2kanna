@@ -29,7 +29,7 @@ class SettingChoice
     private $value;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", name="sc_key", length=255)
      */
     private $key;
 
