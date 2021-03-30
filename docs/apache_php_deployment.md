@@ -1,8 +1,8 @@
 # Apache/PHP-FPM Deployment
 
 ```bash
-git clone https://github.com/linnit/textboard.git
-cd textboard
+git clone https://github.com/linnit/2kanna.git
+cd 2kanna
 composer install
 ```
 
@@ -39,11 +39,11 @@ yarn encore production
 
 Cron is used to remove old posts and unban IP addresses
 
-Replace `<path-to-textboard>` with the full location on the repository
+Replace `<path-to-2kanna>` with the full location on the repository
 
 ```
-*/15 * * * *    <path-to-textboard>/bin/console app:delete-old-posts
-*/15 * * * *    <path-to-textboard>/bin/console app:delete-old-bans
+*/15 * * * *    <path-to-2kanna>/bin/console app:delete-old-posts
+*/15 * * * *    <path-to-2kanna>/bin/console app:delete-old-bans
 ```
 
 ---

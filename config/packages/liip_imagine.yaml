@@ -52,6 +52,8 @@ liip_imagine:
     loaders:
         flysystem_loader:
             flysystem:
-                filesystem_service: oneup_flysystem.s3_filesystem
+                # filesystem_service: oneup_flysystem.s3_filesystem
+                filesystem_service: oneup_flysystem.local_filesystem
+                
 
     data_loader: flysystem_loader

@@ -2,8 +2,6 @@ let imageFile = document.getElementById("post_imageFile_file");
 
 imageFile.onchange = updateImageFileText;
 
-
-
 function updateImageFileText() {
     let fullPath = imageFile.value;
     let fileName = fullPath.split(/(\\|\/)/g).pop();
