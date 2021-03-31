@@ -1,0 +1,13 @@
+[Unit]
+Description=2Kanna Image Service
+After=mysqld.service
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=5
+User=www-data
+ExecStart=/usr/bin/env php /var/www/2kanna.org/bin/console enqueue:consume
+
+[Install]
+WantedBy=multi-user.target
