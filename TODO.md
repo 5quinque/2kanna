@@ -6,6 +6,9 @@ ToDo
  * Table prefixes? https://www.doctrine-project.org/projects/doctrine-orm/en/2.7/cookbook/sql-table-prefixes.html
  * JavaScript classes - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
  * IPv6 addresses will not cache, due to ':' character being invalid
+ * Make "Recently Active Threads" not look crap
+ * Fix homepage caching issue
+ * Owners of boards can administrate that board
 
 In Progress
 ===========
@@ -13,6 +16,7 @@ In Progress
 
 Done
 ====
+ * ~~Username length error needs to notify the user of the error~~
  * ~~User role that only allows moderation~~
  * ~~When clicking an image, expand inside the post~~
  * ~~Message div gets too small, text gets crush.. also text wordwrap needs fixing~~

@@ -96,8 +96,16 @@ class SecurityController extends AbstractController
                 $authenticator,
                 'default' // firewall name in security.yaml
             );
+            return $this->redirectToRoute('user_index');
         }
 
-        return $this->redirectToRoute('user_index');
+        return $this->render(
+            'security/login.html.twig',
+            [
+                'last_username' => null,
+                'error' => null,
+                'register_form' => $registerForm->createView()
+                ]
+        );
     }
 }
