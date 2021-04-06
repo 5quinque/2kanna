@@ -8,11 +8,11 @@ ToDo
  * IPv6 addresses will not cache, due to ':' character being invalid
  * Make "Recently Active Threads" not look crap
  * Fix homepage caching issue
- * Owners of boards can administrate that board
 
 In Progress
 ===========
  * Testing - https://symfony.com/doc/current/best_practices.html#smoke-test-your-urls
+ * Owners of boards can administrate their board
 
 Done
 ====

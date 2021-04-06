@@ -9,14 +9,16 @@
             {{ post.created|date("d/m/Y H:i:s", setting('timezone')) }}
             [ID. {{ post.slug }}]
             [<a href="{{ path('post_show', {'board': post.board.name, 'post': post.slug}) }}" class="reply_button post_{{ post.id }}">Reply</a>]
-            {%- if is_granted('ROLE_MODERATOR') -%}
+            {%- if is_granted('ROLE_ADMIN') or is_granted('BOARD_EDIT', post.board) -%}
                 {{ include('post/_delete_form.html.twig') }}
                 {%- if post.sticky -%}{%- set sticky_label = 'Remove Sticky' -%}{%- endif -%}
                 {{ include('post/_make_sticky_form.html.twig') }}
+                {%- if is_granted('ROLE_ADMIN') -%}
                 <span class="text-info">
                     [<a href="{{ path('admin_banned', {'ipAddress': post.ipAddress}) }}">Ban</a>]
                     [<a href="{{ path('admin_ip_posts', {'ipAddress': post.ipAddress}) }}">{{ post.ipAddress }}</a>]
                 </span>
+                {%- endif -%}
             {%- endif -%}
             {% if post.sticky %}
                 <span class="sticky">

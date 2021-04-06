@@ -7,5 +7,7 @@ import './upload';
 import './prism';
 
 Reply.setStickyOnclick();
+Reply.setDeleteOnclick();
+
 Collapse.setCollapseOnclick();
 Image.setImageOnclick();
