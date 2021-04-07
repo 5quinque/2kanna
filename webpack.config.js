@@ -1,5 +1,7 @@
 var Encore = require('@symfony/webpack-encore');
 
+const path = require('path');
+
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
 if (!Encore.isRuntimeEnvironmentConfigured()) {
@@ -69,6 +71,12 @@ Encore
     // uncomment if you use API Platform Admin (composer req api-admin)
     //.enableReactPreset()
     //.addEntry('admin', './assets/js/admin.js')
+
+    .configureDevServerOptions(options => {
+        options.https = {
+            pfx: path.join(process.env.HOME, '.symfony/certs/default.p12'),
+        }
+    })
 ;
 
 module.exports = Encore.getWebpackConfig();

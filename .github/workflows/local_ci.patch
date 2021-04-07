@@ -1,0 +1,57 @@
+--- .github/workflows/ci.yml	2021-04-07 11:31:35.294324465 +0100
++++ .github/workflows/ci_local.yml	2021-04-07 11:18:45.951841818 +0100
+@@ -1,21 +1,10 @@
+-name: Symfony with MySQL
++name: "Local Symfony with MySQL"
+ on: [push, pull_request]
+ jobs:
+-  symfony:
+-    name: Symfony
++  symfony-local:
++    name: Symfony Local
+     runs-on: ubuntu-latest
+ 
+-    services:
+-      mysql:
+-        image: mysql:5.7
+-        env:
+-          MYSQL_ALLOW_EMPTY_PASSWORD: false
+-          MYSQL_ROOT_PASSWORD: symfony
+-          MYSQL_DATABASE: symfony
+-        ports:
+-          - 3306/tcp
+-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+-
+     steps:
+       - name: Checkout
+         uses: actions/checkout@v2
+@@ -27,9 +16,6 @@
+           extensions: imagick, mbstring, xml, ctype, iconv, intl, pdo_sqlite, mysql
+           coverage: xdebug #optional
+ 
+-      - name: Start mysql service
+-        run: sudo /etc/init.d/mysql start
+-
+       - name: Setup NodeJS & Yarn
+         uses: actions/setup-node@v1
+         with:
+@@ -56,7 +42,7 @@
+           php bin/console doctrine:migrations:migrate -n || echo "No migrations found or migration failed"
+           php bin/console doctrine:fixtures:load -n
+         env:
+-          DATABASE_URL: mysql://root:symfony@127.0.0.1:${{ job.services.mysql.ports['3306'] }}/symfony
++          DATABASE_URL: mysql://root:symfony@127.0.0.1:3306/symfony
+ 
+       - name: Install Yarn dependencies and CSS/JS assets
+         run: |
+@@ -66,7 +52,4 @@
+       - name: Run Tests
+         run: php bin/phpunit --coverage-clover coverage.xml
+         env:
+-          DATABASE_URL: mysql://root:symfony@127.0.0.1:${{ job.services.mysql.ports['3306'] }}/symfony
+-
+-      - name: Upload coverage report
+-        run: bash <(curl -s https://codecov.io/bash)
+\ No newline at end of file
++          DATABASE_URL: mysql://root:symfony@127.0.0.1:3306/symfony
+\ No newline at end of file
