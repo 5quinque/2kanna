@@ -56,7 +56,7 @@ jobs:
           php bin/console doctrine:migrations:migrate -n || echo "No migrations found or migration failed"
           php bin/console doctrine:fixtures:load -n
         env:
-          DATABASE_URL: mysql://symfony:symfony@127.0.0.1:${{ job.services.mysql.ports['3306'] }}/symfony
+          DATABASE_URL: mysql://root:symfony@127.0.0.1:${{ job.services.mysql.ports['3306'] }}/symfony
 
       - name: Install Yarn dependencies and CSS/JS assets
         run: |
@@ -66,7 +66,7 @@ jobs:
       - name: Run Tests
         run: php bin/phpunit --coverage-clover coverage.xml
         env:
-          DATABASE_URL: mysql://symfony:symfony@127.0.0.1:${{ job.services.mysql.ports['3306'] }}/symfony
+          DATABASE_URL: mysql://root:symfony@127.0.0.1:${{ job.services.mysql.ports['3306'] }}/symfony
 
       - name: Upload coverage report
         run: bash <(curl -s https://codecov.io/bash)
