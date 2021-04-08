@@ -69,9 +69,7 @@ class ManageBoardsController extends AbstractController
      */
     public function delete(Request $request, Board $board): Response
     {
-        if (!$this->isGranted('ROLE_ADMIN')) {
-            $this->denyAccessUnlessGranted('BOARD_EDIT', $board);
-        }
+        $this->denyAccessUnlessGranted('BOARD_DELETE', $board);
 
         if ($this->isCsrfTokenValid('delete'.$board->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();

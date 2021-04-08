@@ -88,10 +88,8 @@ class PostController extends AbstractController
      */
     public function delete(Request $request, Post $post, PostUtil $postUtil): Response
     {
-        if (!$this->isGranted('ROLE_ADMIN')) {
-            $board = $post->getBoard();
-            $this->denyAccessUnlessGranted('BOARD_EDIT', $board);
-        }
+        $board = $post->getBoard();
+        $this->denyAccessUnlessGranted('BOARD_EDIT', $board);
 
         if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {
             $postUtil->deletePost($post);
@@ -110,11 +108,8 @@ class PostController extends AbstractController
      */
     public function makeSticky(Request $request, Post $post): Response
     {
-        if (!$this->isGranted('ROLE_ADMIN')) {
-            $board = $post->getBoard();
-            dump($board);
-            $this->denyAccessUnlessGranted('BOARD_EDIT', $board);
-        }
+        $board = $post->getBoard();
+        $this->denyAccessUnlessGranted('BOARD_EDIT', $board);
 
         if ($this->isCsrfTokenValid('make_sticky'.$post->getId(), $request->request->get('_token'))) {
             if ($post->getSticky()) {
