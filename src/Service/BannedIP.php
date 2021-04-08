@@ -15,6 +15,7 @@ class BannedIP
     private $bannedRepository;
     private $cache;
     private $ipAddress;
+    private $hashedAddress;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -26,9 +27,11 @@ class BannedIP
         $this->cache = $bansCache;
     }
 
-    private function setIpAddress($ipAddress)
+    private function setIpAddress()
     {
-        $this->ipAddress = $ipAddress;
+        $request = Request::createFromGlobals();
+        $this->ipAddress = $request->getClientIp();
+        $this->hashedAddress = hash('sha256', $this->ipAddress);
     }
 
     public function printDebug(array $debug)
@@ -49,10 +52,9 @@ class BannedIP
 
     public function isRequesterBanned()
     {
-        $request = Request::createFromGlobals();
-        $this->setIpAddress($request->getClientIp());
+        $this->setIpAddress();
 
-        return $this->cache->get($this->ipAddress, function (ItemInterface $item) {
+        return $this->cache->get($this->hashedAddress, function (ItemInterface $item) {
             $item->tag('bans');
 
             /**

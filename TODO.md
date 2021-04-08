@@ -5,7 +5,6 @@ ToDo
  * https://devcenter.heroku.com/articles/deploying-symfony4#trusting-the-heroku-router
  * Table prefixes? https://www.doctrine-project.org/projects/doctrine-orm/en/2.7/cookbook/sql-table-prefixes.html
  * JavaScript classes - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
- * IPv6 addresses will not cache, due to ':' character being invalid
  * Make "Recently Active Threads" not look crap
  * Fix homepage caching issue
 
@@ -13,9 +12,11 @@ In Progress
 ===========
  * Testing - https://symfony.com/doc/current/best_practices.html#smoke-test-your-urls
  * Owners of boards can administrate their board
+ * Fix github workflow to use MySQL instead of postgres
 
 Done
 ====
+ * ~~IPv6 addresses will not cache, due to ':' character being invalid~~
  * ~~Username length error needs to notify the user of the error~~
  * ~~User role that only allows moderation~~
  * ~~When clicking an image, expand inside the post~~
