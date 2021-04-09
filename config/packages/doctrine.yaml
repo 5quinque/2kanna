@@ -1,19 +1,11 @@
 doctrine:
     dbal:
+        override_url: true
         url: '%env(resolve:DATABASE_URL)%'
 
-        driver: 'pdo_mysql'
-        charset: utf8
         # IMPORTANT: You MUST configure your server version,
         # either here or in the DATABASE_URL env var (see .env file)
-        #server_version: '5.7'
-
-        # https://www.doctrine-project.org/projects/doctrine-orm/en/latest/cookbook/working-with-datetime.html
-        types:
-            utcdatetime:
-                name: datetime
-                class: App\DoctrineExtensions\DBAL\Types\UTCDateTimeType
-
+        server_version: '5.7'
     orm:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
