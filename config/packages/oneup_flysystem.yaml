@@ -22,4 +22,5 @@ oneup_flysystem:
             mount: s3_filesystem
         local:
             adapter: default_adapter
+            alias: League\Flysystem\Filesystem
             mount: local_filesystem
