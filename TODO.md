@@ -11,6 +11,7 @@ In Progress
  * Write documentation
  * Testing - https://symfony.com/doc/current/best_practices.html#smoke-test-your-urls
  * Owners of boards can administrate their board
+ * fix webm uploads
 
 Done
 ====

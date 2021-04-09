@@ -10,8 +10,16 @@
             {% for thread in recent_active_threads|slice(0,5) %}
                 <li class="list-group-item">
                 [<a href="{{ path('board_show', {'name': thread.board.name}) }}">{{ thread.board.name }}</a>]
+                
+
+                {%- if thread.imageMimeType starts with 'image/' -%}
+                                <a href="{{ thread.imageName | imagine_filter('img') }}" class="mr-3">
+                                    <img src="{{ thread.imageName | imagine_filter('thumb') }}" class="post-image img-thumbnail" alt="{{ thread.imageName }}" width="16px">
+                                </a>
+                {%- endif -%}
+
                 <a href="{{ path('post_show', {'board': thread.board.name, 'post' : thread.slug}) }}">
-                {{ thread.message|nl2br|codeblock|urltoanchor|crosslink|greentext|striptags[:50] }}
+                {{ thread.message|urltoanchor|crosslink|greentext[:50] }}
                 </a>
                 </li>
             {% endfor %}
@@ -23,7 +31,7 @@
                 <li class="list-group-item">
                 [<a href="{{ path('board_show', {'name': thread.board.name}) }}">{{ thread.board.name }}</a>]
                 <a href="{{ path('post_show', {'board': thread.board.name, 'post' : thread.slug}) }}">
-                {{ thread.message|nl2br|codeblock|urltoanchor|crosslink|greentext|striptags[:50] }}
+                {{ thread.message|urltoanchor|crosslink|greentext[:50] }}
                 </a>
                 </li>
             {% endfor %}

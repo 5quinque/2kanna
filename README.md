@@ -63,21 +63,27 @@ php bin/console enqueue:consume --setup-broker
 
 If you're using Heroku, this should be running as defined in the Procfile
 
+#### AMQP or Filesystem?
+
+The default in `.env` is `ENQUEUE_DSN=file://%kernel.project_dir%/var/queue` which use files on local filesystem as queues. There's a few drawbacks to this, the main is it's CPU intensive.
+
+An alternative is using AMQP, which requires additional setup but offloads the queue. Simply update the `ENQUEUE_DSN` variable.
+
+E.g.
+
+```
+ENQUEUE_DSN=amqp://user:pass@host/queue
+```
+
+You could possible use other methods ([check the php-enqueue docs][3]), but I've not tested them.
+
 ---
 
-## Tests
+## Development
 
-Run the following command to run tests:
+See [docs/development](docs/development.md)
 
-```bash
-./bin/phpunit
-```
-
-With coverage:
-
-```bash
-./bin/phpunit --coverage-html build/coverage-report
-```
 
 [1]: https://classic.yarnpkg.com/en/docs/install
 [2]: https://symfony.com/doc/4.4/setup.html
+[3]: https://php-enqueue.github.io/transport

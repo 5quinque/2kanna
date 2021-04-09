@@ -15,6 +15,8 @@ Auto refresh your browser when updating CSS/JS
 yarn dev-server
 ```
 
+---
+
 ## Testing
 
 Create a local mysql docker container
@@ -46,4 +48,18 @@ When you're satisfied, revert the changes
 
 ```bash
 patch -p0 -R < .github/workflows/local_ci.patch
+```
+
+## Unit Tests
+
+Run the following command to run tests:
+
+```bash
+./bin/phpunit
+```
+
+With coverage:
+
+```bash
+./bin/phpunit --coverage-html build/coverage-report
 ```
