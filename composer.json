@@ -32,6 +32,7 @@
         "symfony/intl": "5.2.*",
         "symfony/monolog-bundle": "^3.1",
         "symfony/orm-pack": "*",
+        "symfony/panther": "^1.0",
         "symfony/process": "5.2.*",
         "symfony/security-bundle": "5.2.*",
         "symfony/serializer-pack": "*",
