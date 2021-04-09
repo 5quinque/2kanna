@@ -28,8 +28,12 @@ class CrossLinkExtension extends AbstractExtension
         ];
     }
 
-    public function createCrossLinks(string $string)
+    public function createCrossLinks($string)
     {
+        if (is_null($string)) {
+            return;
+        }
+
         $regex = '/&gt;&gt;&gt;\/(\w+)\/?([A-F0-9]+)?/';
 
         preg_match_all($regex, $string, $matches);
