@@ -19,6 +19,11 @@ class BoardRepository extends ServiceEntityRepository
         parent::__construct($registry, Board::class);
     }
 
+    public function countEntities()
+    {
+        return count($this->findAll());
+    }
+
     public function findAllArr()
     {
         $result = $this->createQueryBuilder('b')
