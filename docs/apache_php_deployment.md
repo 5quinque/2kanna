@@ -3,17 +3,16 @@
 ```bash
 git clone https://github.com/linnit/2kanna.git
 cd 2kanna
-composer install
+composer install --no-dev --optimize-autoloader
 ```
 
 Configure environment variables
 
 ```bash
-cp .env .env.local
-chmod 600 .env.local
+composer dump-env prod
 ```
 
-Edit .env.local and update database variables
+Edit .env.local.php and relevant values
 
 Create database and table structure
 
@@ -49,8 +48,14 @@ systemctl start 2kanna-img.service
 ### Assets
 
 ```bash
-yarn install
+yarn install --prod
 yarn encore production
+```
+
+### Clear your Symfony Cache
+
+```bash
+APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear
 ```
 
 ### Cron
