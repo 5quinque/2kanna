@@ -8,6 +8,7 @@
     <div class="col-g">
     {% set section = "" %}
     {% for setting_form in forms %}
+        {# {% dump(setting_form.vars.value) %} #}
         {% if section != setting_form.vars.data.section %}
             {% set section = setting_form.vars.data.section %}
             <h3>{{ section }}</h3>
@@ -16,4 +17,8 @@
     {% endfor %}
     </div>
 </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('admin_settings') }}
 {% endblock %}

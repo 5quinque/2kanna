@@ -1,0 +1,12 @@
+{%- for label, messages in app.flashes -%}
+    {%- for message in messages -%}
+        <div class="row alert">
+            <div class="col-100">
+                <div class="alert-dismissible alert-{{ label }}" role="alert">
+                    <button type="button" class="alert-close" data-dismiss="alert">&times;</button>
+                    {{ message }}
+                </div>
+            </div>
+        </div>
+    {%- endfor -%}
+{%- endfor -%}

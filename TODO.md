@@ -4,6 +4,9 @@ ToDo
  * JavaScript classes - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
  * Make "Recently Active Threads" not look crap
  * Fix homepage caching issue
+ * [settingsAjax] Add alert event listener for close button
+ * [settingsAjax] Get a working event listener for checkboxes
+ * [settingsAjax] Move JS setting class to it's own file
 
 In Progress
 ===========

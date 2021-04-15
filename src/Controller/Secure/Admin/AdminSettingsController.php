@@ -31,6 +31,8 @@ class AdminSettingsController extends AbstractController
 
             $form->handleRequest($request);
 
+            $AJAXRequest = $request->get('AJAX');
+
             if ($form->isSubmitted() && $form->isValid()) {
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($setting);
@@ -48,8 +50,11 @@ class AdminSettingsController extends AbstractController
             $forms[] = $form->createView();
         }
 
+        if ($AJAXRequest) {
+            return $this->render('secure/admin/settings/ajax_return.html.twig');
+        }
+
         return $this->render('secure/admin/settings/index.html.twig', [
-            'settings' => $repository->findAll(),
             'forms' => $forms,
         ]);
     }

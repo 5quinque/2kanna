@@ -8,10 +8,15 @@
                 {{ form_widget(setting_form.label) }}
                 </div>
                 {% if setting_form.value is defined %}
-                {{ form_widget(setting_form.value) }}
+                    {{ form_widget(setting_form.value) }}
+                    {% set name = setting_form.value.vars.id %}
+                    {% set value = setting_form.value.vars.value %}
                 {% else %}
-                {{ form_widget(setting_form.value_bool) }}
+                    {{ form_widget(setting_form.value_bool) }}
+                    {% set name = setting_form.value_bool.vars.id %}
+                    {% set value = setting_form.value_bool.vars.value %}
                 {% endif %}
+                <div class="setting-data" data-formname="{{ setting_form.vars.name }}" data-name="{{ name }}" data-value="{{ value }}"></div>
                 <div class="input-group-append">
                     <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
                 </div>
