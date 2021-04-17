@@ -14,7 +14,12 @@
                 {% else %}
                     {{ form_widget(setting_form.value_bool) }}
                     {% set name = setting_form.value_bool.vars.id %}
-                    {% set value = setting_form.value_bool.vars.value %}
+                    
+                    {% if setting_form.value_bool.vars.checked %}
+                        {% set value = 'true' %}
+                    {% else %}
+                        {% set value = 'false' %}
+                    {% endif %}
                 {% endif %}
                 <div class="setting-data" data-formname="{{ setting_form.vars.name }}" data-name="{{ name }}" data-value="{{ value }}"></div>
                 <div class="input-group-append">

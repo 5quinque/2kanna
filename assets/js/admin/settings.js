@@ -18,8 +18,14 @@ class Setting {
     }
 
     checkInput() {
-        if (this.input.value != this.value) {
-            console.log("input value changed");
+        if (this.input.type == "checkbox") {
+            if (this.input.checked.toString() != this.value) {
+                console.log("Checkbox change to ", this.input.checked.toString());
+                this.value = this.input.checked.toString();
+                this.submitForm();
+            }
+        } else if (this.input.value != this.value) {
+            console.log("Input changed to ", this.input.value);
             this.value = this.input.value;
             this.submitForm();
         }
@@ -50,4 +56,9 @@ settingDatasets.forEach((s) => {
     settings.push(new Setting(s.dataset.formname, s.dataset.name, s.dataset.value));
 });
 
+const formButtons = document.querySelectorAll('form .btn-primary');
+
+formButtons.forEach((b) => {
+    b.remove();
+});
 
