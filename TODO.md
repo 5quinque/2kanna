@@ -9,14 +9,14 @@ ToDo
 
 In Progress
 ===========
- * Correct permissions for every page admin/mod/boardadmin/anon and actions
  * Write documentation
  * Testing - https://symfony.com/doc/current/best_practices.html#smoke-test-your-urls
- * Owners of boards can administrate their board
  * fix webm uploads
 
 Done
 ====
+ * ~~Owners of boards can administrate their board~~
+ * ~~Correct permissions for every page admin/mod/boardadmin/anon and actions~~
  * ~~[settingsAjax] Get a working event listener for checkboxes~~
  * ~~Fix github workflow to use MySQL instead of postgres~~
  * ~~https://devcenter.heroku.com/articles/deploying-symfony4#trusting-the-heroku-router~~

@@ -73,6 +73,7 @@ class AdminUserController extends AbstractController
         }
 
         return $this->render('secure/admin/users/user_edit.html.twig', [
+            'user' => $user,
             'user_form' => $userForm->createView(),
         ]);
     }

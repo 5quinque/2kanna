@@ -22,7 +22,7 @@
             <ul class="list-group admin-board-list">
                 {% for board in boards %}
                 <li class="list-group-item d-flex space-between align-items-center">
-                    {{ board.name }}
+                    <span>[o:<a href="{{ path('admin_users_edit', {'username': board.owner.username}) }}">{{ board.owner.username }}</a>] {{ board.name }}</span>
                     <div>
                         {{ include('secure/manage_boards/_removeboard_form.html.twig') }}
                     </div>

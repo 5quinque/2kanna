@@ -5,12 +5,33 @@
 
 {% block main %}
     <div class="row">
-        <div class="col-50 m-auto">
-            {% set button_label = "Save" %}
-            {{ include('secure/admin/users/_edit_form.html.twig') }}
+        <div class="col-g">
+            <div class="row">
+                <h3>Username and roles</h3>
+                <div class="col-100 m-auto">
+                    {% set button_label = "Save" %}
+                    {{ include('secure/admin/users/_edit_form.html.twig') }}
+                </div>
+            </div>
+            <div class="row">
+                <a href="{{ path('admin_users_password', {'username': user.username}) }}">Change Password</a>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <a href="{{ path('admin_users_password', {'username': app.request.get('username')}) }}">Change Password</a>
+        <div class="col-g border-left">
+            <h3 class="px-1">User's Boards</h3>
+            <ul class="list-group admin-board-list">
+                {% for board in user.boards %}
+                <li class="list-group-item d-flex space-between align-items-center">
+                    <span>{{ board.name }}</span>
+                    <div>
+                        {{ include('secure/manage_boards/_removeboard_form.html.twig') }}
+                    </div>
+                </li>
+                {% else %}
+                    <li>No boards found.<li>
+                {% endfor %}
+            </ul>
+        </div>
+
     </div>
 {% endblock %}
