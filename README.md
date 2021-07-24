@@ -33,6 +33,7 @@ Requirements
 
 ## Installation
 
+   * [Docker](docs/docker_deployment.md)
    * [Heroku Deployment](docs/heroku_deployment.md)
    * [Apache/PHP-FPM Deployment](docs/apache_php_deployment.md)
 
