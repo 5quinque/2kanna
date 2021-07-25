@@ -64,7 +64,7 @@ jobs:
           yarn encore production
 
       - name: Run Tests
-        run: php bin/phpunit --coverage-clover coverage.xml
+        run: php vendor/bin/phpunit --coverage-clover coverage.xml
         env:
           DATABASE_URL: mysql://root:symfony@127.0.0.1:${{ job.services.mysql.ports['3306'] }}/symfony
 
