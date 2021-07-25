@@ -7,13 +7,22 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 RUN docker-php-ext-install intl opcache pdo_mysql
 
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash && \
+    apt-get install -y nodejs  && \
+    npm install --global yarn
+
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
 WORKDIR /var/www
+
 CMD composer install ; \
     APP_ENV=dev APP_DEBUG=0 php bin/console cache:clear ; \
     php bin/console doctrine:migrations:migrate ; \
     php bin/console doctrine:fixtures:load -n ; \
+    yarn install ; \
+    yarn encore dev ; \
     php-fpm 
+
 EXPOSE 9000
 
 # CMD composer install --no-dev --optimize-autoloader ; \
